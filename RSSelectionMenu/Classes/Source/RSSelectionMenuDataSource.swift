@@ -89,12 +89,6 @@ extension RSSelectionMenuDataSource {
     fileprivate func isDataSourceEmpty() -> Bool {
         return (self.filteredDataSource.count == 0)
     }
-    
-    /// prepare cell UI
-    fileprivate func prepareUI(cell: UITableViewCell) {
-        cell.selectionStyle = .none
-        cell.setSelected(false)
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -110,9 +104,6 @@ extension RSSelectionMenuDataSource: UITableViewDataSource {
         // create new reusable cell
         let cellStyle = self.tableViewCellStyle()
         let cell = UITableViewCell(style: cellStyle, reuseIdentifier: self.cellIdentifier)
-        
-        // UI
-        prepareUI(cell: cell)
         
         // cell configuration
         if let config = cellConfiguration {

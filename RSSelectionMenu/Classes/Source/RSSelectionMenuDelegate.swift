@@ -9,17 +9,24 @@
 import UIKit
 
 /// UITableViewCellSelection
-typealias UITableViewCellSelection = ((_ cell: UITableViewCell, _ isSelected: Bool, _ indexPath: IndexPath) -> ())
+typealias UITableViewCellSelection = ((_ object: Any, _ isSelected: Bool, _ indexPath: IndexPath) -> ())
 
 class RSSelectionMenuDelegate: NSObject {
 
     // MARK: - Properties
     
+    /// tableview selection type - default is single
+    fileprivate var selectionType: SelectionType
+    
     /// tableview cell selection delegate
     fileprivate let selectionDelegate: UITableViewCellSelection?
     
+    /// selected objects
+    fileprivate var selectedObjects: DataSource = []
+    
     // MARK: - Initialize
-    init(delegate: @escaping UITableViewCellSelection) {
+    init(type: SelectionType? = .single, delegate: @escaping UITableViewCellSelection) {
+        self.selectionType = type!
         self.selectionDelegate = delegate
     }
 }
@@ -27,27 +34,40 @@ class RSSelectionMenuDelegate: NSObject {
 // MARK:- Private
 extension RSSelectionMenuDelegate {
     
-    /// did select row at indexpath
-    fileprivate func tableView(tableView: UITableView, didSelect row: IndexPath) {
+    /// action handler for single selection tableview
+    fileprivate func handleActionForSingleSelectionAt(indexPath: IndexPath, tableView: UITableView) {
         
-        // cell
-        let cell = tableView.cellForRow(at: row)
+        // remove all
+        selectedObjects.removeAll()
         
-        // update row
-        let isSelected = cell?.associatedObject() as? Bool ?? false
-        cell?.setSelected(!isSelected)
+        // object
+        let dataObject = (tableView.dataSource as! RSSelectionMenuDataSource).objectAt(indexPath: indexPath)
+        
+        // add to selected list
+        selectedObjects.append(dataObject)
+        
+        // reload tableview
+        tableView.reloadData()
         
         // selection callback
         if let delegate = selectionDelegate {
-            delegate(cell!, !isSelected, row)
+            delegate(dataObject, true, indexPath)
         }
     }
+}
+
+// MARK:- Public
+extension RSSelectionMenuDelegate {
+    
 }
 
 // MARK:- UITableViewDelegate
 extension RSSelectionMenuDelegate: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView(tableView: tableView, didSelect: indexPath)
+        
+        if selectionType == .single {
+            handleActionForSingleSelectionAt(indexPath: indexPath, tableView: tableView)
+        }
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let dataArray = ["Rushi Sanani jamanbhai hello how are you madam dah ajdfdhsf u jahdsfb", "Rahul", "Mitesh", "Nirav"]
+    let dataArray = ["Rushi", "Rahul", "Mitesh", "Nirav", "Vishal", "Neha", "Hiral", "Swati", "Namita", "Deepali", "Zeel"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,13 +18,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showButtonClicked(_ sender: Any) {
-        
-//        let selectionMenu = RSSelectionMenu.default.initWith(dataSource: dataArray) { (cell, object, indexPath) in
-//
-//            cell.textLabel?.text = object as? String
-//        }
-//        selectionMenu.show(from: self)
-        
+                
         let selectionMenu = RSSelectionMenu.default.initWith(dataSource: dataArray, cellType: .basic) { (cell, object, indexPath) in
             
             cell.textLabel?.text = object as? String

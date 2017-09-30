@@ -73,6 +73,17 @@ extension RSSelectionMenu {
     
     func show(as: PresentationStyle, from: UIViewController) {
     }
+    
+    /// dismiss
+    func dismiss() {
+        
+        if self.isPresented() {
+            self.dismiss(animated: true, completion: nil)
+        }
+        else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
 }
 
 //MARK:- Private

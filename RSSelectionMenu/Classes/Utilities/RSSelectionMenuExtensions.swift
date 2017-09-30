@@ -48,6 +48,20 @@ extension UITableViewCell {
     
     func setSelected(_ value: Bool) {
         self.accessoryType = value ? .checkmark : .none
-        self.setAssociated(object: value)
+    }
+}
+
+//MARK: - UIViewController
+extension UIViewController {
+    
+    func isPresented() -> Bool {
+        if self.presentingViewController != nil {
+            return true
+        } else if self.navigationController?.presentingViewController?.presentedViewController == self.navigationController  {
+            return true
+        } else if self.tabBarController?.presentingViewController is UITabBarController {
+            return true
+        }
+        return false
     }
 }
