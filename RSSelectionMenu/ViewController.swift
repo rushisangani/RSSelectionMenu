@@ -10,11 +10,37 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let dataArray = ["Rushi Sanani jamanbhai hello how are you madam dah ajdfdhsf u jahdsfb", "Rahul", "Mitesh", "Nirav"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    @IBAction func showButtonClicked(_ sender: Any) {
+        
+//        let selectionMenu = RSSelectionMenu.default.initWith(dataSource: dataArray) { (cell, object, indexPath) in
+//
+//            cell.textLabel?.text = object as? String
+//        }
+//        selectionMenu.show(from: self)
+        
+        let selectionMenu = RSSelectionMenu.default.initWith(dataSource: dataArray, cellType: .basic) { (cell, object, indexPath) in
+            
+            cell.textLabel?.text = object as? String
+        }
+        
+        selectionMenu.didSelectRow { (cell, selected, indexPath) in
+            print("row selected at \(indexPath.row)")
+        }
+        
+        selectionMenu.addSearchBar { (searchText) -> (FilteredDataSource) in
+            return self.dataArray.filter({ $0.hasPrefix(searchText) })
+        }
+        
+        selectionMenu.show(from: self)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
