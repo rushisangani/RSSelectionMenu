@@ -9,7 +9,7 @@
 import UIKit
 
 /// FilteredDataSource
-typealias FilteredDataSource = [Any]
+typealias FilteredDataSource = [AnyObject]
 
 /// UISearchBarResult
 typealias UISearchBarResult = ((_ searchText: String) -> (FilteredDataSource))

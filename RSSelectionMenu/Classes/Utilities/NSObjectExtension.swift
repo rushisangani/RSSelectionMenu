@@ -26,6 +26,13 @@ extension NSObject {
     @objc func associatedObject() -> Any? {
         return objc_getAssociatedObject(self, &AssociatedKeys.descriptiveName)
     }
+}
+
+// convert to dictionary
+extension NSObject {
     
-    
+    // dictionary
+    func toDictionary() -> [String: Any] {
+        return NSObject.getAllPropertyValues(withNames: self) as? [String : Any] ?? [:]
+    }
 }

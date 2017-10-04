@@ -51,6 +51,67 @@ extension UITableViewCell {
     }
 }
 
+//MARK: - UITableView
+extension UITableView {
+    
+    // get selection type of tableView
+    func selectionType() -> SelectionType {
+        return RSSelectionMenu.default.selectionType
+    }
+    
+    // unique id key
+    func uniqueIdentifierKey() -> String {
+        return RSSelectionMenu.default.uniqueKey
+    }
+    
+    // object at indexpath
+    func objectAt(indexPath: IndexPath) -> AnyObject {
+        return (self.dataSource as! RSSelectionMenuDataSource).objectAt(indexPath: indexPath)
+    }
+    
+    // check if object is selected
+    func isSelected(object: AnyObject, from: DataSource) -> Int? {
+        
+        // object type is string
+        if object is NSString {
+            let hashValue = (object as! NSString).hashValue
+        
+            return from.index(where: { (data) -> Bool in
+                return hashValue == (data as! NSString).hashValue
+            })
+        }
+            
+        // number type objects
+        else if object is NSNumber {
+            let hashValue = (object as! NSNumber).hashValue
+            
+            return from.index(where: { (data) -> Bool in
+                return hashValue == (data as! NSNumber).hashValue
+            })
+        }
+        
+        // dictionary type
+        else if object is NSDictionary {
+            return hasSameKeyValue(forObject: (object as! Dictionary), inArray: from as! [[String : AnyObject]])
+        }
+    
+        // custom type
+        else {
+            let dictionary = (object as! NSObject).toDictionary()
+            return hasSameKeyValue(forObject: dictionary as [String : AnyObject], inArray: from as! [[String : AnyObject]])
+        }
+    }
+    
+    /// dictionary key value comparision
+    func hasSameKeyValue(forObject: [String: AnyObject], inArray: [[String: AnyObject]]) -> Int? {
+        let value = forObject[uniqueIdentifierKey()] as? String ?? ""
+        
+        return inArray.index(where: { (data) -> Bool in
+            return value == data[uniqueIdentifierKey()] as? String
+        })
+    }
+}
+
 //MARK: - UIViewController
 extension UIViewController {
     

@@ -9,14 +9,11 @@
 import UIKit
 
 /// UITableViewCellSelection
-typealias UITableViewCellSelection = ((_ object: Any, _ isSelected: Bool, _ selectedArray: DataSource) -> ())
+typealias UITableViewCellSelection = ((_ object: AnyObject, _ isSelected: Bool, _ selectedArray: DataSource) -> ())
 
 class RSSelectionMenuDelegate: NSObject {
 
     // MARK: - Properties
-    
-    /// tableview selection type - default is single
-    fileprivate var selectionType: SelectionType
     
     /// tableview cell selection delegate
     fileprivate let selectionDelegate: UITableViewCellSelection?
@@ -25,8 +22,7 @@ class RSSelectionMenuDelegate: NSObject {
     fileprivate var selectedObjects: DataSource = []
     
     // MARK: - Initialize
-    init(type: SelectionType? = .single, delegate: @escaping UITableViewCellSelection) {
-        self.selectionType = type!
+    init(delegate: @escaping UITableViewCellSelection) {
         self.selectionDelegate = delegate
     }
 }
@@ -35,39 +31,78 @@ class RSSelectionMenuDelegate: NSObject {
 extension RSSelectionMenuDelegate {
     
     /// action handler for single selection tableview
-    fileprivate func handleActionForSingleSelectionAt(indexPath: IndexPath, tableView: UITableView) {
+    fileprivate func handleActionForSingleSelection(object: AnyObject, tableView: UITableView) {
         
         // remove all
         selectedObjects.removeAll()
         
-        // object
-        let dataObject = (tableView.dataSource as! RSSelectionMenuDataSource).objectAt(indexPath: indexPath)
-        
         // add to selected list
-        selectedObjects.append(dataObject)
+        selectedObjects.append(object)
         
         // reload tableview
         tableView.reloadData()
         
         // selection callback
         if let delegate = selectionDelegate {
-            delegate(dataObject, true, selectedObjects)
+            delegate(object, true, selectedObjects)
         }
     }
+    
+    /// action handler for multiple selection tableview
+    fileprivate func handleActionForMultiSelection(object: AnyObject, tableView: UITableView) {
+        
+        // is selected
+        var isSelected = false
+        
+        // remove if already selected
+        if let selectedIndex = tableView.isSelected(object: object, from: selectedObjects) {
+            selectedObjects.remove(at: selectedIndex)
+        }
+        else {
+            selectedObjects.append(object)
+            isSelected = true
+        }
+        
+        // reload tableview
+        tableView.reloadData()
+        
+        // selection callback
+        if let delegate = selectionDelegate {
+            delegate(object, isSelected, selectedObjects)
+        }
+    }
+    
 }
 
 // MARK:- Public
 extension RSSelectionMenuDelegate {
     
+    /// add new object to selected array
+    func addToSelected(object: AnyObject, forTableView: UITableView) {
+        
+        guard forTableView.isSelected(object: object, from: selectedObjects) != nil else {
+            selectedObjects.append(object)
+            return
+        }
+    }
 }
 
 // MARK:- UITableViewDelegate
 extension RSSelectionMenuDelegate: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         
-        if selectionType == .single {
-            handleActionForSingleSelectionAt(indexPath: indexPath, tableView: tableView)
+        // selected object
+        let dataObject = tableView.objectAt(indexPath: indexPath)
+        
+        // single selection
+        if tableView.selectionType() == .single {
+            handleActionForSingleSelection(object: dataObject, tableView: tableView)
+            return
         }
+        
+        // multiple selection
+        handleActionForMultiSelection(object: dataObject, tableView: tableView)
     }
 }

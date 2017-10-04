@@ -9,10 +9,10 @@
 import UIKit
 
 /// UITableViewCellConfiguration
-typealias UITableViewCellConfiguration = ((_ cell: UITableViewCell, _ dataObject: Any, _ indexPath: IndexPath) -> (Bool))
+typealias UITableViewCellConfiguration = ((_ cell: UITableViewCell, _ dataObject: AnyObject, _ indexPath: IndexPath) -> (Bool))
 
 /// DataSource
-typealias DataSource = [Any]
+typealias DataSource = [AnyObject]
 
 /// RSSelectionMenuDataSource
 class RSSelectionMenuDataSource: NSObject {
@@ -53,7 +53,7 @@ class RSSelectionMenuDataSource: NSObject {
 extension RSSelectionMenuDataSource {
     
     /// returns the object present in dataSourceArray at specified indexPath
-    func objectAt(indexPath: IndexPath) -> Any {
+    func objectAt(indexPath: IndexPath) -> AnyObject {
         return self.filteredDataSource[indexPath.row]
     }
     
@@ -94,6 +94,12 @@ extension RSSelectionMenuDataSource {
     fileprivate func updateStatus(status: Bool, for cell: UITableViewCell) {
         cell.setSelected(status)
     }
+    
+    /// add object to selected data source
+    fileprivate func addToSelectedDataSource(object: AnyObject, tableView: UITableView) {
+        let delegate = tableView.delegate as! RSSelectionMenuDelegate
+        delegate.addToSelected(object: object, forTableView: tableView)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -101,7 +107,6 @@ extension RSSelectionMenuDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.filteredDataSource.count
-        //return isDataSourceEmpty() ? 1 : self.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,8 +120,12 @@ extension RSSelectionMenuDataSource: UITableViewDataSource {
         
         // cell configuration
         if let config = cellConfiguration {
+            
             let dataObject = self.objectAt(indexPath: indexPath)
             selected = config(cell, dataObject, indexPath)
+            
+            // add to selected
+            if selected { addToSelectedDataSource(object: dataObject, tableView: tableView) }
         }
         
         // status update

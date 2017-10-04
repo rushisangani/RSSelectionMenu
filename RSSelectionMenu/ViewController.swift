@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let dataArray = ["Rushi", "Rahul", "Mitesh", "Nirav", "Vishal", "Neha", "Hiral", "Swati", "Namita", "Deepali", "Zeel"]
+    let dataArray: [String] = ["Rushi", "Rahul", "Mitesh", "Nirav", "Vishal", "Neha", "Hiral", "Swati", "Namita", "Deepali", "Zeel"]
     var selectedArray = ["Rushi", "Rahul"]
     
     override func viewDidLoad() {
@@ -19,11 +19,10 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showButtonClicked(_ sender: Any) {
-        
-        let selectionMenu = RSSelectionMenu.default.initWith(dataSource: dataArray, cellType: .basic) { (cell, object, indexPath) -> (Bool) in
+    
+        let selectionMenu = RSSelectionMenu.default.initWith(selectionType: .multiple, dataSource: dataArray as DataSource) { (cell, object, indexPath) -> (Bool) in
             
             cell.textLabel?.text = object as? String
-            
             return self.selectedArray.contains((cell.textLabel?.text)!)
         }
         
@@ -32,7 +31,7 @@ class ViewController: UIViewController {
         }
         
         selectionMenu.addSearchBar { (searchText) -> (FilteredDataSource) in
-            return self.dataArray.filter({ $0.hasPrefix(searchText) })
+            return self.dataArray.filter({ $0.hasPrefix(searchText) }) as FilteredDataSource
         }
         
         selectionMenu.show(from: self)

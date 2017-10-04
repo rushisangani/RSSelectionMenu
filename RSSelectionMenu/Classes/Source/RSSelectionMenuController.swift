@@ -31,6 +31,12 @@ class RSSelectionMenu: UIViewController {
     /// delegate for search bar search result
     fileprivate var searchBarResultDelegate: UISearchBarResult?
     
+    /// selection type - default is single selection
+    public var selectionType: SelectionType = .single
+    
+    /// unique key for comparision when datasource is other than String or Int array
+    public var uniqueKey: String = ""
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -42,6 +48,7 @@ class RSSelectionMenu: UIViewController {
     fileprivate func setup() {
         tableView.dataSource = dataSource
         tableView.delegate = delegate
+        tableView.tableFooterView = UIView()
         
         addSearchController()
     }
@@ -51,7 +58,20 @@ class RSSelectionMenu: UIViewController {
 extension RSSelectionMenu {
     
     /// Initialize
-    func initWith(dataSource: DataSource, cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) -> RSSelectionMenu {
+    
+    /// default init
+    func initWith(dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) -> RSSelectionMenu {
+        
+        self.uniqueKey = uniqueKey!
+        self.dataSource = RSSelectionMenuDataSource(dataSource: dataSource, forCellType: cellType!, configuration: configuration)
+        return self
+    }
+    
+    /// init with selection type
+    func initWith(selectionType: SelectionType, dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) -> RSSelectionMenu {
+        
+        self.selectionType = selectionType
+        self.uniqueKey = uniqueKey!
         self.dataSource = RSSelectionMenuDataSource(dataSource: dataSource, forCellType: cellType!, configuration: configuration)
         return self
     }
@@ -71,6 +91,7 @@ extension RSSelectionMenu {
         from.present(self, animated: true, completion: nil)
     }
     
+    /// Show with style
     func show(as: PresentationStyle, from: UIViewController) {
     }
     
