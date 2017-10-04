@@ -9,7 +9,7 @@
 import UIKit
 
 /// UITableViewCellConfiguration
-typealias UITableViewCellConfiguration = ((_ cell: UITableViewCell, _ dataObject: Any, _ indexPath: IndexPath) -> ())
+typealias UITableViewCellConfiguration = ((_ cell: UITableViewCell, _ dataObject: Any, _ indexPath: IndexPath) -> (Bool))
 
 /// DataSource
 typealias DataSource = [Any]
@@ -89,6 +89,11 @@ extension RSSelectionMenuDataSource {
     fileprivate func isDataSourceEmpty() -> Bool {
         return (self.filteredDataSource.count == 0)
     }
+    
+    /// update cell status
+    fileprivate func updateStatus(status: Bool, for cell: UITableViewCell) {
+        cell.setSelected(status)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -104,12 +109,18 @@ extension RSSelectionMenuDataSource: UITableViewDataSource {
         // create new reusable cell
         let cellStyle = self.tableViewCellStyle()
         let cell = UITableViewCell(style: cellStyle, reuseIdentifier: self.cellIdentifier)
+
+        // cell selection
+        var selected = false
         
         // cell configuration
         if let config = cellConfiguration {
             let dataObject = self.objectAt(indexPath: indexPath)
-            config(cell, dataObject, indexPath)
+            selected = config(cell, dataObject, indexPath)
         }
+        
+        // status update
+        updateStatus(status: selected, for: cell)
         
         return cell
     }

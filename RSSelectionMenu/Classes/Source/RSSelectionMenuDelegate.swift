@@ -9,7 +9,7 @@
 import UIKit
 
 /// UITableViewCellSelection
-typealias UITableViewCellSelection = ((_ object: Any, _ isSelected: Bool, _ indexPath: IndexPath) -> ())
+typealias UITableViewCellSelection = ((_ object: Any, _ isSelected: Bool, _ selectedArray: DataSource) -> ())
 
 class RSSelectionMenuDelegate: NSObject {
 
@@ -51,7 +51,7 @@ extension RSSelectionMenuDelegate {
         
         // selection callback
         if let delegate = selectionDelegate {
-            delegate(dataObject, true, indexPath)
+            delegate(dataObject, true, selectedObjects)
         }
     }
 }

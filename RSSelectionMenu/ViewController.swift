@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     let dataArray = ["Rushi", "Rahul", "Mitesh", "Nirav", "Vishal", "Neha", "Hiral", "Swati", "Namita", "Deepali", "Zeel"]
+    var selectedArray = ["Rushi", "Rahul"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +19,16 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showButtonClicked(_ sender: Any) {
-                
-        let selectionMenu = RSSelectionMenu.default.initWith(dataSource: dataArray, cellType: .basic) { (cell, object, indexPath) in
+        
+        let selectionMenu = RSSelectionMenu.default.initWith(dataSource: dataArray, cellType: .basic) { (cell, object, indexPath) -> (Bool) in
             
             cell.textLabel?.text = object as? String
+            
+            return self.selectedArray.contains((cell.textLabel?.text)!)
         }
         
-        selectionMenu.didSelectRow { (cell, selected, indexPath) in
-            print("row selected at \(indexPath.row)")
+        selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
+            self.selectedArray = selectedArray as! [String]
         }
         
         selectionMenu.addSearchBar { (searchText) -> (FilteredDataSource) in
@@ -34,12 +37,5 @@ class ViewController: UIViewController {
         
         selectionMenu.show(from: self)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
