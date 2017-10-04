@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     let dataArray: [String] = ["Rushi", "Rahul", "Mitesh", "Nirav", "Vishal", "Neha", "Hiral", "Swati", "Namita", "Deepali", "Zeel"]
-    var selectedArray = ["Rushi", "Rahul"]
+    var selectedArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,13 +20,13 @@ class ViewController: UIViewController {
 
     @IBAction func showButtonClicked(_ sender: Any) {
     
-        let selectionMenu = RSSelectionMenu.default.initWith(selectionType: .multiple, dataSource: dataArray as DataSource) { (cell, object, indexPath) -> (Bool) in
+        let selectionMenu = RSSelectionMenu.default.initWith(selectionType: .single, dataSource: dataArray as DataSource) { (cell, object, indexPath) -> (Bool) in
             
             cell.textLabel?.text = object as? String
             return self.selectedArray.contains((cell.textLabel?.text)!)
         }
         
-        selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
+        selectionMenu.didSelectRow(dismissOnSelect: false) { (object, isSelected, selectedArray) in
             self.selectedArray = selectedArray as! [String]
         }
         
@@ -35,6 +35,8 @@ class ViewController: UIViewController {
         }
         
         selectionMenu.show(from: self)
+        
+        //selectionMenu.showAsPopover(from: (sender as! UIButton), with: CGSize(width: 200, height: 200), inViewController: self)
     }
 }
 

@@ -69,6 +69,13 @@ extension UITableView {
         return (self.dataSource as! RSSelectionMenuDataSource).objectAt(indexPath: indexPath)
     }
     
+    /// dismiss
+    func dismissControllerIfRequired() {
+        if RSSelectionMenu.default.shouldDismissOnSelect {
+            RSSelectionMenu.default.dismiss()
+        }
+    }
+    
     // check if object is selected
     func isSelected(object: AnyObject, from: DataSource) -> Int? {
         

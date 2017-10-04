@@ -37,6 +37,9 @@ class RSSelectionMenu: UIViewController {
     /// unique key for comparision when datasource is other than String or Int array
     public var uniqueKey: String = ""
     
+    /// controller should dissmiss on selection - default is true for single selection
+    var shouldDismissOnSelect: Bool = true
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -77,7 +80,8 @@ extension RSSelectionMenu {
     }
     
     /// Selection event
-    func didSelectRow(_ delegate: @escaping UITableViewCellSelection)  {
+    func didSelectRow(dismissOnSelect: Bool? = true, delegate: @escaping UITableViewCellSelection)  {
+        self.shouldDismissOnSelect = dismissOnSelect!
         self.delegate = RSSelectionMenuDelegate(delegate: delegate)
     }
     
@@ -91,8 +95,22 @@ extension RSSelectionMenu {
         from.present(self, animated: true, completion: nil)
     }
     
-    /// Show with style
-    func show(as: PresentationStyle, from: UIViewController) {
+    /// show as popover
+    func showAsPopover(from: UIView, with contentSize: CGSize, inViewController: UIViewController) {
+        
+        self.modalPresentationStyle = .popover
+        self.preferredContentSize = contentSize
+        
+        let popover = self.popoverPresentationController!
+        popover.delegate = self
+        
+        popover.permittedArrowDirections = .up
+        popover.sourceView = from
+        popover.sourceRect = (from.superview?.convert(from.bounds, to: nil))!
+        
+        inViewController.present(self, animated: true) {
+            self.view.backgroundColor = UIColor.clear
+        }
     }
     
     /// dismiss
@@ -132,5 +150,17 @@ extension RSSelectionMenu {
         
         let filteredDataSource = !text.isEmpty ? self.searchBarResultDelegate!(text) : []
         self.dataSource?.update(dataSource: filteredDataSource, inTableView: tableView)
+    }
+}
+
+// MARK: - UIPopoverPresentationControllerDelegate
+extension RSSelectionMenu : UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        self.dismiss()
     }
 }

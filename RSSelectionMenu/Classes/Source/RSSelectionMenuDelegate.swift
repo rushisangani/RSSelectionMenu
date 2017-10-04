@@ -99,10 +99,13 @@ extension RSSelectionMenuDelegate: UITableViewDelegate {
         // single selection
         if tableView.selectionType() == .single {
             handleActionForSingleSelection(object: dataObject, tableView: tableView)
-            return
+        }
+        else {
+            // multiple selection
+            handleActionForMultiSelection(object: dataObject, tableView: tableView)
         }
         
-        // multiple selection
-        handleActionForMultiSelection(object: dataObject, tableView: tableView)
+        // dismiss if required
+        tableView.dismissControllerIfRequired()
     }
 }
