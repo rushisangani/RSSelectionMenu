@@ -103,7 +103,9 @@ extension RSSelectionMenu {
     
         // custom type
         else {
-            let dictionary = (object as! NSObject).toDictionary()
+            
+            let classType = (object as! NSObject).self as! NSObject.Type
+            let dictionary = (object as! NSObject).toDictionary(from: classType)
             return hasSameKeyValue(forObject: dictionary as [String : AnyObject], inArray: from as! [[String : AnyObject]])
         }
     }

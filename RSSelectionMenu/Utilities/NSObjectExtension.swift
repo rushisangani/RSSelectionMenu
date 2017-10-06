@@ -48,7 +48,19 @@ extension NSObject {
 extension NSObject {
     
     // dictionary
-    func toDictionary() -> [String: Any] {
-        return NSObject.getAllPropertyValues(withNames: self) as? [String : Any] ?? [:]
+    func toDictionary(from classType: NSObject.Type) -> [String: Any] {
+        
+        var propertiesCount : CUnsignedInt = 0
+        let propertiesInAClass = class_copyPropertyList(classType, &propertiesCount)
+        let propertiesDictionary : NSMutableDictionary = NSMutableDictionary()
+        
+        for i in 0 ..< Int(propertiesCount) {
+            let property = propertiesInAClass?[i]
+            let strKey = NSString(utf8String: property_getName(property)) as String?
+            if let key = strKey {
+                propertiesDictionary.setValue(self.value(forKey: key), forKey: key)
+            }
+        }
+        return propertiesDictionary as! [String : Any]
     }
 }

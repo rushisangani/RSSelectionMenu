@@ -28,8 +28,6 @@
 		D852FDA71F879BF7002362CC /* RSSelectionMenuSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */; };
 		D852FDA81F879BF7002362CC /* RSSelectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */; };
 		D852FDAF1F879BFF002362CC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAA1F879BFF002362CC /* Constants.swift */; };
-		D852FDB01F879BFF002362CC /* NSObject+Properties.h in Headers */ = {isa = PBXBuildFile; fileRef = D852FDAB1F879BFF002362CC /* NSObject+Properties.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D852FDB11F879BFF002362CC /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAC1F879BFF002362CC /* NSObject+Properties.m */; };
 		D852FDB21F879BFF002362CC /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */; };
 		D852FDB31F879BFF002362CC /* RSSelectionMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -44,8 +42,6 @@
 		D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuSearchDelegate.swift; sourceTree = "<group>"; };
 		D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionTableView.swift; sourceTree = "<group>"; };
 		D852FDAA1F879BFF002362CC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D852FDAB1F879BFF002362CC /* NSObject+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Properties.h"; sourceTree = "<group>"; };
-		D852FDAC1F879BFF002362CC /* NSObject+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Properties.m"; sourceTree = "<group>"; };
 		D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 		D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,8 +102,6 @@
 				D852FDAA1F879BFF002362CC /* Constants.swift */,
 				D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */,
 				D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */,
-				D852FDAB1F879BFF002362CC /* NSObject+Properties.h */,
-				D852FDAC1F879BFF002362CC /* NSObject+Properties.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -120,7 +114,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D835710C1F87986400185B73 /* RSSelectionMenu.h in Headers */,
-				D852FDB01F879BFF002362CC /* NSObject+Properties.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +213,6 @@
 				D852FDB31F879BFF002362CC /* RSSelectionMenuExtensions.swift in Sources */,
 				D852FDA71F879BF7002362CC /* RSSelectionMenuSearchDelegate.swift in Sources */,
 				D852FDAF1F879BFF002362CC /* Constants.swift in Sources */,
-				D852FDB11F879BFF002362CC /* NSObject+Properties.m in Sources */,
 				D852FDB21F879BFF002362CC /* NSObjectExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,7 +350,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenu;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -380,7 +372,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenu;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
