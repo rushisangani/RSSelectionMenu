@@ -1,0 +1,8 @@
+platform :ios, '10.0'
+
+target 'Example' do
+  use_frameworks!
+
+  pod 'RSSelectionMenu', :git => 'https://github.com/rushisangani/RSSelectionMenu.git'
+
+end
