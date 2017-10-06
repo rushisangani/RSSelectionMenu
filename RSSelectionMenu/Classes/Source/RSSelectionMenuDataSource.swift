@@ -52,6 +52,12 @@ class RSSelectionMenuDataSource: NSObject {
 // MARK: - Public
 extension RSSelectionMenuDataSource {
     
+    /// set cell type and identifier
+    func setCellType(type: CellType, withReuseIdentifier: String) {
+        self.cellType = type
+        self.cellIdentifier = withReuseIdentifier
+    }
+    
     /// returns the object present in dataSourceArray at specified indexPath
     func objectAt(indexPath: IndexPath) -> AnyObject {
         return self.filteredDataSource[indexPath.row]
@@ -113,7 +119,14 @@ extension RSSelectionMenuDataSource: UITableViewDataSource {
         
         // create new reusable cell
         let cellStyle = self.tableViewCellStyle()
-        let cell = UITableViewCell(style: cellStyle, reuseIdentifier: self.cellIdentifier)
+        var cell: UITableViewCell?
+        
+        if cellType == .custom {
+            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        }
+        else {
+            cell = UITableViewCell(style: cellStyle, reuseIdentifier: self.cellIdentifier)
+        }
         
         // cell selection
         var selected = false
@@ -122,15 +135,15 @@ extension RSSelectionMenuDataSource: UITableViewDataSource {
         if let config = cellConfiguration {
             
             let dataObject = self.objectAt(indexPath: indexPath)
-            selected = config(cell, dataObject, indexPath)
+            selected = config(cell!, dataObject, indexPath)
             
             // add to selected
             if selected { addToSelectedDataSource(object: dataObject, tableView: tableView as! RSSelectionTableView) }
         }
         
         // status update
-        updateStatus(status: selected, for: cell)
+        updateStatus(status: selected, for: cell!)
         
-        return cell
+        return cell!
     }
 }

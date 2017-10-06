@@ -67,6 +67,12 @@ class RSSelectionMenu: UIViewController {
 // MARK:- Public
 extension RSSelectionMenu {
     
+    /// custom cell
+    func registerNib(nibName:String, forCellReuseIdentifier: String) {
+        self.tableView?.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: forCellReuseIdentifier)
+        self.tableView?.selectionDataSource?.setCellType(type: .custom, withReuseIdentifier: forCellReuseIdentifier)
+    }
+    
     /// Selection event
     func didSelectRow(dismissOnSelect: Bool? = true, delegate: @escaping UITableViewCellSelection)  {
         self.shouldDismissOnSelect = (tableView?.selectionType == .single) ? dismissOnSelect! : false
@@ -145,7 +151,7 @@ extension RSSelectionMenu {
             
             let popover = tobePresentController.popoverPresentationController!
             popover.delegate = self
-            popover.permittedArrowDirections = .up
+            popover.permittedArrowDirections = .any
             popover.sourceView = source!
             popover.sourceRect = (source?.superview?.convert((source?.bounds)!, to: nil))!
         }

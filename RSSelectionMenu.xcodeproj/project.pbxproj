@@ -10,6 +10,8 @@
 		D811373C1F867864000D6E55 /* RSSelectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811373B1F867864000D6E55 /* RSSelectionTableView.swift */; };
 		D81E0A901F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E0A8F1F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift */; };
 		D81E0A921F7F79A800E76EFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E0A911F7F79A800E76EFB /* Constants.swift */; };
+		D83570F91F87808C00185B73 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83570F71F87808C00185B73 /* CustomTableViewCell.swift */; };
+		D83570FA1F87808C00185B73 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83570F81F87808C00185B73 /* CustomTableViewCell.xib */; };
 		D850A57A1F850CF500BF5805 /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = D850A5781F850CF500BF5805 /* NSObject+Properties.m */; };
 		D8DB48F61F7E9FC0006F2DDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB48F51F7E9FC0006F2DDC /* AppDelegate.swift */; };
 		D8DB48F81F7E9FC0006F2DDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB48F71F7E9FC0006F2DDC /* ViewController.swift */; };
@@ -27,6 +29,8 @@
 		D811373B1F867864000D6E55 /* RSSelectionTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionTableView.swift; sourceTree = "<group>"; };
 		D81E0A8F1F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuSearchDelegate.swift; sourceTree = "<group>"; };
 		D81E0A911F7F79A800E76EFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D83570F71F87808C00185B73 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		D83570F81F87808C00185B73 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		D850A5771F850CF400BF5805 /* RSSelectionMenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RSSelectionMenu-Bridging-Header.h"; sourceTree = "<group>"; };
 		D850A5781F850CF500BF5805 /* NSObject+Properties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Properties.m"; sourceTree = "<group>"; };
 		D850A5791F850CF500BF5805 /* NSObject+Properties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Properties.h"; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 		D8DB49121F7EA728006F2DDC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D83570F71F87808C00185B73 /* CustomTableViewCell.swift */,
+				D83570F81F87808C00185B73 /* CustomTableViewCell.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -189,6 +195,7 @@
 			files = (
 				D8DB49001F7E9FC0006F2DDC /* LaunchScreen.storyboard in Resources */,
 				D8DB48FD1F7E9FC0006F2DDC /* Assets.xcassets in Resources */,
+				D83570FA1F87808C00185B73 /* CustomTableViewCell.xib in Resources */,
 				D8DB48FB1F7E9FC0006F2DDC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,6 +213,7 @@
 				D850A57A1F850CF500BF5805 /* NSObject+Properties.m in Sources */,
 				D8DB48F81F7E9FC0006F2DDC /* ViewController.swift in Sources */,
 				D8DB490E1F7EA048006F2DDC /* RSSelectionMenuExtensions.swift in Sources */,
+				D83570F91F87808C00185B73 /* CustomTableViewCell.swift in Sources */,
 				D8DB49161F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift in Sources */,
 				D8DB49101F7EA066006F2DDC /* RSSelectionMenuDataSource.swift in Sources */,
 				D8DB48F61F7E9FC0006F2DDC /* AppDelegate.swift in Sources */,

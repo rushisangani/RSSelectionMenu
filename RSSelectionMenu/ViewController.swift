@@ -22,10 +22,14 @@ class ViewController: UIViewController {
         
         let selectionMenu = RSSelectionMenu(dataSource: dataArray as DataSource, cellType: .rightDetail) { (cell, object, indexPath) -> (Bool) in
             
-            cell.textLabel?.text = object as? String
-            cell.detailTextLabel?.text = "details"
+            (cell as! CustomTableViewCell).setTitle(title: (object as! String), subTitle: "meditab")
+            
+            //cell.textLabel?.text = object as? String
+            //cell.detailTextLabel?.text = "details"
             return self.selectedArray.contains(object as! String)
         }
+        
+        selectionMenu.registerNib(nibName: "CustomTableViewCell", forCellReuseIdentifier: "cell")
         
         selectionMenu.didSelectRow(dismissOnSelect: false) { (object, isSelected, array) in
             self.selectedArray = array as! [String]
