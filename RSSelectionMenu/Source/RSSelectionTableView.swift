@@ -25,31 +25,31 @@
 import UIKit
 
 /// RSSelectionTableView
-open class RSSelectionTableView: UITableView {
+open class RSSelectionTableView<T>: UITableView {
 
     // MARK: - Properties
     
     /// parent view
-    fileprivate weak var selectionMenu: RSSelectionMenu?
+    weak var selectionMenu: RSSelectionMenu<T>?
     
     /// datasource for tableView
-    var selectionDataSource: RSSelectionMenuDataSource?
+    var selectionDataSource: RSSelectionMenuDataSource<T>?
     
     /// delegate for tableView
-    var selectionDelegate: RSSelectionMenuDelegate?
+    var selectionDelegate: RSSelectionMenuDelegate<T>?
     
     /// delegate for search controller
     var searchControllerDelegate: RSSelectionMenuSearchDelegate?
     
     /// delegate for search bar search result
-    var searchBarResultDelegate: UISearchBarResult?
+    var searchBarResultDelegate: UISearchBarResult<T>?
     
     /// selection type - default is single selection
     var selectionType: SelectionType = .single
     
     // MARK: - Life Cycle
     
-    convenience public init(selectionType: SelectionType, dataSource: RSSelectionMenuDataSource, delegate: RSSelectionMenuDelegate, from: RSSelectionMenu) {
+    convenience public init(selectionType: SelectionType, dataSource: RSSelectionMenuDataSource<T>, delegate: RSSelectionMenuDelegate<T>, from: RSSelectionMenu<T>) {
         self.init()
         
         self.selectionDataSource = dataSource
@@ -66,6 +66,8 @@ open class RSSelectionTableView: UITableView {
         dataSource = self.selectionDataSource
         delegate = self.selectionDelegate
         tableFooterView = UIView()
+        estimatedRowHeight = 50
+        rowHeight = UITableViewAutomaticDimension
         
         // register cells
         register(UITableViewCell.self, forCellReuseIdentifier: CellType.basic.rawValue)
@@ -78,14 +80,15 @@ open class RSSelectionTableView: UITableView {
 extension RSSelectionTableView {
     
     // selection delegate event
-    func setOnDidSelect(delegate: @escaping UITableViewCellSelection) {
+    func setOnDidSelect(delegate: @escaping UITableViewCellSelection<T>) {
         self.selectionDelegate?.selectionDelegate = delegate
     }
     
     // add search bar
-    func addSearchBar(withCompletion: @escaping UISearchBarResult) {
-        self.searchBarResultDelegate = withCompletion
-        self.searchControllerDelegate = RSSelectionMenuSearchDelegate(controller: selectionMenu!, tableView: self)
+    func addSearchBar(placeHolder: String, tintColor: UIColor, completion: @escaping UISearchBarResult<T>) {
+        
+        self.searchBarResultDelegate = completion
+        self.searchControllerDelegate = RSSelectionMenuSearchDelegate(controller: selectionMenu!, tableView: self, placeHolder: placeHolder, tintColor: tintColor)
         
         // update result on search event
         self.searchControllerDelegate?.didSearch = { [weak self] (searchText) in
@@ -96,7 +99,7 @@ extension RSSelectionTableView {
     }
     
     // object at indexpath
-    func objectAt(indexPath: IndexPath) -> AnyObject {
+    func objectAt(indexPath: IndexPath) -> T {
         return self.selectionDataSource!.objectAt(indexPath: indexPath)
     }
     

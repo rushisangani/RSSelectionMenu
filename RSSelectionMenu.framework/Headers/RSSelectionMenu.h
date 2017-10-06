@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  RSSelectionMenu.h
 //
 //  Copyright (c) 2017 Rushi Sangani
 //
@@ -22,28 +22,12 @@
 //  THE SOFTWARE.
 //
 
+#import <UIKit/UIKit.h>
 
-import Foundation
-import UIKit
+//! Project version number for RSSelectionMenu.
+FOUNDATION_EXPORT double RSSelectionMenuVersionNumber;
 
-/// UITableViewCellConfiguration
-public typealias UITableViewCellConfiguration<T> = ((_ cell: UITableViewCell, _ dataObject: T, _ indexPath: IndexPath) -> ())
+//! Project version string for RSSelectionMenu.
+FOUNDATION_EXPORT const unsigned char RSSelectionMenuVersionString[];
 
-/// DataSource
-public typealias DataSource<T> = [T]
-
-/// UITableViewCellSelection
-public typealias UITableViewCellSelection<T> = ((_ object: T, _ isSelected: Bool, _ selectedArray: DataSource<T>) -> ())
-
-/// FilteredDataSource
-public typealias FilteredDataSource<T> = [T]
-
-/// UISearchBarResult
-public typealias UISearchBarResult<T> = ((_ searchText: String) -> (FilteredDataSource<T>))
-
-/// Strings
-let defaultPlaceHolder          = "Search"
-
-
-/// Colors
-let defaultSearchBarTintColor   = UIColor(white: 0.9, alpha: 0.9)
+// In this header, you should import all the public headers of your framework using statements like #import <RSSelectionMenu/PublicHeader.h>

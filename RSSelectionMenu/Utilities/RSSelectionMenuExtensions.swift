@@ -51,14 +51,6 @@ public enum CellType: String {
 
 /************************************/
 
-//MARK: - UIStoryBoard
-extension UIStoryboard {
-    
-    class func instantiateRSSelectionMenu() -> RSSelectionMenu {
-        return UIStoryboard(name: String(describing: RSSelectionMenu.self), bundle: Bundle.main).instantiateInitialViewController() as! RSSelectionMenu
-    }
-}
-
 //MARK: - UITableViewCell
 extension UITableViewCell {
     
@@ -70,13 +62,18 @@ extension UITableViewCell {
 //MARK: - RSSelectionMenu
 extension RSSelectionMenu {
     
+    // returns unique key
+    public func uniqueKeyId() -> String {
+        return self.associatedObject() as? String ?? ""
+    }
+    
     // check if object is inside the datasource
-    class func containsObject(_ object: AnyObject, inDataSource: DataSource) -> Bool {
+    public func containsObject<T>(_ object: T, inDataSource: DataSource<T>) -> Bool {
         return (isSelected(object: object, from: inDataSource) != nil)
     }
     
     // check if object is selected
-    class func isSelected(object: AnyObject, from: DataSource) -> Int? {
+    public func isSelected<T>(object: T, from: DataSource<T>) -> Int? {
         
         // object type is string
         if object is NSString {
@@ -98,24 +95,28 @@ extension RSSelectionMenu {
         
         // dictionary type
         else if object is NSDictionary {
-            return hasSameKeyValue(forObject: (object as! Dictionary), inArray: from as! [[String : AnyObject]])
+            return hasSameKeyValue(forObject: (object as! Dictionary), inArray: from)
         }
     
         // custom type
         else {
             
-            let classType = (object as! NSObject).self as! NSObject.Type
+            let classType = T.self as! NSObject.Type
             let dictionary = (object as! NSObject).toDictionary(from: classType)
-            return hasSameKeyValue(forObject: dictionary as [String : AnyObject], inArray: from as! [[String : AnyObject]])
+            return hasSameKeyValue(forObject: dictionary, inArray: from)
         }
     }
     
     /// dictionary key value comparision
-    class func hasSameKeyValue(forObject: [String: AnyObject], inArray: [[String: AnyObject]]) -> Int? {
-        let value = forObject[RSSelectionMenu.uniqueKey] as? String ?? ""
+    public func hasSameKeyValue<T>(forObject: [String: AnyObject], inArray: DataSource<T>) -> Int? {
+        let key = uniqueKeyId()
+        let classType = T.self as! NSObject.Type
+        
+        let value = String(describing: forObject[key]!)
         
         return inArray.index(where: { (data) -> Bool in
-            return value == data[RSSelectionMenu.uniqueKey] as? String
+            let dictionary = (data as! NSObject).toDictionary(from: classType)
+            return value == String(describing: dictionary[key]!)
         })
     }
 }

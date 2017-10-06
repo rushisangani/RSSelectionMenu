@@ -34,7 +34,7 @@ open class RSSelectionMenuSearchDelegate: NSObject {
     public var didSearch: ((String) -> ())?
     
     // MARK: - Initialize
-    init(controller: UIViewController, tableView: UITableView, placeHolder: String? = defaultPlaceHolder, tintColor: UIColor? = defaultSearchBarTintColor) {
+    init(controller: UIViewController, tableView: UITableView, placeHolder: String, tintColor: UIColor) {
         super.init()
         
         controller.definesPresentationContext = true

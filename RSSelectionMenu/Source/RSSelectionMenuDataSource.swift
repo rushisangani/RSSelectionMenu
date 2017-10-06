@@ -24,7 +24,7 @@
 import UIKit
 
 /// RSSelectionMenuDataSource
-open class RSSelectionMenuDataSource: NSObject {
+open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
 
     // MARK: - Properties
     
@@ -35,26 +35,59 @@ open class RSSelectionMenuDataSource: NSObject {
     fileprivate var cellIdentifier: String = CellType.basic.rawValue
     
     /// data source for tableview
-    fileprivate var dataSource: DataSource = []
+    fileprivate var dataSource: DataSource<T> = []
     
     /// filtered data source for tableView
-    fileprivate var filteredDataSource: FilteredDataSource = []
+    fileprivate var filteredDataSource: FilteredDataSource<T> = []
     
     /// cell configuration - (cell, dataObject, indexPath)
-    fileprivate var cellConfiguration: UITableViewCellConfiguration?
+    fileprivate var cellConfiguration: UITableViewCellConfiguration<T>?
     
     // MARK: - Initialize
     
-    init(dataSource: DataSource, forCellType type: CellType, configuration: @escaping UITableViewCellConfiguration) {
+    init(dataSource: DataSource<T>, forCellType type: CellType, configuration: @escaping UITableViewCellConfiguration<T>) {
         
         self.dataSource = dataSource
-        self.filteredDataSource = dataSource
+        self.filteredDataSource = self.dataSource
         self.cellType = type
         self.cellConfiguration = configuration
     }
     
-    convenience init(dataSource: DataSource, configuration: @escaping UITableViewCellConfiguration) {
+    convenience init(dataSource: DataSource<T>, configuration: @escaping UITableViewCellConfiguration<T>) {
         self.init(dataSource: dataSource, forCellType: CellType.basic, configuration: configuration)
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.filteredDataSource.count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // create new reusable cell
+        let cellStyle = self.tableViewCellStyle()
+        var cell: UITableViewCell?
+        
+        if cellType == .custom {
+            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        }
+        else {
+            cell = UITableViewCell(style: cellStyle, reuseIdentifier: self.cellIdentifier)
+        }
+        
+        // cell configuration
+        if let config = cellConfiguration {
+            
+            let dataObject = self.objectAt(indexPath: indexPath)
+            config(cell!, dataObject, indexPath)
+            
+            // selection
+            let delegate = tableView.delegate as! RSSelectionMenuDelegate<T>
+            updateStatus(status: delegate.showSelected(object: dataObject, inTableView: tableView as! RSSelectionTableView<T>), for: cell!)
+        }
+        
+        return cell!
     }
 }
 
@@ -68,12 +101,12 @@ extension RSSelectionMenuDataSource {
     }
     
     /// returns the object present in dataSourceArray at specified indexPath
-    func objectAt(indexPath: IndexPath) -> AnyObject {
+    func objectAt(indexPath: IndexPath) -> T {
         return self.filteredDataSource[indexPath.row]
     }
     
     /// to update data source for tableview
-    func update(dataSource: FilteredDataSource, inTableView tableView: RSSelectionTableView) {
+    func update(dataSource: DataSource<T>, inTableView tableView: RSSelectionTableView<T>) {
         
         if dataSource.count == 0 { filteredDataSource = self.dataSource }
         else { filteredDataSource = dataSource }
@@ -108,40 +141,5 @@ extension RSSelectionMenuDataSource {
     /// update cell status
     fileprivate func updateStatus(status: Bool, for cell: UITableViewCell) {
         cell.showSelected(status)
-    }
-}
-
-// MARK: - UITableViewDataSource
-extension RSSelectionMenuDataSource: UITableViewDataSource {
-    
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.filteredDataSource.count
-    }
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // create new reusable cell
-        let cellStyle = self.tableViewCellStyle()
-        var cell: UITableViewCell?
-        
-        if cellType == .custom {
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        }
-        else {
-            cell = UITableViewCell(style: cellStyle, reuseIdentifier: self.cellIdentifier)
-        }
-        
-        // cell configuration
-        if let config = cellConfiguration {
-            
-            let dataObject = self.objectAt(indexPath: indexPath)
-            config(cell!, dataObject, indexPath)
-            
-            // selection
-            let delegate = tableView.delegate as! RSSelectionMenuDelegate
-            updateStatus(status: delegate.showSelected(object: dataObject), for: cell!)
-        }
-        
-        return cell!
     }
 }

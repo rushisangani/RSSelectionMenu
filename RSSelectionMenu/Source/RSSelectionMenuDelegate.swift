@@ -24,20 +24,43 @@
 
 import UIKit
 
-open class RSSelectionMenuDelegate: NSObject {
+open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
 
     // MARK: - Properties
-    
+
     /// tableview cell selection delegate
-    var selectionDelegate: UITableViewCellSelection? = nil
+    var selectionDelegate: UITableViewCellSelection<T>? = nil
     
     /// selected objects
-    fileprivate var selectedObjects: DataSource = []
+    fileprivate var selectedObjects = DataSource<T>()
     
     // MARK: - Initialize
-    convenience init(selectedItems: DataSource) {
+    convenience init(selectedItems: DataSource<T>) {
         self.init()
         selectedObjects = selectedItems
+    }
+    
+    // MARK:- UITableViewDelegate
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: false)
+        let selectionTableView = tableView as! RSSelectionTableView<T>
+        
+        // selected object
+        let dataObject = selectionTableView.objectAt(indexPath: indexPath)
+        
+        // single selection
+        if selectionTableView.selectionType == .single {
+            handleActionForSingleSelection(object: dataObject, tableView: selectionTableView)
+        }
+        else {
+            // multiple selection
+            handleActionForMultiSelection(object: dataObject, tableView: selectionTableView)
+        }
+        
+        // dismiss if required
+        selectionTableView.dismissControllerIfRequired()
     }
 }
 
@@ -45,7 +68,7 @@ open class RSSelectionMenuDelegate: NSObject {
 extension RSSelectionMenuDelegate {
     
     /// action handler for single selection tableview
-    fileprivate func handleActionForSingleSelection(object: AnyObject, tableView: RSSelectionTableView) {
+    fileprivate func handleActionForSingleSelection(object: T, tableView: RSSelectionTableView<T>) {
         
         // remove all
         selectedObjects.removeAll()
@@ -63,13 +86,13 @@ extension RSSelectionMenuDelegate {
     }
     
     /// action handler for multiple selection tableview
-    fileprivate func handleActionForMultiSelection(object: AnyObject, tableView: RSSelectionTableView) {
+    fileprivate func handleActionForMultiSelection(object: T, tableView: RSSelectionTableView<T>) {
         
         // is selected
         var isSelected = false
         
         // remove if already selected
-        if let selectedIndex = RSSelectionMenu.isSelected(object: object, from: selectedObjects) {
+        if let selectedIndex = tableView.selectionMenu?.isSelected(object: object, from: selectedObjects) {
             selectedObjects.remove(at: selectedIndex)
         }
         else {
@@ -92,32 +115,7 @@ extension RSSelectionMenuDelegate {
 extension RSSelectionMenuDelegate {
     
     /// check for selection status
-    public func showSelected(object: AnyObject) -> Bool {
-        return RSSelectionMenu.containsObject(object, inDataSource: selectedObjects)
-    }
-}
-
-// MARK:- UITableViewDelegate
-extension RSSelectionMenuDelegate: UITableViewDelegate {
-    
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: false)
-        let selectionTableView = tableView as! RSSelectionTableView
-        
-        // selected object
-        let dataObject = selectionTableView.objectAt(indexPath: indexPath)
-        
-        // single selection
-        if selectionTableView.selectionType == .single {
-            handleActionForSingleSelection(object: dataObject, tableView: selectionTableView)
-        }
-        else {
-            // multiple selection
-            handleActionForMultiSelection(object: dataObject, tableView: selectionTableView)
-        }
-        
-        // dismiss if required
-        selectionTableView.dismissControllerIfRequired()
+    public func showSelected(object: T, inTableView: RSSelectionTableView<T>) -> Bool {
+        return inTableView.selectionMenu!.containsObject(object, inDataSource: selectedObjects)
     }
 }

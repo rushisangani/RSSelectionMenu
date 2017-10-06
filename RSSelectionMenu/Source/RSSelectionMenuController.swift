@@ -25,40 +25,37 @@
 import UIKit
 
 /// RSSelectionMenuController
-open class RSSelectionMenu: UIViewController {
+open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationControllerDelegate {
 
     // MARK: - Outlets
-    public var tableView: RSSelectionTableView?
+    public var tableView: RSSelectionTableView<T>?
     
     // MARK: - Properties
     var parentController: UIViewController?
-    
-    /// unique key for comparision when datasource is other than String or Int array
-    public static var uniqueKey: String = ""
     
     /// controller should dissmiss on selection - default is true for single selection
     public var shouldDismissOnSelect: Bool = true
     
     // MARK: - Life Cycle
     
-    convenience public init(dataSource: DataSource, selectedItems: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
+    convenience public init(dataSource: DataSource<T>, selectedItems: DataSource<T>, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration<T>) {
         self.init(selectionType: .single, dataSource: dataSource, selectedItems: selectedItems, uniqueKey: uniqueKey!, cellType: cellType!, configuration: configuration)
     }
     
-    convenience public init(selectionType: SelectionType, dataSource: DataSource, selectedItems: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
+    convenience public init(selectionType: SelectionType, dataSource: DataSource<T>, selectedItems: DataSource<T>, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration<T>) {
         self.init()
         
         // data source
-        let selectionDataSource = RSSelectionMenuDataSource(dataSource: dataSource, forCellType: cellType!, configuration: configuration)
+        let selectionDataSource = RSSelectionMenuDataSource<T>(dataSource: dataSource, forCellType: cellType!, configuration: configuration)
         
         // delegate
-        let selectionDelegate = RSSelectionMenuDelegate(selectedItems: selectedItems)
-        
-        // key
-        RSSelectionMenu.uniqueKey = uniqueKey!
+        let selectionDelegate = RSSelectionMenuDelegate<T>(selectedItems: selectedItems)
         
         // initilize tableview
-        self.tableView = RSSelectionTableView(selectionType: selectionType, dataSource: selectionDataSource, delegate: selectionDelegate, from: self)
+        self.tableView = RSSelectionTableView<T>(selectionType: selectionType, dataSource: selectionDataSource, delegate: selectionDelegate, from: self)
+        
+        // key
+        self.setAssociated(object: uniqueKey!)
     }
     
     override open func viewDidLoad() {
@@ -87,6 +84,26 @@ open class RSSelectionMenu: UIViewController {
         super.viewDidLayoutSubviews()
         self.tableView?.frame = self.view.frame
     }
+    
+    /// Done button
+    fileprivate func setDoneButton() {
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    @objc func doneButtonTapped() {
+        self.dismiss()
+    }
+    
+    // MARK: - UIPopoverPresentationControllerDelegate
+    public func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    public func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return !showDoneButton()
+    }
 }
 
 // MARK:- Public
@@ -99,14 +116,14 @@ extension RSSelectionMenu {
     }
     
     /// Selection event
-    public func didSelectRow(dismissOnSelect: Bool? = true, delegate: @escaping UITableViewCellSelection)  {
+    public func didSelectRow(dismissOnSelect: Bool? = true, delegate: @escaping UITableViewCellSelection<T>)  {
         self.shouldDismissOnSelect = (tableView?.selectionType == .single) ? dismissOnSelect! : false
         self.tableView?.setOnDidSelect(delegate: delegate)
     }
     
     /// Searchbar
-    public func addSearchBar(withCompletion: @escaping UISearchBarResult) {
-        self.tableView?.addSearchBar(withCompletion: withCompletion)
+    public func addSearchBar(placeHolder: String? = defaultPlaceHolder, tintColor: UIColor? = defaultSearchBarTintColor, completion: @escaping UISearchBarResult<T>) {
+        self.tableView?.addSearchBar(placeHolder: placeHolder!, tintColor: tintColor!, completion: completion)
     }
     
     /// Show
@@ -149,17 +166,6 @@ extension RSSelectionMenu {
         return !shouldDismissOnSelect || tableView?.selectionType == .multiple
     }
     
-    /// Done button
-    fileprivate func setDoneButton() {
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
-        navigationItem.rightBarButtonItem = doneButton
-    }
-    
-    @objc func doneButtonTapped() {
-        self.dismiss()
-    }
-    
     // show
     fileprivate func show(with: PresentationStyle, from: UIViewController, source: UIView?, size: CGSize?) {
         
@@ -187,16 +193,3 @@ extension RSSelectionMenu {
         from.present(tobePresentController, animated: true, completion: nil)
     }
 }
-
-// MARK: - UIPopoverPresentationControllerDelegate
-extension RSSelectionMenu : UIPopoverPresentationControllerDelegate {
-    
-    public func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-    
-    public func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        return !showDoneButton()
-    }
-}
-

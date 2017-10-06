@@ -48,7 +48,7 @@ extension NSObject {
 extension NSObject {
     
     // dictionary
-    func toDictionary(from classType: NSObject.Type) -> [String: Any] {
+    func toDictionary(from classType: NSObject.Type) -> [String: AnyObject] {
         
         var propertiesCount : CUnsignedInt = 0
         let propertiesInAClass = class_copyPropertyList(classType, &propertiesCount)
@@ -61,6 +61,6 @@ extension NSObject {
                 propertiesDictionary.setValue(self.value(forKey: key), forKey: key)
             }
         }
-        return propertiesDictionary as! [String : Any]
+        return propertiesDictionary as! [String : AnyObject]
     }
 }
