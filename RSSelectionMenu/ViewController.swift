@@ -20,21 +20,24 @@ class ViewController: UIViewController {
 
     @IBAction func showButtonClicked(_ sender: Any) {
         
-        let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: dataArray as DataSource) { (cell, object, indexPath) -> (Bool) in
+        let selectionMenu = RSSelectionMenu(dataSource: dataArray as DataSource, cellType: .rightDetail) { (cell, object, indexPath) -> (Bool) in
+            
             cell.textLabel?.text = object as? String
-            return self.selectedArray.contains((cell.textLabel?.text)!)
+            cell.detailTextLabel?.text = "details"
+            return self.selectedArray.contains(object as! String)
         }
         
-        selectionMenu.didSelectRow { (object, selected, selectedArray) in
-            self.selectedArray = selectedArray as! [String]
+        selectionMenu.didSelectRow(dismissOnSelect: false) { (object, isSelected, array) in
+            self.selectedArray = array as! [String]
+            
         }
         
-//        selectionMenu.addSearchBar { (searchText) -> (FilteredDataSource) in
-//            return self.dataArray.filter({ $0.hasPrefix(searchText) }) as FilteredDataSource
+//        selectionMenu.addSearchBar { (text) -> (FilteredDataSource) in
+//            return self.dataArray.filter({ $0.hasPrefix(text) }) as FilteredDataSource
 //        }
         
-        //selectionMenu.show(from: self)
         selectionMenu.showAsPopover(from: (sender as! UIButton), inViewController: self)
+        //selectionMenu.showAsPopover(from: (sender as! UIButton), inViewController: self)
     }
 }
 

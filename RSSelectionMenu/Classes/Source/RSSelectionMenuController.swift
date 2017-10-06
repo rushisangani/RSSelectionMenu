@@ -23,7 +23,7 @@ class RSSelectionMenu: UIViewController {
     // MARK: - Life Cycle
     
     convenience init(dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
-        self.init(selectionType: .single, dataSource: dataSource, configuration: configuration)
+        self.init(selectionType: .single, dataSource: dataSource, uniqueKey: uniqueKey!, cellType: cellType!, configuration: configuration)
     }
     
     convenience init(selectionType: SelectionType, dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
@@ -53,7 +53,7 @@ class RSSelectionMenu: UIViewController {
         self.view.frame = (parentController?.view.frame)!
         self.view.addSubview(tableView!)
         
-        if tableView?.selectionType == .multiple {
+        if showDoneButton() {
             setDoneButton()
         }
     }
@@ -87,7 +87,7 @@ extension RSSelectionMenu {
     /// show as popover
     func showAsPopover(from: UIView, inViewController: UIViewController, with contentSize: CGSize? = nil) {
         parentController = inViewController
-        show(with: .popOver, from: inViewController, source: from, size: contentSize)
+        show(with: .popover, from: inViewController, source: from, size: contentSize)
     }
     
     /// dismiss
@@ -110,6 +110,11 @@ extension RSSelectionMenu {
 //MARK:- Private
 extension RSSelectionMenu {
 
+    // check if show done button
+    fileprivate func showDoneButton() -> Bool {
+        return !shouldDismissOnSelect || tableView?.selectionType == .multiple
+    }
+    
     /// Done button
     fileprivate func setDoneButton() {
         
@@ -134,7 +139,7 @@ extension RSSelectionMenu {
             tobePresentController = UINavigationController(rootViewController: self)
         }
         
-        if with == .popOver {
+        if with == .popover {
             tobePresentController.modalPresentationStyle = .popover
             if size != nil { tobePresentController.preferredContentSize = size! }
             
@@ -157,7 +162,7 @@ extension RSSelectionMenu : UIPopoverPresentationControllerDelegate {
     }
     
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        return (self.tableView?.selectionType == .single)
+        return !showDoneButton()
     }
 }
 

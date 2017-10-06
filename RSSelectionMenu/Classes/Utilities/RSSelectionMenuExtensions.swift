@@ -21,8 +21,7 @@ enum PresentationStyle {
     
     case present       // default
     case push
-    case popOver
-    case dropDown
+    case popover
 }
 
 // MARK: - CellType
