@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                    DESC
   	s.homepage     = "https://github.com/rushisangani/RSSelectionMenu"
   
-  	s.license      = { :type => "GNU GENERAL PUBLIC LICENSE", :file => "LICENSE" }
+  	s.license      = { :type => "MIT", :file => "LICENSE" }
   	s.author       = { "Rushi Sangani" => "rushisangani@gmail.com" }
   	s.platform     = :ios, "10.0"
   	s.source       = { :git => "https://github.com/rushisangani/RSSelectionMenu.git", :tag => "1.0.0" }
