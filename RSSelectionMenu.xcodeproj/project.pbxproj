@@ -6,50 +6,52 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		D852FDDD1F87A1C6002362CC /* UniversalRSSelectionMenu */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D852FDDE1F87A1C6002362CC /* Build configuration list for PBXAggregateTarget "UniversalRSSelectionMenu" */;
+			buildPhases = (
+				D852FDE11F87A1F6002362CC /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = UniversalRSSelectionMenu;
+			productName = UniversalRSSelectionMenu;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		D811373C1F867864000D6E55 /* RSSelectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811373B1F867864000D6E55 /* RSSelectionTableView.swift */; };
-		D81E0A901F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E0A8F1F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift */; };
-		D81E0A921F7F79A800E76EFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E0A911F7F79A800E76EFB /* Constants.swift */; };
-		D83570F91F87808C00185B73 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83570F71F87808C00185B73 /* CustomTableViewCell.swift */; };
-		D83570FA1F87808C00185B73 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83570F81F87808C00185B73 /* CustomTableViewCell.xib */; };
-		D850A57A1F850CF500BF5805 /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = D850A5781F850CF500BF5805 /* NSObject+Properties.m */; };
-		D8DB48F61F7E9FC0006F2DDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB48F51F7E9FC0006F2DDC /* AppDelegate.swift */; };
-		D8DB48F81F7E9FC0006F2DDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB48F71F7E9FC0006F2DDC /* ViewController.swift */; };
-		D8DB48FB1F7E9FC0006F2DDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8DB48F91F7E9FC0006F2DDC /* Main.storyboard */; };
-		D8DB48FD1F7E9FC0006F2DDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8DB48FC1F7E9FC0006F2DDC /* Assets.xcassets */; };
-		D8DB49001F7E9FC0006F2DDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8DB48FE1F7E9FC0006F2DDC /* LaunchScreen.storyboard */; };
-		D8DB49091F7EA00D006F2DDC /* RSSelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB49081F7EA00D006F2DDC /* RSSelectionMenuController.swift */; };
-		D8DB490E1F7EA048006F2DDC /* RSSelectionMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB490D1F7EA048006F2DDC /* RSSelectionMenuExtensions.swift */; };
-		D8DB49101F7EA066006F2DDC /* RSSelectionMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB490F1F7EA066006F2DDC /* RSSelectionMenuDataSource.swift */; };
-		D8DB49161F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB49151F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift */; };
-		D8DB49181F7ECBE8006F2DDC /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB49171F7ECBE8006F2DDC /* NSObjectExtension.swift */; };
+		D835710C1F87986400185B73 /* RSSelectionMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = D835710A1F87986400185B73 /* RSSelectionMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D852FDA41F879BF7002362CC /* RSSelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FD9F1F879BF6002362CC /* RSSelectionMenuController.swift */; };
+		D852FDA51F879BF7002362CC /* RSSelectionMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA01F879BF6002362CC /* RSSelectionMenuDataSource.swift */; };
+		D852FDA61F879BF7002362CC /* RSSelectionMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA11F879BF6002362CC /* RSSelectionMenuDelegate.swift */; };
+		D852FDA71F879BF7002362CC /* RSSelectionMenuSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */; };
+		D852FDA81F879BF7002362CC /* RSSelectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */; };
+		D852FDAF1F879BFF002362CC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAA1F879BFF002362CC /* Constants.swift */; };
+		D852FDB01F879BFF002362CC /* NSObject+Properties.h in Headers */ = {isa = PBXBuildFile; fileRef = D852FDAB1F879BFF002362CC /* NSObject+Properties.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D852FDB11F879BFF002362CC /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAC1F879BFF002362CC /* NSObject+Properties.m */; };
+		D852FDB21F879BFF002362CC /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */; };
+		D852FDB31F879BFF002362CC /* RSSelectionMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D811373B1F867864000D6E55 /* RSSelectionTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionTableView.swift; sourceTree = "<group>"; };
-		D81E0A8F1F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuSearchDelegate.swift; sourceTree = "<group>"; };
-		D81E0A911F7F79A800E76EFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D83570F71F87808C00185B73 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		D83570F81F87808C00185B73 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
-		D850A5771F850CF400BF5805 /* RSSelectionMenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RSSelectionMenu-Bridging-Header.h"; sourceTree = "<group>"; };
-		D850A5781F850CF500BF5805 /* NSObject+Properties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Properties.m"; sourceTree = "<group>"; };
-		D850A5791F850CF500BF5805 /* NSObject+Properties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Properties.h"; sourceTree = "<group>"; };
-		D8DB48F21F7E9FC0006F2DDC /* RSSelectionMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSelectionMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8DB48F51F7E9FC0006F2DDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D8DB48F71F7E9FC0006F2DDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D8DB48FA1F7E9FC0006F2DDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D8DB48FC1F7E9FC0006F2DDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D8DB48FF1F7E9FC0006F2DDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D8DB49011F7E9FC0006F2DDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8DB49081F7EA00D006F2DDC /* RSSelectionMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuController.swift; sourceTree = "<group>"; };
-		D8DB490D1F7EA048006F2DDC /* RSSelectionMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuExtensions.swift; sourceTree = "<group>"; };
-		D8DB490F1F7EA066006F2DDC /* RSSelectionMenuDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuDataSource.swift; sourceTree = "<group>"; };
-		D8DB49151F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuDelegate.swift; sourceTree = "<group>"; };
-		D8DB49171F7ECBE8006F2DDC /* NSObjectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
+		D83571071F87986400185B73 /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D835710A1F87986400185B73 /* RSSelectionMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSelectionMenu.h; sourceTree = "<group>"; };
+		D835710B1F87986400185B73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D852FD9F1F879BF6002362CC /* RSSelectionMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuController.swift; sourceTree = "<group>"; };
+		D852FDA01F879BF6002362CC /* RSSelectionMenuDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuDataSource.swift; sourceTree = "<group>"; };
+		D852FDA11F879BF6002362CC /* RSSelectionMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuDelegate.swift; sourceTree = "<group>"; };
+		D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuSearchDelegate.swift; sourceTree = "<group>"; };
+		D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionTableView.swift; sourceTree = "<group>"; };
+		D852FDAA1F879BFF002362CC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D852FDAB1F879BFF002362CC /* NSObject+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Properties.h"; sourceTree = "<group>"; };
+		D852FDAC1F879BFF002362CC /* NSObject+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Properties.m"; sourceTree = "<group>"; };
+		D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
+		D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D8DB48EF1F7E9FC0006F2DDC /* Frameworks */ = {
+		D83571031F87986400185B73 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -59,90 +61,80 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D8DB48E91F7E9FC0006F2DDC = {
+		D83570FD1F87986400185B73 = {
 			isa = PBXGroup;
 			children = (
-				D8DB48F41F7E9FC0006F2DDC /* RSSelectionMenu */,
-				D8DB48F31F7E9FC0006F2DDC /* Products */,
+				D83571091F87986400185B73 /* RSSelectionMenu */,
+				D83571081F87986400185B73 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D8DB48F31F7E9FC0006F2DDC /* Products */ = {
+		D83571081F87986400185B73 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D8DB48F21F7E9FC0006F2DDC /* RSSelectionMenu.app */,
+				D83571071F87986400185B73 /* RSSelectionMenu.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D8DB48F41F7E9FC0006F2DDC /* RSSelectionMenu */ = {
+		D83571091F87986400185B73 /* RSSelectionMenu */ = {
 			isa = PBXGroup;
 			children = (
-				D850A5771F850CF400BF5805 /* RSSelectionMenu-Bridging-Header.h */,
-				D8DB49071F7E9FE7006F2DDC /* Classes */,
-				D8DB48F51F7E9FC0006F2DDC /* AppDelegate.swift */,
-				D8DB48F71F7E9FC0006F2DDC /* ViewController.swift */,
-				D8DB48F91F7E9FC0006F2DDC /* Main.storyboard */,
-				D8DB48FC1F7E9FC0006F2DDC /* Assets.xcassets */,
-				D8DB48FE1F7E9FC0006F2DDC /* LaunchScreen.storyboard */,
-				D8DB49011F7E9FC0006F2DDC /* Info.plist */,
+				D835710A1F87986400185B73 /* RSSelectionMenu.h */,
+				D852FD9E1F879BF6002362CC /* Source */,
+				D852FDA91F879BFF002362CC /* Utilities */,
+				D835710B1F87986400185B73 /* Info.plist */,
 			);
 			path = RSSelectionMenu;
 			sourceTree = "<group>";
 		};
-		D8DB49071F7E9FE7006F2DDC /* Classes */ = {
+		D852FD9E1F879BF6002362CC /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D8DB49121F7EA728006F2DDC /* Resources */,
-				D8DB49111F7EA71B006F2DDC /* Source */,
-				D8DB490C1F7EA048006F2DDC /* Utilities */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		D8DB490C1F7EA048006F2DDC /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				D81E0A911F7F79A800E76EFB /* Constants.swift */,
-				D8DB490D1F7EA048006F2DDC /* RSSelectionMenuExtensions.swift */,
-				D8DB49171F7ECBE8006F2DDC /* NSObjectExtension.swift */,
-				D850A5791F850CF500BF5805 /* NSObject+Properties.h */,
-				D850A5781F850CF500BF5805 /* NSObject+Properties.m */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		D8DB49111F7EA71B006F2DDC /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				D811373B1F867864000D6E55 /* RSSelectionTableView.swift */,
-				D8DB490F1F7EA066006F2DDC /* RSSelectionMenuDataSource.swift */,
-				D8DB49151F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift */,
-				D81E0A8F1F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift */,
-				D8DB49081F7EA00D006F2DDC /* RSSelectionMenuController.swift */,
+				D852FD9F1F879BF6002362CC /* RSSelectionMenuController.swift */,
+				D852FDA01F879BF6002362CC /* RSSelectionMenuDataSource.swift */,
+				D852FDA11F879BF6002362CC /* RSSelectionMenuDelegate.swift */,
+				D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */,
+				D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		D8DB49121F7EA728006F2DDC /* Resources */ = {
+		D852FDA91F879BFF002362CC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				D83570F71F87808C00185B73 /* CustomTableViewCell.swift */,
-				D83570F81F87808C00185B73 /* CustomTableViewCell.xib */,
+				D852FDAA1F879BFF002362CC /* Constants.swift */,
+				D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */,
+				D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */,
+				D852FDAB1F879BFF002362CC /* NSObject+Properties.h */,
+				D852FDAC1F879BFF002362CC /* NSObject+Properties.m */,
 			);
-			path = Resources;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		D83571041F87986400185B73 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D835710C1F87986400185B73 /* RSSelectionMenu.h in Headers */,
+				D852FDB01F879BFF002362CC /* NSObject+Properties.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		D8DB48F11F7E9FC0006F2DDC /* RSSelectionMenu */ = {
+		D83571061F87986400185B73 /* RSSelectionMenu */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8DB49041F7E9FC0006F2DDC /* Build configuration list for PBXNativeTarget "RSSelectionMenu" */;
+			buildConfigurationList = D835710F1F87986400185B73 /* Build configuration list for PBXNativeTarget "RSSelectionMenu" */;
 			buildPhases = (
-				D8DB48EE1F7E9FC0006F2DDC /* Sources */,
-				D8DB48EF1F7E9FC0006F2DDC /* Frameworks */,
-				D8DB48F01F7E9FC0006F2DDC /* Resources */,
+				D83571021F87986400185B73 /* Sources */,
+				D83571031F87986400185B73 /* Frameworks */,
+				D83571041F87986400185B73 /* Headers */,
+				D83571051F87986400185B73 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -150,101 +142,93 @@
 			);
 			name = RSSelectionMenu;
 			productName = RSSelectionMenu;
-			productReference = D8DB48F21F7E9FC0006F2DDC /* RSSelectionMenu.app */;
-			productType = "com.apple.product-type.application";
+			productReference = D83571071F87986400185B73 /* RSSelectionMenu.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D8DB48EA1F7E9FC0006F2DDC /* Project object */ = {
+		D83570FE1F87986400185B73 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Rushi Sangani";
 				TargetAttributes = {
-					D8DB48F11F7E9FC0006F2DDC = {
+					D83571061F87986400185B73 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+					D852FDDD1F87A1C6002362CC = {
+						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = D8DB48ED1F7E9FC0006F2DDC /* Build configuration list for PBXProject "RSSelectionMenu" */;
+			buildConfigurationList = D83571011F87986400185B73 /* Build configuration list for PBXProject "RSSelectionMenu" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
-			mainGroup = D8DB48E91F7E9FC0006F2DDC;
-			productRefGroup = D8DB48F31F7E9FC0006F2DDC /* Products */;
+			mainGroup = D83570FD1F87986400185B73;
+			productRefGroup = D83571081F87986400185B73 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D8DB48F11F7E9FC0006F2DDC /* RSSelectionMenu */,
+				D83571061F87986400185B73 /* RSSelectionMenu */,
+				D852FDDD1F87A1C6002362CC /* UniversalRSSelectionMenu */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D8DB48F01F7E9FC0006F2DDC /* Resources */ = {
+		D83571051F87986400185B73 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8DB49001F7E9FC0006F2DDC /* LaunchScreen.storyboard in Resources */,
-				D8DB48FD1F7E9FC0006F2DDC /* Assets.xcassets in Resources */,
-				D83570FA1F87808C00185B73 /* CustomTableViewCell.xib in Resources */,
-				D8DB48FB1F7E9FC0006F2DDC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D852FDE11F87A1F6002362CC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"${PROJECT_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\" \"${PROJECT_DIR}\"\n\n# Step 6. Convenience step to open the project's directory in Finder\nopen \"${PROJECT_DIR}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		D8DB48EE1F7E9FC0006F2DDC /* Sources */ = {
+		D83571021F87986400185B73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8DB49181F7ECBE8006F2DDC /* NSObjectExtension.swift in Sources */,
-				D811373C1F867864000D6E55 /* RSSelectionTableView.swift in Sources */,
-				D8DB49091F7EA00D006F2DDC /* RSSelectionMenuController.swift in Sources */,
-				D850A57A1F850CF500BF5805 /* NSObject+Properties.m in Sources */,
-				D8DB48F81F7E9FC0006F2DDC /* ViewController.swift in Sources */,
-				D8DB490E1F7EA048006F2DDC /* RSSelectionMenuExtensions.swift in Sources */,
-				D83570F91F87808C00185B73 /* CustomTableViewCell.swift in Sources */,
-				D8DB49161F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift in Sources */,
-				D8DB49101F7EA066006F2DDC /* RSSelectionMenuDataSource.swift in Sources */,
-				D8DB48F61F7E9FC0006F2DDC /* AppDelegate.swift in Sources */,
-				D81E0A901F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift in Sources */,
-				D81E0A921F7F79A800E76EFB /* Constants.swift in Sources */,
+				D852FDA61F879BF7002362CC /* RSSelectionMenuDelegate.swift in Sources */,
+				D852FDA41F879BF7002362CC /* RSSelectionMenuController.swift in Sources */,
+				D852FDA81F879BF7002362CC /* RSSelectionTableView.swift in Sources */,
+				D852FDA51F879BF7002362CC /* RSSelectionMenuDataSource.swift in Sources */,
+				D852FDB31F879BFF002362CC /* RSSelectionMenuExtensions.swift in Sources */,
+				D852FDA71F879BF7002362CC /* RSSelectionMenuSearchDelegate.swift in Sources */,
+				D852FDAF1F879BFF002362CC /* Constants.swift in Sources */,
+				D852FDB11F879BFF002362CC /* NSObject+Properties.m in Sources */,
+				D852FDB21F879BFF002362CC /* NSObjectExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		D8DB48F91F7E9FC0006F2DDC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D8DB48FA1F7E9FC0006F2DDC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D8DB48FE1F7E9FC0006F2DDC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D8DB48FF1F7E9FC0006F2DDC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		D8DB49021F7E9FC0006F2DDC /* Debug */ = {
+		D835710D1F87986400185B73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -275,6 +259,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -298,10 +283,12 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		D8DB49031F7E9FC0006F2DDC /* Release */ = {
+		D835710E1F87986400185B73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -332,6 +319,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -348,66 +336,104 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		D8DB49051F7E9FC0006F2DDC /* Debug */ = {
+		D83571101F87986400185B73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RQ9BPQCP49;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = M9KRH522ST;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = RSSelectionMenu/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.meditab.RSSelectionMenu;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "RSSelectionMenu/RSSelectionMenu-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenu;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		D8DB49061F7E9FC0006F2DDC /* Release */ = {
+		D83571111F87986400185B73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RQ9BPQCP49;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = M9KRH522ST;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = RSSelectionMenu/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.meditab.RSSelectionMenu;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "RSSelectionMenu/RSSelectionMenu-Bridging-Header.h";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenu;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D852FDDF1F87A1C6002362CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M9KRH522ST;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D852FDE01F87A1C6002362CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M9KRH522ST;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D8DB48ED1F7E9FC0006F2DDC /* Build configuration list for PBXProject "RSSelectionMenu" */ = {
+		D83571011F87986400185B73 /* Build configuration list for PBXProject "RSSelectionMenu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8DB49021F7E9FC0006F2DDC /* Debug */,
-				D8DB49031F7E9FC0006F2DDC /* Release */,
+				D835710D1F87986400185B73 /* Debug */,
+				D835710E1F87986400185B73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8DB49041F7E9FC0006F2DDC /* Build configuration list for PBXNativeTarget "RSSelectionMenu" */ = {
+		D835710F1F87986400185B73 /* Build configuration list for PBXNativeTarget "RSSelectionMenu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8DB49051F7E9FC0006F2DDC /* Debug */,
-				D8DB49061F7E9FC0006F2DDC /* Release */,
+				D83571101F87986400185B73 /* Debug */,
+				D83571111F87986400185B73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D852FDDE1F87A1C6002362CC /* Build configuration list for PBXAggregateTarget "UniversalRSSelectionMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D852FDDF1F87A1C6002362CC /* Debug */,
+				D852FDE01F87A1C6002362CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D8DB48EA1F7E9FC0006F2DDC /* Project object */;
+	rootObject = D83570FE1F87986400185B73 /* Project object */;
 }

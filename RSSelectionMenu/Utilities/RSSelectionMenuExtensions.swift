@@ -1,23 +1,39 @@
 //
 //  RSSelectionMenuExtensions.swift
-//  RSSelectionMenu
 //
-//  Created by Rushi on 29/09/17.
-//  Copyright © 2017 Rushi Sangani. All rights reserved.
+//  Copyright (c) 2017 Rushi Sangani
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 import Foundation
 import UIKit
 
 // MARK: - SelectionType
-enum SelectionType {
+public enum SelectionType {
     
     case single        // default
     case multiple
 }
 
 // MARK: - PresentationStyle
-enum PresentationStyle {
+public enum PresentationStyle {
     
     case present       // default
     case push
@@ -25,7 +41,7 @@ enum PresentationStyle {
 }
 
 // MARK: - CellType
-enum CellType: String {
+public enum CellType: String {
     
     case basic          // default
     case rightDetail
@@ -105,7 +121,7 @@ extension RSSelectionMenu {
 //MARK: - UIViewController
 extension UIViewController {
     
-    func isPresented() -> Bool {
+    open func isPresented() -> Bool {
         if self.presentingViewController != nil {
             return true
         } else if self.navigationController?.presentingViewController?.presentedViewController == self.navigationController  {

@@ -1,15 +1,31 @@
 //
 //  RSSelectionTableView.swift
-//  RSSelectionMenu
 //
-//  Created by Rushi on 05/10/17.
-//  Copyright © 2017 Rushi Sangani. All rights reserved.
+//  Copyright (c) 2017 Rushi Sangani
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 import UIKit
 
 /// RSSelectionTableView
-class RSSelectionTableView: UITableView {
+open class RSSelectionTableView: UITableView {
 
     // MARK: - Properties
     
@@ -17,23 +33,23 @@ class RSSelectionTableView: UITableView {
     fileprivate weak var selectionMenu: RSSelectionMenu?
     
     /// datasource for tableView
-    public var selectionDataSource: RSSelectionMenuDataSource?
+    var selectionDataSource: RSSelectionMenuDataSource?
     
     /// delegate for tableView
-    public var selectionDelegate: RSSelectionMenuDelegate?
+    var selectionDelegate: RSSelectionMenuDelegate?
     
     /// delegate for search controller
-    public var searchControllerDelegate: RSSelectionMenuSearchDelegate?
+    var searchControllerDelegate: RSSelectionMenuSearchDelegate?
     
     /// delegate for search bar search result
-    public var searchBarResultDelegate: UISearchBarResult?
+    var searchBarResultDelegate: UISearchBarResult?
     
     /// selection type - default is single selection
-    public var selectionType: SelectionType = .single
+    var selectionType: SelectionType = .single
     
     // MARK: - Life Cycle
     
-    convenience init(selectionType: SelectionType, dataSource: RSSelectionMenuDataSource, delegate: RSSelectionMenuDelegate, from: RSSelectionMenu) {
+    convenience public init(selectionType: SelectionType, dataSource: RSSelectionMenuDataSource, delegate: RSSelectionMenuDelegate, from: RSSelectionMenu) {
         self.init()
         
         self.selectionDataSource = dataSource
@@ -62,12 +78,12 @@ class RSSelectionTableView: UITableView {
 extension RSSelectionTableView {
     
     // selection delegate event
-    public func setOnDidSelect(delegate: @escaping UITableViewCellSelection) {
+    func setOnDidSelect(delegate: @escaping UITableViewCellSelection) {
         self.selectionDelegate?.selectionDelegate = delegate
     }
     
     // add search bar
-    public func addSearchBar(withCompletion: @escaping UISearchBarResult) {
+    func addSearchBar(withCompletion: @escaping UISearchBarResult) {
         self.searchBarResultDelegate = withCompletion
         self.searchControllerDelegate = RSSelectionMenuSearchDelegate(controller: selectionMenu!, tableView: self)
         
@@ -80,12 +96,12 @@ extension RSSelectionTableView {
     }
     
     // object at indexpath
-    public func objectAt(indexPath: IndexPath) -> AnyObject {
+    func objectAt(indexPath: IndexPath) -> AnyObject {
         return self.selectionDataSource!.objectAt(indexPath: indexPath)
     }
     
     /// dismiss
-    public func dismissControllerIfRequired() {
+    func dismissControllerIfRequired() {
         if (selectionMenu?.shouldDismissOnSelect)! {
             selectionMenu?.dismiss()
         }
