@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D811373C1F867864000D6E55 /* RSSelectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811373B1F867864000D6E55 /* RSSelectionTableView.swift */; };
 		D81E0A901F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E0A8F1F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift */; };
 		D81E0A921F7F79A800E76EFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E0A911F7F79A800E76EFB /* Constants.swift */; };
 		D850A57A1F850CF500BF5805 /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = D850A5781F850CF500BF5805 /* NSObject+Properties.m */; };
@@ -18,12 +19,12 @@
 		D8DB49091F7EA00D006F2DDC /* RSSelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB49081F7EA00D006F2DDC /* RSSelectionMenuController.swift */; };
 		D8DB490E1F7EA048006F2DDC /* RSSelectionMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB490D1F7EA048006F2DDC /* RSSelectionMenuExtensions.swift */; };
 		D8DB49101F7EA066006F2DDC /* RSSelectionMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB490F1F7EA066006F2DDC /* RSSelectionMenuDataSource.swift */; };
-		D8DB49141F7EA758006F2DDC /* RSSelectionMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8DB49131F7EA758006F2DDC /* RSSelectionMenu.storyboard */; };
 		D8DB49161F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB49151F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift */; };
 		D8DB49181F7ECBE8006F2DDC /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DB49171F7ECBE8006F2DDC /* NSObjectExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D811373B1F867864000D6E55 /* RSSelectionTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionTableView.swift; sourceTree = "<group>"; };
 		D81E0A8F1F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuSearchDelegate.swift; sourceTree = "<group>"; };
 		D81E0A911F7F79A800E76EFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D850A5771F850CF400BF5805 /* RSSelectionMenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RSSelectionMenu-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -39,7 +40,6 @@
 		D8DB49081F7EA00D006F2DDC /* RSSelectionMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuController.swift; sourceTree = "<group>"; };
 		D8DB490D1F7EA048006F2DDC /* RSSelectionMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuExtensions.swift; sourceTree = "<group>"; };
 		D8DB490F1F7EA066006F2DDC /* RSSelectionMenuDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuDataSource.swift; sourceTree = "<group>"; };
-		D8DB49131F7EA758006F2DDC /* RSSelectionMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RSSelectionMenu.storyboard; sourceTree = "<group>"; };
 		D8DB49151F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuDelegate.swift; sourceTree = "<group>"; };
 		D8DB49171F7ECBE8006F2DDC /* NSObjectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +111,7 @@
 		D8DB49111F7EA71B006F2DDC /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D811373B1F867864000D6E55 /* RSSelectionTableView.swift */,
 				D8DB490F1F7EA066006F2DDC /* RSSelectionMenuDataSource.swift */,
 				D8DB49151F7EB8AF006F2DDC /* RSSelectionMenuDelegate.swift */,
 				D81E0A8F1F7F779A00E76EFB /* RSSelectionMenuSearchDelegate.swift */,
@@ -122,7 +123,6 @@
 		D8DB49121F7EA728006F2DDC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D8DB49131F7EA758006F2DDC /* RSSelectionMenu.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -188,7 +188,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8DB49001F7E9FC0006F2DDC /* LaunchScreen.storyboard in Resources */,
-				D8DB49141F7EA758006F2DDC /* RSSelectionMenu.storyboard in Resources */,
 				D8DB48FD1F7E9FC0006F2DDC /* Assets.xcassets in Resources */,
 				D8DB48FB1F7E9FC0006F2DDC /* Main.storyboard in Resources */,
 			);
@@ -202,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8DB49181F7ECBE8006F2DDC /* NSObjectExtension.swift in Sources */,
+				D811373C1F867864000D6E55 /* RSSelectionTableView.swift in Sources */,
 				D8DB49091F7EA00D006F2DDC /* RSSelectionMenuController.swift in Sources */,
 				D850A57A1F850CF500BF5805 /* NSObject+Properties.m in Sources */,
 				D8DB48F81F7E9FC0006F2DDC /* ViewController.swift in Sources */,

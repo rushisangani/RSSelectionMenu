@@ -18,7 +18,7 @@ typealias UISearchBarResult = ((_ searchText: String) -> (FilteredDataSource))
 class RSSelectionMenuSearchDelegate: NSObject {
 
     // MARK: - Properties
-    fileprivate let searchController = UISearchController(searchResultsController: nil)
+    public let searchController = UISearchController(searchResultsController: nil)
     
     /// to execute on search event
     public var didSearch: ((String) -> ())?

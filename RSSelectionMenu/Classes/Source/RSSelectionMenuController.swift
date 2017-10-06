@@ -12,115 +12,97 @@ import UIKit
 class RSSelectionMenu: UIViewController {
 
     // MARK: - Outlets
-    @IBOutlet weak var tableView: UITableView!
+    var tableView: RSSelectionTableView?
     
     // MARK: - Properties
-    open static let `default`: RSSelectionMenu = {
-        return UIStoryboard.instantiateRSSelectionMenu()
-    }()
-    
-    /// datasource for tableView
-    fileprivate var dataSource: RSSelectionMenuDataSource?
-    
-    /// delegate for tableView
-    fileprivate var delegate: RSSelectionMenuDelegate?
-    
-    /// delegate for search controller
-    fileprivate var searchControllerDelegate: RSSelectionMenuSearchDelegate?
-    
-    /// delegate for search bar search result
-    fileprivate var searchBarResultDelegate: UISearchBarResult?
-    
-    /// selection type - default is single selection
-    public var selectionType: SelectionType = .single
-    
-    /// unique key for comparision when datasource is other than String or Int array
-    public var uniqueKey: String = ""
+    fileprivate var parentController: UIViewController?
     
     /// controller should dissmiss on selection - default is true for single selection
     var shouldDismissOnSelect: Bool = true
     
     // MARK: - Life Cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
+    convenience init(dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
+        self.init(selectionType: .single, dataSource: dataSource, configuration: configuration)
     }
     
-    // MARK: - Setup
-    fileprivate func setup() {
-        tableView.dataSource = dataSource
-        tableView.delegate = delegate
-        tableView.tableFooterView = UIView()
+    convenience init(selectionType: SelectionType, dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
+        self.init()
         
-        addSearchController()
+        // data source
+        let selectionDataSource = RSSelectionMenuDataSource(dataSource: dataSource, forCellType: cellType!, configuration: configuration)
+        
+        // initilize tableview
+        self.tableView = RSSelectionTableView(selectionType: selectionType, dataSource: selectionDataSource, delegate: RSSelectionMenuDelegate(), uniqueKey: uniqueKey!, from: self)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupLayout()        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        view.endEditing(true)
+    }
+    
+    // MARK: - Setup Layout
+    
+    fileprivate func setupLayout() {
+        self.view.frame = (parentController?.view.frame)!
+        self.view.addSubview(tableView!)
+        
+        if tableView?.selectionType == .multiple {
+            setDoneButton()
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableView?.frame = self.view.frame
     }
 }
 
 // MARK:- Public
 extension RSSelectionMenu {
     
-    /// Initialize
-    
-    /// default init
-    func initWith(dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) -> RSSelectionMenu {
-        
-        self.uniqueKey = uniqueKey!
-        self.dataSource = RSSelectionMenuDataSource(dataSource: dataSource, forCellType: cellType!, configuration: configuration)
-        return self
-    }
-    
-    /// init with selection type
-    func initWith(selectionType: SelectionType, dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) -> RSSelectionMenu {
-        
-        self.selectionType = selectionType
-        self.uniqueKey = uniqueKey!
-        self.dataSource = RSSelectionMenuDataSource(dataSource: dataSource, forCellType: cellType!, configuration: configuration)
-        return self
-    }
-    
     /// Selection event
     func didSelectRow(dismissOnSelect: Bool? = true, delegate: @escaping UITableViewCellSelection)  {
-        self.shouldDismissOnSelect = dismissOnSelect!
-        self.delegate = RSSelectionMenuDelegate(delegate: delegate)
+        self.shouldDismissOnSelect = (tableView?.selectionType == .single) ? dismissOnSelect! : false
+        self.tableView?.setOnDidSelect(delegate: delegate)
     }
     
     /// Searchbar
     func addSearchBar(withCompletion: @escaping UISearchBarResult) {
-        self.searchBarResultDelegate = withCompletion
+        self.tableView?.addSearchBar(withCompletion: withCompletion)
     }
     
     /// Show
-    func show(from: UIViewController) {
-        from.present(self, animated: true, completion: nil)
+    func show(with: PresentationStyle? = .present, from: UIViewController) {
+        parentController = from
+        show(with: with!, from: from, source: nil, size: nil)
     }
     
     /// show as popover
-    func showAsPopover(from: UIView, with contentSize: CGSize, inViewController: UIViewController) {
-        
-        self.modalPresentationStyle = .popover
-        self.preferredContentSize = contentSize
-        
-        let popover = self.popoverPresentationController!
-        popover.delegate = self
-        
-        popover.permittedArrowDirections = .up
-        popover.sourceView = from
-        popover.sourceRect = (from.superview?.convert(from.bounds, to: nil))!
-        
-        inViewController.present(self, animated: true) {
-            self.view.backgroundColor = UIColor.clear
-        }
+    func showAsPopover(from: UIView, inViewController: UIViewController, with contentSize: CGSize? = nil) {
+        parentController = inViewController
+        show(with: .popOver, from: inViewController, source: from, size: contentSize)
     }
     
     /// dismiss
-    func dismiss() {
+    func dismiss(animated: Bool? = true) {
+        
+        // dismiss searchcontroller
+        if let searchController = tableView?.searchControllerDelegate?.searchController {
+            if searchController.isActive { searchController.dismiss(animated: false, completion: nil) }
+        }
         
         if self.isPresented() {
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: animated!, completion: nil)
         }
         else {
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: animated!)
         }
     }
 }
@@ -128,28 +110,42 @@ extension RSSelectionMenu {
 //MARK:- Private
 extension RSSelectionMenu {
 
-    /// checks if searchbar needs to add
-    fileprivate func addSearchBar() -> Bool {
-        return (self.searchBarResultDelegate != nil)
+    /// Done button
+    fileprivate func setDoneButton() {
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        navigationItem.rightBarButtonItem = doneButton
     }
     
-    /// adds search controller if search is enabled
-    fileprivate func addSearchController() {
-        guard addSearchBar() else { return }
+    @objc func doneButtonTapped() {
+        self.dismiss()
+    }
+    
+    // show
+    fileprivate func show(with: PresentationStyle, from: UIViewController, source: UIView?, size: CGSize?) {
         
-        self.searchControllerDelegate = RSSelectionMenuSearchDelegate(controller: self, tableView: tableView)
-        
-        // search event
-        self.searchControllerDelegate?.didSearch = { [weak self] (searchText) in
-            self?.onDidStartSearch(text: searchText)
+        if with == .push {
+            self.navigationController?.pushViewController(self, animated: true)
+            return
         }
-    }
-    
-    /// called on searchcontroller search event
-    fileprivate func onDidStartSearch(text: String) {
         
-        let filteredDataSource = !text.isEmpty ? self.searchBarResultDelegate!(text) : []
-        self.dataSource?.update(dataSource: filteredDataSource, inTableView: tableView)
+        var tobePresentController: UIViewController = self
+        if !shouldDismissOnSelect {
+            tobePresentController = UINavigationController(rootViewController: self)
+        }
+        
+        if with == .popOver {
+            tobePresentController.modalPresentationStyle = .popover
+            if size != nil { tobePresentController.preferredContentSize = size! }
+            
+            let popover = tobePresentController.popoverPresentationController!
+            popover.delegate = self
+            popover.permittedArrowDirections = .up
+            popover.sourceView = source!
+            popover.sourceRect = (source?.superview?.convert((source?.bounds)!, to: nil))!
+        }
+        
+        from.present(tobePresentController, animated: true, completion: nil)
     }
 }
 
@@ -160,7 +156,8 @@ extension RSSelectionMenu : UIPopoverPresentationControllerDelegate {
         return .none
     }
     
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        self.dismiss()
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return (self.tableView?.selectionType == .single)
     }
 }
+

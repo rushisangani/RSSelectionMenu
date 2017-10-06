@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tgm-g6-NoK">
-                                <rect key="frame" x="168.5" y="318.5" width="38" height="30"/>
+                                <rect key="frame" x="168.5" y="258.5" width="38" height="30"/>
                                 <state key="normal" title="Show"/>
                                 <connections>
                                     <action selector="showButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QVH-9Q-7lX"/>
@@ -27,7 +27,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Tgm-g6-NoK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Kzq-ET-uQG"/>
+                            <constraint firstItem="Tgm-g6-NoK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-60" id="Kzq-ET-uQG"/>
                             <constraint firstItem="Tgm-g6-NoK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YaD-BJ-SeS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

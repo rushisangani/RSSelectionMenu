@@ -19,7 +19,8 @@ enum SelectionType {
 // MARK: - PresentationStyle
 enum PresentationStyle {
     
-    case `default`
+    case present       // default
+    case push
     case popOver
     case dropDown
 }
@@ -51,30 +52,8 @@ extension UITableViewCell {
     }
 }
 
-//MARK: - UITableView
-extension UITableView {
-    
-    // get selection type of tableView
-    func selectionType() -> SelectionType {
-        return RSSelectionMenu.default.selectionType
-    }
-    
-    // unique id key
-    func uniqueIdentifierKey() -> String {
-        return RSSelectionMenu.default.uniqueKey
-    }
-    
-    // object at indexpath
-    func objectAt(indexPath: IndexPath) -> AnyObject {
-        return (self.dataSource as! RSSelectionMenuDataSource).objectAt(indexPath: indexPath)
-    }
-    
-    /// dismiss
-    func dismissControllerIfRequired() {
-        if RSSelectionMenu.default.shouldDismissOnSelect {
-            RSSelectionMenu.default.dismiss()
-        }
-    }
+//MARK: - RSSelectionTableView
+extension RSSelectionTableView {
     
     // check if object is selected
     func isSelected(object: AnyObject, from: DataSource) -> Int? {
@@ -111,10 +90,10 @@ extension UITableView {
     
     /// dictionary key value comparision
     func hasSameKeyValue(forObject: [String: AnyObject], inArray: [[String: AnyObject]]) -> Int? {
-        let value = forObject[uniqueIdentifierKey()] as? String ?? ""
+        let value = forObject[uniqueKey] as? String ?? ""
         
         return inArray.index(where: { (data) -> Bool in
-            return value == data[uniqueIdentifierKey()] as? String
+            return value == data[uniqueKey] as? String
         })
     }
 }

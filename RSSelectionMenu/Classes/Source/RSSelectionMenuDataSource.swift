@@ -58,7 +58,7 @@ extension RSSelectionMenuDataSource {
     }
     
     /// to update data source for tableview
-    func update(dataSource: FilteredDataSource, inTableView tableView: UITableView) {
+    func update(dataSource: FilteredDataSource, inTableView tableView: RSSelectionTableView) {
         
         if dataSource.count == 0 { filteredDataSource = self.dataSource }
         else { filteredDataSource = dataSource }
@@ -96,7 +96,7 @@ extension RSSelectionMenuDataSource {
     }
     
     /// add object to selected data source
-    fileprivate func addToSelectedDataSource(object: AnyObject, tableView: UITableView) {
+    fileprivate func addToSelectedDataSource(object: AnyObject, tableView: RSSelectionTableView) {
         let delegate = tableView.delegate as! RSSelectionMenuDelegate
         delegate.addToSelected(object: object, forTableView: tableView)
     }
@@ -114,7 +114,7 @@ extension RSSelectionMenuDataSource: UITableViewDataSource {
         // create new reusable cell
         let cellStyle = self.tableViewCellStyle()
         let cell = UITableViewCell(style: cellStyle, reuseIdentifier: self.cellIdentifier)
-
+        
         // cell selection
         var selected = false
         
@@ -125,7 +125,7 @@ extension RSSelectionMenuDataSource: UITableViewDataSource {
             selected = config(cell, dataObject, indexPath)
             
             // add to selected
-            if selected { addToSelectedDataSource(object: dataObject, tableView: tableView) }
+            if selected { addToSelectedDataSource(object: dataObject, tableView: tableView as! RSSelectionTableView) }
         }
         
         // status update
