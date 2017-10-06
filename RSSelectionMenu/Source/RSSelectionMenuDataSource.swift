@@ -107,7 +107,7 @@ extension RSSelectionMenuDataSource {
     
     /// update cell status
     fileprivate func updateStatus(status: Bool, for cell: UITableViewCell) {
-        cell.setSelected(status)
+        cell.showSelected(status)
     }
 }
 

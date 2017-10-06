@@ -62,7 +62,7 @@ extension UIStoryboard {
 //MARK: - UITableViewCell
 extension UITableViewCell {
     
-    func setSelected(_ value: Bool) {
+    func showSelected(_ value: Bool) {
         self.accessoryType = value ? .checkmark : .none
     }
 }
