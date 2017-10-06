@@ -22,10 +22,9 @@ class RSSelectionMenuDelegate: NSObject {
     fileprivate var selectedObjects: DataSource = []
     
     // MARK: - Initialize
-    convenience init(delegate: @escaping UITableViewCellSelection) {
+    convenience init(selectedItems: DataSource) {
         self.init()
-        
-        self.selectionDelegate = delegate
+        selectedObjects = selectedItems
     }
 }
 
@@ -57,7 +56,7 @@ extension RSSelectionMenuDelegate {
         var isSelected = false
         
         // remove if already selected
-        if let selectedIndex = tableView.isSelected(object: object, from: selectedObjects) {
+        if let selectedIndex = RSSelectionMenu.isSelected(object: object, from: selectedObjects) {
             selectedObjects.remove(at: selectedIndex)
         }
         else {
@@ -79,13 +78,9 @@ extension RSSelectionMenuDelegate {
 // MARK:- Public
 extension RSSelectionMenuDelegate {
     
-    /// add new object to selected array
-    func addToSelected(object: AnyObject, forTableView: RSSelectionTableView) {
-        
-        guard forTableView.isSelected(object: object, from: selectedObjects) != nil else {
-            selectedObjects.append(object)
-            return
-        }
+    /// check for selection status
+    public func showSelected(object: AnyObject) -> Bool {
+        return RSSelectionMenu.containsObject(object, inDataSource: selectedObjects)
     }
 }
 

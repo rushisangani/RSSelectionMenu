@@ -17,23 +17,32 @@ class RSSelectionMenu: UIViewController {
     // MARK: - Properties
     fileprivate var parentController: UIViewController?
     
+    /// unique key for comparision when datasource is other than String or Int array
+    public static var uniqueKey: String = ""
+    
     /// controller should dissmiss on selection - default is true for single selection
-    var shouldDismissOnSelect: Bool = true
+    public var shouldDismissOnSelect: Bool = true
     
     // MARK: - Life Cycle
     
-    convenience init(dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
-        self.init(selectionType: .single, dataSource: dataSource, uniqueKey: uniqueKey!, cellType: cellType!, configuration: configuration)
+    convenience init(dataSource: DataSource, selectedItems: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
+        self.init(selectionType: .single, dataSource: dataSource, selectedItems: selectedItems, uniqueKey: uniqueKey!, cellType: cellType!, configuration: configuration)
     }
     
-    convenience init(selectionType: SelectionType, dataSource: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
+    convenience init(selectionType: SelectionType, dataSource: DataSource, selectedItems: DataSource, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration) {
         self.init()
         
         // data source
         let selectionDataSource = RSSelectionMenuDataSource(dataSource: dataSource, forCellType: cellType!, configuration: configuration)
         
+        // delegate
+        let selectionDelegate = RSSelectionMenuDelegate(selectedItems: selectedItems)
+        
+        // key
+        RSSelectionMenu.uniqueKey = uniqueKey!
+        
         // initilize tableview
-        self.tableView = RSSelectionTableView(selectionType: selectionType, dataSource: selectionDataSource, delegate: RSSelectionMenuDelegate(), uniqueKey: uniqueKey!, from: self)
+        self.tableView = RSSelectionTableView(selectionType: selectionType, dataSource: selectionDataSource, delegate: selectionDelegate, from: self)
     }
     
     override func viewDidLoad() {
@@ -99,16 +108,19 @@ extension RSSelectionMenu {
     /// dismiss
     func dismiss(animated: Bool? = true) {
         
-        // dismiss searchcontroller
-        if let searchController = tableView?.searchControllerDelegate?.searchController {
-            if searchController.isActive { searchController.dismiss(animated: false, completion: nil) }
-        }
-        
-        if self.isPresented() {
-            self.dismiss(animated: animated!, completion: nil)
-        }
-        else {
-            self.navigationController?.popViewController(animated: animated!)
+        DispatchQueue.main.async {
+            
+            // dismiss searchcontroller
+            if let searchController = self.tableView?.searchControllerDelegate?.searchController {
+                if searchController.isActive { searchController.dismiss(animated: false, completion: nil) }
+            }
+            
+            if self.isPresented() {
+                self.dismiss(animated: animated!, completion: nil)
+            }
+            else {
+                self.navigationController?.popViewController(animated: animated!)
+            }
         }
     }
 }

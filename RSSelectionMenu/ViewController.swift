@@ -10,8 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let dataArray: [String] = ["Rushi", "Rahul", "Mitesh", "Nirav", "Vishal", "Neha", "Hiral", "Swati", "Namita", "Deepali", "Zeel"]
-    var selectedArray = [String]()
+    //let dataArray: [String] = ["Rushi", "Rahul", "Mitesh", "Nirav", "Vishal", "Neha", "Hiral", "Swati", "Namita", "Deepali", "Zeel"]
+    var selectedArray = [[String: String]]()
+    
+    let dictArray: [[String:String]] = [
+        
+        ["id": "1", "name": "Rushi"], ["id": "2", "name": "Rahul"], ["id": "3", "name": "Mitesh"], ["id": "4", "name": "Nirav"], ["id": "5", "name": "Hiral"], ["id": "6", "name": "Swati"], ["id": "7", "name": "Deepali"]
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,20 +25,23 @@ class ViewController: UIViewController {
 
     @IBAction func showButtonClicked(_ sender: Any) {
         
-        let selectionMenu = RSSelectionMenu(dataSource: dataArray as DataSource, cellType: .rightDetail) { (cell, object, indexPath) -> (Bool) in
+        let selectionMenu = RSSelectionMenu(dataSource: dictArray as DataSource, selectedItems: selectedArray as DataSource) { (cell, object, indexPath) in
             
-            (cell as! CustomTableViewCell).setTitle(title: (object as! String), subTitle: "meditab")
+            let customCell = cell as! CustomTableViewCell
+            let dict = object as! [String: String]
             
-            //cell.textLabel?.text = object as? String
-            //cell.detailTextLabel?.text = "details"
-            return self.selectedArray.contains(object as! String)
+            customCell.setTitle(title: dict["name"]!, subTitle: dict["id"]!)
         }
         
+        RSSelectionMenu.uniqueKey = "id"
         selectionMenu.registerNib(nibName: "CustomTableViewCell", forCellReuseIdentifier: "cell")
         
-        selectionMenu.didSelectRow(dismissOnSelect: false) { (object, isSelected, array) in
-            self.selectedArray = array as! [String]
+        selectionMenu.didSelectRow { (object, isSelected, array) in
             
+        }
+        
+        selectionMenu.didSelectRow { (object, isSelected, array) in
+            self.selectedArray = array as! [[String: String]]
         }
         
 //        selectionMenu.addSearchBar { (text) -> (FilteredDataSource) in

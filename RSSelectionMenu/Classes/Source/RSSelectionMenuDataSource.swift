@@ -9,7 +9,7 @@
 import UIKit
 
 /// UITableViewCellConfiguration
-typealias UITableViewCellConfiguration = ((_ cell: UITableViewCell, _ dataObject: AnyObject, _ indexPath: IndexPath) -> (Bool))
+typealias UITableViewCellConfiguration = ((_ cell: UITableViewCell, _ dataObject: AnyObject, _ indexPath: IndexPath) -> ())
 
 /// DataSource
 typealias DataSource = [AnyObject]
@@ -100,12 +100,6 @@ extension RSSelectionMenuDataSource {
     fileprivate func updateStatus(status: Bool, for cell: UITableViewCell) {
         cell.setSelected(status)
     }
-    
-    /// add object to selected data source
-    fileprivate func addToSelectedDataSource(object: AnyObject, tableView: RSSelectionTableView) {
-        let delegate = tableView.delegate as! RSSelectionMenuDelegate
-        delegate.addToSelected(object: object, forTableView: tableView)
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -128,21 +122,16 @@ extension RSSelectionMenuDataSource: UITableViewDataSource {
             cell = UITableViewCell(style: cellStyle, reuseIdentifier: self.cellIdentifier)
         }
         
-        // cell selection
-        var selected = false
-        
         // cell configuration
         if let config = cellConfiguration {
             
             let dataObject = self.objectAt(indexPath: indexPath)
-            selected = config(cell!, dataObject, indexPath)
+            config(cell!, dataObject, indexPath)
             
-            // add to selected
-            if selected { addToSelectedDataSource(object: dataObject, tableView: tableView as! RSSelectionTableView) }
+            // selection
+            let delegate = tableView.delegate as! RSSelectionMenuDelegate
+            updateStatus(status: delegate.showSelected(object: dataObject), for: cell!)
         }
-        
-        // status update
-        updateStatus(status: selected, for: cell!)
         
         return cell!
     }

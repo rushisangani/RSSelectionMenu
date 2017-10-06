@@ -51,11 +51,16 @@ extension UITableViewCell {
     }
 }
 
-//MARK: - RSSelectionTableView
-extension RSSelectionTableView {
+//MARK: - RSSelectionMenu
+extension RSSelectionMenu {
+    
+    // check if object is inside the datasource
+    class func containsObject(_ object: AnyObject, inDataSource: DataSource) -> Bool {
+        return (isSelected(object: object, from: inDataSource) != nil)
+    }
     
     // check if object is selected
-    func isSelected(object: AnyObject, from: DataSource) -> Int? {
+    class func isSelected(object: AnyObject, from: DataSource) -> Int? {
         
         // object type is string
         if object is NSString {
@@ -88,11 +93,11 @@ extension RSSelectionTableView {
     }
     
     /// dictionary key value comparision
-    func hasSameKeyValue(forObject: [String: AnyObject], inArray: [[String: AnyObject]]) -> Int? {
-        let value = forObject[uniqueKey] as? String ?? ""
+    class func hasSameKeyValue(forObject: [String: AnyObject], inArray: [[String: AnyObject]]) -> Int? {
+        let value = forObject[RSSelectionMenu.uniqueKey] as? String ?? ""
         
         return inArray.index(where: { (data) -> Bool in
-            return value == data[uniqueKey] as? String
+            return value == data[RSSelectionMenu.uniqueKey] as? String
         })
     }
 }

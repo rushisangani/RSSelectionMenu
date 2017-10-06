@@ -31,17 +31,13 @@ class RSSelectionTableView: UITableView {
     /// selection type - default is single selection
     public var selectionType: SelectionType = .single
     
-    /// unique key for comparision when datasource is other than String or Int array
-    public var uniqueKey: String = ""
-    
     // MARK: - Life Cycle
     
-    convenience init(selectionType: SelectionType, dataSource: RSSelectionMenuDataSource, delegate: RSSelectionMenuDelegate, uniqueKey: String, from: RSSelectionMenu) {
+    convenience init(selectionType: SelectionType, dataSource: RSSelectionMenuDataSource, delegate: RSSelectionMenuDelegate, from: RSSelectionMenu) {
         self.init()
         
         self.selectionDataSource = dataSource
         self.selectionDelegate = delegate
-        self.uniqueKey = uniqueKey
         self.selectionType = selectionType
         self.selectionMenu = from
         
