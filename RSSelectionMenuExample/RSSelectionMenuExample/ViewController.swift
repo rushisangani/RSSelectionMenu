@@ -45,6 +45,9 @@ class ViewController: UITableViewController {
             cell.textLabel?.text = object
         }
         
+        // title
+        selectionMenu.setNavigationBar(title: "Select Player")
+        
         selectionMenu.didSelectRow { (object, isSelected, selectedData) in
             
             // update existing array on select
@@ -105,6 +108,10 @@ class ViewController: UITableViewController {
             
             cell.textLabel?.text = object
         }
+        
+        // title and color
+        selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSForegroundColorAttributeName: UIColor.white], barTintColor: UIColor.orange.withAlphaComponent(0.5))
+        
         
         // add first row
         selectionMenu.showFirstRowAs(type: .All, selected: firstRowSelected) { (text, selected) in

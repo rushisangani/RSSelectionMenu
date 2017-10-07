@@ -36,6 +36,9 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     /// controller should dissmiss on selection - default is true for single selection
     public var shouldDismissOnSelect: Bool = true
     
+    /// navigationbar theme
+    fileprivate var navigationBarTheme: NavigationBarTheme?
+    
     // MARK: - Life Cycle
     
     convenience public init(dataSource: DataSource<T>, selectedItems: DataSource<T>, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration<T>) {
@@ -75,6 +78,12 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         self.view.frame = (parentController?.view.frame)!
         self.view.addSubview(tableView!)
         
+        // navigation bar theme
+        if let theme = navigationBarTheme {
+            setNavigationBarTheme(theme)
+        }
+        
+        // done button
         if showDoneButton() {
             setDoneButton()
         }
@@ -129,6 +138,11 @@ extension RSSelectionMenu {
     /// Searchbar
     public func addSearchBar(placeHolder: String? = defaultPlaceHolder, tintColor: UIColor? = defaultSearchBarTintColor, completion: @escaping UISearchBarResult<T>) {
         self.tableView?.addSearchBar(placeHolder: placeHolder!, tintColor: tintColor!, completion: completion)
+    }
+    
+    /// Navigationbar title and color
+    public func setNavigationBar(title: String, attributes:[String: Any]? = nil, barTintColor: UIColor? = nil) {
+        self.navigationBarTheme = NavigationBarTheme(title: title, attributes: attributes, color: barTintColor)
     }
     
     /// Show
@@ -196,5 +210,19 @@ extension RSSelectionMenu {
         }
         
         from.present(tobePresentController, animated: true, completion: nil)
+    }
+    
+    // navigation bar
+    fileprivate func setNavigationBarTheme(_ theme: NavigationBarTheme) {
+        if let navigationBar = self.navigationController?.navigationBar {
+            
+            navigationBar.barTintColor = theme.color
+            if theme.color != nil {
+                navigationBar.tintColor = UIColor.white
+            }
+            
+            navigationItem.title = theme.title
+            navigationBar.titleTextAttributes = theme.attributes
+        }
     }
 }

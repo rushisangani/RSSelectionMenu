@@ -59,6 +59,14 @@ extension UITableViewCell {
     }
 }
 
+// MARK: - NavigationBar
+public struct NavigationBarTheme {
+    
+    var title: String?
+    var attributes: [String: Any]?
+    var color: UIColor?
+}
+
 //MARK: - RSSelectionMenu
 extension RSSelectionMenu {
     
