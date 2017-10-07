@@ -8,7 +8,6 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ![Alt text](/Images/image3.png?raw=true "Show as popover")
 ![Alt text](/Images/image4.png?raw=true "Multiple selection")
 ![Alt text](/Images/image5.png?raw=true "Custom cells")
-
 ## Features
 
 - Show selection menu as list or popover with single or multiple selection.
