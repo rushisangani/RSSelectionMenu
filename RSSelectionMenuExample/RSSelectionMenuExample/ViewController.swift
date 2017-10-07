@@ -53,7 +53,7 @@ class ViewController: UITableViewController {
             // update existing array on select
             self.simpleSelectedArray = selectedData
         }
-        selectionMenu.show(with: .push, from: self)
+        selectionMenu.show(style: .push, from: self)
     }
     
     func presentModallyWithRightDetail() {
@@ -79,7 +79,7 @@ class ViewController: UITableViewController {
             self.selectedDataArray = selectedArray
         }
         
-        selectionMenu.show(from: self)
+        selectionMenu.show(style: .formSheet, from: self)
     }
     
     func showAsPopoverWithSubTitle(sender: UIView) {
@@ -143,7 +143,7 @@ class ViewController: UITableViewController {
         }
         
         // specify size
-        selectionMenu.showAsPopover(from: sender, inViewController: self, with: CGSize(width: 300, height: 220))
+        selectionMenu.showAsPopover(from: sender, inViewController: self, withSize: CGSize(width: 300, height: 220))
     }
     
     func showWithCustomCell() {
@@ -167,7 +167,7 @@ class ViewController: UITableViewController {
             return self.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(text.lowercased()) })
         }
         
-        selectionMenu.show(with: .push, from: self)
+        selectionMenu.show(style: .formSheet, from: self)
     }
 }
 

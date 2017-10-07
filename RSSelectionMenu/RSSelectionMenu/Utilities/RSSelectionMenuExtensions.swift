@@ -38,6 +38,7 @@ public enum PresentationStyle {
     case present       // default
     case push
     case popover
+    case formSheet
 }
 
 // MARK: - CellType

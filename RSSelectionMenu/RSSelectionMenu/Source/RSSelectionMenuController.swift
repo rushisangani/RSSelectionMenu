@@ -25,7 +25,7 @@
 import UIKit
 
 /// RSSelectionMenuController
-open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationControllerDelegate {
+open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate {
 
     // MARK: - Outlets
     public var tableView: RSSelectionTableView<T>?
@@ -33,11 +33,14 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     // MARK: - Properties
     var parentController: UIViewController?
     
-    /// controller should dissmiss on selection - default is true for single selection
-    public var shouldDismissOnSelect: Bool = true
+    /// presentation stype
+    fileprivate var presentationStyle: PresentationStyle = .present
     
     /// navigationbar theme
     fileprivate var navigationBarTheme: NavigationBarTheme?
+    
+    /// backgroundView
+    fileprivate var backgroundView = UIView()
     
     // MARK: - Life Cycle
     
@@ -64,6 +67,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     override open func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
         setupLayout()        
     }
     
@@ -72,11 +76,23 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         view.endEditing(true)
     }
     
+    // MARK: - Setup Views
+    fileprivate func setupViews() {
+        
+        backgroundView.backgroundColor = UIColor.clear
+        if presentationStyle == .formSheet {
+            backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+            addTapGesture()
+        }
+        
+        backgroundView.addSubview(tableView!)
+        view.addSubview(backgroundView)
+    }
+    
     // MARK: - Setup Layout
     
     fileprivate func setupLayout() {
         self.view.frame = (parentController?.view.frame)!
-        self.view.addSubview(tableView!)
         
         // navigation bar theme
         if let theme = navigationBarTheme {
@@ -91,7 +107,28 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     
     override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView?.frame = self.view.frame
+        self.backgroundView.frame = self.view.frame
+        
+        if presentationStyle != .formSheet {
+            self.tableView?.frame = backgroundView.frame
+            return
+        }
+        
+        self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
+        self.tableView?.center = backgroundView.center
+        tableView?.layer.cornerRadius = 8
+    }
+    
+    /// Tap gesture
+    fileprivate func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onBackgroundTapped(sender:)))
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.delegate = self
+        backgroundView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc fileprivate func onBackgroundTapped(sender: UITapGestureRecognizer){
+        self.dismiss()
     }
     
     /// Done button
@@ -113,6 +150,13 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     public func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         return !showDoneButton()
     }
+    
+    // MARK: - UIGestureRecognizerDelegate
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if (touch.view?.isDescendant(of: tableView!))! { return false }
+        return true
+    }
+    
 }
 
 // MARK:- Public
@@ -125,8 +169,7 @@ extension RSSelectionMenu {
     }
     
     /// Selection event
-    public func didSelectRow(dismissOnSelect: Bool? = true, delegate: @escaping UITableViewCellSelection<T>)  {
-        self.shouldDismissOnSelect = (tableView?.selectionType == .single) ? dismissOnSelect! : false
+    public func didSelectRow(delegate: @escaping UITableViewCellSelection<T>)  {
         self.tableView?.setOnDidSelect(delegate: delegate)
     }
     
@@ -146,13 +189,13 @@ extension RSSelectionMenu {
     }
     
     /// Show
-    public func show(with: PresentationStyle? = .present, from: UIViewController) {
+    public func show(style: PresentationStyle? = .present, from: UIViewController) {
         parentController = from
-        show(with: with!, from: from, source: nil, size: nil)
+        show(with: style!, from: from, source: nil, size: nil)
     }
     
     /// show as popover
-    public func showAsPopover(from: UIView, inViewController: UIViewController, with contentSize: CGSize? = nil) {
+    public func showAsPopover(from: UIView, inViewController: UIViewController, withSize contentSize: CGSize? = nil) {
         parentController = inViewController
         show(with: .popover, from: inViewController, source: from, size: contentSize)
     }
@@ -182,11 +225,15 @@ extension RSSelectionMenu {
 
     // check if show done button
     fileprivate func showDoneButton() -> Bool {
-        return !shouldDismissOnSelect || tableView?.selectionType == .multiple
+        if (presentationStyle == .present || presentationStyle == .push) && tableView?.selectionType == .multiple{
+            return true
+        }
+        return false
     }
     
     // show
     fileprivate func show(with: PresentationStyle, from: UIViewController, source: UIView?, size: CGSize?) {
+        presentationStyle = with
         
         if with == .push {
             from.navigationController?.pushViewController(self, animated: true)
@@ -194,11 +241,10 @@ extension RSSelectionMenu {
         }
         
         var tobePresentController: UIViewController = self
-        if with != .popover || tableView?.selectionType == .multiple {
+        if with == .present {
             tobePresentController = UINavigationController(rootViewController: self)
         }
-        
-        if with == .popover {
+        else if with == .popover {
             tobePresentController.modalPresentationStyle = .popover
             if size != nil { tobePresentController.preferredContentSize = size! }
             
@@ -206,7 +252,11 @@ extension RSSelectionMenu {
             popover.delegate = self
             popover.permittedArrowDirections = .any
             popover.sourceView = source!
-            popover.sourceRect = (source?.superview?.convert((source?.bounds)!, to: nil))!
+            popover.sourceRect = (source?.bounds)!
+        }
+        else if with == .formSheet {
+            tobePresentController.modalPresentationStyle = .overCurrentContext
+            tobePresentController.modalTransitionStyle = .crossDissolve
         }
         
         from.present(tobePresentController, animated: true, completion: nil)
