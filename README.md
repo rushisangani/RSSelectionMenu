@@ -148,9 +148,9 @@ customDataArray.append(Person(id: 3, firstName: "Virat", lastName: "Kohli"))
 
 let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: customDataArray, selectedItems: customselectedDataArray, uniqueKey: "id") { (cell, person, indexPath) in
             
-            let customCell = cell as! CustomTableViewCell
-            customCell.setData(person: person)
-        }
+    let customCell = cell as! CustomTableViewCell
+    customCell.setData(person: person)
+}
 
 
 // register your xib for tableviewcell        
