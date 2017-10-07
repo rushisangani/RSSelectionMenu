@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  RSFirstRowSelection.swift
 //
 //  Copyright (c) 2017 Rushi Sangani
 //
@@ -22,28 +22,42 @@
 //  THE SOFTWARE.
 //
 
-
 import Foundation
-import UIKit
 
-/// UITableViewCellConfiguration
-public typealias UITableViewCellConfiguration<T> = ((_ cell: UITableViewCell, _ dataObject: T, _ indexPath: IndexPath) -> ())
+/// FirstRowSelection
+public typealias FirstRowSelection = ((_ object: String, _ isSelected: Bool) -> ())
 
-/// DataSource
-public typealias DataSource<T> = [T]
+/// FirstRowType
+public enum FirstRowType: String {
+    
+    case  Empty
+    case  None
+    case  All
+    
+    // display
+    var value: String {
+        if self == .Empty { return "" }
+        return self.rawValue
+    }
+}
 
-/// UITableViewCellSelection
-public typealias UITableViewCellSelection<T> = ((_ object: T?, _ isSelected: Bool, _ selectedArray: DataSource<T>) -> ())
-
-/// FilteredDataSource
-public typealias FilteredDataSource<T> = [T]
-
-/// UISearchBarResult
-public typealias UISearchBarResult<T> = ((_ searchText: String) -> (FilteredDataSource<T>))
-
-/// Strings
-let defaultPlaceHolder          = "Search"
-
-
-/// Colors
-let defaultSearchBarTintColor   = UIColor(white: 0.9, alpha: 0.9)
+/// RSFirstRowSelection
+public class RSFirstRowSelection {
+    
+    // selection state
+    var selected: Bool = false
+    
+    // row type
+    var rowType: FirstRowType?
+    
+    // selection delegate
+    var delegate: FirstRowSelection?
+    
+    // init
+    init(selected: Bool, rowType: FirstRowType?, delegate: FirstRowSelection?) {
+        
+        self.selected = selected
+        self.rowType = rowType
+        self.delegate = delegate
+    }
+}

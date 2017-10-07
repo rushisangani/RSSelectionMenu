@@ -21,12 +21,16 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+
 import UIKit
 
 /// RSSelectionMenuDataSource
 open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
 
     // MARK: - Properties
+    
+    /// tableView
+    weak var selectionTableView: RSSelectionTableView<T>?
     
     /// cell type of tableview - default is "basic = UITableViewCellStyle.default"
     fileprivate var cellType: CellType = .basic
@@ -53,17 +57,21 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
         self.cellConfiguration = configuration
     }
     
-    convenience init(dataSource: DataSource<T>, configuration: @escaping UITableViewCellConfiguration<T>) {
-        self.init(dataSource: dataSource, forCellType: CellType.basic, configuration: configuration)
-    }
-    
     // MARK: - UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.filteredDataSource.count
+        
+        var count = self.filteredDataSource.count
+        if isFirstRowAdded() { count += 1 }
+        return count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // check if first row added
+        if indexPath.row == 0 && isFirstRowAdded() {
+            return setupFirstRow()
+        }
         
         // create new reusable cell
         let cellStyle = self.tableViewCellStyle()
@@ -102,7 +110,8 @@ extension RSSelectionMenuDataSource {
     
     /// returns the object present in dataSourceArray at specified indexPath
     func objectAt(indexPath: IndexPath) -> T {
-        return self.filteredDataSource[indexPath.row]
+        let index = !isFirstRowAdded() ? indexPath.row : indexPath.row-1
+        return self.filteredDataSource[index]
     }
     
     /// to update data source for tableview
@@ -112,6 +121,11 @@ extension RSSelectionMenuDataSource {
         else { filteredDataSource = dataSource }
         
         tableView.reloadData()
+    }
+    
+    /// checks if first row is added
+    func isFirstRowAdded() -> Bool {
+        return (selectionTableView?.firstRowSelection != nil && filteredDataSource.count == dataSource.count)
     }
 }
 
@@ -141,5 +155,18 @@ extension RSSelectionMenuDataSource {
     /// update cell status
     fileprivate func updateStatus(status: Bool, for cell: UITableViewCell) {
         cell.showSelected(status)
+    }
+    
+    /// setup first row
+    fileprivate func setupFirstRow() -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: CellType.basic.rawValue)
+        cell.textLabel?.text = selectionTableView?.firstRowSelection?.rowType?.value
+        cell.textLabel?.textColor = UIColor.darkGray
+        
+        // update status
+        updateStatus(status: (selectionTableView?.firstRowSelection?.selected)!, for: cell)
+        
+        return cell
     }
 }

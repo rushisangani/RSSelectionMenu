@@ -14,7 +14,9 @@ class ViewController: UITableViewController {
     // MARK: - Properties
     
     let simpleDataArray = ["Sachin", "Rahul", "Saurav", "Virat", "Suresh", "Ravindra", "Chris", "Steve", "Anil"]
-    var simpleSelectedArray = ["Rahul"]
+    var simpleSelectedArray = [String]()
+    
+    var firstRowSelected = true
     
     let dataArray = ["Sachin Tendulkar", "Rahul Dravid", "Saurav Ganguli", "Virat Kohli", "Suresh Raina", "Ravindra Jadeja", "Chris Gyle", "Steve Smith", "Anil Kumble"]
     var selectedDataArray = [String]()
@@ -54,6 +56,7 @@ class ViewController: UITableViewController {
     func presentModallyWithRightDetail() {
         
         // show with datasource, selected items with cellType = rightDetail
+        // show first row as None
         
         let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray, cellType: .rightDetail) { (cell, object, indexPath) in
             
@@ -62,6 +65,11 @@ class ViewController: UITableViewController {
             
             cell.textLabel?.text = firstName
             cell.detailTextLabel?.text = lastName
+        }
+        
+        // add first row
+        selectionMenu.showFirstRowAs(type: .None, selected: firstRowSelected) { (text, selected) in
+            self.firstRowSelected = selected
         }
         
         selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
@@ -96,6 +104,11 @@ class ViewController: UITableViewController {
         let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: simpleDataArray, selectedItems: simpleSelectedArray) { (cell, object, indexPath) in
             
             cell.textLabel?.text = object
+        }
+        
+        // add first row
+        selectionMenu.showFirstRowAs(type: .All, selected: firstRowSelected) { (text, selected) in
+            self.firstRowSelected = selected
         }
         
         selectionMenu.didSelectRow { (object, isSelected, selectedData) in

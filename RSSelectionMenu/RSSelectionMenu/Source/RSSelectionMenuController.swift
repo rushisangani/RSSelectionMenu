@@ -121,6 +121,11 @@ extension RSSelectionMenu {
         self.tableView?.setOnDidSelect(delegate: delegate)
     }
     
+    /// First row type and selection
+    public func showFirstRowAs(type: FirstRowType, selected: Bool, completion: @escaping FirstRowSelection) {
+        self.tableView?.showFirstRowAs(type: type, selected: selected, completion: completion)
+    }
+    
     /// Searchbar
     public func addSearchBar(placeHolder: String? = defaultPlaceHolder, tintColor: UIColor? = defaultSearchBarTintColor, completion: @escaping UISearchBarResult<T>) {
         self.tableView?.addSearchBar(placeHolder: placeHolder!, tintColor: tintColor!, completion: completion)
@@ -175,7 +180,7 @@ extension RSSelectionMenu {
         }
         
         var tobePresentController: UIViewController = self
-        if !shouldDismissOnSelect {
+        if with != .popover || tableView?.selectionType == .multiple {
             tobePresentController = UINavigationController(rootViewController: self)
         }
         

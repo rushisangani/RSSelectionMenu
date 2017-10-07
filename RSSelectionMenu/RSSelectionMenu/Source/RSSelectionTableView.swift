@@ -47,6 +47,9 @@ open class RSSelectionTableView<T>: UITableView {
     /// selection type - default is single selection
     var selectionType: SelectionType = .single
     
+    /// first row selection
+    var firstRowSelection: RSFirstRowSelection?
+    
     // MARK: - Life Cycle
     
     convenience public init(selectionType: SelectionType, dataSource: RSSelectionMenuDataSource<T>, delegate: RSSelectionMenuDelegate<T>, from: RSSelectionMenu<T>) {
@@ -63,6 +66,7 @@ open class RSSelectionTableView<T>: UITableView {
     // MARK: - Setup
     func setup() {
         
+        self.selectionDataSource?.selectionTableView = self
         dataSource = self.selectionDataSource
         delegate = self.selectionDelegate
         tableFooterView = UIView()
@@ -96,6 +100,14 @@ extension RSSelectionTableView {
             let filteredDataSource = !searchText.isEmpty ? self?.searchBarResultDelegate!(searchText) : []
             self?.selectionDataSource?.update(dataSource: filteredDataSource!, inTableView: self!)
         }
+    }
+    
+    /// first row type and selection
+    public func showFirstRowAs(type: FirstRowType, selected: Bool, completion: @escaping FirstRowSelection) {
+        
+        self.firstRowSelection = RSFirstRowSelection(selected: selected, rowType: type, delegate: completion)
+        if selected { self.selectionDelegate?.removeAllSelected() }
+        
     }
     
     // object at indexpath

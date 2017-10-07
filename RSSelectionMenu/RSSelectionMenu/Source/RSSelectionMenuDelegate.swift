@@ -43,9 +43,19 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
     // MARK:- UITableViewDelegate
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: false)
+        
         let selectionTableView = tableView as! RSSelectionTableView<T>
+        
+        // first row selected
+        if indexPath.row == 0 && isFirstRowAdded(inTableView: selectionTableView) {
+            
+            handleActionForFirstRow(tableView: selectionTableView)
+            return
+        }
+        
+        // update first row
+        updateFirstRowSelection(tableView: selectionTableView)
         
         // selected object
         let dataObject = selectionTableView.objectAt(indexPath: indexPath)
@@ -69,9 +79,7 @@ extension RSSelectionMenuDelegate {
     
     /// action handler for single selection tableview
     fileprivate func handleActionForSingleSelection(object: T, tableView: RSSelectionTableView<T>) {
-        
-        // remove all
-        selectedObjects.removeAll()
+        removeAllSelected()
         
         // add to selected list
         selectedObjects.append(object)
@@ -109,6 +117,40 @@ extension RSSelectionMenuDelegate {
         }
     }
     
+    /// first row selection handler
+    fileprivate func handleActionForFirstRow(tableView: RSSelectionTableView<T>) {
+        
+        // remove all selected when first row select
+        removeAllSelected()
+        
+        // update first row selection
+        updateFirstRowSelection(selected: !(tableView.firstRowSelection?.selected)!, tableView: tableView)
+        
+        // reload tableview
+        tableView.reloadData()
+        
+        // selection callback
+        if let rowSelection = selectionDelegate {
+            rowSelection(nil, false, selectedObjects)
+        }
+        
+        // dismiss if required
+        tableView.dismissControllerIfRequired()
+    }
+    
+    /// checks if first row is added
+    fileprivate func isFirstRowAdded(inTableView: RSSelectionTableView<T>) -> Bool {
+        return (inTableView.selectionDataSource?.isFirstRowAdded())!
+    }
+    
+    /// update first row selection
+    fileprivate func updateFirstRowSelection(selected: Bool? = false, tableView: RSSelectionTableView<T>) {
+        if var rowSelection = tableView.firstRowSelection {
+            
+            rowSelection.selected = selected!
+            rowSelection.delegate!((rowSelection.rowType?.value)!, selected!)
+        }
+    }
 }
 
 // MARK:- Public
@@ -117,5 +159,10 @@ extension RSSelectionMenuDelegate {
     /// check for selection status
     public func showSelected(object: T, inTableView: RSSelectionTableView<T>) -> Bool {
         return inTableView.selectionMenu!.containsObject(object, inDataSource: selectedObjects)
+    }
+    
+    /// remove selected objects
+    public func removeAllSelected() {
+        selectedObjects.removeAll()
     }
 }
