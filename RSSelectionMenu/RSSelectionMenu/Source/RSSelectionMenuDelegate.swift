@@ -145,7 +145,7 @@ extension RSSelectionMenuDelegate {
     
     /// update first row selection
     fileprivate func updateFirstRowSelection(selected: Bool? = false, tableView: RSSelectionTableView<T>) {
-        if var rowSelection = tableView.firstRowSelection {
+        if let rowSelection = tableView.firstRowSelection {
             
             rowSelection.selected = selected!
             rowSelection.delegate!((rowSelection.rowType?.value)!, selected!)
