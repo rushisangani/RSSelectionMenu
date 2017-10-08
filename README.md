@@ -5,12 +5,13 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 
 ![Alt text](/Images/image1.png?raw=true "Home")
 ![Alt text](/Images/image2.png?raw=true "Simple push")
-![Alt text](/Images/image3.png?raw=true "Show as popover")
-![Alt text](/Images/image4.png?raw=true "Multiple selection")
-![Alt text](/Images/image5.png?raw=true "Custom cells")
+![Alt text](/Images/image3.png?raw=true "FormSheet")
+![Alt text](/Images/image4.png?raw=true "Popover")
+![Alt text](/Images/image5.png?raw=true "Multiple selection")
+![Alt text](/Images/image6.png?raw=true "Custom cells")
 ## Features
 
-- Show selection menu as list or popover with single or multiple selection.
+- Show selection menu as List, Popover or FormSheet with single or multiple selection.
 - Use different cell types. (Basic, RightDetail, SubTitle)
 - Works with Swift premitive types as well as custom NSObject classes.
 - Show selection menu with your custom cells.
@@ -29,9 +30,9 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu', '~> 1.0.4'
+pod 'RSSelectionMenu', '~> 1.0.5'
 or
-pod 'RSSelectionMenu', '~> 1.0.4', :git => 'https://github.com/rushisangani/RSSelectionMenu.git'
+pod 'RSSelectionMenu', '~> 1.0.5', :git => 'https://github.com/rushisangani/RSSelectionMenu.git'
 
 ```
 
@@ -50,6 +51,7 @@ let selectionMenu = RSSelectionMenu(dataSource: simpleDataArray, selectedItems:s
 // title
 selectionMenu.setNavigationBar(title: "Select Player")
 
+// did select handler
 selectionMenu.didSelectRow { (object, isSelected, selectedData) in
     
     // update existing array on select
@@ -73,7 +75,7 @@ let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: select
 	cell.detailTextLabel?.text = lastName
 }
         
-// add first row as None
+// add first row as 'None'
 selectionMenu.showFirstRowAs(type: .None, selected: firstRowSelected) { (text, selected) in
     self.firstRowSelected = selected
 }
@@ -85,21 +87,43 @@ selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
 selectionMenu.show(from: self)
 ```
 
-### Multiple selection with search and custom Navigationbar theme
+### Formsheet with SearchBar
 
 ```swift
+let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray) { (cell, object, indexPath) in
+            
+    let firstName = object.components(separatedBy: " ").first
+    let lastName = object.components(separatedBy: " ").last
+    
+    cell.textLabel?.text = firstName
+    cell.detailTextLabel?.text = lastName
+}
 
-// set type as Multiple
+selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
+    self.selectedDataArray = selectedArray
+}
+
+// add searchbar
+selectionMenu.addSearchBar { (searchText) -> ([String]) in
+    return self.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
+}
+
+selectionMenu.show(style: .formSheet, from: self)
+```
+
+### Multi Selection, SearchBar and Custom NavigationBar
+
+```swift
 let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: simpleDataArray, selectedItems: simpleSelectedArray) { (cell, object, indexPath) in
             
     cell.textLabel?.text = object
 }
-        
+
 // set navigation title and color
 selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSForegroundColorAttributeName: UIColor.white], barTintColor: UIColor.orange.withAlphaComponent(0.5))
 
 
-// add first row as All selected
+// add first row as 'All'
 selectionMenu.showFirstRowAs(type: .All, selected: firstRowSelected) { (text, selected) in
     self.firstRowSelected = selected
 }
@@ -110,15 +134,13 @@ selectionMenu.didSelectRow { (object, isSelected, selectedData) in
 
 // add searchbar
 selectionMenu.addSearchBar { (searchText) -> ([String]) in
-
-	// return filtered array based on your criteria
     return self.simpleDataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
 }
 
 selectionMenu.show(from: self)
 ```
 
-### Custom Cell with custom models or dictionary
+### Custom Cells with Models
 
 ```swift
 class Person: NSObject {
@@ -137,14 +159,14 @@ class Person: NSObject {
 var customDataArray = [Person]()
 var customselectedDataArray = [Person]()
 
-// prepare data array with your custom models
+// prepare data array with models
 customDataArray.append(Person(id: 1, firstName: "Sachin", lastName: "Tendulkar"))
 customDataArray.append(Person(id: 2, firstName: "Rahul", lastName: "Dravid"))
 customDataArray.append(Person(id: 3, firstName: "Virat", lastName: "Kohli"))
 
 
 // specify unique key for your model or dictionary that contains an unique value.
-// This is required to identify each row uniquely.
+// This is required to identify each row uniquely. (Here, the unique key is "id" that identifies the person uniquely.)
 
 let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: customDataArray, selectedItems: customselectedDataArray, uniqueKey: "id") { (cell, person, indexPath) in
             

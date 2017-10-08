@@ -109,14 +109,20 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         super.viewDidLayoutSubviews()
         self.backgroundView.frame = self.view.frame
         
-        if presentationStyle != .formSheet {
-            self.tableView?.frame = backgroundView.frame
-            return
-        }
+        setTableViewFrame()
+    }
+    
+    /// tableView frame
+    fileprivate func setTableViewFrame() {
         
-        self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
-        self.tableView?.center = backgroundView.center
-        tableView?.layer.cornerRadius = 8
+        if presentationStyle == .formSheet {
+            tableView?.layer.cornerRadius = 8
+            self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
+            self.tableView?.center = backgroundView.center
+        }
+        else {
+            self.tableView?.frame = backgroundView.frame
+        }
     }
     
     /// Tap gesture
@@ -190,13 +196,11 @@ extension RSSelectionMenu {
     
     /// Show
     public func show(style: PresentationStyle? = .present, from: UIViewController) {
-        parentController = from
         show(with: style!, from: from, source: nil, size: nil)
     }
     
     /// show as popover
     public func showAsPopover(from: UIView, inViewController: UIViewController, withSize contentSize: CGSize? = nil) {
-        parentController = inViewController
         show(with: .popover, from: inViewController, source: from, size: contentSize)
     }
     
@@ -233,6 +237,7 @@ extension RSSelectionMenu {
     
     // show
     fileprivate func show(with: PresentationStyle, from: UIViewController, source: UIView?, size: CGSize?) {
+        parentController = from
         presentationStyle = with
         
         if with == .push {

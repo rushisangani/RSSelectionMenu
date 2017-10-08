@@ -79,14 +79,36 @@ class ViewController: UITableViewController {
             self.selectedDataArray = selectedArray
         }
         
+        selectionMenu.show(from: self)
+    }
+    
+    func showAsFormSheetWithSearch() {
+        
+        let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray) { (cell, object, indexPath) in
+            
+            let firstName = object.components(separatedBy: " ").first
+            let lastName = object.components(separatedBy: " ").last
+            
+            cell.textLabel?.text = firstName
+            cell.detailTextLabel?.text = lastName
+        }
+        
+        selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
+            self.selectedDataArray = selectedArray
+        }
+        
+        // add searchbar
+        selectionMenu.addSearchBar { (searchText) -> ([String]) in
+            return self.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
+        }
+        
         selectionMenu.show(style: .formSheet, from: self)
     }
     
-    func showAsPopoverWithSubTitle(sender: UIView) {
+    func showAsPopover(sender: UIView) {
         
-        // show as popover with datasource, selected items with cellType = subTitle
-        
-        let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray, cellType: .subTitle) { (cell, object, indexPath) in
+        // show as popover with datasource, selected items
+        let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray) { (cell, object, indexPath) in
             
             let firstName = object.components(separatedBy: " ").first
             let lastName = object.components(separatedBy: " ").last
@@ -101,7 +123,7 @@ class ViewController: UITableViewController {
         selectionMenu.showAsPopover(from: sender, inViewController: self)
     }
     
-    func presentModallyWithMultiSelectionAndSearch() {
+    func presentWithMultiSelectionAndSearch() {
         
         // show with datasource, selected items, multiple selection and search
         let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: simpleDataArray, selectedItems: simpleSelectedArray) { (cell, object, indexPath) in
@@ -130,22 +152,6 @@ class ViewController: UITableViewController {
         selectionMenu.show(from: self)
     }
     
-    func showAsPopoverWithMultiSelect(sender: UIView) {
-        
-        // show as popover with datasource, selected items, multiple selection
-        let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: simpleDataArray, selectedItems: simpleSelectedArray) { (cell, object, indexPath) in
-            
-            cell.textLabel?.text = object
-        }
-        
-        selectionMenu.didSelectRow { (object, isSelected, selectedData) in
-            self.simpleSelectedArray = selectedData
-        }
-        
-        // specify size
-        selectionMenu.showAsPopover(from: sender, inViewController: self, withSize: CGSize(width: 300, height: 220))
-    }
-    
     func showWithCustomCell() {
         
         // show with datasource and selected items with custom cells and models
@@ -166,8 +172,7 @@ class ViewController: UITableViewController {
         selectionMenu.addSearchBar { (text) -> ([Person]) in
             return self.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(text.lowercased()) })
         }
-        
-        selectionMenu.show(style: .formSheet, from: self)
+        selectionMenu.show(style: .push, from: self)
     }
 }
 
@@ -190,8 +195,12 @@ extension ViewController {
                 presentModallyWithRightDetail()
                 break
             case 2:
-                showAsPopoverWithSubTitle(sender: cell!)
+                showAsFormSheetWithSearch()
                 break
+            case 3:
+                showAsPopover(sender: cell!)
+                break
+                
             default:
                 break
             }
@@ -202,18 +211,7 @@ extension ViewController {
         // multi selection
         
         if indexPath.section == 1 {
-            
-            switch indexPath.row {
-            case 0:
-                presentModallyWithMultiSelectionAndSearch()
-                break
-            case 1:
-                showAsPopoverWithMultiSelect(sender: cell!)
-                break
-            default:
-                break
-            }
-            
+            presentWithMultiSelectionAndSearch()
             return
         }
         
