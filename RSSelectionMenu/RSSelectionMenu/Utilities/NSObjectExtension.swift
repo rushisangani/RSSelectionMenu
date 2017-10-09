@@ -26,7 +26,7 @@ import Foundation
 import ObjectiveC.NSObjCRuntime
 
 /// NSObject associated object
-extension NSObject {
+public extension NSObject {
     
     /// keys
     private struct AssociatedKeys {
@@ -34,21 +34,21 @@ extension NSObject {
     }
     
     /// set associated object
-    @objc func setAssociated(object: Any) {
+    @objc public func setAssociated(object: Any) {
         objc_setAssociatedObject(self, &AssociatedKeys.descriptiveName, object, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
     /// get associated object
-    @objc func associatedObject() -> Any? {
+    @objc public func associatedObject() -> Any? {
         return objc_getAssociatedObject(self, &AssociatedKeys.descriptiveName)
     }
 }
 
 // convert to dictionary
-extension NSObject {
+public extension NSObject {
     
     // dictionary
-    func toDictionary(from classType: NSObject.Type) -> [String: AnyObject] {
+    public func toDictionary(from classType: NSObject.Type) -> [String: AnyObject] {
         
         var propertiesCount : CUnsignedInt = 0
         let propertiesInAClass = class_copyPropertyList(classType, &propertiesCount)
