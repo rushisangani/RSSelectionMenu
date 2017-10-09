@@ -21,7 +21,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 
 - iOS 10.0+ 
 - Xcode 8.3+
-- Swift 3.0+
+- Swift 3.2+
 
 
 ## Installation
@@ -29,9 +29,14 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ### CocoaPods
 
 ```ruby
+Swift 4
+
 pod 'RSSelectionMenu'
 or
-pod 'RSSelectionMenu', '~> 1.0.6'
+pod 'RSSelectionMenu', '~> 2.0'
+
+Swift 3.2
+pod 'RSSelectionMenu', '~> 1.6.0'
 ```
 
 ## Usage

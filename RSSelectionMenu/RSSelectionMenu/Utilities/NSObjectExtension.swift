@@ -56,7 +56,7 @@ extension NSObject {
         
         for i in 0 ..< Int(propertiesCount) {
             let property = propertiesInAClass?[i]
-            let strKey = NSString(utf8String: property_getName(property)) as String?
+            let strKey = NSString(utf8String: property_getName(property!)) as String?
             if let key = strKey {
                 propertiesDictionary.setValue(self.value(forKey: key), forKey: key)
             }

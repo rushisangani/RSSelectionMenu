@@ -64,7 +64,7 @@ extension UITableViewCell {
 public struct NavigationBarTheme {
     
     var title: String?
-    var attributes: [String: Any]?
+    var attributes: [NSAttributedStringKey: Any]?
     var color: UIColor?
 }
 

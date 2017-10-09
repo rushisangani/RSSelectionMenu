@@ -42,8 +42,8 @@ public typealias FilteredDataSource<T> = [T]
 public typealias UISearchBarResult<T> = ((_ searchText: String) -> (FilteredDataSource<T>))
 
 /// Strings
-let defaultPlaceHolder          = "Search"
+public let defaultPlaceHolder          = "Search"
 
 
 /// Colors
-let defaultSearchBarTintColor   = UIColor(white: 0.9, alpha: 0.9)
+public let defaultSearchBarTintColor   = UIColor(white: 0.9, alpha: 0.9)

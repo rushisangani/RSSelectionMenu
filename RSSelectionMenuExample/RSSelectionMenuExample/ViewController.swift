@@ -132,7 +132,7 @@ class ViewController: UITableViewController {
         }
         
         // title and color
-        selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSForegroundColorAttributeName: UIColor.white], barTintColor: UIColor.orange.withAlphaComponent(0.5))
+        selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor.white], barTintColor: UIColor.orange.withAlphaComponent(0.5))
         
         
         // add first row
