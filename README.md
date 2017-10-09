@@ -29,10 +29,9 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu', '~> 1.0.5'
+pod 'RSSelectionMenu'
 or
-pod 'RSSelectionMenu', '~> 1.0.5', :git => 'https://github.com/rushisangani/RSSelectionMenu.git'
-
+pod 'RSSelectionMenu', '~> 1.0.6'
 ```
 
 ## Usage
