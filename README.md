@@ -33,7 +33,7 @@ Swift 4
 
 pod 'RSSelectionMenu'
 or
-pod 'RSSelectionMenu', '~> 2.0'
+pod 'RSSelectionMenu', '~> 2.0.2'
 
 Swift 3.2
 pod 'RSSelectionMenu', '~> 1.6.0'
