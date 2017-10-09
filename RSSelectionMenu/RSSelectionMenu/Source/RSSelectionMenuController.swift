@@ -103,6 +103,11 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         if showDoneButton() {
             setDoneButton()
         }
+        
+        // cancel button
+        if showCancelButton() {
+            setCancelButton()
+        }
     }
     
     override open func viewDidLayoutSubviews() {
@@ -146,6 +151,13 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     
     @objc func doneButtonTapped() {
         self.dismiss()
+    }
+    
+    /// cancel button
+    fileprivate func setCancelButton() {
+        
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(doneButtonTapped))
+        navigationItem.leftBarButtonItem = cancelButton
     }
     
     // MARK: - UIPopoverPresentationControllerDelegate
@@ -229,7 +241,15 @@ extension RSSelectionMenu {
 
     // check if show done button
     fileprivate func showDoneButton() -> Bool {
-        if (presentationStyle == .present || presentationStyle == .push) && tableView?.selectionType == .multiple{
+        if (presentationStyle == .present || presentationStyle == .push) && tableView?.selectionType == .multiple {
+            return true
+        }
+        return false
+    }
+    
+    // check if show cancel button
+    fileprivate func showCancelButton() -> Bool {
+        if presentationStyle == .present && tableView?.selectionType == .single {
             return true
         }
         return false
