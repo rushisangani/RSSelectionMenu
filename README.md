@@ -17,7 +17,6 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 - Show selection menu with your custom cells.
 - Search from the list with inbuilt SearchBar.
 
-
 ## Requirements
 
 - iOS 10.0+ 
@@ -37,6 +36,28 @@ pod 'RSSelectionMenu', '~> 1.0.5', :git => 'https://github.com/rushisangani/RSSe
 ```
 
 ## Usage
+
+### Selection Type
+- Single
+- Multiple
+
+### PresentationStyle
+- Present
+- Push
+- FormSheet
+- Popover
+
+### UITableViewCell Type
+- Basic
+- RightDetail
+- SubTitle
+- Custom
+
+### FirstRow Type
+- Empty
+- None
+- All
+
 
 ### Simple Selection List
 
@@ -65,6 +86,7 @@ selectionMenu.show(with: .push, from: self)
 ```swift
 let dataArray = ["Sachin Tendulkar", "Rahul Dravid", "Saurav Ganguli", "Virat Kohli", "Suresh Raina", "Ravindra Jadeja", "Chris Gyle", "Steve Smith", "Anil Kumble"]
 var selectedDataArray = [String]()
+var firstRowSelected = true
 
 let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray, cellType: .rightDetail) { (cell, object, indexPath) in
             
