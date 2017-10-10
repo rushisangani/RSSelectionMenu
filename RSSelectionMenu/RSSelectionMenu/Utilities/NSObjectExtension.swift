@@ -48,7 +48,7 @@ public extension NSObject {
 public extension NSObject {
     
     // dictionary
-    public func toDictionary() -> [String: AnyObject] {
+    @objc public func toDictionary() -> [String: AnyObject] {
         
         let propertiesDictionary : NSMutableDictionary = NSMutableDictionary()
         let model = Mirror(reflecting: self)
