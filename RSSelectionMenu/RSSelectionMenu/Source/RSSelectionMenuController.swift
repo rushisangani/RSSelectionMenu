@@ -25,7 +25,6 @@
 import UIKit
 
 /// RSSelectionMenuController
-@objcMembers
 open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate {
 
     // MARK: - Outlets
@@ -148,7 +147,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         backgroundView.addGestureRecognizer(tapGesture)
     }
     
-    func onBackgroundTapped(sender: UITapGestureRecognizer){
+    @objc func onBackgroundTapped(sender: UITapGestureRecognizer){
         self.dismiss()
     }
     
@@ -159,7 +158,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         navigationItem.rightBarButtonItem = doneButton
     }
     
-    func doneButtonTapped() {
+    @objc func doneButtonTapped() {
         self.dismiss()
     }
     
