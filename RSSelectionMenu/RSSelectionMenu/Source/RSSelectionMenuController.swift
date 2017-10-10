@@ -235,11 +235,11 @@ extension RSSelectionMenu {
                 if searchBar.isFirstResponder { searchBar.resignFirstResponder() }
             }
             
-            if self.isPresented() {
-                self.dismiss(animated: animated!, completion: nil)
+            if self.presentationStyle == .push {
+                 self.navigationController?.popViewController(animated: animated!)
             }
             else {
-                self.navigationController?.popViewController(animated: animated!)
+               self.dismiss(animated: animated!, completion: nil)
             }
         }
     }
