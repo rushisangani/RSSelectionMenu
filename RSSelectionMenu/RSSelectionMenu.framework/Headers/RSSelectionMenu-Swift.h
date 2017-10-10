@@ -202,10 +202,14 @@ SWIFT_CLASS("_TtC15RSSelectionMenu29RSSelectionMenuSearchDelegate")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
-@class UISearchController;
+@class UISearchBar;
 
-@interface RSSelectionMenuSearchDelegate (SWIFT_EXTENSION(RSSelectionMenu)) <UISearchResultsUpdating>
-- (void)updateSearchResultsForSearchController:(UISearchController * _Nonnull)searchController;
+@interface RSSelectionMenuSearchDelegate (SWIFT_EXTENSION(RSSelectionMenu)) <UISearchBarDelegate>
+- (void)searchBarTextDidBeginEditing:(UISearchBar * _Nonnull)searchBar;
+- (void)searchBarTextDidEndEditing:(UISearchBar * _Nonnull)searchBar;
+- (void)searchBarSearchButtonClicked:(UISearchBar * _Nonnull)searchBar;
+- (void)searchBarCancelButtonClicked:(UISearchBar * _Nonnull)searchBar;
+- (void)searchBar:(UISearchBar * _Nonnull)searchBar textDidChange:(NSString * _Nonnull)searchText;
 @end
 
 

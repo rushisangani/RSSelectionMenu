@@ -112,20 +112,29 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     
     override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.backgroundView.frame = self.view.frame
-        
+    
         setTableViewFrame()
     }
     
     /// tableView frame
     fileprivate func setTableViewFrame() {
         
+        let window =  UIApplication.shared.delegate?.window
+        
         if presentationStyle == .formSheet {
-            tableView?.layer.cornerRadius = 8
-            self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
-            self.tableView?.center = backgroundView.center
+            tableView?.layer.cornerRadius = 9
+        
+            self.backgroundView.frame = (window??.frame)!
+            self.tableView?.center = self.backgroundView.center
+            
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
+                return
+            }
+            self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 300, height: backgroundView.frame.size.height - 400)
         }
         else {
+            self.backgroundView.frame = self.view.frame
             self.tableView?.frame = backgroundView.frame
         }
     }
@@ -221,9 +230,9 @@ extension RSSelectionMenu {
         
         DispatchQueue.main.async {
             
-            // dismiss searchcontroller
-            if let searchController = self.tableView?.searchControllerDelegate?.searchController {
-                if searchController.isActive { searchController.dismiss(animated: false, completion: nil) }
+            // dismiss search
+            if let searchBar = self.tableView?.searchControllerDelegate?.searchBar {
+                if searchBar.isFirstResponder { searchBar.resignFirstResponder() }
             }
             
             if self.isPresented() {

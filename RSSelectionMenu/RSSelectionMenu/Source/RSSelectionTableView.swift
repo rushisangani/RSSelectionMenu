@@ -92,7 +92,7 @@ extension RSSelectionTableView {
     func addSearchBar(placeHolder: String, tintColor: UIColor, completion: @escaping UISearchBarResult<T>) {
         
         self.searchBarResultDelegate = completion
-        self.searchControllerDelegate = RSSelectionMenuSearchDelegate(controller: selectionMenu!, tableView: self, placeHolder: placeHolder, tintColor: tintColor)
+        self.searchControllerDelegate = RSSelectionMenuSearchDelegate(tableView: self, placeHolder: placeHolder, tintColor: tintColor)
         
         // update result on search event
         self.searchControllerDelegate?.didSearch = { [weak self] (searchText) in

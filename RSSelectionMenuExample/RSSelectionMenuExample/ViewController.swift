@@ -120,7 +120,7 @@ class ViewController: UITableViewController {
         selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
             self.selectedDataArray = selectedArray
         }
-        selectionMenu.showAsPopover(from: sender, inViewController: self)
+        selectionMenu.showAsPopover(from: sender, inViewController: self, withSize: CGSize(width: 400, height: 500))
     }
     
     func presentWithMultiSelectionAndSearch() {

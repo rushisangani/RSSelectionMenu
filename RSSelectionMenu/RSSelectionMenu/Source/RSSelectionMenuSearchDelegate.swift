@@ -26,35 +26,57 @@ import UIKit
 
 /// RSSelectionMenuSearchDelegate
 open class RSSelectionMenuSearchDelegate: NSObject {
-
+    
     // MARK: - Properties
-    public let searchController = UISearchController(searchResultsController: nil)
+    public var searchBar: UISearchBar?
     
     /// to execute on search event
     public var didSearch: ((String) -> ())?
     
     // MARK: - Initialize
-    init(controller: UIViewController, tableView: UITableView, placeHolder: String, tintColor: UIColor) {
+    init(tableView: UITableView, placeHolder: String, tintColor: UIColor) {
         super.init()
         
-        controller.definesPresentationContext = true
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.barTintColor = tintColor
-        searchController.searchBar.placeholder = placeHolder
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchBar = UISearchBar()
+        searchBar?.delegate = self
+        searchBar?.sizeToFit()
+        searchBar?.barTintColor = tintColor
+        searchBar?.placeholder = placeHolder
         
         // add as tableHeaderView
-        tableView.tableHeaderView = searchController.searchBar
+        tableView.tableHeaderView = searchBar
+    }
+    
+    func searchForText(text: String?) {
+        if let search = didSearch {
+            search(text ?? "")
+        }
     }
 }
 
-// MARK:- UISearchResultsUpdating
-extension RSSelectionMenuSearchDelegate : UISearchResultsUpdating {
+// MARK:- UISearchBarDelegate
+extension RSSelectionMenuSearchDelegate : UISearchBarDelegate {
     
-    public func updateSearchResults(for searchController: UISearchController) {
-        if let search = didSearch {
-            search(searchController.searchBar.text ?? "")
-        }
+    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+    }
+    
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
+        searchBar.text = ""
+        searchForText(text: "")
+    }
+    
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchForText(text: searchText)
     }
 }

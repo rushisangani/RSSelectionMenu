@@ -48,18 +48,12 @@ public extension NSObject {
 public extension NSObject {
     
     // dictionary
-    public func toDictionary(from classType: NSObject.Type) -> [String: AnyObject] {
+    public func toDictionary() -> [String: AnyObject] {
         
-        var propertiesCount : CUnsignedInt = 0
-        let propertiesInAClass = class_copyPropertyList(classType, &propertiesCount)
         let propertiesDictionary : NSMutableDictionary = NSMutableDictionary()
-        
-        for i in 0 ..< Int(propertiesCount) {
-            let property = propertiesInAClass?[i]
-            let strKey = NSString(utf8String: property_getName(property!)) as String?
-            if let key = strKey {
-                propertiesDictionary.setValue(self.value(forKey: key), forKey: key)
-            }
+        let model = Mirror(reflecting: self)
+        for (name, value) in model.children {
+            propertiesDictionary.setValue(value, forKey: name!)
         }
         return propertiesDictionary as! [String : AnyObject]
     }

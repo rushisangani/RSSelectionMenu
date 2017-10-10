@@ -109,23 +109,20 @@ extension RSSelectionMenu {
     
         // custom type
         else {
-            
-            let classType = T.self as! NSObject.Type
-            let dictionary = (object as! NSObject).toDictionary(from: classType)
+            let dictionary = (object as! NSObject).toDictionary()
             return hasSameKeyValue(forObject: dictionary, inArray: from)
         }
     }
     
     /// dictionary key value comparision
     public func hasSameKeyValue<T>(forObject: [String: AnyObject], inArray: DataSource<T>) -> Int? {
-        let key = uniqueKeyId()
-        let classType = T.self as! NSObject.Type
         
-        let value = String(describing: forObject[key]!)
+        let key = uniqueKeyId()
+        let value = String(describing: forObject[key])
         
         return inArray.index(where: { (data) -> Bool in
-            let dictionary = (data as! NSObject).toDictionary(from: classType)
-            return value == String(describing: dictionary[key]!)
+            let dictionary = (data as! NSObject).toDictionary()
+            return value == String(describing: dictionary[key])
         })
     }
 }
