@@ -15,18 +15,18 @@
 		A29317951F87FD060076A0C4 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29317921F87FD060076A0C4 /* CustomTableViewCell.swift */; };
 		A29317961F87FD060076A0C4 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29317931F87FD060076A0C4 /* CustomTableViewCell.xib */; };
 		A29317971F87FD060076A0C4 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29317941F87FD060076A0C4 /* Person.swift */; };
-		D87629F81F8CD8C40009F5E5 /* RSSelectionMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87629F71F8CD8C40009F5E5 /* RSSelectionMenu.framework */; };
-		D87629F91F8CD8C40009F5E5 /* RSSelectionMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D87629F71F8CD8C40009F5E5 /* RSSelectionMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D8659C7E1F8CE1D7000F0BB2 /* RSSelectionMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8659C7D1F8CE1D7000F0BB2 /* RSSelectionMenu.framework */; };
+		D8659C7F1F8CE1D7000F0BB2 /* RSSelectionMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8659C7D1F8CE1D7000F0BB2 /* RSSelectionMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A29317901F87FCBD0076A0C4 /* Embed Frameworks */ = {
+		D8659C801F8CE1D7000F0BB2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D87629F91F8CD8C40009F5E5 /* RSSelectionMenu.framework in Embed Frameworks */,
+				D8659C7F1F8CE1D7000F0BB2 /* RSSelectionMenu.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,7 +44,7 @@
 		A29317921F87FD060076A0C4 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		A29317931F87FD060076A0C4 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		A29317941F87FD060076A0C4 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
-		D87629F71F8CD8C40009F5E5 /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8659C7D1F8CE1D7000F0BB2 /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D87629F81F8CD8C40009F5E5 /* RSSelectionMenu.framework in Frameworks */,
+				D8659C7E1F8CE1D7000F0BB2 /* RSSelectionMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +62,7 @@
 		A293176F1F87FC3F0076A0C4 = {
 			isa = PBXGroup;
 			children = (
-				D87629F71F8CD8C40009F5E5 /* RSSelectionMenu.framework */,
+				D8659C7D1F8CE1D7000F0BB2 /* RSSelectionMenu.framework */,
 				A293177A1F87FC3F0076A0C4 /* RSSelectionMenuExample */,
 				A29317791F87FC3F0076A0C4 /* Products */,
 			);
@@ -110,7 +110,7 @@
 				A29317741F87FC3F0076A0C4 /* Sources */,
 				A29317751F87FC3F0076A0C4 /* Frameworks */,
 				A29317761F87FC3F0076A0C4 /* Resources */,
-				A29317901F87FCBD0076A0C4 /* Embed Frameworks */,
+				D8659C801F8CE1D7000F0BB2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
