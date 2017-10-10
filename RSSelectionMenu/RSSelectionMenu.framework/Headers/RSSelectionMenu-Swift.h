@@ -186,6 +186,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_MODULE_NAMESPACE_PUSH("RSSelectionMenu")
 
+@interface NSObject (SWIFT_EXTENSION(RSSelectionMenu))
+- (NSDictionary<NSString *, id> * _Nonnull)toDictionary SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 @interface NSObject (SWIFT_EXTENSION(RSSelectionMenu))
