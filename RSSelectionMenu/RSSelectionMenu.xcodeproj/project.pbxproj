@@ -23,7 +23,7 @@
 /* Begin PBXBuildFile section */
 		A21C309D1F88BAF100C48F9A /* RSFirstRowSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21C309C1F88BAF100C48F9A /* RSFirstRowSelection.swift */; };
 		D835710C1F87986400185B73 /* RSSelectionMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = D835710A1F87986400185B73 /* RSSelectionMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D852FDA41F879BF7002362CC /* RSSelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FD9F1F879BF6002362CC /* RSSelectionMenuController.swift */; };
+		D852FDA41F879BF7002362CC /* RSSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FD9F1F879BF6002362CC /* RSSelectionMenu.swift */; };
 		D852FDA51F879BF7002362CC /* RSSelectionMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA01F879BF6002362CC /* RSSelectionMenuDataSource.swift */; };
 		D852FDA61F879BF7002362CC /* RSSelectionMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA11F879BF6002362CC /* RSSelectionMenuDelegate.swift */; };
 		D852FDA71F879BF7002362CC /* RSSelectionMenuSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */; };
@@ -38,7 +38,7 @@
 		D83571071F87986400185B73 /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D835710A1F87986400185B73 /* RSSelectionMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSelectionMenu.h; sourceTree = "<group>"; };
 		D835710B1F87986400185B73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D852FD9F1F879BF6002362CC /* RSSelectionMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuController.swift; sourceTree = "<group>"; };
+		D852FD9F1F879BF6002362CC /* RSSelectionMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenu.swift; sourceTree = "<group>"; };
 		D852FDA01F879BF6002362CC /* RSSelectionMenuDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuDataSource.swift; sourceTree = "<group>"; };
 		D852FDA11F879BF6002362CC /* RSSelectionMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuDelegate.swift; sourceTree = "<group>"; };
 		D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuSearchDelegate.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		D852FD9E1F879BF6002362CC /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D852FD9F1F879BF6002362CC /* RSSelectionMenuController.swift */,
+				D852FD9F1F879BF6002362CC /* RSSelectionMenu.swift */,
 				D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */,
 				D852FDA01F879BF6002362CC /* RSSelectionMenuDataSource.swift */,
 				D852FDA11F879BF6002362CC /* RSSelectionMenuDelegate.swift */,
@@ -210,7 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D852FDA61F879BF7002362CC /* RSSelectionMenuDelegate.swift in Sources */,
-				D852FDA41F879BF7002362CC /* RSSelectionMenuController.swift in Sources */,
+				D852FDA41F879BF7002362CC /* RSSelectionMenu.swift in Sources */,
 				A21C309D1F88BAF100C48F9A /* RSFirstRowSelection.swift in Sources */,
 				D852FDA81F879BF7002362CC /* RSSelectionTableView.swift in Sources */,
 				D852FDA51F879BF7002362CC /* RSSelectionMenuDataSource.swift in Sources */,
