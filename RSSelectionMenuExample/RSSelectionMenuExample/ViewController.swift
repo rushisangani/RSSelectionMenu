@@ -105,7 +105,7 @@ class ViewController: UITableViewController {
         selectionMenu.show(style: .formSheet, from: self)
     }
     
-    func showAsPopover(sender: UIView) {
+    func showAsPopover(_ sender: UIView) {
         
         // show as popover with datasource, selected items
         let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray) { (cell, object, indexPath) in
@@ -160,7 +160,7 @@ class ViewController: UITableViewController {
         let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: customDataArray, selectedItems: customselectedDataArray, uniqueKey: "id") { (cell, person, indexPath) in
             
             let customCell = cell as! CustomTableViewCell
-            customCell.setData(person: person)
+            customCell.setData(person)
         }
         
         selectionMenu.registerNib(nibName: "CustomTableViewCell", forCellReuseIdentifier: "cell")
@@ -198,7 +198,7 @@ extension ViewController {
                 showAsFormSheetWithSearch()
                 break
             case 3:
-                showAsPopover(sender: cell!)
+                showAsPopover(cell!)
                 break
                 
             default:

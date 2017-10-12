@@ -134,6 +134,7 @@
 					A29317771F87FC3F0076A0C4 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = M9KRH522ST;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};

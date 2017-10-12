@@ -26,7 +26,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     // set data
-    func setData(person: Person) {
+    func setData(_ person: Person) {
         
         idLabel.text = person.id.description
         firstNameLabel.text = person.firstName
