@@ -211,7 +211,7 @@ extension RSSelectionMenu {
     }
     
     /// Navigationbar title and color
-    public func setNavigationBar(title: String, attributes:[NSAttributedStringKey: Any]? = nil, barTintColor: UIColor? = nil) {
+    public func setNavigationBar(title: String, attributes:[String: Any]? = nil, barTintColor: UIColor? = nil) {
         self.navigationBarTheme = NavigationBarTheme(title: title, attributes: attributes, color: barTintColor)
     }
     
