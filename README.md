@@ -192,7 +192,7 @@ let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: custo
 
 - If you don't want to implement protocol then define your unique property as below.
 ```swift
-    selectionMenu.uniquePropertyName = "id"     // replace your property name or dictionary key here which has unique value.
+selectionMenu.uniquePropertyName = "id"     // replace your property name or dictionary key here which has unique value.
 ```
 
 ### Custom Models with Custom Cells
@@ -228,8 +228,6 @@ customDataArray.append(Person(id: 3, firstName: "Virat", lastName: "Kohli"))
 
 
 // Show menu with datasource array with Models - SelectionType = Multiple, CellType = Custom
-// For Custom cells - You need to specify NibName and CellIdentifier
-// For Custom Models - You need to specify UniquePropertyName
 
 let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: customDataArray, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
 
