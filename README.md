@@ -34,28 +34,6 @@ pod 'RSSelectionMenu'
 
 ## Usage
 
-### Selection Type
-- Single
-- Multiple
-
-### PresentationStyle
-- Present
-- Push
-- Formsheet
-- Popover
-
-### UITableViewCell Type
-- Basic
-- RightDetail
-- SubTitle
-- Custom
-
-### FirstRow Type
-- Empty
-- None
-- All
-
-
 ### Simple Selection List 
 - Provide dataSource array and selected items (if any) to show selection list.
 - Update your selected items array when user selects any item.
