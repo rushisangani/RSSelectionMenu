@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': '/Users/rushisangani/Library/Developer/Xcode/DerivedData/RSSelectionMenu-cykzowzumiohjvdxgvzojicqzoko/Build/Products/Debug-iphoneos/RSSelectionMenu.framework/Modules'
+    'contents': [{
+      'type': 'file',
+      'name': 'module.modulemap',
+      'external-contents': '/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/build/RSSelectionMenu.build/Debug-iphoneos/RSSelectionMenu.build/unextended-module.modulemap',
+    }]
+  }]
+}

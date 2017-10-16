@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A2A84AEA1F951E8400C579A2"
+               BlueprintIdentifier = "A29317771F87FC3F0076A0C4"
                BuildableName = "RSSelectionMenuExample.app"
                BlueprintName = "RSSelectionMenuExample"
                ReferencedContainer = "container:RSSelectionMenuExample.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2A84AEA1F951E8400C579A2"
+            BlueprintIdentifier = "A29317771F87FC3F0076A0C4"
             BuildableName = "RSSelectionMenuExample.app"
             BlueprintName = "RSSelectionMenuExample"
             ReferencedContainer = "container:RSSelectionMenuExample.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2A84AEA1F951E8400C579A2"
+            BlueprintIdentifier = "A29317771F87FC3F0076A0C4"
             BuildableName = "RSSelectionMenuExample.app"
             BlueprintName = "RSSelectionMenuExample"
             ReferencedContainer = "container:RSSelectionMenuExample.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2A84AEA1F951E8400C579A2"
+            BlueprintIdentifier = "A29317771F87FC3F0076A0C4"
             BuildableName = "RSSelectionMenuExample.app"
             BlueprintName = "RSSelectionMenuExample"
             ReferencedContainer = "container:RSSelectionMenuExample.xcodeproj">

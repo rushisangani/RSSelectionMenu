@@ -1,0 +1,13 @@
+version: "Apple Swift version 3.1 (swiftlang-802.0.53 clang-802.0.42)"
+options: "621fd41353251bcba60bf07bfef27040"
+build_time: [561494164, 718370000]
+inputs:
+  "/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/RSSelectionMenu/Source/RSSelectionMenuDelegate.swift": [561485952, 0]
+  "/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/RSSelectionMenu/Source/RSSelectionMenuController.swift": [561486496, 0]
+  "/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/RSSelectionMenu/Source/RSFirstRowSelection.swift": [560682282, 0]
+  "/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/RSSelectionMenu/Source/RSSelectionTableView.swift": [561485964, 0]
+  "/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/RSSelectionMenu/Source/RSSelectionMenuDataSource.swift": [561486154, 0]
+  "/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/RSSelectionMenu/Utilities/RSSelectionMenuExtensions.swift": [561485092, 0]
+  "/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/RSSelectionMenu/Source/RSSelectionMenuSearchDelegate.swift": [561145794, 0]
+  "/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/RSSelectionMenu/Utilities/Constants.swift": [561486226, 0]
+  "/Users/rushisangani/Downloads/RSSelectionMenu-1.0.5/RSSelectionMenu/RSSelectionMenu/Utilities/NSObjectExtension.swift": [561145794, 0]
