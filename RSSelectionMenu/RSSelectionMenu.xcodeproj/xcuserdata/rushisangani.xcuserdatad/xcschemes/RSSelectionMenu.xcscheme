@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D83571061F87986400185B73"
+               BlueprintIdentifier = "A2A84AC21F951D3A00C579A2"
                BuildableName = "RSSelectionMenu.framework"
                BlueprintName = "RSSelectionMenu"
                ReferencedContainer = "container:RSSelectionMenu.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D83571061F87986400185B73"
+            BlueprintIdentifier = "A2A84AC21F951D3A00C579A2"
             BuildableName = "RSSelectionMenu.framework"
             BlueprintName = "RSSelectionMenu"
             ReferencedContainer = "container:RSSelectionMenu.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D83571061F87986400185B73"
+            BlueprintIdentifier = "A2A84AC21F951D3A00C579A2"
             BuildableName = "RSSelectionMenu.framework"
             BlueprintName = "RSSelectionMenu"
             ReferencedContainer = "container:RSSelectionMenu.xcodeproj">

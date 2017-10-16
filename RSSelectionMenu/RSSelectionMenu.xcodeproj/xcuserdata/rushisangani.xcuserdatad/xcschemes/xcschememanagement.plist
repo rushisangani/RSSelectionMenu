@@ -9,20 +9,10 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>UniversalRSSelectionMenu.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>D83571061F87986400185B73</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D852FDDD1F87A1C6002362CC</key>
+		<key>A2A84AC21F951D3A00C579A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

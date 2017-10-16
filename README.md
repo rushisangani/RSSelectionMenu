@@ -5,7 +5,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 
 ![Alt text](/Images/image1.png?raw=true "Home")
 ![Alt text](/Images/image2.png?raw=true "Simple push")
-![Alt text](/Images/image3.png?raw=true "FormSheet")
+![Alt text](/Images/image3.png?raw=true "Formsheet")
 ![Alt text](/Images/image4.png?raw=true "Popover")
 ![Alt text](/Images/image5.png?raw=true "Multiple selection")
 ![Alt text](/Images/image6.png?raw=true "Custom cells")

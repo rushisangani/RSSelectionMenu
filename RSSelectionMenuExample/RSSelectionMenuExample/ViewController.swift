@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  RSSelectionMenuExample
 //
-//  Created by Rushi Sangani on 06/10/17.
+//  Created by Rushi Sangani on 16/10/17.
 //  Copyright © 2017 Rushi Sangani. All rights reserved.
 //
 
@@ -97,12 +97,12 @@ class ViewController: UITableViewController {
     
     func showAsFormSheetWithSearch() {
         
-         // Show menu with datasource array - PresentationStyle = Formsheet & SearchBar
+        // Show menu with datasource array - PresentationStyle = Formsheet & SearchBar
         
         let selectionMenu = RSSelectionMenu(dataSource: dataArray) { (cell, object, indexPath) in
             cell.textLabel?.text = object
         }
-
+        
         // show selected items
         selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, selectedItems) in
             self.selectedDataArray = selectedItems
@@ -130,7 +130,7 @@ class ViewController: UITableViewController {
         let selectionMenu = RSSelectionMenu(dataSource: simpleDataArray) { (cell, object, indexPath) in
             cell.textLabel?.text = object
         }
-    
+        
         selectionMenu.setSelectedItems(items: simpleSelectedArray) { (text, isSelected, selectedItems) in
             
             // update your existing array with updated selected items, so when menu presents second time updated items will be default selected.
@@ -146,7 +146,7 @@ class ViewController: UITableViewController {
     
     func presentWithMultiSelectionAndSearch() {
         
-         // Show menu with datasource array - SelectionType = Multiple, CellType = SubTitle & SearchBar
+        // Show menu with datasource array - SelectionType = Multiple, CellType = SubTitle & SearchBar
         
         let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: dataArray, cellType: .SubTitle) { (cell, object, indexPath) in
             
@@ -193,7 +193,7 @@ class ViewController: UITableViewController {
         // For Custom Models - You need to specify UniquePropertyName
         
         let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: customDataArray, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
-        
+            
             // cast cell to your custom cell type
             let customCell = cell as! CustomTableViewCell
             
