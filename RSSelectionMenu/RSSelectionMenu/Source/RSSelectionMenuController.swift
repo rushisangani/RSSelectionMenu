@@ -35,6 +35,10 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     /// property name or unique key is required when using custom models array or dictionary array as datasource
     public var uniquePropertyName: String?
     
+    /// Barbuttons titles
+    public var leftBarButtonTitle: String?
+    public var rightBarButtonTitle: String?
+    
     fileprivate var parentController: UIViewController?
     
     /// presentation stype
@@ -92,6 +96,16 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         
         backgroundView.addSubview(tableView!)
         view.addSubview(backgroundView)
+        
+        // done button
+        if showDoneButton() {
+            setDoneButton()
+        }
+        
+        // cancel button
+        if showCancelButton() {
+            setCancelButton()
+        }
     }
     
     // MARK: - Setup Layout
@@ -102,16 +116,6 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         // navigation bar theme
         if let theme = navigationBarTheme {
             setNavigationBarTheme(theme)
-        }
-        
-        // done button
-        if showDoneButton() {
-            setDoneButton()
-        }
-        
-        // cancel button
-        if showCancelButton() {
-            setCancelButton()
         }
     }
     
@@ -159,8 +163,8 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     
     /// Done button
     func setDoneButton() {
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        let doneTitle = (self.rightBarButtonTitle != nil) ? self.rightBarButtonTitle! : doneButtonTitle
+        let doneButton = UIBarButtonItem(title: doneTitle, style: .done, target: self, action: #selector(doneButtonTapped))
         navigationItem.rightBarButtonItem = doneButton
     }
     
@@ -170,8 +174,8 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     
     /// cancel button
     fileprivate func setCancelButton() {
-        
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(doneButtonTapped))
+        let cancelTitle = (self.leftBarButtonTitle != nil) ? self.leftBarButtonTitle! : cancelButtonTitle
+        let cancelButton = UIBarButtonItem(title: cancelTitle, style: .plain, target: self, action: #selector(doneButtonTapped))
         navigationItem.leftBarButtonItem = cancelButton
     }
     

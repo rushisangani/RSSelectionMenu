@@ -84,6 +84,8 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
             break
         default:
             cell = UITableViewCell(style: cellStyle, reuseIdentifier: cellType.value())
+            cell?.textLabel?.numberOfLines = 0
+            cell?.detailTextLabel?.numberOfLines = 0
             break
         }
         

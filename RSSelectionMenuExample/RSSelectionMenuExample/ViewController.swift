@@ -179,6 +179,9 @@ class ViewController: UITableViewController {
         // set navigationbar theme
         selectionMenu.setNavigationBar(title: "Select Player", attributes: nil, barTintColor: UIColor.orange.withAlphaComponent(0.5))
         
+        // right barbutton title
+        selectionMenu.rightBarButtonTitle = "Submit"
+        
         // show as default
         selectionMenu.show(from: self)
     }

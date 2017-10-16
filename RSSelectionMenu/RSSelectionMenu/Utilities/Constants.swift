@@ -43,7 +43,8 @@ public typealias UISearchBarResult<T> = ((_ searchText: String) -> (FilteredData
 
 /// Strings
 public let defaultPlaceHolder          = "Search"
-
+public let cancelButtonTitle           = "Cancel"
+public let doneButtonTitle             = "Done"
 
 /// Colors
 public let defaultSearchBarTintColor   = UIColor(white: 0.9, alpha: 0.9)
