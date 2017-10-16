@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   	s.source       = { :git => "https://github.com/rushisangani/RSSelectionMenu.git", :tag => s.version }
 
     s.ios.deployment_target = '10.0'
-  	s.source_files = "RSSelectionMenu/**/*.{h,m,swift}"
+  	s.source_files = "RSSelectionMenu/**/*.swift"
 end
