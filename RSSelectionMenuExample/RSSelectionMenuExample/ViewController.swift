@@ -39,29 +39,39 @@ class ViewController: UITableViewController {
     
     func showAsPush() {
         
-        // show with datasource and selected items
+        // Show menu with datasource array - Default SelectionType = Single
+        // Here you'll get cell configuration where you can set any text based on condition
+        // Cell configuration following parameters.
+        // 1. UITableViewCell   2. Object of type T   3. IndexPath
         
-        let selectionMenu = RSSelectionMenu(dataSource: simpleDataArray, selectedItems: simpleSelectedArray) { (cell, object, indexPath) in
+        let selectionMenu =  RSSelectionMenu(dataSource: simpleDataArray) { (cell, object, indexPath) in
             cell.textLabel?.text = object
         }
         
-        // title
+        // set navigation title
         selectionMenu.setNavigationBar(title: "Select Player")
         
-        selectionMenu.didSelectRow { (object, isSelected, selectedData) in
+        // set default selected items when menu present on screen.
+        // Here you'll get onDidSelectRow
+        
+        selectionMenu.setSelectedItems(items: simpleSelectedArray) { (text, isSelected, selectedItems) in
             
-            // update existing array on select
-            self.simpleSelectedArray = selectedData
+            // update your existing array with updated selected items, so when menu presents second time updated items will be default selected.
+            self.simpleSelectedArray = selectedItems
         }
-        selectionMenu.show(style: .push, from: self)
+        
+        // show as PresentationStyle = Push
+        selectionMenu.show(style: .Push, from: self)
     }
     
     func presentModallyWithRightDetail() {
         
-        // show with datasource, selected items with cellType = rightDetail
-        // show first row as None
+        // Show menu with datasource array - SelectionType = Single & CellType = RightDetail
         
-        let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray, cellType: .rightDetail) { (cell, object, indexPath) in
+        let selectionMenu =  RSSelectionMenu(selectionType: .Single, dataSource: dataArray, cellType: .RightDetail) { (cell, object, indexPath) in
+            
+            // here you can set any text from object
+            // let's set firstname in title and lastname as right detail
             
             let firstName = object.components(separatedBy: " ").first
             let lastName = object.components(separatedBy: " ").last
@@ -70,45 +80,77 @@ class ViewController: UITableViewController {
             cell.detailTextLabel?.text = lastName
         }
         
-        // add first row
-        selectionMenu.showFirstRowAs(type: .None, selected: firstRowSelected) { (text, selected) in
-            self.firstRowSelected = selected
+        selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, selectedItems) in
+            self.selectedDataArray = selectedItems
         }
         
-        selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
-            self.selectedDataArray = selectedArray
+        // To show first row as Empty, when dropdown as no value selected by default
+        // Here you'll get Text and isSelected when user selects first row
+        
+        selectionMenu.addFirstRowAs(rowType: .Empty, showSelected: self.firstRowSelected) { (text, isSelected) in
+            self.firstRowSelected = isSelected
         }
         
+        // show as default
         selectionMenu.show(from: self)
     }
     
     func showAsFormSheetWithSearch() {
         
-        let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray) { (cell, object, indexPath) in
-            
-            let firstName = object.components(separatedBy: " ").first
-            let lastName = object.components(separatedBy: " ").last
-            
-            cell.textLabel?.text = firstName
-            cell.detailTextLabel?.text = lastName
+         // Show menu with datasource array - PresentationStyle = Formsheet & SearchBar
+        
+        let selectionMenu = RSSelectionMenu(dataSource: dataArray) { (cell, object, indexPath) in
+            cell.textLabel?.text = object
+        }
+
+        // show selected items
+        selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, selectedItems) in
+            self.selectedDataArray = selectedItems
         }
         
-        selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
-            self.selectedDataArray = selectedArray
-        }
+        // show searchbar with placeholder text and barTintColor
+        // Here you'll get search text - when user types in seachbar
         
-        // add searchbar
-        selectionMenu.addSearchBar { (searchText) -> ([String]) in
+        selectionMenu.showSearchBar(withPlaceHolder: "Search Player", tintColor: UIColor.white.withAlphaComponent(0.3)) { (searchText) -> ([String]) in
+            
+            // return filtered array based on any condition
+            // here let's return array where firstname starts with specified search text
+            
             return self.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
         }
         
-        selectionMenu.show(style: .formSheet, from: self)
+        // show as formsheet
+        selectionMenu.show(style: .Formsheet, from: self)
     }
     
     func showAsPopover(_ sender: UIView) {
         
-        // show as popover with datasource, selected items
-        let selectionMenu = RSSelectionMenu(dataSource: dataArray, selectedItems: selectedDataArray) { (cell, object, indexPath) in
+        // Show as Popover with datasource
+        
+        let selectionMenu = RSSelectionMenu(dataSource: simpleDataArray) { (cell, object, indexPath) in
+            cell.textLabel?.text = object
+        }
+    
+        selectionMenu.setSelectedItems(items: simpleSelectedArray) { (text, isSelected, selectedItems) in
+            
+            // update your existing array with updated selected items, so when menu presents second time updated items will be default selected.
+            self.simpleSelectedArray = selectedItems
+        }
+        
+        // show as popover
+        // Here specify popover sourceView and size of popover
+        // specifying nil will present with default size
+        
+        selectionMenu.show(style: .Popover(sourceView: sender, size: nil), from: self)
+    }
+    
+    func presentWithMultiSelectionAndSearch() {
+        
+         // Show menu with datasource array - SelectionType = Multiple, CellType = SubTitle & SearchBar
+        
+        let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: dataArray, cellType: .SubTitle) { (cell, object, indexPath) in
+            
+            // set firstname in title and lastname as subTitle
             
             let firstName = object.components(separatedBy: " ").first
             let lastName = object.components(separatedBy: " ").last
@@ -117,62 +159,57 @@ class ViewController: UITableViewController {
             cell.detailTextLabel?.text = lastName
         }
         
-        selectionMenu.didSelectRow { (object, isSelected, selectedArray) in
-            self.selectedDataArray = selectedArray
-        }
-        selectionMenu.showAsPopover(from: sender, inViewController: self)
-    }
-    
-    func presentWithMultiSelectionAndSearch() {
-        
-        // show with datasource, selected items, multiple selection and search
-        let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: simpleDataArray, selectedItems: simpleSelectedArray) { (cell, object, indexPath) in
-            
-            cell.textLabel?.text = object
+        selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, selectedItems) in
+            self.selectedDataArray = selectedItems
         }
         
-        // title and color
-        selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSForegroundColorAttributeName : UIColor.white], barTintColor: UIColor.orange.withAlphaComponent(0.5))
+        // To show first row as All, when dropdown as All selected by default
+        // Here you'll get Text and isSelected when user selects first row
         
-        
-        // add first row
-        selectionMenu.showFirstRowAs(type: .All, selected: firstRowSelected) { (text, selected) in
-            self.firstRowSelected = selected
+        selectionMenu.addFirstRowAs(rowType: .All, showSelected: self.firstRowSelected) { (text, isSelected) in
+            self.firstRowSelected = isSelected
         }
         
-        selectionMenu.didSelectRow { (object, isSelected, selectedData) in
-            self.simpleSelectedArray = selectedData
+        // show searchbar
+        // Here you'll get search text - when user types in seachbar
+        selectionMenu.showSearchBar { (searchtext) -> ([String]) in
+            return self.dataArray.filter({ $0.lowercased().hasPrefix(searchtext.lowercased()) })
         }
         
-        // add searchbar
-        selectionMenu.addSearchBar { (searchText) -> ([String]) in
-            return self.simpleDataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
-        }
+        // set navigationbar theme
+        selectionMenu.setNavigationBar(title: "Select Player", attributes: nil, barTintColor: UIColor.orange.withAlphaComponent(0.5))
         
+        // show as default
         selectionMenu.show(from: self)
     }
     
     func showWithCustomCell() {
         
-        // show with datasource and selected items with custom cells and models
-        // specify unique key in your models or dictionary to identify the object
+        // Show menu with datasource array with Models - SelectionType = Multiple, CellType = Custom
+        // For Custom cells - You need to specify NibName and CellIdentifier
+        // For Custom Models - You need to specify UniquePropertyName
         
-        let selectionMenu = RSSelectionMenu(selectionType: .multiple, dataSource: customDataArray, selectedItems: customselectedDataArray, uniqueKey: "id") { (cell, person, indexPath) in
-            
+        let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: customDataArray, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
+        
+            // cast cell to your custom cell type
             let customCell = cell as! CustomTableViewCell
+            
+            // here you'll get specified model object
+            // set data based on your need
             customCell.setData(person)
         }
         
-        selectionMenu.registerNib(nibName: "CustomTableViewCell", forCellReuseIdentifier: "cell")
-        
-        selectionMenu.didSelectRow { (object, isSelected, selectedData) in
-            self.customselectedDataArray = selectedData
+        // show with default selected items and update when user selects any row
+        selectionMenu.setSelectedItems(items: customselectedDataArray) { (text, selected, selectedItems) in
+            self.customselectedDataArray = selectedItems
         }
         
-        selectionMenu.addSearchBar { (text) -> ([Person]) in
-            return self.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(text.lowercased()) })
+        // show searchbar
+        selectionMenu.showSearchBar { (searchtext) -> ([Person]) in
+            return self.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(searchtext.lowercased()) })
         }
-        selectionMenu.show(style: .push, from: self)
+        
+        selectionMenu.show(style: .Push, from: self)
     }
 }
 

@@ -28,26 +28,39 @@ import UIKit
 // MARK: - SelectionType
 public enum SelectionType {
     
-    case single        // default
-    case multiple
+    case Single        // default
+    case Multiple
 }
 
 // MARK: - PresentationStyle
 public enum PresentationStyle {
     
-    case present       // default
-    case push
-    case popover
-    case formSheet
+    case Present       // default
+    case Push
+    case Popover(sourceView: UIView, size: CGSize?)
+    case Formsheet
 }
 
 // MARK: - CellType
-public enum CellType: String {
+public enum CellType {
     
-    case basic          // default
-    case rightDetail
-    case subTitle
-    case custom
+    case Basic          // default
+    case RightDetail
+    case SubTitle
+    case Custom(nibName: String, cellIdentifier: String)
+    
+    func value() -> String {
+        switch self {
+        case .Basic:
+            return "basic"
+        case .RightDetail:
+            return "rightDetail"
+        case .SubTitle:
+            return "subTitle"
+        default:
+            return "basic"
+        }
+    }
 }
 
 /************************************/
@@ -69,6 +82,10 @@ public struct NavigationBarTheme {
 }
 
 //MARK: - RSSelectionMenu
+public protocol UniqueProperty {
+    func uniquePropertyName() -> String
+}
+
 extension RSSelectionMenu {
     
     // returns unique key
@@ -104,21 +121,29 @@ extension RSSelectionMenu {
         
         // dictionary type
         else if object is NSDictionary {
-            return hasSameKeyValue(forObject: (object as! Dictionary), inArray: from)
+            guard let key = uniquePropertyName else {
+                fatalError("unique key is required to identify each dictionary uniquely.")
+            }
+            return hasSameValue(forKey: key, object: (object as! Dictionary), inArray: from)
         }
     
         // custom type
         else {
+            
+            if (uniquePropertyName == nil) && !(T.self is UniqueProperty.Type) {
+                fatalError("NSObject subclass must implement UniqueProperty protocol or specify an uniquePropertyName to identify each object uniquely.")
+            }
+            
             let dictionary = (object as! NSObject).toDictionary()
-            return hasSameKeyValue(forObject: dictionary, inArray: from)
+            let key = (T.self is UniqueProperty.Type) ? (object as! UniqueProperty).uniquePropertyName() : uniquePropertyName!
+            
+            return hasSameValue(forKey: key, object: dictionary, inArray: from)
         }
     }
     
     /// dictionary key value comparision
-    public func hasSameKeyValue<T>(forObject: [String: AnyObject], inArray: DataSource<T>) -> Int? {
-        
-        let key = uniqueKeyId()
-        let value = String(describing: forObject[key])
+    public func hasSameValue<T>(forKey key: String, object: [String: AnyObject], inArray: DataSource<T>) -> Int? {
+        let value = String(describing: object[key])
         
         return inArray.index(where: { (data) -> Bool in
             let dictionary = (data as! NSObject).toDictionary()

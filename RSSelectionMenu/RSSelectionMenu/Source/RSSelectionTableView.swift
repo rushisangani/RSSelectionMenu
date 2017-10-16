@@ -45,20 +45,24 @@ open class RSSelectionTableView<T>: UITableView {
     var searchBarResultDelegate: UISearchBarResult<T>?
     
     /// selection type - default is single selection
-    var selectionType: SelectionType = .single
+    var selectionType: SelectionType = .Single
+    
+    /// cell type of tableview - default is "basic = UITableViewCellStyle.default"
+    var cellType: CellType = .Basic
     
     /// first row selection
     var firstRowSelection: RSFirstRowSelection?
     
     // MARK: - Life Cycle
     
-    convenience public init(selectionType: SelectionType, dataSource: RSSelectionMenuDataSource<T>, delegate: RSSelectionMenuDelegate<T>, from: RSSelectionMenu<T>) {
+    convenience public init(selectionType: SelectionType, cellType: CellType, dataSource: RSSelectionMenuDataSource<T>, delegate: RSSelectionMenuDelegate<T>, from: RSSelectionMenu<T>) {
         self.init()
         
         self.selectionDataSource = dataSource
         self.selectionDelegate = delegate
         self.selectionType = selectionType
         self.selectionMenu = from
+        self.cellType = cellType
         
         setup()
     }
@@ -74,18 +78,32 @@ open class RSSelectionTableView<T>: UITableView {
         rowHeight = UITableViewAutomaticDimension
         
         // register cells
-        register(UITableViewCell.self, forCellReuseIdentifier: CellType.basic.rawValue)
-        register(UITableViewCell.self, forCellReuseIdentifier: CellType.rightDetail.rawValue)
-        register(UITableViewCell.self, forCellReuseIdentifier: CellType.subTitle.rawValue)
+        register(UITableViewCell.self, forCellReuseIdentifier: CellType.Basic.value())
+        register(UITableViewCell.self, forCellReuseIdentifier: CellType.RightDetail.value())
+        register(UITableViewCell.self, forCellReuseIdentifier: CellType.SubTitle.value())
+        
+        // register nib for custom cell
+        if case let CellType.Custom(name, cellIdentifier) = cellType {
+            register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+            selectionDataSource?.cellIdentifier = cellIdentifier
+        }
     }
 }
 
 //MARK: - Public
 extension RSSelectionTableView {
     
-    // selection delegate event
-    func setOnDidSelect(delegate: @escaping UITableViewCellSelection<T>) {
+    /// set selected items and selection event
+    public func setSelectedItems(items: DataSource<T>, onDidSelectRow delegate: @escaping UITableViewCellSelection<T>) {
         self.selectionDelegate?.selectionDelegate = delegate
+        self.selectionDelegate?.selectedObjects = items
+    }
+    
+    /// Set first row
+    public func addFirstRowAs(rowType: FirstRowType, showSelected: Bool, onDidSelectFirstRow completion: @escaping FirstRowSelection) {
+        
+        self.firstRowSelection = RSFirstRowSelection(selected: showSelected, rowType: rowType, delegate: completion)
+        if showSelected { self.selectionDelegate?.removeAllSelected() }
     }
     
     // add search bar
@@ -102,14 +120,6 @@ extension RSSelectionTableView {
         }
     }
     
-    /// first row type and selection
-    public func showFirstRowAs(type: FirstRowType, selected: Bool, completion: @escaping FirstRowSelection) {
-        
-        self.firstRowSelection = RSFirstRowSelection(selected: selected, rowType: type, delegate: completion)
-        if selected { self.selectionDelegate?.removeAllSelected() }
-        
-    }
-    
     // object at indexpath
     func objectAt(indexPath: IndexPath) -> T {
         return self.selectionDataSource!.objectAt(indexPath: indexPath)
@@ -117,7 +127,7 @@ extension RSSelectionTableView {
     
     /// dismiss
     func dismissControllerIfRequired() {
-        if selectionType == .single {
+        if selectionType == .Single {
             selectionMenu?.dismiss()
         }
     }

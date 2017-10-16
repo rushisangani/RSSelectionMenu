@@ -32,11 +32,13 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
     /// tableView
     weak var selectionTableView: RSSelectionTableView<T>?
     
-    /// cell type of tableview - default is "basic = UITableViewCellStyle.default"
-    fileprivate var cellType: CellType = .basic
+    /// cell type of tableview
+    var cellType: CellType {
+        return selectionTableView?.cellType ?? .Basic
+    }
     
     /// cell identifier for tableview - default is "basic"
-    fileprivate var cellIdentifier: String = CellType.basic.rawValue
+    var cellIdentifier: String = CellType.Basic.value()
     
     /// data source for tableview
     fileprivate var dataSource: DataSource<T> = []
@@ -49,12 +51,11 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
     
     // MARK: - Initialize
     
-    init(dataSource: DataSource<T>, forCellType type: CellType, configuration: @escaping UITableViewCellConfiguration<T>) {
+    init(dataSource: DataSource<T>, forCellType type: CellType, cellConfiguration: @escaping UITableViewCellConfiguration<T>) {
         
         self.dataSource = dataSource
         self.filteredDataSource = self.dataSource
-        self.cellType = type
-        self.cellConfiguration = configuration
+        self.cellConfiguration = cellConfiguration
     }
     
     // MARK: - UITableViewDataSource
@@ -77,11 +78,13 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
         let cellStyle = self.tableViewCellStyle()
         var cell: UITableViewCell?
         
-        if cellType == .custom {
+        switch cellType {
+        case .Custom:
             cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        }
-        else {
-            cell = UITableViewCell(style: cellStyle, reuseIdentifier: self.cellIdentifier)
+            break
+        default:
+            cell = UITableViewCell(style: cellStyle, reuseIdentifier: cellType.value())
+            break
         }
         
         // cell configuration
@@ -101,12 +104,6 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
 
 // MARK: - Public
 extension RSSelectionMenuDataSource {
-    
-    /// set cell type and identifier
-    func setCellType(type: CellType, withReuseIdentifier: String) {
-        self.cellType = type
-        self.cellIdentifier = withReuseIdentifier
-    }
     
     /// returns the object present in dataSourceArray at specified indexPath
     func objectAt(indexPath: IndexPath) -> T {
@@ -136,11 +133,11 @@ extension RSSelectionMenuDataSource {
     fileprivate func tableViewCellStyle() -> UITableViewCellStyle {
         
         switch self.cellType {
-        case .basic:
+        case .Basic:
             return UITableViewCellStyle.default
-        case .rightDetail:
+        case .RightDetail:
             return UITableViewCellStyle.value1
-        case .subTitle:
+        case .SubTitle:
             return UITableViewCellStyle.subtitle
         default:
             return UITableViewCellStyle.default
@@ -160,7 +157,7 @@ extension RSSelectionMenuDataSource {
     /// setup first row
     fileprivate func setupFirstRow() -> UITableViewCell {
         
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: CellType.basic.rawValue)
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: CellType.Basic.value())
         cell.textLabel?.text = selectionTableView?.firstRowSelection?.rowType?.value
         cell.textLabel?.textColor = UIColor.darkGray
         

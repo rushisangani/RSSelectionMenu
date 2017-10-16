@@ -31,10 +31,14 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     public var tableView: RSSelectionTableView<T>?
     
     // MARK: - Properties
-    var parentController: UIViewController?
+    
+    /// property name or unique key is required when using custom models array or dictionary array as datasource
+    public var uniquePropertyName: String?
+    
+    fileprivate var parentController: UIViewController?
     
     /// presentation stype
-    fileprivate var presentationStyle: PresentationStyle = .present
+    fileprivate var menuPresentationStyle: PresentationStyle = .Present
     
     /// navigationbar theme
     fileprivate var navigationBarTheme: NavigationBarTheme?
@@ -44,24 +48,25 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     
     // MARK: - Life Cycle
     
-    convenience public init(dataSource: DataSource<T>, selectedItems: DataSource<T>, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration<T>) {
-        self.init(selectionType: .single, dataSource: dataSource, selectedItems: selectedItems, uniqueKey: uniqueKey!, cellType: cellType!, configuration: configuration)
+    convenience public init(dataSource: DataSource<T>, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
+        self.init(selectionType: .Single, dataSource: dataSource, cellConfiguration: configuration)
     }
     
-    convenience public init(selectionType: SelectionType, dataSource: DataSource<T>, selectedItems: DataSource<T>, uniqueKey: String? = "", cellType: CellType? = .basic, configuration: @escaping UITableViewCellConfiguration<T>) {
+    convenience public init(selectionType: SelectionType, dataSource: DataSource<T>, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
+        self.init(selectionType: selectionType, dataSource: dataSource, cellType: .Basic, cellConfiguration: configuration)
+    }
+    
+    convenience public init(selectionType: SelectionType, dataSource: DataSource<T>, cellType: CellType, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
         self.init()
         
         // data source
-        let selectionDataSource = RSSelectionMenuDataSource<T>(dataSource: dataSource, forCellType: cellType!, configuration: configuration)
+        let selectionDataSource = RSSelectionMenuDataSource<T>(dataSource: dataSource, forCellType: cellType, cellConfiguration: configuration)
         
         // delegate
-        let selectionDelegate = RSSelectionMenuDelegate<T>(selectedItems: selectedItems)
-        
+        let selectionDelegate = RSSelectionMenuDelegate<T>(selectedItems: [])
+     
         // initilize tableview
-        self.tableView = RSSelectionTableView<T>(selectionType: selectionType, dataSource: selectionDataSource, delegate: selectionDelegate, from: self)
-        
-        // key
-        self.setAssociated(object: uniqueKey!)
+        self.tableView = RSSelectionTableView<T>(selectionType: selectionType, cellType: cellType, dataSource: selectionDataSource, delegate: selectionDelegate, from: self)
     }
     
     override open func viewDidLoad() {
@@ -78,9 +83,9 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     
     // MARK: - Setup Views
     fileprivate func setupViews() {
-        
         backgroundView.backgroundColor = UIColor.clear
-        if presentationStyle == .formSheet {
+        
+        if case .Formsheet = menuPresentationStyle {
             backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
             addTapGesture()
         }
@@ -121,9 +126,11 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         
         let window =  UIApplication.shared.delegate?.window
         
-        if presentationStyle == .formSheet {
+        // change border style for formsheet
+        if case .Formsheet = menuPresentationStyle {
+            
             tableView?.layer.cornerRadius = 9
-        
+            
             self.backgroundView.frame = (window??.frame)!
             self.tableView?.center = self.backgroundView.center
             
@@ -132,8 +139,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
                 return
             }
             self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 300, height: backgroundView.frame.size.height - 400)
-        }
-        else {
+        }else {
             self.backgroundView.frame = self.view.frame
             self.tableView?.frame = backgroundView.frame
         }
@@ -189,25 +195,23 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
 // MARK:- Public
 extension RSSelectionMenu {
     
-    /// custom cell
-    public func registerNib(nibName:String, forCellReuseIdentifier: String) {
-        self.tableView?.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: forCellReuseIdentifier)
-        self.tableView?.selectionDataSource?.setCellType(type: .custom, withReuseIdentifier: forCellReuseIdentifier)
-    }
-    
-    /// Selection event
-    public func didSelectRow(delegate: @escaping UITableViewCellSelection<T>)  {
-        self.tableView?.setOnDidSelect(delegate: delegate)
+    /// Set selected items and selection event
+    public func setSelectedItems(items: DataSource<T>, onDidSelectRow delegate: @escaping UITableViewCellSelection<T>) {
+        self.tableView?.setSelectedItems(items: items, onDidSelectRow: delegate)
     }
     
     /// First row type and selection
-    public func showFirstRowAs(type: FirstRowType, selected: Bool, completion: @escaping FirstRowSelection) {
-        self.tableView?.showFirstRowAs(type: type, selected: selected, completion: completion)
+    public func addFirstRowAs(rowType: FirstRowType, showSelected: Bool, onDidSelectFirstRow completion: @escaping FirstRowSelection) {
+        self.tableView?.addFirstRowAs(rowType: rowType, showSelected: showSelected, onDidSelectFirstRow: completion)
     }
     
     /// Searchbar
-    public func addSearchBar(placeHolder: String? = defaultPlaceHolder, tintColor: UIColor? = defaultSearchBarTintColor, completion: @escaping UISearchBarResult<T>) {
-        self.tableView?.addSearchBar(placeHolder: placeHolder!, tintColor: tintColor!, completion: completion)
+    public func showSearchBar(onTextDidSearch completion: @escaping UISearchBarResult<T>) {
+        self.showSearchBar(withPlaceHolder: defaultPlaceHolder, tintColor: defaultSearchBarTintColor, onTextDidSearch: completion)
+    }
+    
+    public func showSearchBar(withPlaceHolder: String, tintColor: UIColor, onTextDidSearch completion: @escaping UISearchBarResult<T>) {
+        self.tableView?.addSearchBar(placeHolder: withPlaceHolder, tintColor: tintColor, completion: completion)
     }
     
     /// Navigationbar title and color
@@ -216,13 +220,12 @@ extension RSSelectionMenu {
     }
     
     /// Show
-    public func show(style: PresentationStyle? = .present, from: UIViewController) {
-        show(with: style!, from: from, source: nil, size: nil)
+    public func show(from: UIViewController) {
+        self.show(style: .Present, from: from)
     }
     
-    /// show as popover
-    public func showAsPopover(from: UIView, inViewController: UIViewController, withSize contentSize: CGSize? = nil) {
-        show(with: .popover, from: inViewController, source: from, size: contentSize)
+    public func show(style: PresentationStyle, from: UIViewController) {
+        self.showMenu(with: style, from: from)
     }
     
     /// dismiss
@@ -235,7 +238,7 @@ extension RSSelectionMenu {
                 if searchBar.isFirstResponder { searchBar.resignFirstResponder() }
             }
             
-            if self.presentationStyle == .push {
+            if case .Push = self.menuPresentationStyle {
                  self.navigationController?.popViewController(animated: animated!)
             }
             else {
@@ -250,45 +253,47 @@ extension RSSelectionMenu {
 
     // check if show done button
     fileprivate func showDoneButton() -> Bool {
-        if (presentationStyle == .present || presentationStyle == .push) && tableView?.selectionType == .multiple {
-            return true
+        switch menuPresentationStyle {
+        case .Present, .Push:
+            return tableView?.selectionType == .Multiple
+        default:
+            return false
         }
-        return false
     }
     
     // check if show cancel button
     fileprivate func showCancelButton() -> Bool {
-        if presentationStyle == .present && tableView?.selectionType == .single {
-            return true
+        if case .Present = menuPresentationStyle {
+            return tableView?.selectionType == .Single
         }
         return false
     }
     
     // show
-    fileprivate func show(with: PresentationStyle, from: UIViewController, source: UIView?, size: CGSize?) {
+    fileprivate func showMenu(with: PresentationStyle, from: UIViewController) {
         parentController = from
-        presentationStyle = with
+        menuPresentationStyle = with
         
-        if with == .push {
+        if case .Push = with {
             from.navigationController?.pushViewController(self, animated: true)
             return
         }
         
         var tobePresentController: UIViewController = self
-        if with == .present {
+        if case .Present = with {
             tobePresentController = UINavigationController(rootViewController: self)
         }
-        else if with == .popover {
+        else if case let .Popover(sourceView, size) = with {
             tobePresentController.modalPresentationStyle = .popover
             if size != nil { tobePresentController.preferredContentSize = size! }
             
             let popover = tobePresentController.popoverPresentationController!
             popover.delegate = self
             popover.permittedArrowDirections = .any
-            popover.sourceView = source!
-            popover.sourceRect = (source?.bounds)!
+            popover.sourceView = sourceView
+            popover.sourceRect = sourceView.bounds
         }
-        else if with == .formSheet {
+        else if case .Formsheet = with {
             tobePresentController.modalPresentationStyle = .overCurrentContext
             tobePresentController.modalTransitionStyle = .crossDissolve
         }

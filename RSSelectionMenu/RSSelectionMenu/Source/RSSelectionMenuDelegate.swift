@@ -32,7 +32,7 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
     var selectionDelegate: UITableViewCellSelection<T>? = nil
     
     /// selected objects
-    fileprivate var selectedObjects = DataSource<T>()
+    var selectedObjects = DataSource<T>()
     
     // MARK: - Initialize
     convenience init(selectedItems: DataSource<T>) {
@@ -61,7 +61,7 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
         let dataObject = selectionTableView.objectAt(indexPath: indexPath)
         
         // single selection
-        if selectionTableView.selectionType == .single {
+        if selectionTableView.selectionType == .Single {
             handleActionForSingleSelection(object: dataObject, tableView: selectionTableView)
         }
         else {
