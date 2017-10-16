@@ -307,6 +307,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -327,6 +328,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
