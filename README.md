@@ -125,6 +125,23 @@ selectionMenu.showSearchBar { (searchtext) -> ([String]) in
 }
 ```
 
+### Customize SearchBar
+- Change seachbar placeholder text, searchbar tint color.
+- Change searchbar cancel button attributes (Title and TintColor)
+
+```swift
+// show searchbar with placeholder and tint color
+selectionMenu.showSearchBar(withPlaceHolder: "Search Player", tintColor: UIColor.withAlphaComponent(0.5)) { (searchtext) -> ([String]) in
+    return self.dataArray.filter({ $0.lowercased().hasPrefix(searchtext.lowercased()) })
+}
+
+// customize default cancel button of seachbar
+// 1. Set cancel button title to "Dismiss"
+// 2. Change tint color. - nil value will set the default tint color
+
+selectionMenu.searchBarCancelButtonAttributes = SearchBarCancelButtonAttributes("Dismiss", nil)
+```
+
 ### Show as Formsheet or Popover
 - Change presentation type to .Formsheet or .Popover while presenting. - Default style is .Present
 
@@ -167,11 +184,6 @@ let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: custo
 - RSSelectionMenu can also works with Custom Models.
 - Inherit your models from NSObject.
 - Implement UniqueProperty protocol and define your unique property in the model.
-
-- If you don't want to implement protocol then define your unique property as below.
-```swift
-selectionMenu.uniquePropertyName = "id"     // replace your property name or dictionary key here which has unique value.
-```
 
 ### Custom Models with Custom Cells
 ```swift
@@ -230,8 +242,14 @@ selectionMenu.showSearchBar { (searchtext) -> ([Person]) in
 selectionMenu.show(style: .Push, from: self)
 ```
 
+- If you don't want to implement protocol then set your unique property as below.
+```swift
+selectionMenu.uniquePropertyName = "id"     // replace your property name or dictionary key here which has unique value.
+```
+
+
 ### Example
-See example[(https://github.com/rushisangani/RSSelectionMenu/tree/master/RSSelectionMenuExample] for more details.
+See [Example](https://github.com/rushisangani/RSSelectionMenu/tree/master/RSSelectionMenuExample) for more details.
 
 ## License
 

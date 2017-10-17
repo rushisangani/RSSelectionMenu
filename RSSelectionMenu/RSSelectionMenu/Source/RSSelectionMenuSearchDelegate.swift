@@ -33,6 +33,9 @@ open class RSSelectionMenuSearchDelegate: NSObject {
     /// to execute on search event
     public var didSearch: ((String) -> ())?
     
+    /// cancel button
+    public var cancelButtonAttributes: SearchBarCancelButtonAttributes?
+    
     // MARK: - Initialize
     init(tableView: UITableView, placeHolder: String, tintColor: UIColor) {
         super.init()
@@ -52,6 +55,19 @@ open class RSSelectionMenuSearchDelegate: NSObject {
             search(text ?? "")
         }
     }
+    
+    // cancel button
+    func setCancelButtonAttributes(attributes: SearchBarCancelButtonAttributes) {
+        guard let firstSubView = searchBar?.subviews.first else { return }
+        for view in firstSubView.subviews {
+            if let cancelButton = view as? UIButton {
+                cancelButton.setTitle(attributes.title, for: .normal)
+                if let color = attributes.tintColor {
+                    cancelButton.tintColor = color
+                }
+            }
+        }
+    }
 }
 
 // MARK:- UISearchBarDelegate
@@ -59,6 +75,9 @@ extension RSSelectionMenuSearchDelegate : UISearchBarDelegate {
     
     public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
+        
+        guard let attributes = cancelButtonAttributes else { return }
+        setCancelButtonAttributes(attributes: attributes)
     }
     
     public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {

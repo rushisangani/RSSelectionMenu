@@ -41,6 +41,10 @@ public typealias FilteredDataSource<T> = [T]
 /// UISearchBarResult
 public typealias UISearchBarResult<T> = ((_ searchText: String) -> (FilteredDataSource<T>))
 
+/// SearchBar CancelButton
+public typealias SearchBarCancelButtonAttributes = (title: String, tintColor: UIColor?)
+
+
 /// Strings
 public let defaultPlaceHolder          = "Search"
 public let cancelButtonTitle           = "Cancel"

@@ -39,6 +39,13 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     public var leftBarButtonTitle: String?
     public var rightBarButtonTitle: String?
     
+    /// Searchbar cancel button
+    public var searchBarCancelButtonAttributes: SearchBarCancelButtonAttributes? = nil {
+        didSet {
+            self.tableView?.searchControllerDelegate?.cancelButtonAttributes = searchBarCancelButtonAttributes
+        }
+    }
+    
     fileprivate var parentController: UIViewController?
     
     /// presentation stype
