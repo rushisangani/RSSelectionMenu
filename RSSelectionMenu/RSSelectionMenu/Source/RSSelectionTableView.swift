@@ -114,9 +114,12 @@ extension RSSelectionTableView {
         
         // update result on search event
         self.searchControllerDelegate?.didSearch = { [weak self] (searchText) in
-            
-            let filteredDataSource = !searchText.isEmpty ? self?.searchBarResultDelegate!(searchText) : []
-            self?.selectionDataSource?.update(dataSource: filteredDataSource!, inTableView: self!)
+            if searchText.isEmpty {
+                self?.selectionDataSource?.update(dataSource: (self?.selectionDataSource?.dataSource)!, inTableView: self!)
+            }else {
+                let filteredDataSource = self?.searchBarResultDelegate!(searchText) ?? []
+                self?.selectionDataSource?.update(dataSource: filteredDataSource, inTableView: self!)
+            }
         }
     }
     

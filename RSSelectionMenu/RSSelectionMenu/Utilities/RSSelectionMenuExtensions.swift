@@ -88,11 +88,6 @@ public protocol UniqueProperty {
 
 extension RSSelectionMenu {
     
-    // returns unique key
-    public func uniqueKeyId() -> String {
-        return self.associatedObject() as? String ?? ""
-    }
-    
     // check if object is inside the datasource
     public func containsObject<T>(_ object: T, inDataSource: DataSource<T>) -> Bool {
         return (isSelected(object: object, from: inDataSource) != nil)

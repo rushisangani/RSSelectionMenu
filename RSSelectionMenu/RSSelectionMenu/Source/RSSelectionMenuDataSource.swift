@@ -41,7 +41,7 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
     var cellIdentifier: String = CellType.Basic.value()
     
     /// data source for tableview
-    fileprivate var dataSource: DataSource<T> = []
+    var dataSource: DataSource<T> = []
     
     /// filtered data source for tableView
     fileprivate var filteredDataSource: FilteredDataSource<T> = []
@@ -115,10 +115,7 @@ extension RSSelectionMenuDataSource {
     
     /// to update data source for tableview
     func update(dataSource: DataSource<T>, inTableView tableView: RSSelectionTableView<T>) {
-        
-        if dataSource.count == 0 { filteredDataSource = self.dataSource }
-        else { filteredDataSource = dataSource }
-        
+        filteredDataSource = dataSource
         tableView.reloadData()
     }
     
