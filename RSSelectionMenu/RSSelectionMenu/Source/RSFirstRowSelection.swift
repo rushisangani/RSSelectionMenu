@@ -24,9 +24,6 @@
 
 import Foundation
 
-/// FirstRowSelection
-public typealias FirstRowSelection = ((_ object: String, _ isSelected: Bool) -> ())
-
 /// FirstRowType
 public enum FirstRowType: String {
     

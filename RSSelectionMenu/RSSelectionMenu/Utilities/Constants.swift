@@ -35,6 +35,10 @@ public typealias DataSource<T> = [T]
 /// UITableViewCellSelection
 public typealias UITableViewCellSelection<T> = ((_ object: T?, _ isSelected: Bool, _ selectedArray: DataSource<T>) -> ())
 
+/// FirstRowSelection
+public typealias FirstRowSelection = ((_ object: String, _ isSelected: Bool) -> ())
+
+
 /// FilteredDataSource
 public typealias FilteredDataSource<T> = [T]
 
