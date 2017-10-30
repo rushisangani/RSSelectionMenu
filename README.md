@@ -32,7 +32,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 pod 'RSSelectionMenu'
 ```
 ### Swift 4 project with RSSelectionMenu
-- RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.
+RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.
 
 ```ruby
 post_install do |installer|
@@ -43,6 +43,12 @@ post_install do |installer|
     end
 end
 ```
+- Alternatively you can follow below steps.
+
+1. Go to pods projects in your workspace.
+2. Select RSSelectionMenu target.
+3. Go to Build Settings and set Swift Language Version to 3.2
+
 ## Usage
 
 ### Simple Selection List 
