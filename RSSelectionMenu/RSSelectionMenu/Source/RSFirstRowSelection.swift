@@ -25,16 +25,25 @@
 import Foundation
 
 /// FirstRowType
-public enum FirstRowType: String {
+public enum FirstRowType {
     
     case  Empty
     case  None
     case  All
+    case  Custom(value: String)
     
     // display
     var value: String {
-        if self == .Empty { return "" }
-        return self.rawValue
+        switch self {
+        case .Empty:
+            return ""
+        case .None:
+            return "None"
+        case .All:
+            return "All"
+        case .Custom(let value):
+            return value
+        }
     }
 }
 

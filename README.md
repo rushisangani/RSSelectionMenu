@@ -113,7 +113,7 @@ selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, sele
 selectionMenu.show(from: self)
 ```
 
-### Show first row as Empty, None or All
+### Show first row as Empty, None, All, or Custom
 - Set default selection value to "", None or All while presenting.
 
 ```swift
