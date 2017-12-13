@@ -46,7 +46,8 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         }
     }
     
-    fileprivate var parentController: UIViewController?
+    /// store reference view controller
+    fileprivate weak var parentController: UIViewController?
     
     /// presentation stype
     fileprivate var menuPresentationStyle: PresentationStyle = .Present
