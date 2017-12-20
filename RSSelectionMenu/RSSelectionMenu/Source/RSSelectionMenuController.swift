@@ -142,15 +142,15 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         if case .Formsheet = menuPresentationStyle {
             
             tableView?.layer.cornerRadius = 9
-            
             self.backgroundView.frame = (window??.frame)!
-            self.tableView?.center = self.backgroundView.center
             
             if UIDevice.current.userInterfaceIdiom == .phone {
                 self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
-                return
+            }else {
+                self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 300, height: backgroundView.frame.size.height - 400)
             }
-            self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 300, height: backgroundView.frame.size.height - 400)
+            self.tableView?.center = self.backgroundView.center
+            
         }else {
             self.backgroundView.frame = self.view.frame
             self.tableView?.frame = backgroundView.frame
@@ -227,7 +227,7 @@ extension RSSelectionMenu {
     }
     
     /// Navigationbar title and color
-    public func setNavigationBar(title: String, attributes:[String: Any]? = nil, barTintColor: UIColor? = nil) {
+    public func setNavigationBar(title: String, attributes:[NSAttributedStringKey: Any]? = nil, barTintColor: UIColor? = nil) {
         self.navigationBarTheme = NavigationBarTheme(title: title, attributes: attributes, color: barTintColor)
     }
     

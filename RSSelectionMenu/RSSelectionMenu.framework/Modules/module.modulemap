@@ -7,4 +7,5 @@ framework module RSSelectionMenu {
 
 module RSSelectionMenu.Swift {
     header "RSSelectionMenu-Swift.h"
+    requires objc
 }
