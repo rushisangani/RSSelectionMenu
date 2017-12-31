@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   	s.author       = { "Rushi Sangani" => "rushisangani@gmail.com" }
   	s.source       = { :git => "https://github.com/rushisangani/RSSelectionMenu.git", :tag => s.version }
 
-    s.ios.deployment_target = '10.0'
+    s.ios.deployment_target = '9.0'
   	s.source_files = "RSSelectionMenu/**/*.swift"
     s.requires_arc = true
 end
