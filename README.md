@@ -19,7 +19,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 
 ## Requirements
 
-- iOS 10.0+ 
+- iOS 9.0+ 
 - Xcode 8.3+
 - Swift 3.0+
 
