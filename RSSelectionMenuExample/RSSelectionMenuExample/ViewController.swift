@@ -46,6 +46,9 @@ class ViewController: UITableViewController {
         
         let selectionMenu =  RSSelectionMenu(dataSource: simpleDataArray) { (cell, object, indexPath) in
             cell.textLabel?.text = object
+            
+            // Change tint color (if needed)
+            cell.tintColor = .orange
         }
         
         // set navigation title

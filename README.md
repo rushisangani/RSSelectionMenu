@@ -66,6 +66,9 @@ var simpleSelectedArray = [String]()
 
 let selectionMenu =  RSSelectionMenu(dataSource: simpleDataArray) { (cell, object, indexPath) in
     cell.textLabel?.text = object
+    
+    // Change tint color (if needed)
+    cell.tintColor = .orange
 }
 
 // set default selected items when menu present on screen.
