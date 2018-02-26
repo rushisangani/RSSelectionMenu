@@ -227,8 +227,8 @@ extension RSSelectionMenu {
     }
     
     /// Navigationbar title and color
-    public func setNavigationBar(title: String, attributes:[NSAttributedStringKey: Any]? = nil, barTintColor: UIColor? = nil) {
-        self.navigationBarTheme = NavigationBarTheme(title: title, attributes: attributes, color: barTintColor)
+    public func setNavigationBar(title: String, attributes:[NSAttributedStringKey: Any]? = nil, barTintColor: UIColor? = nil, tintColor: UIColor? = nil) {
+        self.navigationBarTheme = NavigationBarTheme(title: title, attributes: attributes, color: barTintColor, tintColor: tintColor)
     }
     
     /// Show
@@ -318,8 +318,8 @@ extension RSSelectionMenu {
         if let navigationBar = self.navigationController?.navigationBar {
             
             navigationBar.barTintColor = theme.color
-            if theme.color != nil {
-                navigationBar.tintColor = UIColor.white
+            if let tintColor = theme.tintColor {
+                navigationBar.tintColor = tintColor
             }
             
             navigationItem.title = theme.title
