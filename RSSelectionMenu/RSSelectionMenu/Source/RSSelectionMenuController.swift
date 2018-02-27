@@ -318,10 +318,7 @@ extension RSSelectionMenu {
         if let navigationBar = self.navigationController?.navigationBar {
             
             navigationBar.barTintColor = theme.color
-            if let tintColor = theme.tintColor {
-                navigationBar.tintColor = tintColor
-            }
-            
+            navigationBar.tintColor = theme.tintColor ?? UIColor.white
             navigationItem.title = theme.title
             navigationBar.titleTextAttributes = theme.attributes
         }

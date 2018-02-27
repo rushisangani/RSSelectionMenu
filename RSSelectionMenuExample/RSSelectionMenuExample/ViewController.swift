@@ -180,7 +180,7 @@ class ViewController: UITableViewController {
         }
         
         // set navigationbar theme
-        selectionMenu.setNavigationBar(title: "Select Player", attributes: nil, barTintColor: UIColor.orange.withAlphaComponent(0.5))
+        selectionMenu.setNavigationBar(title: "Select Player", attributes: nil, barTintColor: UIColor.orange.withAlphaComponent(0.5), tintColor: UIColor.white)
         
         // right barbutton title
         selectionMenu.rightBarButtonTitle = "Submit"

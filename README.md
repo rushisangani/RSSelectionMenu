@@ -30,6 +30,8 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 
 ```ruby
 pod 'RSSelectionMenu'
+or
+pod 'RSSelectionMenu', '~> 3.3'
 ```
 <!--### Swift 4 project with RSSelectionMenu-->
 <!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->
@@ -178,7 +180,7 @@ selectionMenu.show(style: .Popover(sourceView: sourceView, size: nil), from: sel
 
 ```swift
 // set navigation title and color
-selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSForegroundColorAttributeName: UIColor.white], barTintColor: UIColor.orange.withAlphaComponent(0.5))
+selectionMenu.setNavigationBar(title: "Select Player", attributes: nil, barTintColor: UIColor.orange.withAlphaComponent(0.5), tintColor: UIColor.white)
 
 // right barbutton title - Default is 'Done'
 selectionMenu.rightBarButtonTitle = "Submit"
