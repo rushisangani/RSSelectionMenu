@@ -38,7 +38,8 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     /// Barbuttons titles
     public var leftBarButtonTitle: String?
     public var rightBarButtonTitle: String?
-    
+    public var leftBarButtonAction = {}
+    public var rightBarButtonAction = {}
     /// Searchbar cancel button
     public var searchBarCancelButtonAttributes: SearchBarCancelButtonAttributes? = nil {
         didSet {
@@ -177,11 +178,13 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     }
     
     @objc func doneButtonTapped() {
+        rightBarButtonAction()
         self.dismiss()
     }
     
     /// cancel button
     fileprivate func setCancelButton() {
+        leftBarButtonAction()
         let cancelTitle = (self.leftBarButtonTitle != nil) ? self.leftBarButtonTitle! : cancelButtonTitle
         let cancelButton = UIBarButtonItem(title: cancelTitle, style: .plain, target: self, action: #selector(doneButtonTapped))
         navigationItem.leftBarButtonItem = cancelButton
