@@ -181,12 +181,15 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         rightBarButtonAction()
         self.dismiss()
     }
+    @objc func cancelButtonTapped() {
+        leftBarButtonAction()
+        self.dismiss()
+    }
     
     /// cancel button
     fileprivate func setCancelButton() {
-        leftBarButtonAction()
         let cancelTitle = (self.leftBarButtonTitle != nil) ? self.leftBarButtonTitle! : cancelButtonTitle
-        let cancelButton = UIBarButtonItem(title: cancelTitle, style: .plain, target: self, action: #selector(doneButtonTapped))
+        let cancelButton = UIBarButtonItem(title: cancelTitle, style: .plain, target: self, action: #selector(cancelButtonTapped))
         navigationItem.leftBarButtonItem = cancelButton
     }
     
