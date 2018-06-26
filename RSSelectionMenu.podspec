@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
           
 	s.name         = "RSSelectionMenu"
-  	s.version      = "3.3"
+  	s.version      = "4.0"
   	s.summary      = "An elegant selection list or dropdown menu for iOS with single or multiple selections."
   	s.description  = <<-DESC
     RSSelectionMenu provides easy to use features to show drop-down or selection list with the single or multiple selections.

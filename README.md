@@ -31,7 +31,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ```ruby
 pod 'RSSelectionMenu'
 or
-pod 'RSSelectionMenu', '~> 3.3'
+pod 'RSSelectionMenu', '~> 4.0'
 ```
 <!--### Swift 4 project with RSSelectionMenu-->
 <!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->
@@ -91,6 +91,15 @@ selectionMenu.show(style: .Push, from: self)
 ```swift
 let selectionMenu = RSSelectionMenu(selectionType: .Multiple, dataSource: dataArray, cellType: .Basic) { (cell, object, indexPath) in
     cell.textLabel?.text = object
+}
+```
+### On Dismiss Handler
+- Perform any operation when menu is dismissed
+```swift
+selectionMenu.onDismiss = { selectedItems in
+    self.selectedDataArray = selectedItems
+    
+    // perform any operation once you get selected items
 }
 ```
 

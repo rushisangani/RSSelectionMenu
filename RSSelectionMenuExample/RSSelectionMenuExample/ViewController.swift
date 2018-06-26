@@ -108,7 +108,7 @@ class ViewController: UITableViewController {
         
         // show selected items
         selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, selectedItems) in
-            self.selectedDataArray = selectedItems
+            
         }
         
         // show searchbar with placeholder text and barTintColor
@@ -120,6 +120,11 @@ class ViewController: UITableViewController {
             // here let's return array where firstname starts with specified search text
             
             return self.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
+        }
+        
+        // get on dismiss event with selected items
+        selectionMenu.onDismiss = { selectedItems in
+            self.selectedDataArray = selectedItems
         }
         
         // show as formsheet
@@ -207,12 +212,17 @@ class ViewController: UITableViewController {
         
         // show with default selected items and update when user selects any row
         selectionMenu.setSelectedItems(items: customselectedDataArray) { (text, selected, selectedItems) in
-            self.customselectedDataArray = selectedItems
+            
         }
         
         // show searchbar
         selectionMenu.showSearchBar { (searchtext) -> ([Person]) in
             return self.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(searchtext.lowercased()) })
+        }
+        
+        // on dismiss handler - get selected items
+        selectionMenu.onDismiss = { selectedItems in
+            self.customselectedDataArray = selectedItems
         }
         
         selectionMenu.show(style: .Push, from: self)

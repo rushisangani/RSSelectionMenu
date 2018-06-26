@@ -39,6 +39,9 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     public var leftBarButtonTitle: String?
     public var rightBarButtonTitle: String?
     
+    /// Selection menu dismissal handler
+    public var onDismiss:((_ selectedItems: DataSource<T>) -> ())?
+    
     /// Searchbar cancel button
     public var searchBarCancelButtonAttributes: SearchBarCancelButtonAttributes? = nil {
         didSet {
@@ -243,18 +246,23 @@ extension RSSelectionMenu {
     /// dismiss
     public func dismiss(animated: Bool? = true) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             
             // dismiss search
-            if let searchBar = self.tableView?.searchControllerDelegate?.searchBar {
+            if let searchBar = self?.tableView?.searchControllerDelegate?.searchBar {
                 if searchBar.isFirstResponder { searchBar.resignFirstResponder() }
             }
             
-            if case .Push = self.menuPresentationStyle {
-                 self.navigationController?.popViewController(animated: animated!)
+            // on menu dismiss
+            if let dismissHandler = self?.onDismiss {
+                dismissHandler(self?.tableView?.selectionDelegate?.selectedObjects ?? [])
+            }
+            
+            if case .Push? = self?.menuPresentationStyle {
+                 self?.navigationController?.popViewController(animated: animated!)
             }
             else {
-               self.dismiss(animated: animated!, completion: nil)
+               self?.dismiss(animated: animated!, completion: nil)
             }
         }
     }
