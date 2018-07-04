@@ -28,6 +28,9 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
 
     // MARK: - Properties
 
+    /// Maximum selection for multiple selection
+    var maxSelectionCount : Int?
+
     /// tableview cell selection delegate
     var selectionDelegate: UITableViewCellSelection<T>? = nil
     
@@ -104,8 +107,13 @@ extension RSSelectionMenuDelegate {
             selectedObjects.remove(at: selectedIndex)
         }
         else {
-            selectedObjects.append(object)
-            isSelected = true
+            if maxSelectionCount != nil, maxSelectionCount! <= selectedObjects.count  {
+
+            } else {
+                selectedObjects.append(object)
+                isSelected = true
+            }
+
         }
         
         // reload tableview
