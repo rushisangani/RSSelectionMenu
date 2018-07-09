@@ -48,7 +48,15 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
             self.tableView?.searchControllerDelegate?.cancelButtonAttributes = searchBarCancelButtonAttributes
         }
     }
-    
+
+    /// Maximum selection for multiple selection
+    public var maxSelectionCount: Int? = nil {
+        didSet {
+            self.tableView?.selectionDelegate?.maxSelectionCount = maxSelectionCount
+        }
+    }
+
+
     /// store reference view controller
     fileprivate weak var parentController: UIViewController?
     
