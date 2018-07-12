@@ -211,8 +211,8 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
 extension RSSelectionMenu {
     
     /// Set selected items and selection event
-    public func setSelectedItems(items: DataSource<T>, onDidSelectRow delegate: @escaping UITableViewCellSelection<T>) {
-        self.tableView?.setSelectedItems(items: items, onDidSelectRow: delegate)
+    public func setSelectedItems(items: DataSource<T>, maxSelected: UInt? = nil, onDidSelectRow delegate: @escaping UITableViewCellSelection<T>) {
+        self.tableView?.setSelectedItems(items: items, maxSelected: maxSelected, onDidSelectRow: delegate)
     }
     
     /// First row type and selection

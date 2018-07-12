@@ -34,6 +34,9 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
     /// selected objects
     var selectedObjects = DataSource<T>()
     
+    /// maximum selection limit
+    var maxSelectedLimit: UInt?
+    
     // MARK: - Initialize
     convenience init(selectedItems: DataSource<T>) {
         self.init()
@@ -103,7 +106,9 @@ extension RSSelectionMenuDelegate {
         if let selectedIndex = tableView.selectionMenu?.isSelected(object: object, from: selectedObjects) {
             selectedObjects.remove(at: selectedIndex)
         }
-        else {
+        
+        // check if selected items reached to max limit, if specified
+        else if maxSelectedLimit == nil || selectedObjects.count < maxSelectedLimit! {
             selectedObjects.append(object)
             isSelected = true
         }

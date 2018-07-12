@@ -3,12 +3,12 @@
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
 
-![Alt text](/Images/image1.png?raw=true "Home")
-![Alt text](/Images/image2.png?raw=true "Simple push")
-![Alt text](/Images/image3.png?raw=true "Formsheet")
-![Alt text](/Images/image4.png?raw=true "Popover")
-![Alt text](/Images/image5.png?raw=true "Multiple selection")
-![Alt text](/Images/image6.png?raw=true "Custom cells")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image1.png "Home")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image2.png "Simple push")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image3.png "Formsheet")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image4.png "Popover")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image5.png "Multiple selection")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image6.png "Custom cells")
 ## Features
 
 - Show selection menu as List, Popover or FormSheet with single or multiple selection.
@@ -31,7 +31,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ```ruby
 pod 'RSSelectionMenu'
 or
-pod 'RSSelectionMenu', '~> 4.0'
+pod 'RSSelectionMenu', '~> 4.0.1'
 ```
 <!--### Swift 4 project with RSSelectionMenu-->
 <!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->
@@ -87,10 +87,13 @@ selectionMenu.show(style: .Push, from: self)
 ```
 ### Multiple Selection List
 - Set SelectionType to .Multiple
+- Set Maximum selection limit
 
 ```swift
 let selectionMenu = RSSelectionMenu(selectionType: .Multiple, dataSource: dataArray, cellType: .Basic) { (cell, object, indexPath) in
     cell.textLabel?.text = object
+}
+selectionMenu.setSelectedItems(items: selectedDataArray, maxSelected: 3) { (text, selected, selectedItems) in
 }
 ```
 ### On Dismiss Handler

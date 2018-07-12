@@ -167,7 +167,8 @@ class ViewController: UITableViewController {
             cell.detailTextLabel?.text = lastName
         }
         
-        selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, selectedItems) in
+        // show selected items, and provide maximum selected item limit
+        selectionMenu.setSelectedItems(items: selectedDataArray, maxSelected: 3) { (text, selected, selectedItems) in
             self.selectedDataArray = selectedItems
         }
         

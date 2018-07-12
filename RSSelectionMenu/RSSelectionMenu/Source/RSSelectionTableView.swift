@@ -94,9 +94,10 @@ open class RSSelectionTableView<T>: UITableView {
 extension RSSelectionTableView {
     
     /// set selected items and selection event
-    public func setSelectedItems(items: DataSource<T>, onDidSelectRow delegate: @escaping UITableViewCellSelection<T>) {
+    public func setSelectedItems(items: DataSource<T>, maxSelected: UInt?, onDidSelectRow delegate: @escaping UITableViewCellSelection<T>) {
         self.selectionDelegate?.selectionDelegate = delegate
         self.selectionDelegate?.selectedObjects = items
+        self.selectionDelegate?.maxSelectedLimit = maxSelected
     }
     
     /// Set first row
