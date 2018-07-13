@@ -31,7 +31,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ```ruby
 pod 'RSSelectionMenu'
 or
-pod 'RSSelectionMenu', '~> 4.0.1'
+pod 'RSSelectionMenu', '~> 4.0.2'
 ```
 <!--### Swift 4 project with RSSelectionMenu-->
 <!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->

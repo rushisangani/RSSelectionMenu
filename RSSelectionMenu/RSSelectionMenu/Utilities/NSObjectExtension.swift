@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import CoreData
 
 // convert to dictionary
 public extension NSObject {
@@ -31,9 +32,17 @@ public extension NSObject {
     @objc public func toDictionary() -> [String: AnyObject] {
         
         let propertiesDictionary : NSMutableDictionary = NSMutableDictionary()
-        let model = Mirror(reflecting: self)
-        for (name, value) in model.children {
-            propertiesDictionary.setValue(value, forKey: name!)
+        
+        // check of object is NSManagedObject
+        if let object = self as? NSManagedObject {
+            let keys = Array(object.entity.attributesByName.keys)
+            propertiesDictionary.setDictionary(object.dictionaryWithValues(forKeys: keys))
+        }
+        else {
+            let model = Mirror(reflecting: self)
+            for (name, value) in model.children {
+                propertiesDictionary.setValue(value, forKey: name!)
+            }
         }
         return propertiesDictionary as! [String : AnyObject]
     }

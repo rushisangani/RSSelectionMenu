@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
           
 	s.name         = "RSSelectionMenu"
-  	s.version      = "4.0.1"
+  	s.version      = "4.0.2"
 
     s.summary      = "An elegant selection list or dropdown menu for iOS with single or multiple selections."
   	s.description  = <<-DESC
