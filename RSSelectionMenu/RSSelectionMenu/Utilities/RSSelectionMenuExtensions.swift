@@ -129,19 +129,19 @@ extension RSSelectionMenu {
                 fatalError("NSObject subclass must implement UniqueProperty protocol or specify an uniquePropertyName to identify each object uniquely.")
             }
             
-            let dictionary = (object as! NSObject).toDictionary()
             let key = (T.self is UniqueProperty.Type) ? (object as! UniqueProperty).uniquePropertyName() : uniquePropertyName!
-            
+            let dictionary: [String: Any] = (object is Decodable) ? (object as! Decodable).toDictionary() : (object as! NSObject).toDictionary()
+
             return hasSameValue(forKey: key, object: dictionary, inArray: from)
         }
     }
     
     /// dictionary key value comparision
-    public func hasSameValue<T>(forKey key: String, object: [String: AnyObject], inArray: DataSource<T>) -> Int? {
+    public func hasSameValue<T>(forKey key: String, object: [String: Any], inArray: DataSource<T>) -> Int? {
         let value = String(describing: object[key])
         
         return inArray.index(where: { (data) -> Bool in
-            let dictionary = (data as! NSObject).toDictionary()
+            let dictionary = (data is Decodable) ? (data as! Decodable).toDictionary() : (data as! NSObject).toDictionary()
             return value == String(describing: dictionary[key])
         })
     }

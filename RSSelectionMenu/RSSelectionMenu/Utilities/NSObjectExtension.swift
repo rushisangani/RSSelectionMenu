@@ -44,6 +44,24 @@ public extension NSObject {
                 propertiesDictionary.setValue(value, forKey: name!)
             }
         }
-        return propertiesDictionary as! [String : AnyObject]
+        return propertiesDictionary as! [String: AnyObject]
+    }
+}
+
+/// Decodable
+public extension Decodable {
+    
+    /// convert model to dictionary
+    func toDictionary() -> [String: Any] {
+        
+        // create dict
+        var data = [String: Any]()
+        
+        // get mirror object and key,value pairs
+        let model = Mirror(reflecting: self)
+        for (name, value) in model.children {
+            data[name!] = value
+        }
+        return data
     }
 }
