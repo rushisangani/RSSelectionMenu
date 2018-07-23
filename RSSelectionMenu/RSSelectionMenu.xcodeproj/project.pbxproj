@@ -29,7 +29,7 @@
 		D852FDA71F879BF7002362CC /* RSSelectionMenuSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */; };
 		D852FDA81F879BF7002362CC /* RSSelectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */; };
 		D852FDAF1F879BFF002362CC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAA1F879BFF002362CC /* Constants.swift */; };
-		D852FDB21F879BFF002362CC /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */; };
+		D852FDB21F879BFF002362CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAD1F879BFF002362CC /* Extensions.swift */; };
 		D852FDB31F879BFF002362CC /* RSSelectionMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +44,7 @@
 		D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuSearchDelegate.swift; sourceTree = "<group>"; };
 		D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionTableView.swift; sourceTree = "<group>"; };
 		D852FDAA1F879BFF002362CC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
+		D852FDAD1F879BFF002362CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				D852FDAA1F879BFF002362CC /* Constants.swift */,
-				D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */,
+				D852FDAD1F879BFF002362CC /* Extensions.swift */,
 				D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */,
 			);
 			path = Utilities;
@@ -217,7 +217,7 @@
 				D852FDB31F879BFF002362CC /* RSSelectionMenuExtensions.swift in Sources */,
 				D852FDA71F879BF7002362CC /* RSSelectionMenuSearchDelegate.swift in Sources */,
 				D852FDAF1F879BFF002362CC /* Constants.swift in Sources */,
-				D852FDB21F879BFF002362CC /* NSObjectExtension.swift in Sources */,
+				D852FDB21F879BFF002362CC /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
