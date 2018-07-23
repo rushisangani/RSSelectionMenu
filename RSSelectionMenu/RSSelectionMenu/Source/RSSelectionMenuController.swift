@@ -39,6 +39,13 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     public var leftBarButtonTitle: String?
     public var rightBarButtonTitle: String?
     
+    /// maximum selection limit
+    public var maxSelectionLimit: UInt? = nil {
+        didSet {
+            self.tableView?.selectionDelegate?.maxSelectedLimit = maxSelectionLimit
+        }
+    }
+    
     /// Selection menu dismissal handler
     public var onDismiss:((_ selectedItems: DataSource<T>) -> ())?
     
