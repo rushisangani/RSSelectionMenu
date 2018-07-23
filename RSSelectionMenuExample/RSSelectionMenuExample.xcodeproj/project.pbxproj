@@ -19,6 +19,8 @@
 		A29317961F87FD060076A0C4 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29317931F87FD060076A0C4 /* CustomTableViewCell.xib */; };
 		A2DEC10F2104E490005113C7 /* SingleSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC10E2104E490005113C7 /* SingleSelectionHandler.swift */; };
 		A2DEC111210649EA005113C7 /* MultipleSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC110210649EA005113C7 /* MultipleSelectionHandler.swift */; };
+		A2DEC11321065AFB005113C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC11221065AFB005113C7 /* User.swift */; };
+		A2DEC11521065BBC005113C7 /* CustomCellsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC11421065BBC005113C7 /* CustomCellsHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +51,8 @@
 		A29317931F87FD060076A0C4 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		A2DEC10E2104E490005113C7 /* SingleSelectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectionHandler.swift; sourceTree = "<group>"; };
 		A2DEC110210649EA005113C7 /* MultipleSelectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionHandler.swift; sourceTree = "<group>"; };
+		A2DEC11221065AFB005113C7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A2DEC11421065BBC005113C7 /* CustomCellsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellsHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				A26882BF1F9532D7005ECF35 /* Person.swift */,
+				A2DEC11221065AFB005113C7 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -97,6 +102,7 @@
 				A293177D1F87FC3F0076A0C4 /* ViewController.swift */,
 				A2DEC10E2104E490005113C7 /* SingleSelectionHandler.swift */,
 				A2DEC110210649EA005113C7 /* MultipleSelectionHandler.swift */,
+				A2DEC11421065BBC005113C7 /* CustomCellsHandler.swift */,
 				A293177F1F87FC3F0076A0C4 /* Main.storyboard */,
 				A29317821F87FC3F0076A0C4 /* Assets.xcassets */,
 				A29317841F87FC3F0076A0C4 /* LaunchScreen.storyboard */,
@@ -191,10 +197,12 @@
 			files = (
 				A2DEC10F2104E490005113C7 /* SingleSelectionHandler.swift in Sources */,
 				A26882C01F9532D7005ECF35 /* Person.swift in Sources */,
+				A2DEC11521065BBC005113C7 /* CustomCellsHandler.swift in Sources */,
 				A29317951F87FD060076A0C4 /* CustomTableViewCell.swift in Sources */,
 				A293177E1F87FC3F0076A0C4 /* ViewController.swift in Sources */,
 				A293177C1F87FC3F0076A0C4 /* AppDelegate.swift in Sources */,
 				A2DEC111210649EA005113C7 /* MultipleSelectionHandler.swift in Sources */,
+				A2DEC11321065AFB005113C7 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

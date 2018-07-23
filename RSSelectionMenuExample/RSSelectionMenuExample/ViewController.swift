@@ -39,45 +39,14 @@ class ViewController: UITableViewController {
     var customDataArray = [Person]()
     var customselectedDataArray = [Person]()
     
+    /// Custom models (Swift structs)
+    var users = [User]()
+    var selectedUsers = [User]()
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareCustomData()
-    }
-    
-    func showWithCustomCell() {
-        
-        // Show menu with datasource array with Models - SelectionType = Multiple, CellType = Custom
-        // For Custom cells - You need to specify NibName and CellIdentifier
-        // For Custom Models - You need to specify UniquePropertyName
-        
-        let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: customDataArray, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
-            
-            // cast cell to your custom cell type
-            let customCell = cell as! CustomTableViewCell
-            
-            // here you'll get specified model object
-            // set data based on your need
-            customCell.setData(person)
-        }
-        
-        // show with default selected items and update when user selects any row
-        selectionMenu.setSelectedItems(items: customselectedDataArray) { (text, selected, selectedItems) in
-            
-        }
-        
-        // show searchbar
-        selectionMenu.showSearchBar { (searchtext) -> ([Person]) in
-            return self.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(searchtext.lowercased()) })
-        }
-        
-        // on dismiss handler - get selected items
-        selectionMenu.onDismiss = { selectedItems in
-            self.customselectedDataArray = selectedItems
-        }
-        
-        selectionMenu.show(style: .Push, from: self)
     }
 }
 
@@ -125,7 +94,11 @@ extension ViewController {
         else {
             
             // custom cell
-            showWithCustomCell()
+            if indexPath.row == 0 {
+                showWithCustomCell()
+            }else {
+                self.showWithCustomModels()
+            }
         }
     }
 }
@@ -135,11 +108,20 @@ extension ViewController {
     
     func prepareCustomData() {
         
+        // models
         customDataArray.append(Person(id: 1, firstName: "Sachin", lastName: "Tendulkar"))
         customDataArray.append(Person(id: 2, firstName: "Rahul", lastName: "Dravid"))
         customDataArray.append(Person(id: 3, firstName: "Virat", lastName: "Kohli"))
         customDataArray.append(Person(id: 4, firstName: "Suresh", lastName: "Raina"))
         customDataArray.append(Person(id: 5, firstName: "Chris", lastName: "Gyle"))
         customDataArray.append(Person(id: 6, firstName: "Ravindra", lastName: "Jadeja"))
+        
+        // struct
+        users.append(User(id: 1, name: "AB", organization: "Google"))
+        users.append(User(id: 2, name: "Chris", organization: "Amazon"))
+        users.append(User(id: 3, name: "John", organization: "Facebook"))
+        users.append(User(id: 4, name: "Camila", organization: "AirBnb"))
+        users.append(User(id: 6, name: "D-12", organization: "Microsoft"))
+        
     }
 }
