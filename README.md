@@ -3,12 +3,9 @@
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
 
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image1.png "Home")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image2.png "Simple push")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image3.png "Formsheet")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image4.png "Popover")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image5.png "Multiple selection")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image6.png "Custom cells")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/01.gif "Single Selection")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/022.gif "Multi Selection")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/03.gif "Custom")
 ## Features
 
 - Show selection menu as List, Popover or FormSheet with single or multiple selection.
@@ -31,7 +28,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ```ruby
 pod 'RSSelectionMenu'
 or
-pod 'RSSelectionMenu', '~> 4.0.2'
+pod 'RSSelectionMenu', '~> 5.0'
 ```
 <!--### Swift 4 project with RSSelectionMenu-->
 <!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->
@@ -216,7 +213,7 @@ let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: custo
 
 ### Custom Models or Dictionary
 - RSSelectionMenu can also works with Custom Models.
-- Inherit your models from NSObject.
+- Inherit your models from NSObject or use Codable class/struct.
 - Implement UniqueProperty protocol and define your unique property in the model.
 
 ### Custom Models with Custom Cells

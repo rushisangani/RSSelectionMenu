@@ -96,9 +96,9 @@
 		A293177A1F87FC3F0076A0C4 /* RSSelectionMenuExample */ = {
 			isa = PBXGroup;
 			children = (
+				A293177B1F87FC3F0076A0C4 /* AppDelegate.swift */,
 				A29317911F87FD060076A0C4 /* CustomCell */,
 				A26882BE1F9532D7005ECF35 /* Models */,
-				A293177B1F87FC3F0076A0C4 /* AppDelegate.swift */,
 				A293177D1F87FC3F0076A0C4 /* ViewController.swift */,
 				A2DEC10E2104E490005113C7 /* SingleSelectionHandler.swift */,
 				A2DEC110210649EA005113C7 /* MultipleSelectionHandler.swift */,

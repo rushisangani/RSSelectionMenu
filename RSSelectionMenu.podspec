@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
           
 	s.name         = "RSSelectionMenu"
-  	s.version      = "4.0.2"
+  	s.version      = "5.0"
 
     s.summary      = "An elegant selection list or dropdown menu for iOS with single or multiple selections."
   	s.description  = <<-DESC
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   	s.homepage     = "https://github.com/rushisangani/RSSelectionMenu"
 
-    s.screenshots  = "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image1.png", "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image2.png", "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image3.png", "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image4.png", "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image5.png", "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/image6.png"
+    s.screenshots  = "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/01.gif", "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/02.gif", "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/03.gif"
 
   
   	s.license      = { :type => "MIT", :file => "LICENSE" }
