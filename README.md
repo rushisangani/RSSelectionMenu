@@ -4,7 +4,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 
 
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/01.gif "Single Selection")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/022.gif "Multi Selection")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/02.gif "Multi Selection")
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/03.gif "Custom")
 ## Features
 
