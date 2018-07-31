@@ -155,7 +155,12 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
             self.backgroundView.frame = (window??.frame)!
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
+            
+                if UIDevice.current.orientation == .portrait {
+                    self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
+                }else {
+                    self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 200, height: backgroundView.frame.size.height - 100)
+                }
             }else {
                 self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 300, height: backgroundView.frame.size.height - 400)
             }
@@ -180,7 +185,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     }
     
     /// Done button
-    func setDoneButton() {
+    fileprivate func setDoneButton() {
         let doneTitle = (self.rightBarButtonTitle != nil) ? self.rightBarButtonTitle! : doneButtonTitle
         let doneButton = UIBarButtonItem(title: doneTitle, style: .done, target: self, action: #selector(doneButtonTapped))
         navigationItem.rightBarButtonItem = doneButton

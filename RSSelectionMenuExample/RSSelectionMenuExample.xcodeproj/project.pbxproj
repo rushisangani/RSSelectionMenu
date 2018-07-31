@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A26882BC1F9532B1005ECF35 /* RSSelectionMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A26882BB1F9532B1005ECF35 /* RSSelectionMenu.framework */; };
-		A26882BD1F9532B1005ECF35 /* RSSelectionMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A26882BB1F9532B1005ECF35 /* RSSelectionMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A2092EFA210E113100FE4EFB /* RSSelectionMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2092EF9210E113100FE4EFB /* RSSelectionMenu.framework */; };
+		A2092EFB210E113100FE4EFB /* RSSelectionMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2092EF9210E113100FE4EFB /* RSSelectionMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A26882C01F9532D7005ECF35 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26882BF1F9532D7005ECF35 /* Person.swift */; };
 		A293177C1F87FC3F0076A0C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293177B1F87FC3F0076A0C4 /* AppDelegate.swift */; };
 		A293177E1F87FC3F0076A0C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293177D1F87FC3F0076A0C4 /* ViewController.swift */; };
@@ -30,7 +30,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A26882BD1F9532B1005ECF35 /* RSSelectionMenu.framework in Embed Frameworks */,
+				A2092EFB210E113100FE4EFB /* RSSelectionMenu.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,7 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A26882BB1F9532B1005ECF35 /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2092EF9210E113100FE4EFB /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26882BF1F9532D7005ECF35 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		A29317781F87FC3F0076A0C4 /* RSSelectionMenuExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSelectionMenuExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A293177B1F87FC3F0076A0C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A26882BC1F9532B1005ECF35 /* RSSelectionMenu.framework in Frameworks */,
+				A2092EFA210E113100FE4EFB /* RSSelectionMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,7 +79,7 @@
 		A293176F1F87FC3F0076A0C4 = {
 			isa = PBXGroup;
 			children = (
-				A26882BB1F9532B1005ECF35 /* RSSelectionMenu.framework */,
+				A2092EF9210E113100FE4EFB /* RSSelectionMenu.framework */,
 				A293177A1F87FC3F0076A0C4 /* RSSelectionMenuExample */,
 				A29317791F87FC3F0076A0C4 /* Products */,
 			);
@@ -352,6 +352,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenuExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -370,6 +371,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenuExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
