@@ -76,6 +76,7 @@ open class RSSelectionTableView<T>: UITableView {
         tableFooterView = UIView()
         estimatedRowHeight = 50
         rowHeight = UITableViewAutomaticDimension
+        keyboardDismissMode = .interactive
         
         // register cells
         register(UITableViewCell.self, forCellReuseIdentifier: CellType.Basic.value())
@@ -111,7 +112,7 @@ extension RSSelectionTableView {
     func addSearchBar(placeHolder: String, tintColor: UIColor, completion: @escaping UISearchBarResult<T>) {
         
         self.searchBarResultDelegate = completion
-        self.searchControllerDelegate = RSSelectionMenuSearchDelegate(tableView: self, placeHolder: placeHolder, tintColor: tintColor)
+        self.searchControllerDelegate = RSSelectionMenuSearchDelegate(placeHolder: placeHolder, tintColor: tintColor)
         
         // update result on search event
         self.searchControllerDelegate?.didSearch = { [weak self] (searchText) in

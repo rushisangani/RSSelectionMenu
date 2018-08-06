@@ -143,7 +143,7 @@ extension ViewController {
         }
         
         // search bar with place holder
-        selectionMenu.showSearchBar(withPlaceHolder: "Search Player", tintColor: UIColor.lightGray.withAlphaComponent(0.5)) { (searchText) -> ([String]) in
+        selectionMenu.showSearchBar(withPlaceHolder: "Search Player", tintColor: UIColor.lightGray.withAlphaComponent(0.2)) { (searchText) -> ([String]) in
             
             return self.dataArray.filter({ $0.lowercased().starts(with: searchText.lowercased()) })
         }

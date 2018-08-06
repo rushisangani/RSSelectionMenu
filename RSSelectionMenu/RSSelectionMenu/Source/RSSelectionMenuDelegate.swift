@@ -45,6 +45,11 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
     
     // MARK:- UITableViewDelegate
     
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let searchBar = isSearchbarAdded(tableView).1
+        return searchBar
+    }
+    
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
@@ -74,6 +79,10 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
         
         // dismiss if required
         selectionTableView.dismissControllerIfRequired()
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return isSearchbarAdded(tableView).0 ? defaultHeaderHeight : 1
     }
 }
 
@@ -155,6 +164,15 @@ extension RSSelectionMenuDelegate {
             rowSelection.selected = selected!
             rowSelection.delegate!((rowSelection.rowType?.value)!, selected!)
         }
+    }
+    
+    /// checks if searchbar is added
+    fileprivate func isSearchbarAdded(_ tableView: UITableView) -> (Bool, UISearchBar?) {
+        let selectionTableView = tableView as! RSSelectionTableView<T>
+        if let searchBar = selectionTableView.searchControllerDelegate?.searchBar {
+            return (true, searchBar)
+        }
+        return (false, nil)
     }
 }
 

@@ -37,7 +37,7 @@ open class RSSelectionMenuSearchDelegate: NSObject {
     public var cancelButtonAttributes: SearchBarCancelButtonAttributes?
     
     // MARK: - Initialize
-    init(tableView: UITableView, placeHolder: String, tintColor: UIColor) {
+    init(placeHolder: String, tintColor: UIColor) {
         super.init()
         
         searchBar = UISearchBar()
@@ -46,10 +46,6 @@ open class RSSelectionMenuSearchDelegate: NSObject {
         searchBar?.barTintColor = tintColor
         searchBar?.placeholder = placeHolder
         searchBar?.enablesReturnKeyAutomatically = false
-        
-        // add as tableHeaderView
-        tableView.tableHeaderView = searchBar
-        tableView.keyboardDismissMode = .interactive
     }
     
     func searchForText(text: String?) {

@@ -151,7 +151,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         // change border style for formsheet
         if case .Formsheet = menuPresentationStyle {
             
-            tableView?.layer.cornerRadius = 9
+            tableView?.layer.cornerRadius = 8
             self.backgroundView.frame = (window??.frame)!
             
             if UIDevice.current.userInterfaceIdiom == .phone {

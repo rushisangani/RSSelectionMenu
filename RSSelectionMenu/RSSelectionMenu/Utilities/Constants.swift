@@ -56,3 +56,6 @@ public let doneButtonTitle             = "Done"
 
 /// Colors
 public let defaultSearchBarTintColor   = UIColor(white: 0.9, alpha: 0.9)
+
+/// Constants
+public let defaultHeaderHeight         = CGFloat(50)
