@@ -8,22 +8,34 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ## Features
 
 ### Selection
-- Single (Default), Multiple
+```swift
+Single | Multiple
+```
 
 ### Presentation Style
-- Push (Default), Present, Formsheet, Popover
+```swift
+Push | Present | Formsheet | Popover
+```
 
 ### Cell Style
-- Basic (Default), Right Detail, Sub Title, Custom
+```swift
+Basic | Right Detail | Sub Title | Custom
+```
 
 ### Data Types
-- Premitive Types (String, Int,..), Codable Objects, NSObject Subclasses, Dictionary Array
+```swift
+Premitive Types (String, Int,..) | Codable Objects | NSObject Subclasses | Dictionary Array
+```
 
 ### Customization
-- SearchBar, NavigationBar, Max Selection Limit, Header Row
+```swift
+SearchBar | NavigationBar | Max Selection Limit | Header Row
+```
 
 ## Requirements
-- iOS 9.0+, Xcode 8.3+, Swift 3.0+
+```swift
+iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
+```
 
 ## Installation
 
@@ -128,10 +140,10 @@ selectionMenu.onWillAppear = {
 // show searchbar
 selectionMenu.showSearchBar { (searchtext) -> ([String]) in
 
-// return filtered array based on any condition
-// here let's return array where name starts with specified search text
+  // return filtered array based on any condition
+  // here let's return array where name starts with specified search text
 
-return self.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
+  return self.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
 }
 ```
 
