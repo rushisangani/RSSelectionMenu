@@ -27,8 +27,18 @@ import UIKit
 /// RSSelectionMenuController
 open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate {
 
-    // MARK: - Outlets
+    // MARK: - Views
     public var tableView: RSSelectionTableView<T>?
+    
+    /// SearchBar
+    public var searchBar: UISearchBar? {
+        return tableView?.searchControllerDelegate?.searchBar
+    }
+    
+    /// NavigationBar
+    public var navigationBar: UINavigationBar? {
+        return self.navigationController?.navigationBar
+    }
     
     // MARK: - Properties
     
@@ -45,6 +55,9 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
             self.tableView?.selectionDelegate?.maxSelectedLimit = maxSelectionLimit
         }
     }
+    
+    /// Selection menu willAppear handler
+    public var onWillAppear:(() -> ())?
     
     /// Selection menu dismissal handler
     public var onDismiss:((_ selectedItems: DataSource<T>) -> ())?
@@ -96,6 +109,11 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         
         setupViews()
         setupLayout()        
+    }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let handler = onWillAppear { handler() }
     }
     
     override open func viewWillDisappear(_ animated: Bool) {
@@ -335,7 +353,7 @@ extension RSSelectionMenu {
     
     // navigation bar
     fileprivate func setNavigationBarTheme(_ theme: NavigationBarTheme) {
-        if let navigationBar = self.navigationController?.navigationBar {
+        if let navigationBar = self.navigationBar {
             
             navigationBar.barTintColor = theme.color
             navigationBar.tintColor = theme.tintColor ?? UIColor.white
