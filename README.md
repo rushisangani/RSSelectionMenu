@@ -7,27 +7,30 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/03.gif "Custom")
 ## Features
 
-- Show selection menu as List, Popover or FormSheet with single or multiple selection.
-- Use different cell types. (Basic, RightDetail, SubTitle)
-- Works with Swift premitive types as well as custom NSObject classes.
-- Show selection menu with your custom cells.
-- Search from the list with inbuilt SearchBar.
+### Selection
+- Single (Default), Multiple
+
+### Presentation Style
+- Push (Default), Present, Formsheet, Popover
+
+### Cell Style
+- Basic (Default), Right Detail, Sub Title, Custom
+
+### Data Types
+- Premitive Types (String, Int,..), Codable Objects, NSObject Subclasses, Dictionary Array
+
+### Customization
+- SearchBar, NavigationBar, Max Selection Limit, Header Row
 
 ## Requirements
-
-- iOS 9.0+ 
-- Xcode 8.3+
-- Swift 3.0+
-
+- iOS 9.0+, Xcode 8.3+, Swift 3.0+
 
 ## Installation
 
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu'
-or
-pod 'RSSelectionMenu', '~> 5.0.2'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.0.3'
 ```
 <!--### Swift 4 project with RSSelectionMenu-->
 <!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->
@@ -49,10 +52,7 @@ pod 'RSSelectionMenu', '~> 5.0.2'
 
 ## Usage
 
-### Simple Selection List 
-- Provide dataSource array and selected items (if any) to show selection list.
-- Update your selected items array when user selects any item.
-
+### Simple Selection List
 ```swift
 let simpleDataArray = ["Sachin", "Rahul", "Saurav", "Virat", "Suresh", "Ravindra", "Chris"]
 var simpleSelectedArray = [String]()
@@ -82,18 +82,29 @@ selectionMenu.setSelectedItems(items: simpleSelectedArray) { (text, isSelected, 
 selectionMenu.show(style: .Push, from: self)
 ```
 ### Multiple Selection List
-- Set SelectionType to .Multiple
-- Set Maximum selection limit
-
 ```swift
 let selectionMenu = RSSelectionMenu(selectionType: .Multiple, dataSource: dataArray, cellType: .Basic) { (cell, object, indexPath) in
     cell.textLabel?.text = object
 }
+```
+- Set Maximum selection limit (Optional)
+```swift
 selectionMenu.setSelectedItems(items: selectedDataArray, maxSelected: 3) { (text, selected, selectedItems) in
 }
 ```
-### On Dismiss Handler
-- Perform any operation when menu is dismissed
+
+### Presentation Style - Formsheet or Popover
+```swift
+// show as formsheet
+selectionMenu.show(style: .Formsheet, from: self)
+
+// show as popover
+selectionMenu.show(style: .Popover(sourceView: sourceView, size: nil), from: self)
+```
+
+### Event Handlers
+
+#### On Dismiss
 ```swift
 selectionMenu.onDismiss = { selectedItems in
     self.selectedDataArray = selectedItems
@@ -102,9 +113,29 @@ selectionMenu.onDismiss = { selectedItems in
 }
 ```
 
-### Cell Type Right Detail/SubTitle
-- Set cell type to RightDetail or SubTitle while initialization.
+#### On WillAppear
+```swift
+selectionMenu.onWillAppear = {
+    /// do something..
+}
+```
 
+### Customization
+
+#### SearchBar
+- You'll get notified via handler, when user starts typing in searchbar.
+```swift
+// show searchbar
+selectionMenu.showSearchBar { (searchtext) -> ([String]) in
+
+// return filtered array based on any condition
+// here let's return array where name starts with specified search text
+
+return self.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
+}
+```
+
+#### Cell Style - Right Detail or Sub Title
 ```swift
 let selectionMenu = RSSelectionMenu(selectionType: .Single, dataSource: dataArray, cellType: .RightDetail) { (cell, object, indexPath) in
 
@@ -126,9 +157,19 @@ selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, sele
 selectionMenu.show(from: self)
 ```
 
-### Show first row as Empty, None, All, or Custom
-- Set default selection value to "", None or All while presenting.
+#### Custom Cells
+- Provide custom cell with xib file name and cell identifier.
+```swift
+let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: customDataArray, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
 
+// cast cell to your custom cell type
+let customCell = cell as! CustomTableViewCell
+
+// set cell data here
+}
+```
+
+#### Header Row - Empty, None, All, or Custom
 ```swift
 // To show first row as Empty, when dropdown as no value selected by default
 // Here you'll get Text and isSelected when user selects first row
@@ -140,52 +181,48 @@ selectionMenu.addFirstRowAs(rowType: .Empty, showSelected: self.firstRowSelected
 }
 ```
 
-### Show SearchBar
-- Add searchbar as headerView when you want to search from list.
-- You'll get notified when user starts typing in searchbar.
-
+### DataSource - Codable Objects, NSObject Subclasses or Dictionary Array
+- Implement **UniqueProperty** protocol to model class or structure.
 ```swift
-// show searchbar
-selectionMenu.showSearchBar { (searchtext) -> ([String]) in
+class Person: NSObject, UniqueProperty {
+
+    let id: Int
+    let firstName: String
+    let lastName: String
+
+    init(id: Int, firstName: String, lastName: String) {
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+    }
+
+    // Here id has the unique value for each person
+    func uniquePropertyName() -> String {
+        return "id"
+    }
+}
+```
+or
+```swift
+struct Employee: Codable, UniqueProperty {
     
-    // return filtered array based on any condition
-    // here let's return array where name starts with specified search text
-
-    return self.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
+    let empId: Int?
+    let name: String?
+    
+    func uniquePropertyName() -> String {
+        return "empId"
+    }
 }
 ```
-
-### Customize SearchBar
-- Change seachbar placeholder text, searchbar tint color.
-- Change searchbar cancel button attributes (Title and TintColor)
-
+or
 ```swift
-// show searchbar with placeholder and tint color
-selectionMenu.showSearchBar(withPlaceHolder: "Search Player", tintColor: UIColor.withAlphaComponent(0.5)) { (searchtext) -> ([String]) in
-    return self.dataArray.filter({ $0.lowercased().hasPrefix(searchtext.lowercased()) })
-}
-
-// customize default cancel button of seachbar
-// 1. Set cancel button title to "Dismiss"
-// 2. Change tint color. - nil value will set the default tint color
-
-selectionMenu.searchBarCancelButtonAttributes = SearchBarCancelButtonAttributes("Dismiss", nil)
+selectionMenu.uniquePropertyName = "empId" or "keyname of unique value in dictionary"
 ```
 
-### Show as Formsheet or Popover
-- Change presentation type to .Formsheet or .Popover while presenting. - Default style is .Present
+### UI Customization
 
-```swift
-// show as formsheet
-selectionMenu.show(style: .Formsheet, from: self)
-
-// show as popover
-selectionMenu.show(style: .Popover(sourceView: sourceView, size: nil), from: self)
-```
-
-### Customize NavigationBar
-- Change Navigation Title, NavigationBar color, Title Color and BarButtonItem titles.
-
+#### NavigationBar
+- Set Title, BarButton Titles, TintColor, and Title Color
 ```swift
 // set navigation title and color
 selectionMenu.setNavigationBar(title: "Select Player", attributes: nil, barTintColor: UIColor.orange.withAlphaComponent(0.5), tintColor: UIColor.white)
@@ -197,86 +234,14 @@ selectionMenu.rightBarButtonTitle = "Submit"
 selectionMenu.leftBarButtonTitle = "Close"
 ```
 
-### Custom Cells
-- Provide custom cell with xib file name and cell identifier.
-
+#### SearchBar
+- Set Placeholder, Tint Color
 ```swift
-let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: customDataArray, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
-
-    // cast cell to your custom cell type
-    let customCell = cell as! CustomTableViewCell
-    
-    // set cell data here
+// show searchbar with placeholder and tint color
+selectionMenu.showSearchBar(withPlaceHolder: "Search Player", tintColor: UIColor.withAlphaComponent(0.5)) { (searchtext) -> ([String]) in
+    return self.dataArray.filter({ $0.lowercased().hasPrefix(searchtext.lowercased()) })
 }
 ```
-
-### Custom Models or Dictionary
-- RSSelectionMenu can also works with Custom Models.
-- Inherit your models from NSObject or use Codable class/struct.
-- Implement UniqueProperty protocol and define your unique property in the model.
-
-### Custom Models with Custom Cells
-```swift
-// Implement UniqueProperty protocol and return property name which has unique value.
-// You can also specify this later by - selectionMenu.uniquePropertyName = "id"
-
-class Person: NSObject, UniqueProperty {
-
-    let id: Int
-    let firstName: String
-    let lastName: String
-
-    init(id: Int, firstName: String, lastName: String) {
-    self.id = id
-    self.firstName = firstName
-    self.lastName = lastName
-    }
-
-    // Here id has the unique value for each person
-    func uniquePropertyName() -> String {
-        return "id"
-    }
-}
-
-var customDataArray = [Person]()
-var customselectedDataArray = [Person]()
-
-// prepare data array with models
-customDataArray.append(Person(id: 1, firstName: "Sachin", lastName: "Tendulkar"))
-customDataArray.append(Person(id: 2, firstName: "Rahul", lastName: "Dravid"))
-customDataArray.append(Person(id: 3, firstName: "Virat", lastName: "Kohli"))
-
-
-// Show menu with datasource array with Models - SelectionType = Multiple, CellType = Custom
-
-let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: customDataArray, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
-
-    // cast cell to your custom cell type
-    let customCell = cell as! CustomTableViewCell
-
-    // here you'll get specified model object
-    // set data based on your need
-    customCell.setData(person)
-}
-
-// show with default selected items and update when user selects any row
-selectionMenu.setSelectedItems(items: customselectedDataArray) { (text, selected, selectedItems) in
-    self.customselectedDataArray = selectedItems
-}
-
-// show searchbar
-selectionMenu.showSearchBar { (searchtext) -> ([Person]) in
-    return self.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(searchtext.lowercased()) })
-}
-
-selectionMenu.show(style: .Push, from: self)
-```
-
-- If you don't want to implement protocol then set your unique property as below.
-```swift
-selectionMenu.uniquePropertyName = "id"     // replace your property name or dictionary key here which has unique value.
-```
-
 
 ### Example
 See [Example](https://github.com/rushisangani/RSSelectionMenu/tree/master/RSSelectionMenuExample) for more details.
