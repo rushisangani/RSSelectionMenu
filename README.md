@@ -8,7 +8,10 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/01.gif "Single Selection")
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/03.gif "Custom")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/whatsnew.png "Alert & Actionsheet")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/Alert.png "Alert")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/Actionsheet.png "Actionsheet")
+
+<!--![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/whatsnew.png "Alert & Actionsheet")-->
 
 ## Features
 
