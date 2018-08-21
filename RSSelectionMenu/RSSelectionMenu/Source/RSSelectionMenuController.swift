@@ -187,7 +187,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
             self.tableView?.center = self.backgroundView.center
             
         }else {
-            self.backgroundView.frame = self.view.frame
+            self.backgroundView.frame = self.view.bounds
             self.tableView?.frame = backgroundView.frame
         }
     }

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A2092EFA210E113100FE4EFB /* RSSelectionMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2092EF9210E113100FE4EFB /* RSSelectionMenu.framework */; };
-		A2092EFB210E113100FE4EFB /* RSSelectionMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2092EF9210E113100FE4EFB /* RSSelectionMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A26882C01F9532D7005ECF35 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26882BF1F9532D7005ECF35 /* Person.swift */; };
 		A293177C1F87FC3F0076A0C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293177B1F87FC3F0076A0C4 /* AppDelegate.swift */; };
 		A293177E1F87FC3F0076A0C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293177D1F87FC3F0076A0C4 /* ViewController.swift */; };
@@ -17,6 +15,8 @@
 		A29317861F87FC3F0076A0C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A29317841F87FC3F0076A0C4 /* LaunchScreen.storyboard */; };
 		A29317951F87FD060076A0C4 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29317921F87FD060076A0C4 /* CustomTableViewCell.swift */; };
 		A29317961F87FD060076A0C4 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29317931F87FD060076A0C4 /* CustomTableViewCell.xib */; };
+		A2D0D2E8212C7D3200564057 /* RSSelectionMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D0D2E7212C7D3200564057 /* RSSelectionMenu.framework */; };
+		A2D0D2E9212C7D3200564057 /* RSSelectionMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2D0D2E7212C7D3200564057 /* RSSelectionMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A2DEC10F2104E490005113C7 /* SingleSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC10E2104E490005113C7 /* SingleSelectionHandler.swift */; };
 		A2DEC111210649EA005113C7 /* MultipleSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC110210649EA005113C7 /* MultipleSelectionHandler.swift */; };
 		A2DEC11321065AFB005113C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC11221065AFB005113C7 /* User.swift */; };
@@ -30,7 +30,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A2092EFB210E113100FE4EFB /* RSSelectionMenu.framework in Embed Frameworks */,
+				A2D0D2E9212C7D3200564057 /* RSSelectionMenu.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,7 +38,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A2092EF9210E113100FE4EFB /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26882BF1F9532D7005ECF35 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		A29317781F87FC3F0076A0C4 /* RSSelectionMenuExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSelectionMenuExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A293177B1F87FC3F0076A0C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		A29317871F87FC3F0076A0C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A29317921F87FD060076A0C4 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		A29317931F87FD060076A0C4 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		A2D0D2E7212C7D3200564057 /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2DEC10E2104E490005113C7 /* SingleSelectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectionHandler.swift; sourceTree = "<group>"; };
 		A2DEC110210649EA005113C7 /* MultipleSelectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionHandler.swift; sourceTree = "<group>"; };
 		A2DEC11221065AFB005113C7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2092EFA210E113100FE4EFB /* RSSelectionMenu.framework in Frameworks */,
+				A2D0D2E8212C7D3200564057 /* RSSelectionMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,7 +79,7 @@
 		A293176F1F87FC3F0076A0C4 = {
 			isa = PBXGroup;
 			children = (
-				A2092EF9210E113100FE4EFB /* RSSelectionMenu.framework */,
+				A2D0D2E7212C7D3200564057 /* RSSelectionMenu.framework */,
 				A293177A1F87FC3F0076A0C4 /* RSSelectionMenuExample */,
 				A29317791F87FC3F0076A0C4 /* Products */,
 			);

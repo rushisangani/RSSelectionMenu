@@ -49,7 +49,7 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.1'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.1.1'
 ```
 <!--### Swift 4 project with RSSelectionMenu-->
 <!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->
