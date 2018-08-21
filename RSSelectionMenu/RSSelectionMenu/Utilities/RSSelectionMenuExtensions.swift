@@ -39,6 +39,8 @@ public enum PresentationStyle {
     case Push
     case Popover(sourceView: UIView, size: CGSize?)
     case Formsheet
+    case Alert(title: String?, action: String?, height: Double?)
+    case Actionsheet(title: String?, action: String?, height: Double?)
 }
 
 // MARK: - CellType

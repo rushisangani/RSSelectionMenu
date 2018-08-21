@@ -2,6 +2,10 @@
 
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
+### What's New
+
+- New Presentation Styles added: **Alert**  &  **Actionshet**
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/whatsnew.png "Alert & Actionsheet")
 
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/01.gif "Single Selection")
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/03.gif "Custom")
@@ -14,12 +18,12 @@ Single | Multiple
 
 ### Presentation Style
 ```swift
-Push | Present | Formsheet | Popover
+Present | Push | Formsheet | Popover | Alert | Actionsheet
 ```
 
 ### Cell Style
 ```swift
-Basic | Right Detail | Sub Title | Custom
+Basic | RightDetail | SubTitle | Custom
 ```
 
 ### Data Types
@@ -42,7 +46,7 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.0.3'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.1'
 ```
 <!--### Swift 4 project with RSSelectionMenu-->
 <!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->

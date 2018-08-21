@@ -166,5 +166,31 @@ extension ViewController {
         selectionMenu.show(style: .Push, from: self)
     }
     
+    // Alert or Actionsheet
+    func showAsAlertController(style: UIAlertControllerStyle, title: String?, action: String?, height: Double?) {
+        let selectionType: SelectionType = style == .alert ? .Single : .Multiple
+        
+        let selectionMenu =  RSSelectionMenu(selectionType: selectionType, dataSource: simpleDataArray) { (cell, name, indexPath) in
+            cell.textLabel?.text = name
+        }
+        
+        selectionMenu.setSelectedItems(items: simpleSelectedArray) { (text, isSelected, selectedItems) in
+        }
+        
+        selectionMenu.onDismiss = { items in
+            self.simpleSelectedArray = items
+            
+            if style == .alert {
+                self.alertRowDetailLabel.text = items.first
+            }else {
+                self.multiSelectActionSheetLabel.text = items.joined(separator: ", ")
+            }
+            self.tableView.reloadData()
+        }
+        
+        // show
+        let menuStyle: PresentationStyle = style == .alert ? .Alert(title: title, action: action, height: height) : .Actionsheet(title: title, action: action, height: height)
+        selectionMenu.show(style: menuStyle, from: self)
+    }
 }
 

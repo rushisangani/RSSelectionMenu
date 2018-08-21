@@ -17,10 +17,12 @@ class ViewController: UITableViewController {
     @IBOutlet weak var formsheetDetailLabel: UILabel!
     @IBOutlet weak var popoverDetailLabel: UILabel!
     @IBOutlet weak var extraRowDetailLabel: UILabel!
+    @IBOutlet weak var alertRowDetailLabel: UILabel!
     
     @IBOutlet weak var multiSelectPushLabel: UILabel!
     @IBOutlet weak var multiSelectPopoverLabel: UILabel!
     @IBOutlet weak var multiSelectCustomRowLabel: UILabel!
+    @IBOutlet weak var multiSelectActionSheetLabel: UILabel!
     
     // MARK: - Properties
     
@@ -72,6 +74,8 @@ extension ViewController {
                 self.showAsPopover(sender: cell!)
             case 4:
                 self.showWithFirstRow()
+            case 5:
+                self.showAsAlertController(style: .alert, title: "Select Player", action: nil, height: nil)
             default:
                 break
             }
@@ -87,6 +91,8 @@ extension ViewController {
                 self.showAsMultiSelectPopover(sender: cell!)
             case 2:
                 self.showWithMultiSelect(style: .Present)
+            case 3:
+                self.showAsAlertController(style: .actionSheet, title: "Select Player", action: nil, height: nil)
             default:
                 break
             }

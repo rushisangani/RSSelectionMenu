@@ -72,8 +72,8 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     /// store reference view controller
     fileprivate weak var parentController: UIViewController?
     
-    /// presentation stype
-    fileprivate var menuPresentationStyle: PresentationStyle = .Present
+    /// presentation style
+    var menuPresentationStyle: PresentationStyle = .Present
     
     /// navigationbar theme
     fileprivate var navigationBarTheme: NavigationBarTheme?
@@ -147,7 +147,9 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     // MARK: - Setup Layout
     
     fileprivate func setupLayout() {
-        self.view.frame = (parentController?.view.frame)!
+        if let frame = parentController?.view.frame {
+            self.view.frame = frame
+        }
         
         // navigation bar theme
         if let theme = navigationBarTheme {
@@ -278,21 +280,16 @@ extension RSSelectionMenu {
         
         DispatchQueue.main.async { [weak self] in
             
-            // dismiss search
-            if let searchBar = self?.tableView?.searchControllerDelegate?.searchBar {
-                if searchBar.isFirstResponder { searchBar.resignFirstResponder() }
-            }
+            // perform on dimiss operations
+            self?.menuWillDismiss()
             
-            // on menu dismiss
-            if let dismissHandler = self?.onDismiss {
-                dismissHandler(self?.tableView?.selectionDelegate?.selectedObjects ?? [])
-            }
-            
-            if case .Push? = self?.menuPresentationStyle {
-                 self?.navigationController?.popViewController(animated: animated!)
-            }
-            else {
+            switch self?.menuPresentationStyle {
+            case .Push?:
+                self?.navigationController?.popViewController(animated: animated!)
+            case .Present?, .Popover?, .Formsheet?, .Alert?, .Actionsheet?:
                self?.dismiss(animated: animated!, completion: nil)
+            case .none:
+                break
             }
         }
     }
@@ -317,6 +314,20 @@ extension RSSelectionMenu {
             return tableView?.selectionType == .Single
         }
         return false
+    }
+    
+    // perform operation on dismiss
+    fileprivate func menuWillDismiss() {
+        
+        // dismiss search
+        if let searchBar = self.tableView?.searchControllerDelegate?.searchBar {
+            if searchBar.isFirstResponder { searchBar.resignFirstResponder() }
+        }
+        
+        // on menu dismiss
+        if let dismissHandler = self.onDismiss {
+            dismissHandler(self.tableView?.selectionDelegate?.selectedObjects ?? [])
+        }
     }
     
     // show
@@ -347,8 +358,34 @@ extension RSSelectionMenu {
             tobePresentController.modalPresentationStyle = .overCurrentContext
             tobePresentController.modalTransitionStyle = .crossDissolve
         }
+        else if case let .Alert(title, action, height) = with {
+            tobePresentController = getAlertViewController(style: .alert, title: title, action: action, height: height)
+            tobePresentController.setValue(self, forKey: contentViewController)
+        }
+        else if case let .Actionsheet(title, action, height) = with {
+            tobePresentController = getAlertViewController(style: .actionSheet, title: title, action: action, height: height)
+            tobePresentController.setValue(self, forKey: contentViewController)
+        }
         
         from.present(tobePresentController, animated: true, completion: nil)
+    }
+    
+    // get alert controller
+    fileprivate func getAlertViewController(style: UIAlertControllerStyle, title: String?, action: String?, height: Double?) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: nil, preferredStyle: style)
+        
+        let actionTitle = action ?? doneButtonTitle
+        let doneAction = UIAlertAction(title: actionTitle, style: .cancel) { (doneButton) in
+            self.menuWillDismiss()
+        }
+        if tableView?.selectionType == .Multiple {
+            alertController.addAction(doneAction)
+        }
+        
+        let viewHeight = height ?? 350
+        alertController.preferredContentSize.height = CGFloat(viewHeight)
+        self.preferredContentSize.height = alertController.preferredContentSize.height
+        return alertController
     }
     
     // navigation bar

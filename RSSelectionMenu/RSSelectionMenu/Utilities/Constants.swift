@@ -48,6 +48,8 @@ public typealias UISearchBarResult<T> = ((_ searchText: String) -> (FilteredData
 /// SearchBar CancelButton
 public typealias SearchBarCancelButtonAttributes = (title: String, tintColor: UIColor?)
 
+/// Keys
+public let contentViewController       = "contentViewController"
 
 /// Strings
 public let defaultPlaceHolder          = "Search"
