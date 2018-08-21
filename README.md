@@ -2,7 +2,7 @@
 
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
-### What's New
+### What's New in version 5.1
 
 - New Presentation Styles added: **Alert**  &  **Actionshet**
 
