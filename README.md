@@ -5,6 +5,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ### What's New
 
 - New Presentation Styles added: **Alert**  &  **Actionshet**
+
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/whatsnew.png "Alert & Actionsheet")
 
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/01.gif "Single Selection")
