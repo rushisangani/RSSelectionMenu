@@ -112,13 +112,19 @@ selectionMenu.setSelectedItems(items: selectedDataArray, maxSelected: 3) { (text
 }
 ```
 
-### Presentation Style - Formsheet or Popover
+### Presentation Style - Formsheet, Popover, Alert, Actionsheet
 ```swift
-// show as formsheet
+// show as Formsheet
 selectionMenu.show(style: .Formsheet, from: self)
 
-// show as popover
+// show as Popover
 selectionMenu.show(style: .Popover(sourceView: sourceView, size: nil), from: self)
+
+// show as Alert
+selectionMenu.show(style: .Alert(title: "Select", action: nil, height: nil), from: self)
+
+// Show as Actionsheet
+selectionMenu.show(style: .Alert(title: nil, action: "Done", height: nil), from: self)
 ```
 
 ### Event Handlers
