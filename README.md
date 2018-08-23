@@ -5,6 +5,7 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 ### What's New in version 5.2
 
 - Carthage support
+- New presentation styles added: **Alert** & **Actionsheet**
 
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/Alert.png "Alert")
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/Actionsheet.png "Actionsheet")
