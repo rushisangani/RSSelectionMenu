@@ -2,9 +2,9 @@
 
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
-### What's New in version 5.1
+### What's New in version 5.2
 
-- New Presentation Styles added: **Alert**  &  **Actionshet**
+- Carthage support
 
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/Alert.png "Alert")
 ![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/Actionsheet.png "Actionsheet")
@@ -51,6 +51,29 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ```ruby
 pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.1.1'
 ```
+
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
+
+You can install Carthage with [Homebrew](https://brew.sh/) using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate RSSelectionMenu into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "rushisangani/RSSelectionMenu" ~> 5.2
+```
+Then follow below steps:
+- Run `carthage update` to build the framework.
+- Set Framework search path in target build settings : Build Settings -> Framework Search Paths : $(PROJECT_DIR)/Carthage/Build/iOS 
+- Add  RSSelectionMenu.framework in `Embedded Binaries`.
+- Add  RSSelectionMenu.framework in `Linked Frameworks and Libraries`.
+
 <!--### Swift 4 project with RSSelectionMenu-->
 <!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->
 <!---->
