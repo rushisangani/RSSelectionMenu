@@ -70,7 +70,7 @@ github "rushisangani/RSSelectionMenu" ~> 5.2
 ```
 Then follow below steps:
 - Run `carthage update` to build the framework.
-- Set Framework search path in target build settings : Build Settings -> Framework Search Paths : $(PROJECT_DIR)/Carthage/Build/iOS 
+- Set Framework search path in target build settings : Build Settings  -> Framework Search Paths  :  `$(PROJECT_DIR)/Carthage/Build/iOS` 
 - Add  RSSelectionMenu.framework in `Embedded Binaries`.
 - Add  RSSelectionMenu.framework in `Linked Frameworks and Libraries`.
 
