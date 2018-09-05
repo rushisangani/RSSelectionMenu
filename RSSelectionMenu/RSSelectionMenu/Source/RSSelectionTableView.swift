@@ -132,7 +132,8 @@ extension RSSelectionTableView {
     
     /// dismiss
     func dismissControllerIfRequired() {
-        if selectionType == .Single {
+        let dismiss = selectionMenu?.dismissAutomatically ?? false
+        if selectionType == .Single && dismiss {
             selectionMenu?.dismiss()
         }
     }

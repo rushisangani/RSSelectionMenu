@@ -30,6 +30,9 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     // MARK: - Views
     public var tableView: RSSelectionTableView<T>?
     
+    /// dismiss: for Single selection only
+    public var dismissAutomatically: Bool = true
+    
     /// SearchBar
     public var searchBar: UISearchBar? {
         return tableView?.searchControllerDelegate?.searchBar
@@ -302,7 +305,7 @@ extension RSSelectionMenu {
     fileprivate func showDoneButton() -> Bool {
         switch menuPresentationStyle {
         case .Present, .Push:
-            return tableView?.selectionType == .Multiple
+            return (tableView?.selectionType == .Multiple || !self.dismissAutomatically)
         default:
             return false
         }
@@ -311,7 +314,7 @@ extension RSSelectionMenu {
     // check if show cancel button
     fileprivate func showCancelButton() -> Bool {
         if case .Present = menuPresentationStyle {
-            return tableView?.selectionType == .Single
+            return tableView?.selectionType == .Single && self.dismissAutomatically
         }
         return false
     }
@@ -378,7 +381,9 @@ extension RSSelectionMenu {
         let doneAction = UIAlertAction(title: actionTitle, style: .cancel) { (doneButton) in
             self.menuWillDismiss()
         }
-        if tableView?.selectionType == .Multiple {
+        
+        // add done action
+        if (tableView?.selectionType == .Multiple || !self.dismissAutomatically)  {
             alertController.addAction(doneAction)
         }
         
