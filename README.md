@@ -51,7 +51,7 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.1.1'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.2.1'
 ```
 
 ### Carthage
