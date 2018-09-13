@@ -368,6 +368,10 @@ extension RSSelectionMenu {
         else if case let .Actionsheet(title, action, height) = with {
             tobePresentController = getAlertViewController(style: .actionSheet, title: title, action: action, height: height)
             tobePresentController.setValue(self, forKey: contentViewController)
+            
+            tobePresentController.popoverPresentationController?.sourceView = self.view
+            tobePresentController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
+            tobePresentController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
         }
         
         from.present(tobePresentController, animated: true, completion: nil)
