@@ -369,9 +369,12 @@ extension RSSelectionMenu {
             tobePresentController = getAlertViewController(style: .actionSheet, title: title, action: action, height: height)
             tobePresentController.setValue(self, forKey: contentViewController)
             
-            tobePresentController.popoverPresentationController?.sourceView = self.view
-            tobePresentController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
-            tobePresentController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            // present as popover for iPad
+            if let popoverController = tobePresentController.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.permittedArrowDirections = []
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            }
         }
         
         from.present(tobePresentController, animated: true, completion: nil)

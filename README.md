@@ -2,7 +2,7 @@
 
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
-### What's New in version 5.2.1
+### What's New in version 5.2.2
 
 - Carthage support
 - New presentation styles added: **Alert** & **Actionsheet**
@@ -51,7 +51,7 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.2.1'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.2.2'
 ```
 
 ### Carthage
