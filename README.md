@@ -68,7 +68,7 @@ $ brew install carthage
 To integrate RSSelectionMenu into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "rushisangani/RSSelectionMenu" ~> 5.2.1
+github "rushisangani/RSSelectionMenu" ~> 5.2.2
 ```
 Then follow below steps:
 - Run `carthage update` to build the framework.
