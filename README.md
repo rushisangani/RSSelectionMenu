@@ -153,7 +153,7 @@ selectionMenu.show(style: .Popover(sourceView: sourceView, size: nil), from: sel
 selectionMenu.show(style: .Alert(title: "Select", action: nil, height: nil), from: self)
 
 // Show as Actionsheet
-selectionMenu.show(style: .Alert(title: nil, action: "Done", height: nil), from: self)
+selectionMenu.show(style: .Actionsheet(title: nil, action: "Done", height: nil), from: self)
 ```
 
 ### Event Handlers
