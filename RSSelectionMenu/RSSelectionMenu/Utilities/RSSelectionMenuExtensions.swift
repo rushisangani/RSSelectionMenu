@@ -1,7 +1,7 @@
 //
 //  RSSelectionMenuExtensions.swift
 //
-//  Copyright (c) 2017 Rushi Sangani
+//  Copyright (c) 2018 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -78,7 +78,7 @@ extension UITableViewCell {
 // MARK: - NavigationBar
 public struct NavigationBarTheme {
     var title: String?
-    var attributes: [NSAttributedStringKey: Any]?
+    var attributes: [NSAttributedString.Key: Any]?
     var color: UIColor?
     var tintColor: UIColor?
 }

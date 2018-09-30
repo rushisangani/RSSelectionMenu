@@ -1,7 +1,7 @@
 //
 //  RSSelectionMenuDataSource.swift
 //
-//  Copyright (c) 2017 Rushi Sangani
+//  Copyright (c) 2018 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -129,17 +129,17 @@ extension RSSelectionMenuDataSource {
 extension RSSelectionMenuDataSource {
     
     /// returns UITableViewCellStyle based on defined cellType
-    fileprivate func tableViewCellStyle() -> UITableViewCellStyle {
+    fileprivate func tableViewCellStyle() -> UITableViewCell.CellStyle {
         
         switch self.cellType {
         case .Basic:
-            return UITableViewCellStyle.default
+            return UITableViewCell.CellStyle.default
         case .RightDetail:
-            return UITableViewCellStyle.value1
+            return UITableViewCell.CellStyle.value1
         case .SubTitle:
-            return UITableViewCellStyle.subtitle
+            return UITableViewCell.CellStyle.subtitle
         default:
-            return UITableViewCellStyle.default
+            return UITableViewCell.CellStyle.default
         }
     }
     
@@ -156,7 +156,7 @@ extension RSSelectionMenuDataSource {
     /// setup first row
     fileprivate func setupFirstRow() -> UITableViewCell {
         
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: CellType.Basic.value())
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: CellType.Basic.value())
         cell.textLabel?.text = selectionTableView?.firstRowSelection?.rowType?.value
         cell.textLabel?.textColor = UIColor.darkGray
         

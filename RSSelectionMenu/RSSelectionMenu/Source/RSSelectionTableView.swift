@@ -1,7 +1,7 @@
 //
 //  RSSelectionTableView.swift
 //
-//  Copyright (c) 2017 Rushi Sangani
+//  Copyright (c) 2018 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -75,7 +75,7 @@ open class RSSelectionTableView<T>: UITableView {
         delegate = self.selectionDelegate
         tableFooterView = UIView()
         estimatedRowHeight = 50
-        rowHeight = UITableViewAutomaticDimension
+        rowHeight = UITableView.automaticDimension
         keyboardDismissMode = .interactive
         
         // register cells

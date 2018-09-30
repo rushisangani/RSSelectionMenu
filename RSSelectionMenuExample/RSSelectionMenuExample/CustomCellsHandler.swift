@@ -64,7 +64,7 @@ extension ViewController {
         }
         
         // navigationbar
-        selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white], barTintColor: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1), tintColor: UIColor.white)
+        selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white], barTintColor: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1), tintColor: UIColor.white)
         
         
         // unique property

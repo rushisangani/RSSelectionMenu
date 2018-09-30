@@ -1,7 +1,7 @@
 //
 //  RSSelectionMenuController.swift
 //
-//  Copyright (c) 2017 Rushi Sangani
+//  Copyright (c) 2018 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -150,7 +150,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     // MARK: - Setup Layout
     
     fileprivate func setupLayout() {
-        if let frame = parentController?.view.frame {
+        if let frame = parentController?.view.bounds {
             self.view.frame = frame
         }
         
@@ -175,18 +175,20 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         if case .Formsheet = menuPresentationStyle {
             
             tableView?.layer.cornerRadius = 8
-            self.backgroundView.frame = (window??.frame)!
+            self.backgroundView.frame = (window??.bounds)!
+            var tableViewSize = CGSize.zero
             
             if UIDevice.current.userInterfaceIdiom == .phone {
             
                 if UIDevice.current.orientation == .portrait {
-                    self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
+                    tableViewSize = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
                 }else {
-                    self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 200, height: backgroundView.frame.size.height - 100)
+                    tableViewSize = CGSize(width: backgroundView.frame.size.width - 200, height: backgroundView.frame.size.height - 100)
                 }
             }else {
-                self.tableView?.frame.size = CGSize(width: backgroundView.frame.size.width - 300, height: backgroundView.frame.size.height - 400)
+                tableViewSize = CGSize(width: backgroundView.frame.size.width - 300, height: backgroundView.frame.size.height - 400)
             }
+            self.tableView?.frame.size = tableViewSize
             self.tableView?.center = self.backgroundView.center
             
         }else {
@@ -265,7 +267,7 @@ extension RSSelectionMenu {
     }
     
     /// Navigationbar title and color
-    public func setNavigationBar(title: String, attributes:[NSAttributedStringKey: Any]? = nil, barTintColor: UIColor? = nil, tintColor: UIColor? = nil) {
+    public func setNavigationBar(title: String, attributes:[NSAttributedString.Key: Any]? = nil, barTintColor: UIColor? = nil, tintColor: UIColor? = nil) {
         self.navigationBarTheme = NavigationBarTheme(title: title, attributes: attributes, color: barTintColor, tintColor: tintColor)
     }
     
@@ -381,7 +383,7 @@ extension RSSelectionMenu {
     }
     
     // get alert controller
-    fileprivate func getAlertViewController(style: UIAlertControllerStyle, title: String?, action: String?, height: Double?) -> UIAlertController {
+    fileprivate func getAlertViewController(style: UIAlertController.Style, title: String?, action: String?, height: Double?) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: style)
         
         let actionTitle = action ?? doneButtonTitle
