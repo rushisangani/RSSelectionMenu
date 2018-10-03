@@ -180,7 +180,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
             
             if UIDevice.current.userInterfaceIdiom == .phone {
             
-                if UIDevice.current.orientation == .portrait {
+                if UIApplication.shared.statusBarOrientation == .portrait {
                     tableViewSize = CGSize(width: backgroundView.frame.size.width - 80, height: backgroundView.frame.size.height - 260)
                 }else {
                     tableViewSize = CGSize(width: backgroundView.frame.size.width - 200, height: backgroundView.frame.size.height - 100)
