@@ -103,6 +103,9 @@ extension ViewController {
             self.selectedDataArray = selectedItems
         }
         
+        // title
+        menu.setNavigationBar(title: "Select Player")
+        
         // on dissmis
         menu.onDismiss = { selectedItems in
             

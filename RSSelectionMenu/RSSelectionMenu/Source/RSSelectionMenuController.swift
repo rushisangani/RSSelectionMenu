@@ -155,9 +155,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         }
         
         // navigation bar theme
-        if let theme = navigationBarTheme {
-            setNavigationBarTheme(theme)
-        }
+        setNavigationBarTheme()
     }
     
     override open func viewDidLayoutSubviews() {
@@ -350,6 +348,7 @@ extension RSSelectionMenu {
             tobePresentController = UINavigationController(rootViewController: self)
         }
         else if case let .Popover(sourceView, size) = with {
+            tobePresentController = UINavigationController(rootViewController: self)
             tobePresentController.modalPresentationStyle = .popover
             if size != nil { tobePresentController.preferredContentSize = size! }
             
@@ -403,13 +402,21 @@ extension RSSelectionMenu {
     }
     
     // navigation bar
-    fileprivate func setNavigationBarTheme(_ theme: NavigationBarTheme) {
-        if let navigationBar = self.navigationBar {
+    fileprivate func setNavigationBarTheme() {
+        guard let navigationBar = self.navigationBar else { return }
+        
+        guard let theme = self.navigationBarTheme else {
             
-            navigationBar.barTintColor = theme.color
-            navigationBar.tintColor = theme.tintColor ?? UIColor.white
-            navigationItem.title = theme.title
-            navigationBar.titleTextAttributes = theme.attributes
+            // hide navigationbar for popover, if no title present
+            if case .Popover = self.menuPresentationStyle {
+                navigationBar.isHidden = true
+            }
+            return
         }
+        
+        navigationBar.barTintColor = theme.color
+        navigationBar.tintColor = theme.tintColor ?? UIColor.white
+        navigationItem.title = theme.title
+        navigationBar.titleTextAttributes = theme.attributes
     }
 }
