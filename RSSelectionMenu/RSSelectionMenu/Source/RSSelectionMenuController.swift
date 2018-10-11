@@ -283,6 +283,7 @@ extension RSSelectionMenu {
             if size != nil { tobePresentController.preferredContentSize = size! }
             
             let popover = tobePresentController.popoverPresentationController!
+            popover.backgroundColor = tableView?.backgroundColor
             popover.delegate = self
             popover.permittedArrowDirections = .any
             popover.sourceView = source!
