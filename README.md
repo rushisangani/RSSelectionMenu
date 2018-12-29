@@ -181,7 +181,7 @@ selectionMenu.onWillAppear = {
 - You'll get notified via handler, when user starts typing in searchbar.
 ```swift
 // show searchbar
-selectionMenu.showSearchBar { (searchtext) -> ([String]) in
+selectionMenu.showSearchBar { (searchText) -> ([String]) in
 
   // return filtered array based on any condition
   // here let's return array where name starts with specified search text
