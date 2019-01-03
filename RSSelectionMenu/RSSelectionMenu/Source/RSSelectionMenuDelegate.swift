@@ -54,8 +54,6 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        
         let selectionTableView = tableView as! RSSelectionTableView<T>
         
         // first row selected
@@ -81,6 +79,13 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
         
         // dismiss if required
         selectionTableView.dismissMenuIfRequired()
+    }
+    
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        let selectionTableView = tableView as! RSSelectionTableView<T>
+        let item = selectionTableView.objectAt(indexPath: indexPath)
+        handleActionForMultiSelection(item: item, index: indexPath.row, tableView: selectionTableView)
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

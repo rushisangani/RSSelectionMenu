@@ -51,6 +51,9 @@ open class RSSelectionTableView<T>: UITableView {
     /// cell type of tableview - default is "basic = UITableViewCellStyle.default"
     var cellType: CellType = .basic
     
+    /// cell selection style - default is 'tickmark'
+    var cellSelectionStyle: CellSelectionStyle = .tickmark
+    
     /// first row selection
     var firstRowSelection: RSFirstRowSelection?
     
@@ -119,6 +122,15 @@ extension RSSelectionTableView {
         self.selectionDelegate?.selectionDelegate = delegate
         self.selectionDelegate?.selectedItems = items
         self.selectionDelegate?.maxSelectedLimit = maxSelected
+    }
+    
+    /// Set cell selection style
+    func setCellSelectionStyle(_ style: CellSelectionStyle) {
+        self.cellSelectionStyle = style
+        if style == .checkbox {
+            isEditing = true
+            allowsMultipleSelectionDuringEditing = true
+        }
     }
     
     /// Add first row

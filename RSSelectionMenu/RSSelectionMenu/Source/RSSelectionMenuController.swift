@@ -53,6 +53,13 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     public var leftBarButtonTitle: String?
     public var rightBarButtonTitle: String?
     
+    /// cell selection style
+    public var cellSelectionStyle: CellSelectionStyle = .tickmark {
+        didSet {
+            self.tableView?.setCellSelectionStyle(cellSelectionStyle)
+        }
+    }
+    
     /// maximum selection limit
     public var maxSelectionLimit: UInt? = nil {
         didSet {

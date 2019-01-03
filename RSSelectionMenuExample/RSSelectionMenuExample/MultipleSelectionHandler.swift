@@ -35,6 +35,8 @@ extension ViewController {
             }
         }
         
+        selectionMenu.cellSelectionStyle = .checkbox
+        
         // selected items
         selectionMenu.setSelectedItems(items: simpleSelectedArray) { (name, index, selected, selectedItems) in
         }

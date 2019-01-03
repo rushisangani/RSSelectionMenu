@@ -99,7 +99,7 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
         // selection
         let delegate = tableView.delegate as! RSSelectionMenuDelegate<T>
         let selected = delegate.showSelected(item: item, inTableView: tableView as! RSSelectionTableView<T>)
-        self.updateCellStatus(selected: selected, for: cell)
+        self.updateStatus(selected, forCell: cell, atIndexPath: indexPath)
         
         return cell
     }
@@ -145,20 +145,41 @@ extension RSSelectionMenuDataSource {
     }
     
     /// update cell status
-    fileprivate func updateCellStatus(selected: Bool, for cell: UITableViewCell) {
-        cell.accessoryType = selected ? .checkmark : .none
+    fileprivate func updateStatus(_ status: Bool, forCell cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        
+        guard selectionTableView?.cellSelectionStyle == .checkbox else {
+            cell.accessoryType = status ? .checkmark : .none
+            return
+        }
+        
+        guard case .custom = cellType else {
+            cell.setSelected(status, animated: true)
+            return
+        }
+        
+        if isFirstRowAdded(), indexPath.row == 0 {
+            cell.setSelected(status, animated: true)
+            return
+        }
+        
+        if status {
+            selectionTableView?.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }else {
+            selectionTableView?.deselectRow(at: indexPath, animated: false)
+        }
     }
     
     /// setup first row
     fileprivate func setupFirstRow() -> UITableViewCell {
         
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: CellType.basic.value())
+        cell.selectionStyle = .none
         cell.textLabel?.text = selectionTableView?.firstRowSelection?.rowType.value
-        cell.textLabel?.textColor = UIColor.darkGray
+        cell.textLabel?.textColor = UIColor.darkText
         
         // update status
         let selected = selectionTableView?.firstRowSelection?.selected ?? false
-        self.updateCellStatus(selected: selected, for: cell)
+        self.updateStatus(selected, forCell: cell, atIndexPath: IndexPath(row: 0, section: 0))
         
         return cell
     }
@@ -170,7 +191,6 @@ extension RSSelectionMenuDataSource {
         switch cellType {
         case .custom(_, _):
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            cell.selectionStyle = .none
             return cell
         default:
             let cell = UITableViewCell(style: self.tableViewCellStyle(), reuseIdentifier: cellIdentifier)

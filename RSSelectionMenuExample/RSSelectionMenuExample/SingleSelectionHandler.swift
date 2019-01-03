@@ -50,6 +50,8 @@ extension ViewController {
             self.tableView.reloadData()
         }
         
+        selectionMenu.cellSelectionStyle = .checkbox
+        
         // show empty data label
         selectionMenu.showEmptyDataLabel()
         
@@ -84,6 +86,8 @@ extension ViewController {
             
             return self.dataArray.filter({ $0.lowercased().starts(with: searchText.lowercased()) })
         }
+        
+        menu.cellSelectionStyle = .checkbox
         
         // show as formsheet
         menu.show(style: .formSheet, from: self)
@@ -147,6 +151,8 @@ extension ViewController {
                 print("Empty Option Selected")
             }
         }
+        
+        selectionMenu.cellSelectionStyle = .checkbox
         
         // show empty data label
         selectionMenu.showEmptyDataLabel()

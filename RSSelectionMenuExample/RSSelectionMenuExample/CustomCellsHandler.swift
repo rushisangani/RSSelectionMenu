@@ -37,6 +37,8 @@ extension ViewController {
             return self.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(searchtext.lowercased()) })
         }
         
+        selectionMenu.cellSelectionStyle = .checkbox
+        
         // on dismiss handler - get selected items
         selectionMenu.onDismiss = { selectedItems in
             self.customselectedDataArray = selectedItems
@@ -69,6 +71,8 @@ extension ViewController {
         
         // unique property
         selectionMenu.uniquePropertyName = "id"
+        
+        selectionMenu.cellSelectionStyle = .checkbox
         
         selectionMenu.show(style: .present, from: self)
     }
