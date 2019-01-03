@@ -3,7 +3,7 @@
 //  RSSelectionMenuExample
 //
 //  Created by Rushi Sangani on 23/07/18.
-//  Copyright © 2018 Rushi Sangani. All rights reserved.
+//  Copyright © 2019 Rushi Sangani. All rights reserved.
 //
 
 import Foundation
@@ -15,7 +15,7 @@ extension ViewController {
     func showWithMultiSelect(style: PresentationStyle) {
         
         // Set selection type - Multiple
-        let selectionMenu = RSSelectionMenu(selectionType: .Multiple, dataSource: simpleDataArray) { (cell, name, indexPath) in
+        let selectionMenu = RSSelectionMenu(selectionStyle: .multiple, dataSource: simpleDataArray) { (cell, name, indexPath) in
             
             cell.textLabel?.text = name
             
@@ -26,7 +26,7 @@ extension ViewController {
         // add first row as All
         
         let allSelected = (simpleSelectedArray.count == 0)
-        selectionMenu.addFirstRowAs(rowType: .All, showSelected: allSelected) { (text, selected) in
+        selectionMenu.addFirstRowAs(rowType: .all, showSelected: allSelected) { (text, selected) in
             
             if selected {
                 
@@ -36,12 +36,12 @@ extension ViewController {
         }
         
         // selected items
-        selectionMenu.setSelectedItems(items: simpleSelectedArray) { (name, selected, selectedItems) in
+        selectionMenu.setSelectedItems(items: simpleSelectedArray) { (name, index, selected, selectedItems) in
         }
         
         // max selection item 3
-        if case .Present = style {
-            selectionMenu.maxSelectionLimit = 3
+        if case .present = style {
+            selectionMenu.maxSelectionLimit = 4
         }
         
         // on dismiss
@@ -51,7 +51,7 @@ extension ViewController {
             /// do some stuff on menu dismiss
             let displayText = items.joined(separator: ", ")
             
-            if case .Push = style {
+            if case .push = style {
                 self.multiSelectPushLabel.text = displayText.isEmpty ? "All" : displayText
             }else {
                 self.multiSelectCustomRowLabel.text = displayText.isEmpty ? "All" : displayText
@@ -61,7 +61,7 @@ extension ViewController {
         }
         
         // show menu
-        selectionMenu.show(style: .Push, from: self)
+        selectionMenu.show(style: style, from: self)
     }
     
     // Popover - Multi Select
@@ -69,7 +69,7 @@ extension ViewController {
         
         // selection type as multiple
         
-        let selectionMenu = RSSelectionMenu(selectionType: .Multiple, dataSource: dataArray, cellType: .SubTitle) { (cell, name, indexPath) in
+        let selectionMenu = RSSelectionMenu(selectionStyle: .multiple, dataSource: dataArray, cellType: .subTitle) { (cell, name, indexPath) in
             
             cell.textLabel?.text = name.components(separatedBy: " ").first
             cell.detailTextLabel?.text = name.components(separatedBy: " ").last
@@ -77,7 +77,7 @@ extension ViewController {
         
         // selected items
 
-        selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, selectedList) in
+        selectionMenu.setSelectedItems(items: selectedDataArray) { (text, index, selected, selectedList) in
             
             // update list
             self.selectedDataArray = selectedList
@@ -95,6 +95,6 @@ extension ViewController {
         }
         
         // show as popover
-        selectionMenu.show(style: .Popover(sourceView: sender, size: nil), from: self)
+        selectionMenu.show(style: .popover(sourceView: sender, size: nil), from: self)
     }
 }

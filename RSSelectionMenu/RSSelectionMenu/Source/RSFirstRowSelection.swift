@@ -1,7 +1,8 @@
 //
 //  RSFirstRowSelection.swift
+//  RSSelectionMenu
 //
-//  Copyright (c) 2018 Rushi Sangani
+//  Copyright (c) 2019 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,46 +25,24 @@
 
 import Foundation
 
-/// FirstRowType
-public enum FirstRowType {
-    
-    case  Empty
-    case  None
-    case  All
-    case  Custom(value: String)
-    
-    // display
-    var value: String {
-        switch self {
-        case .Empty:
-            return ""
-        case .None:
-            return "None"
-        case .All:
-            return "All"
-        case .Custom(let value):
-            return value
-        }
-    }
-}
-
 /// RSFirstRowSelection
 public class RSFirstRowSelection {
+    
+    // MARK: - Properties
+    
+    // row type
+    var rowType: FirstRowType
     
     // selection state
     var selected: Bool = false
     
-    // row type
-    var rowType: FirstRowType?
-    
-    // selection delegate
+    // delegate
     var delegate: FirstRowSelection?
     
-    // init
-    init(selected: Bool, rowType: FirstRowType?, delegate: FirstRowSelection?) {
-        
-        self.selected = selected
+    /// init
+    init(rowType: FirstRowType, selected: Bool, delegate: FirstRowSelection?) {
         self.rowType = rowType
+        self.selected = selected
         self.delegate = delegate
     }
 }

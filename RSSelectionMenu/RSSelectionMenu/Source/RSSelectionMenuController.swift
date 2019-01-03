@@ -1,7 +1,8 @@
 //
 //  RSSelectionMenuController.swift
+//  RSSelectionMenu
 //
-//  Copyright (c) 2018 Rushi Sangani
+//  Copyright (c) 2019 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -30,9 +31,6 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     // MARK: - Views
     public var tableView: RSSelectionTableView<T>?
     
-    /// dismiss: for Single selection only
-    public var dismissAutomatically: Bool = true
-    
     /// SearchBar
     public var searchBar: UISearchBar? {
         return tableView?.searchControllerDelegate?.searchBar
@@ -44,6 +42,9 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     }
     
     // MARK: - Properties
+    
+    /// dismiss: for Single selection only
+    public var dismissAutomatically: Bool = true
     
     /// property name or unique key is required when using custom models array or dictionary array as datasource
     public var uniquePropertyName: String?
@@ -65,18 +66,11 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     /// Selection menu dismissal handler
     public var onDismiss:((_ selectedItems: DataSource<T>) -> ())?
     
-    /// Searchbar cancel button
-    public var searchBarCancelButtonAttributes: SearchBarCancelButtonAttributes? = nil {
-        didSet {
-            self.tableView?.searchControllerDelegate?.cancelButtonAttributes = searchBarCancelButtonAttributes
-        }
-    }
-    
     /// store reference view controller
     fileprivate weak var parentController: UIViewController?
     
     /// presentation style
-    var menuPresentationStyle: PresentationStyle = .Present
+    fileprivate var menuPresentationStyle: PresentationStyle = .present
     
     /// navigationbar theme
     fileprivate var navigationBarTheme: NavigationBarTheme?
@@ -84,17 +78,18 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     /// backgroundView
     fileprivate var backgroundView = UIView()
     
-    // MARK: - Life Cycle
+    
+    // MARK: - Init
     
     convenience public init(dataSource: DataSource<T>, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
-        self.init(selectionType: .Single, dataSource: dataSource, cellConfiguration: configuration)
+        self.init(selectionStyle: .single, dataSource: dataSource, cellConfiguration: configuration)
     }
     
-    convenience public init(selectionType: SelectionType, dataSource: DataSource<T>, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
-        self.init(selectionType: selectionType, dataSource: dataSource, cellType: .Basic, cellConfiguration: configuration)
+    convenience public init(selectionStyle: SelectionStyle, dataSource: DataSource<T>, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
+        self.init(selectionStyle: selectionStyle, dataSource: dataSource, cellType: .basic, cellConfiguration: configuration)
     }
     
-    convenience public init(selectionType: SelectionType, dataSource: DataSource<T>, cellType: CellType, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
+    convenience public init(selectionStyle: SelectionStyle, dataSource: DataSource<T>, cellType: CellType, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
         self.init()
         
         // data source
@@ -104,8 +99,10 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         let selectionDelegate = RSSelectionMenuDelegate<T>(selectedItems: [])
      
         // initilize tableview
-        self.tableView = RSSelectionTableView<T>(selectionType: selectionType, cellType: cellType, dataSource: selectionDataSource, delegate: selectionDelegate, from: self)
+        self.tableView = RSSelectionTableView<T>(selectionStyle: selectionStyle, cellType: cellType, dataSource: selectionDataSource, delegate: selectionDelegate, from: self)
     }
+    
+    // MARK: - Life Cycle
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +111,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         setupLayout()        
     }
     
-    open override func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let handler = onWillAppear { handler() }
     }
@@ -128,7 +125,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     fileprivate func setupViews() {
         backgroundView.backgroundColor = UIColor.clear
         
-        if case .Formsheet = menuPresentationStyle {
+        if case .formSheet = menuPresentationStyle {
             backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
             addTapGesture()
         }
@@ -170,7 +167,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         let window =  UIApplication.shared.delegate?.window
         
         // change border style for formsheet
-        if case .Formsheet = menuPresentationStyle {
+        if case .formSheet = menuPresentationStyle {
             
             tableView?.layer.cornerRadius = 8
             self.backgroundView.frame = (window??.bounds)!
@@ -247,7 +244,8 @@ extension RSSelectionMenu {
     
     /// Set selected items and selection event
     public func setSelectedItems(items: DataSource<T>, maxSelected: UInt? = nil, onDidSelectRow delegate: @escaping UITableViewCellSelection<T>) {
-        self.tableView?.setSelectedItems(items: items, maxSelected: maxSelected, onDidSelectRow: delegate)
+        let maxLimit = maxSelected ?? maxSelectionLimit
+        self.tableView?.setSelectedItems(items: items, maxSelected: maxLimit, onDidSelectRow: delegate)
     }
     
     /// First row type and selection
@@ -257,21 +255,21 @@ extension RSSelectionMenu {
     
     /// Searchbar
     public func showSearchBar(onTextDidSearch completion: @escaping UISearchBarResult<T>) {
-        self.showSearchBar(withPlaceHolder: defaultPlaceHolder, tintColor: defaultSearchBarTintColor, onTextDidSearch: completion)
+        self.showSearchBar(withPlaceHolder: defaultPlaceHolder, barTintColor: defaultSearchBarTintColor, onTextDidSearch: completion)
     }
     
-    public func showSearchBar(withPlaceHolder: String, tintColor: UIColor, onTextDidSearch completion: @escaping UISearchBarResult<T>) {
-        self.tableView?.addSearchBar(placeHolder: withPlaceHolder, tintColor: tintColor, completion: completion)
+    public func showSearchBar(withPlaceHolder: String, barTintColor: UIColor, onTextDidSearch completion: @escaping UISearchBarResult<T>) {
+        self.tableView?.addSearchBar(placeHolder: withPlaceHolder, barTintColor: barTintColor, completion: completion)
     }
     
     /// Navigationbar title and color
     public func setNavigationBar(title: String, attributes:[NSAttributedString.Key: Any]? = nil, barTintColor: UIColor? = nil, tintColor: UIColor? = nil) {
-        self.navigationBarTheme = NavigationBarTheme(title: title, attributes: attributes, color: barTintColor, tintColor: tintColor)
+        self.navigationBarTheme = NavigationBarTheme(title: title, titleAttributes: attributes, tintColor: tintColor, barTintColor: barTintColor)
     }
     
     /// Show
     public func show(from: UIViewController) {
-        self.show(style: .Present, from: from)
+        self.show(style: .present, from: from)
     }
     
     public func show(style: PresentationStyle, from: UIViewController) {
@@ -287,9 +285,9 @@ extension RSSelectionMenu {
             self?.menuWillDismiss()
             
             switch self?.menuPresentationStyle {
-            case .Push?:
+            case .push?:
                 self?.navigationController?.popViewController(animated: animated!)
-            case .Present?, .Popover?, .Formsheet?, .Alert?, .Actionsheet?:
+            case .present?, .popover?, .formSheet?, .alert?, .actionSheet?:
                self?.dismiss(animated: animated!, completion: nil)
             case .none:
                 break
@@ -304,8 +302,8 @@ extension RSSelectionMenu {
     // check if show done button
     fileprivate func showDoneButton() -> Bool {
         switch menuPresentationStyle {
-        case .Present, .Push:
-            return (tableView?.selectionType == .Multiple || !self.dismissAutomatically)
+        case .present, .push:
+            return (tableView?.selectionStyle == .multiple || !self.dismissAutomatically)
         default:
             return false
         }
@@ -313,8 +311,8 @@ extension RSSelectionMenu {
     
     // check if show cancel button
     fileprivate func showCancelButton() -> Bool {
-        if case .Present = menuPresentationStyle {
-            return tableView?.selectionType == .Single && self.dismissAutomatically
+        if case .present = menuPresentationStyle {
+            return tableView?.selectionStyle == .single && self.dismissAutomatically
         }
         return false
     }
@@ -329,7 +327,7 @@ extension RSSelectionMenu {
         
         // on menu dismiss
         if let dismissHandler = self.onDismiss {
-            dismissHandler(self.tableView?.selectionDelegate?.selectedObjects ?? [])
+            dismissHandler(self.tableView?.selectionDelegate?.selectedItems ?? [])
         }
     }
     
@@ -338,16 +336,16 @@ extension RSSelectionMenu {
         parentController = from
         menuPresentationStyle = with
         
-        if case .Push = with {
+        if case .push = with {
             from.navigationController?.pushViewController(self, animated: true)
             return
         }
         
         var tobePresentController: UIViewController = self
-        if case .Present = with {
+        if case .present = with {
             tobePresentController = UINavigationController(rootViewController: self)
         }
-        else if case let .Popover(sourceView, size) = with {
+        else if case let .popover(sourceView, size) = with {
             tobePresentController = UINavigationController(rootViewController: self)
             tobePresentController.modalPresentationStyle = .popover
             if size != nil { tobePresentController.preferredContentSize = size! }
@@ -358,15 +356,15 @@ extension RSSelectionMenu {
             popover.sourceView = sourceView
             popover.sourceRect = sourceView.bounds
         }
-        else if case .Formsheet = with {
+        else if case .formSheet = with {
             tobePresentController.modalPresentationStyle = .overCurrentContext
             tobePresentController.modalTransitionStyle = .crossDissolve
         }
-        else if case let .Alert(title, action, height) = with {
+        else if case let .alert(title, action, height) = with {
             tobePresentController = getAlertViewController(style: .alert, title: title, action: action, height: height)
             tobePresentController.setValue(self, forKey: contentViewController)
         }
-        else if case let .Actionsheet(title, action, height) = with {
+        else if case let .actionSheet(title, action, height) = with {
             tobePresentController = getAlertViewController(style: .actionSheet, title: title, action: action, height: height)
             tobePresentController.setValue(self, forKey: contentViewController)
             
@@ -386,12 +384,12 @@ extension RSSelectionMenu {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: style)
         
         let actionTitle = action ?? doneButtonTitle
-        let doneAction = UIAlertAction(title: actionTitle, style: .cancel) { (doneButton) in
-            self.menuWillDismiss()
+        let doneAction = UIAlertAction(title: actionTitle, style: .cancel) { [weak self] (doneButton) in
+            self?.menuWillDismiss()
         }
         
         // add done action
-        if (tableView?.selectionType == .Multiple || !self.dismissAutomatically)  {
+        if (tableView?.selectionStyle == .multiple || !self.dismissAutomatically)  {
             alertController.addAction(doneAction)
         }
         
@@ -408,15 +406,23 @@ extension RSSelectionMenu {
         guard let theme = self.navigationBarTheme else {
             
             // hide navigationbar for popover, if no title present
-            if case .Popover = self.menuPresentationStyle {
+            if case .popover = self.menuPresentationStyle {
                 navigationBar.isHidden = true
+            }
+            
+            // check for present style
+            else if case .present = self.menuPresentationStyle, let parentNavigationBar = self.parentController?.navigationController?.navigationBar {
+                
+                navigationBar.titleTextAttributes = parentNavigationBar.titleTextAttributes
+                navigationBar.barTintColor = parentNavigationBar.barTintColor
+                navigationBar.tintColor = parentNavigationBar.tintColor
             }
             return
         }
         
-        navigationBar.barTintColor = theme.color
-        navigationBar.tintColor = theme.tintColor ?? UIColor.white
         navigationItem.title = theme.title
-        navigationBar.titleTextAttributes = theme.attributes
+        navigationBar.titleTextAttributes = theme.titleAttributes
+        navigationBar.barTintColor = theme.barTintColor
+        navigationBar.tintColor = theme.tintColor
     }
 }

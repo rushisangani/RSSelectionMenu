@@ -1,5 +1,6 @@
 //
-//  RSSelectionMenu.h
+//  NavigationBarTheme.swift
+//  RSSelectionMenu
 //
 //  Copyright (c) 2019 Rushi Sangani
 //
@@ -22,12 +23,16 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+import Foundation
+import UIKit
 
-//! Project version number for RSSelectionMenu.
-FOUNDATION_EXPORT double RSSelectionMenuVersionNumber;
-
-//! Project version string for RSSelectionMenu.
-FOUNDATION_EXPORT const unsigned char RSSelectionMenuVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <RSSelectionMenu/PublicHeader.h>
+/// NavigationBarTheme
+public struct NavigationBarTheme {
+    
+    // MARK: - Properties
+    
+    var title: String?
+    var titleAttributes: [NSAttributedString.Key: Any]?
+    var tintColor: UIColor?
+    var barTintColor: UIColor?
+}

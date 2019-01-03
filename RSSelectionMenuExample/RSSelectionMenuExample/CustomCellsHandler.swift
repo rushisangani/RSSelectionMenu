@@ -3,7 +3,7 @@
 //  RSSelectionMenuExample
 //
 //  Created by Rushi Sangani on 24/07/18.
-//  Copyright © 2018 Rushi Sangani. All rights reserved.
+//  Copyright © 2019 Rushi Sangani. All rights reserved.
 //
 
 import Foundation
@@ -18,7 +18,7 @@ extension ViewController {
         // For Custom cells - specify NibName and CellIdentifier
         // For Custom Models - specify UniquePropertyName
         
-        let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: customDataArray, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
+        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: customDataArray, cellType: .custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
             
             // cast cell to your custom cell type
             let customCell = cell as! CustomTableViewCell
@@ -29,7 +29,7 @@ extension ViewController {
         }
         
         // show with default selected items
-        selectionMenu.setSelectedItems(items: customselectedDataArray) { (text, selected, selectedItems) in
+        selectionMenu.setSelectedItems(items: customselectedDataArray) { (text, index, selected, selectedItems) in
         }
         
         // show searchbar
@@ -42,14 +42,14 @@ extension ViewController {
             self.customselectedDataArray = selectedItems
         }
         
-        selectionMenu.show(style: .Push, from: self)
+        selectionMenu.show(style: .push, from: self)
     }
     
     /// show with custom models
     func showWithCustomModels() {
         
         // menu with custom cells and custom models
-        let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: users, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, user, indexPath) in
+        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: users, cellType: .custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, user, indexPath) in
             
             let customCell = cell as! CustomTableViewCell
             
@@ -59,7 +59,7 @@ extension ViewController {
         }
         
         // selected items
-        selectionMenu.setSelectedItems(items: selectedUsers) { (user, selected, items) in
+        selectionMenu.setSelectedItems(items: selectedUsers) { (user, index, selected, items) in
             self.selectedUsers = items
         }
         
@@ -70,6 +70,6 @@ extension ViewController {
         // unique property
         selectionMenu.uniquePropertyName = "id"
         
-        selectionMenu.show(style: .Present, from: self)
+        selectionMenu.show(style: .present, from: self)
     }
 }

@@ -65,9 +65,9 @@ extension ViewController {
             
             switch indexPath.row {
             case 0:
-                self.showSingleSelectionMenu(style: .Push)
+                self.showSingleSelectionMenu(style: .push)
             case 1:
-                self.showSingleSelectionMenu(style: .Present)
+                self.showSingleSelectionMenu(style: .present)
             case 2:
                 self.showAsFormsheet()
             case 3:
@@ -86,11 +86,11 @@ extension ViewController {
 
             switch indexPath.row {
             case 0:
-                self.showWithMultiSelect(style: .Push)
+                self.showWithMultiSelect(style: .push)
             case 1:
                 self.showAsMultiSelectPopover(sender: cell!)
             case 2:
-                self.showWithMultiSelect(style: .Present)
+                self.showWithMultiSelect(style: .present)
             case 3:
                 self.showAsAlertController(style: .actionSheet, title: "Select Player", action: nil, height: nil)
             default:

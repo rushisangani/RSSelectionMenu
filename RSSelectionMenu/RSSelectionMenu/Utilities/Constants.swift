@@ -1,7 +1,8 @@
 //
 //  Constants.swift
+//  RSSelectionMenu
 //
-//  Copyright (c) 2018 Rushi Sangani
+//  Copyright (c) 2019 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,27 +27,9 @@
 import Foundation
 import UIKit
 
-/// UITableViewCellConfiguration
-public typealias UITableViewCellConfiguration<T> = ((_ cell: UITableViewCell, _ dataObject: T, _ indexPath: IndexPath) -> ())
 
-/// DataSource
-public typealias DataSource<T> = [T]
+/************ Constants ************/
 
-/// UITableViewCellSelection
-public typealias UITableViewCellSelection<T> = ((_ object: T?, _ isSelected: Bool, _ selectedArray: DataSource<T>) -> ())
-
-/// FirstRowSelection
-public typealias FirstRowSelection = ((_ object: String, _ isSelected: Bool) -> ())
-
-
-/// FilteredDataSource
-public typealias FilteredDataSource<T> = [T]
-
-/// UISearchBarResult
-public typealias UISearchBarResult<T> = ((_ searchText: String) -> (FilteredDataSource<T>))
-
-/// SearchBar CancelButton
-public typealias SearchBarCancelButtonAttributes = (title: String, tintColor: UIColor?)
 
 /// Keys
 public let contentViewController       = "contentViewController"
@@ -61,3 +44,32 @@ public let defaultSearchBarTintColor   = UIColor(white: 0.9, alpha: 0.9)
 
 /// Constants
 public let defaultHeaderHeight         = CGFloat(50)
+
+
+
+/************ typealias ************/
+
+
+
+/// UITableViewCellConfiguration
+public typealias UITableViewCellConfiguration<T> = ((_ cell: UITableViewCell, _ item: T, _ indexPath: IndexPath) -> ())
+
+
+/// DataSource
+public typealias DataSource<T> = [T]
+
+
+/// FilteredDataSource
+public typealias FilteredDataSource<T> = [T]
+
+
+/// UITableViewCellSelection
+public typealias UITableViewCellSelection<T> = ((_ item: T?, _ index: Int, _ selected: Bool, _ selectedItems: DataSource<T>) -> ())
+
+
+/// UISearchBarResult
+public typealias UISearchBarResult<T> = ((_ searchText: String) -> (FilteredDataSource<T>))
+
+
+/// FirstRowSelection
+public typealias FirstRowSelection = ((_ value: String, _ selected: Bool) -> ())

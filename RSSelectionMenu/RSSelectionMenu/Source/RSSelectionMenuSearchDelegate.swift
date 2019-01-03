@@ -1,7 +1,8 @@
 //
 //  RSSelectionMenuSearchDelegate.swift
+//  RSSelectionMenu
 //
-//  Copyright (c) 2018 Rushi Sangani
+//  Copyright (c) 2019 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -33,65 +34,32 @@ open class RSSelectionMenuSearchDelegate: NSObject {
     /// to execute on search event
     public var didSearch: ((String) -> ())?
     
-    /// cancel button
-    public var cancelButtonAttributes: SearchBarCancelButtonAttributes?
-    
     // MARK: - Initialize
-    init(placeHolder: String, tintColor: UIColor) {
+    init(placeHolder: String, barTintColor: UIColor) {
         super.init()
         
         searchBar = UISearchBar()
-        searchBar?.delegate = self
-        searchBar?.sizeToFit()
-        searchBar?.barTintColor = tintColor
         searchBar?.placeholder = placeHolder
+        searchBar?.barTintColor = barTintColor
+        searchBar?.sizeToFit()
+        searchBar?.delegate = self
         searchBar?.enablesReturnKeyAutomatically = false
     }
     
+    /// Search for the text
     func searchForText(text: String?) {
-        if let search = didSearch {
-            search(text ?? "")
+        guard let searchHandler = didSearch else {
+            return
         }
-    }
-    
-    // cancel button
-    func setCancelButtonAttributes(attributes: SearchBarCancelButtonAttributes) {
-        guard let firstSubView = searchBar?.subviews.first else { return }
-        for view in firstSubView.subviews {
-            if let cancelButton = view as? UIButton {
-                cancelButton.setTitle(attributes.title, for: .normal)
-                if let color = attributes.tintColor {
-                    cancelButton.tintColor = color
-                }
-            }
-        }
+        searchHandler(text ?? "")
     }
 }
 
 // MARK:- UISearchBarDelegate
 extension RSSelectionMenuSearchDelegate : UISearchBarDelegate {
     
-    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        /*
-        searchBar.showsCancelButton = true
-        guard let attributes = cancelButtonAttributes else { return }
-        setCancelButtonAttributes(attributes: attributes)
-        */
-    }
-    
-    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        //searchBar.showsCancelButton = false
-    }
-    
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-    }
-    
-    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        
-        searchBar.text = ""
-        searchForText(text: "")
     }
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

@@ -1,7 +1,8 @@
 //
 //  RSSelectionMenuDelegate.swift
+//  RSSelectionMenu
 //
-//  Copyright (c) 2018 Rushi Sangani
+//  Copyright (c) 2019 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +25,7 @@
 
 import UIKit
 
+/// RSSelectionMenuDelegate
 open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
 
     // MARK: - Properties
@@ -31,23 +33,24 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
     /// tableview cell selection delegate
     var selectionDelegate: UITableViewCellSelection<T>? = nil
     
-    /// selected objects
-    var selectedObjects = DataSource<T>()
+    /// selected items
+    var selectedItems = DataSource<T>()
     
     /// maximum selection limit
     var maxSelectedLimit: UInt?
     
+    
     // MARK: - Initialize
     convenience init(selectedItems: DataSource<T>) {
         self.init()
-        selectedObjects = selectedItems
+        self.selectedItems = selectedItems
     }
+    
     
     // MARK:- UITableViewDelegate
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let searchBar = isSearchbarAdded(tableView).1
-        return searchBar
+        return self.isSearchBarAdded(tableView).1
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -57,7 +60,6 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
         
         // first row selected
         if indexPath.row == 0 && isFirstRowAdded(inTableView: selectionTableView) {
-            
             handleActionForFirstRow(tableView: selectionTableView)
             return
         }
@@ -65,109 +67,129 @@ open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
         // update first row
         updateFirstRowSelection(tableView: selectionTableView)
         
-        // selected object
-        let dataObject = selectionTableView.objectAt(indexPath: indexPath)
+        // selected item
+        let item = selectionTableView.objectAt(indexPath: indexPath)
         
         // single selection
-        if selectionTableView.selectionType == .Single {
-            handleActionForSingleSelection(object: dataObject, tableView: selectionTableView)
+        if selectionTableView.selectionStyle == .single {
+            self.handleActionForSingleSelection(item: item, index: indexPath.row, tableView: selectionTableView)
         }
+        // multiple selection
         else {
-            // multiple selection
-            handleActionForMultiSelection(object: dataObject, tableView: selectionTableView)
+            self.handleActionForMultiSelection(item: item, index: indexPath.row, tableView: selectionTableView)
         }
         
         // dismiss if required
-        selectionTableView.dismissControllerIfRequired()
+        selectionTableView.dismissMenuIfRequired()
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return isSearchbarAdded(tableView).0 ? defaultHeaderHeight : 1
+        return self.isSearchBarAdded(tableView).0 ? defaultHeaderHeight : 1
     }
 }
+
+// MARK:- Public
+extension RSSelectionMenuDelegate {
+    
+    /// Check for selection status
+    public func showSelected(item: T, inTableView tableView: RSSelectionTableView<T>) -> Bool {
+        return tableView.selectionMenu!.containsObject(item, inDataSource: selectedItems)
+    }
+    
+    /// Remove all selected items
+    public func removeAllSelectedItems() {
+        selectedItems.removeAll()
+    }
+}
+
 
 // MARK:- Private
 extension RSSelectionMenuDelegate {
     
-    /// action handler for single selection tableview
-    fileprivate func handleActionForSingleSelection(object: T, tableView: RSSelectionTableView<T>) {
-        removeAllSelected()
+    /// Action handler for single selection
+    fileprivate func handleActionForSingleSelection(item: T, index: Int, tableView: RSSelectionTableView<T>) {
+        self.removeAllSelectedItems()
         
         // add to selected list
-        selectedObjects.append(object)
+        selectedItems.append(item)
         
         // reload tableview
         tableView.reloadData()
         
-        // selection callback
+        // call selection callback
         if let delegate = selectionDelegate {
-            delegate(object, true, selectedObjects)
+            delegate(item, index, true, selectedItems)
         }
     }
     
-    /// action handler for multiple selection tableview
-    fileprivate func handleActionForMultiSelection(object: T, tableView: RSSelectionTableView<T>) {
+    /// Action handler for multiple selection tableview
+    fileprivate func handleActionForMultiSelection(item: T, index: Int, tableView: RSSelectionTableView<T>) {
         
         // is selected
-        var isSelected = false
+        var selected = false
         
         // remove if already selected
-        if let selectedIndex = tableView.selectionMenu?.isSelected(object: object, from: selectedObjects) {
-            selectedObjects.remove(at: selectedIndex)
+        if let selectedIndex = tableView.selectionMenu?.isSelected(item: item, from: selectedItems) {
+            selectedItems.remove(at: selectedIndex)
         }
         
         // check if selected items reached to max limit, if specified
-        else if maxSelectedLimit == nil || selectedObjects.count < maxSelectedLimit! {
-            selectedObjects.append(object)
-            isSelected = true
+        else if maxSelectedLimit == nil || selectedItems.count < maxSelectedLimit! {
+            selectedItems.append(item)
+            selected = true
         }
         
         // reload tableview
         tableView.reloadData()
         
-        // selection callback
+        // call selection callback
         if let delegate = selectionDelegate {
-            delegate(object, isSelected, selectedObjects)
+            delegate(item, index, selected, selectedItems)
         }
     }
     
-    /// first row selection handler
+    /// First row selection handler
     fileprivate func handleActionForFirstRow(tableView: RSSelectionTableView<T>) {
         
         // remove all selected when first row select
-        removeAllSelected()
+        self.removeAllSelectedItems()
         
         // update first row selection
-        updateFirstRowSelection(selected: !(tableView.firstRowSelection?.selected)!, tableView: tableView)
+        let selected = !(tableView.firstRowSelection?.selected ?? false)
+        updateFirstRowSelection(selected: selected, tableView: tableView)
         
         // reload tableview
         tableView.reloadData()
         
         // selection callback
         if let rowSelection = selectionDelegate {
-            rowSelection(nil, false, selectedObjects)
+            rowSelection(nil, 0, false, selectedItems)
         }
         
         // dismiss if required
-        tableView.dismissControllerIfRequired()
+        tableView.dismissMenuIfRequired()
     }
     
-    /// checks if first row is added
-    fileprivate func isFirstRowAdded(inTableView: RSSelectionTableView<T>) -> Bool {
-        return (inTableView.selectionDataSource?.isFirstRowAdded())!
+    /// Checks if first row is added
+    fileprivate func isFirstRowAdded(inTableView tableView: RSSelectionTableView<T>) -> Bool {
+        return tableView.selectionDataSource?.isFirstRowAdded() ?? false
     }
     
-    /// update first row selection
-    fileprivate func updateFirstRowSelection(selected: Bool? = false, tableView: RSSelectionTableView<T>) {
-        if let rowSelection = tableView.firstRowSelection {
-            
-            rowSelection.selected = selected!
-            rowSelection.delegate!((rowSelection.rowType?.value)!, selected!)
+    /// Update first row selection
+    fileprivate func updateFirstRowSelection(selected: Bool = false, tableView: RSSelectionTableView<T>) {
+        tableView.firstRowSelection?.selected = selected
+        
+        guard let rowSelection = tableView.firstRowSelection,
+            let delegate = rowSelection.delegate else {
+                return
         }
+        
+        // calling delegate
+        delegate(rowSelection.rowType.value, selected)
     }
     
-    /// checks if searchbar is added
-    fileprivate func isSearchbarAdded(_ tableView: UITableView) -> (Bool, UISearchBar?) {
+    /// Checks if searchbar is added
+    fileprivate func isSearchBarAdded(_ tableView: UITableView) -> (Bool, UISearchBar?) {
         let selectionTableView = tableView as! RSSelectionTableView<T>
         if let searchBar = selectionTableView.searchControllerDelegate?.searchBar {
             return (true, searchBar)
@@ -176,16 +198,3 @@ extension RSSelectionMenuDelegate {
     }
 }
 
-// MARK:- Public
-extension RSSelectionMenuDelegate {
-    
-    /// check for selection status
-    public func showSelected(object: T, inTableView: RSSelectionTableView<T>) -> Bool {
-        return inTableView.selectionMenu!.containsObject(object, inDataSource: selectedObjects)
-    }
-    
-    /// remove selected objects
-    public func removeAllSelected() {
-        selectedObjects.removeAll()
-    }
-}

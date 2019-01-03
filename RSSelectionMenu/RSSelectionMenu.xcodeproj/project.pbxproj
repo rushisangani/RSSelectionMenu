@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		864713E321DDE62000F6B96C /* DecodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864713E221DDE62000F6B96C /* DecodableExtension.swift */; };
+		864713E521DDE6AE00F6B96C /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864713E421DDE6AE00F6B96C /* ViewControllerExtension.swift */; };
+		864713E921DDE76800F6B96C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864713E821DDE76800F6B96C /* Enums.swift */; };
+		864713ED21DDE82D00F6B96C /* NavigationBarTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864713EC21DDE82D00F6B96C /* NavigationBarTheme.swift */; };
 		A21C309D1F88BAF100C48F9A /* RSFirstRowSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21C309C1F88BAF100C48F9A /* RSFirstRowSelection.swift */; };
 		D835710C1F87986400185B73 /* RSSelectionMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = D835710A1F87986400185B73 /* RSSelectionMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D852FDA41F879BF7002362CC /* RSSelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FD9F1F879BF6002362CC /* RSSelectionMenuController.swift */; };
@@ -29,11 +33,15 @@
 		D852FDA71F879BF7002362CC /* RSSelectionMenuSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */; };
 		D852FDA81F879BF7002362CC /* RSSelectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */; };
 		D852FDAF1F879BFF002362CC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAA1F879BFF002362CC /* Constants.swift */; };
-		D852FDB21F879BFF002362CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAD1F879BFF002362CC /* Extensions.swift */; };
-		D852FDB31F879BFF002362CC /* RSSelectionMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */; };
+		D852FDB21F879BFF002362CC /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */; };
+		D852FDB31F879BFF002362CC /* RSSelectionMenuExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852FDAE1F879BFF002362CC /* RSSelectionMenuExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		864713E221DDE62000F6B96C /* DecodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtension.swift; sourceTree = "<group>"; };
+		864713E421DDE6AE00F6B96C /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
+		864713E821DDE76800F6B96C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		864713EC21DDE82D00F6B96C /* NavigationBarTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarTheme.swift; sourceTree = "<group>"; };
 		A21C309C1F88BAF100C48F9A /* RSFirstRowSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSFirstRowSelection.swift; sourceTree = "<group>"; };
 		D83571071F87986400185B73 /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D835710A1F87986400185B73 /* RSSelectionMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSelectionMenu.h; sourceTree = "<group>"; };
@@ -44,8 +52,8 @@
 		D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuSearchDelegate.swift; sourceTree = "<group>"; };
 		D852FDA31F879BF6002362CC /* RSSelectionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionTableView.swift; sourceTree = "<group>"; };
 		D852FDAA1F879BFF002362CC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D852FDAD1F879BFF002362CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuExtensions.swift; sourceTree = "<group>"; };
+		D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
+		D852FDAE1F879BFF002362CC /* RSSelectionMenuExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSelectionMenuExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +67,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		864713E621DDE74800F6B96C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D852FDAD1F879BFF002362CC /* NSObjectExtension.swift */,
+				864713E221DDE62000F6B96C /* DecodableExtension.swift */,
+				864713E421DDE6AE00F6B96C /* ViewControllerExtension.swift */,
+				D852FDAE1F879BFF002362CC /* RSSelectionMenuExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D83570FD1F87986400185B73 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +114,7 @@
 				D852FDA11F879BF6002362CC /* RSSelectionMenuDelegate.swift */,
 				D852FDA21F879BF6002362CC /* RSSelectionMenuSearchDelegate.swift */,
 				A21C309C1F88BAF100C48F9A /* RSFirstRowSelection.swift */,
+				864713EC21DDE82D00F6B96C /* NavigationBarTheme.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -102,9 +122,9 @@
 		D852FDA91F879BFF002362CC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				864713E821DDE76800F6B96C /* Enums.swift */,
 				D852FDAA1F879BFF002362CC /* Constants.swift */,
-				D852FDAD1F879BFF002362CC /* Extensions.swift */,
-				D852FDAE1F879BFF002362CC /* RSSelectionMenuExtensions.swift */,
+				864713E621DDE74800F6B96C /* Extensions */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -213,12 +233,16 @@
 				D852FDA61F879BF7002362CC /* RSSelectionMenuDelegate.swift in Sources */,
 				D852FDA41F879BF7002362CC /* RSSelectionMenuController.swift in Sources */,
 				A21C309D1F88BAF100C48F9A /* RSFirstRowSelection.swift in Sources */,
+				864713E321DDE62000F6B96C /* DecodableExtension.swift in Sources */,
+				864713ED21DDE82D00F6B96C /* NavigationBarTheme.swift in Sources */,
 				D852FDA81F879BF7002362CC /* RSSelectionTableView.swift in Sources */,
 				D852FDA51F879BF7002362CC /* RSSelectionMenuDataSource.swift in Sources */,
-				D852FDB31F879BFF002362CC /* RSSelectionMenuExtensions.swift in Sources */,
+				D852FDB31F879BFF002362CC /* RSSelectionMenuExtension.swift in Sources */,
+				864713E521DDE6AE00F6B96C /* ViewControllerExtension.swift in Sources */,
 				D852FDA71F879BF7002362CC /* RSSelectionMenuSearchDelegate.swift in Sources */,
 				D852FDAF1F879BFF002362CC /* Constants.swift in Sources */,
-				D852FDB21F879BFF002362CC /* Extensions.swift in Sources */,
+				864713E921DDE76800F6B96C /* Enums.swift in Sources */,
+				D852FDB21F879BFF002362CC /* NSObjectExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +372,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = M9KRH522ST;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -370,7 +394,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = M9KRH522ST;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

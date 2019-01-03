@@ -1,7 +1,8 @@
 //
-//  AssociatedObjectExtension.swift
+//  NSObjectExtension.swift
+//  RSSelectionMenu
 //
-//  Copyright (c) 2018 Rushi Sangani
+//  Copyright (c) 2019 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,10 +26,10 @@
 import Foundation
 import CoreData
 
-// convert to dictionary
+/// NSObject Extension
 public extension NSObject {
     
-    // dictionary
+    /// Convert NSObject model to dictionary
     @objc public func toDictionary() -> [String: AnyObject] {
         
         let propertiesDictionary : NSMutableDictionary = NSMutableDictionary()
@@ -45,23 +46,5 @@ public extension NSObject {
             }
         }
         return propertiesDictionary as! [String: AnyObject]
-    }
-}
-
-/// Decodable
-public extension Decodable {
-    
-    /// convert model to dictionary
-    func toDictionary() -> [String: Any] {
-        
-        // create dict
-        var data = [String: Any]()
-        
-        // get mirror object and key,value pairs
-        let model = Mirror(reflecting: self)
-        for (name, value) in model.children {
-            data[name!] = value
-        }
-        return data
     }
 }

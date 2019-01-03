@@ -1,5 +1,6 @@
 //
-//  RSSelectionMenu.h
+//  DecodableExtension.swift
+//  RSSelectionMenu
 //
 //  Copyright (c) 2019 Rushi Sangani
 //
@@ -22,12 +23,22 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for RSSelectionMenu.
-FOUNDATION_EXPORT double RSSelectionMenuVersionNumber;
-
-//! Project version string for RSSelectionMenu.
-FOUNDATION_EXPORT const unsigned char RSSelectionMenuVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <RSSelectionMenu/PublicHeader.h>
+/// Decodable
+public extension Decodable {
+    
+    /// Convert model to dictionary
+    func toDictionary() -> [String: Any] {
+        
+        // create dict
+        var data = [String: Any]()
+        
+        // get mirror object and key,value pairs
+        let model = Mirror(reflecting: self)
+        for (name, value) in model.children {
+            data[name!] = value
+        }
+        return data
+    }
+}

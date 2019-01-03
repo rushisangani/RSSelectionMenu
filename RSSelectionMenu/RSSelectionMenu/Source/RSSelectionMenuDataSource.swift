@@ -1,7 +1,8 @@
 //
 //  RSSelectionMenuDataSource.swift
+//  RSSelectionMenu
 //
-//  Copyright (c) 2018 Rushi Sangani
+//  Copyright (c) 2019 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -32,22 +33,31 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
     /// tableView
     weak var selectionTableView: RSSelectionTableView<T>?
     
+    /// data source for tableview
+    var dataSource: DataSource<T> = []
+    
     /// cell type of tableview
     var cellType: CellType {
-        return selectionTableView?.cellType ?? .Basic
+        return selectionTableView?.cellType ?? .basic
     }
     
     /// cell identifier for tableview - default is "basic"
-    var cellIdentifier: String = CellType.Basic.value()
-    
-    /// data source for tableview
-    var dataSource: DataSource<T> = []
+    var cellIdentifier: String {
+        
+        switch cellType {
+        case .custom(_, let identifier):
+            return identifier
+        default:
+            return cellType.value()
+        }
+    }
     
     /// filtered data source for tableView
     fileprivate var filteredDataSource: FilteredDataSource<T> = []
     
-    /// cell configuration - (cell, dataObject, indexPath)
+    /// cell configuration - (cell, item, indexPath)
     fileprivate var cellConfiguration: UITableViewCellConfiguration<T>?
+    
     
     // MARK: - Initialize
     
@@ -61,10 +71,8 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        var count = self.filteredDataSource.count
-        if isFirstRowAdded() { count += 1 }
-        return count
+        let count = self.filteredDataSource.count
+        return self.isFirstRowAdded() ? count+1 : count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,33 +82,22 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
             return setupFirstRow()
         }
         
-        // create new reusable cell
-        let cellStyle = self.tableViewCellStyle()
-        var cell: UITableViewCell?
+        // get reusable cell
+        let cell = self.getReusableCell(forTableView: tableView, indexPath: indexPath)
         
-        switch cellType {
-        case .Custom:
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            break
-        default:
-            cell = UITableViewCell(style: cellStyle, reuseIdentifier: cellType.value())
-            cell?.textLabel?.numberOfLines = 0
-            cell?.detailTextLabel?.numberOfLines = 0
-            break
+        guard let configuration = cellConfiguration else {
+            return cell
         }
         
-        // cell configuration
-        if let config = cellConfiguration {
-            
-            let dataObject = self.objectAt(indexPath: indexPath)
-            config(cell!, dataObject, indexPath)
-            
-            // selection
-            let delegate = tableView.delegate as! RSSelectionMenuDelegate<T>
-            updateStatus(status: delegate.showSelected(object: dataObject, inTableView: tableView as! RSSelectionTableView<T>), for: cell!)
-        }
+        let item = self.objectAt(indexPath: indexPath)
+        configuration(cell, item, indexPath)
         
-        return cell!
+        // selection
+        let delegate = tableView.delegate as! RSSelectionMenuDelegate<T>
+        let selected = delegate.showSelected(item: item, inTableView: tableView as! RSSelectionTableView<T>)
+        self.updateCellStatus(selected: selected, for: cell)
+        
+        return cell
     }
 }
 
@@ -132,37 +129,51 @@ extension RSSelectionMenuDataSource {
     fileprivate func tableViewCellStyle() -> UITableViewCell.CellStyle {
         
         switch self.cellType {
-        case .Basic:
+        case .basic:
             return UITableViewCell.CellStyle.default
-        case .RightDetail:
+        case .rightDetail:
             return UITableViewCell.CellStyle.value1
-        case .SubTitle:
+        case .subTitle:
             return UITableViewCell.CellStyle.subtitle
         default:
             return UITableViewCell.CellStyle.default
         }
     }
     
-    /// checks if data source is empty
-    fileprivate func isDataSourceEmpty() -> Bool {
-        return (self.filteredDataSource.count == 0)
-    }
-    
     /// update cell status
-    fileprivate func updateStatus(status: Bool, for cell: UITableViewCell) {
-        cell.showSelected(status)
+    fileprivate func updateCellStatus(selected: Bool, for cell: UITableViewCell) {
+        cell.accessoryType = selected ? .checkmark : .none
     }
     
     /// setup first row
     fileprivate func setupFirstRow() -> UITableViewCell {
         
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: CellType.Basic.value())
-        cell.textLabel?.text = selectionTableView?.firstRowSelection?.rowType?.value
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: CellType.basic.value())
+        cell.textLabel?.text = selectionTableView?.firstRowSelection?.rowType.value
         cell.textLabel?.textColor = UIColor.darkGray
         
         // update status
-        updateStatus(status: (selectionTableView?.firstRowSelection?.selected)!, for: cell)
+        let selected = selectionTableView?.firstRowSelection?.selected ?? false
+        self.updateCellStatus(selected: selected, for: cell)
         
         return cell
+    }
+    
+    /// get tableview cell for cell type
+    fileprivate func getReusableCell(forTableView tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+
+        // create reusable cell
+        switch cellType {
+        case .custom(_, _):
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+            cell.selectionStyle = .none
+            return cell
+        default:
+            let cell = UITableViewCell(style: self.tableViewCellStyle(), reuseIdentifier: cellIdentifier)
+            cell.textLabel?.numberOfLines = 0
+            cell.detailTextLabel?.numberOfLines = 0
+            cell.selectionStyle = .none
+            return cell
+        }
     }
 }
