@@ -66,6 +66,9 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     /// Selection menu dismissal handler
     public var onDismiss:((_ selectedItems: DataSource<T>) -> ())?
     
+    
+    // MARK: - Private
+    
     /// store reference view controller
     fileprivate weak var parentController: UIViewController?
     
@@ -222,6 +225,8 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         navigationItem.leftBarButtonItem = cancelButton
     }
     
+    
+    
     // MARK: - UIPopoverPresentationControllerDelegate
     public func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
@@ -265,6 +270,11 @@ extension RSSelectionMenu {
     /// Navigationbar title and color
     public func setNavigationBar(title: String, attributes:[NSAttributedString.Key: Any]? = nil, barTintColor: UIColor? = nil, tintColor: UIColor? = nil) {
         self.navigationBarTheme = NavigationBarTheme(title: title, titleAttributes: attributes, tintColor: tintColor, barTintColor: barTintColor)
+    }
+    
+    /// Empty Data Label
+    public func showEmptyDataLabel(text: String = defaultEmptyDataString, attributes: [NSAttributedString.Key: Any]? = nil) {
+        self.tableView?.showEmptyDataLabel(text: text, attributes: attributes)
     }
     
     /// Show

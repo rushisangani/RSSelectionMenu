@@ -54,6 +54,18 @@ open class RSSelectionTableView<T>: UITableView {
     /// first row selection
     var firstRowSelection: RSFirstRowSelection?
     
+    /// empty data view
+    lazy var emptyDataView: UILabel = {
+        let label = UILabel()
+        label.center = self.center
+        label.isHidden = true
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.darkText
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.sizeToFit()
+        return label
+    }()
     
     // MARK: - Life Cycle
     
@@ -67,6 +79,13 @@ open class RSSelectionTableView<T>: UITableView {
         self.cellType = cellType
         
         setup()
+    }
+    
+    open override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        if let _ = self.backgroundView {
+            self.emptyDataView.center = self.center
+        }
     }
     
     // MARK: - Setup
@@ -126,6 +145,23 @@ extension RSSelectionTableView {
                 self?.selectionDataSource?.update(dataSource: filteredDataSource, inTableView: self!)
             }
         }
+    }
+    
+    // empty data view
+    func showEmptyDataLabel(text: String, attributes: [NSAttributedString.Key: Any]?) {
+        let label = self.emptyDataView
+        if let textAttributes = attributes {
+            label.attributedText = NSAttributedString(string: text, attributes: textAttributes)
+        }else {
+            label.text = text
+        }
+        self.backgroundView = label
+    }
+    
+    // reloadData
+    func reload() {
+        self.reloadData()
+        self.backgroundView?.isHidden = ((self.selectionDataSource?.count ?? 0) > 0)
     }
     
     // object at indexpath

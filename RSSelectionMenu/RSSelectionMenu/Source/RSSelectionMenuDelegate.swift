@@ -114,7 +114,7 @@ extension RSSelectionMenuDelegate {
         selectedItems.append(item)
         
         // reload tableview
-        tableView.reloadData()
+        tableView.reload()
         
         // call selection callback
         if let delegate = selectionDelegate {
@@ -140,7 +140,7 @@ extension RSSelectionMenuDelegate {
         }
         
         // reload tableview
-        tableView.reloadData()
+        tableView.reload()
         
         // call selection callback
         if let delegate = selectionDelegate {
@@ -159,7 +159,7 @@ extension RSSelectionMenuDelegate {
         updateFirstRowSelection(selected: selected, tableView: tableView)
         
         // reload tableview
-        tableView.reloadData()
+        tableView.reload()
         
         // selection callback
         if let rowSelection = selectionDelegate {

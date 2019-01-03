@@ -58,6 +58,10 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
     /// cell configuration - (cell, item, indexPath)
     fileprivate var cellConfiguration: UITableViewCellConfiguration<T>?
     
+    /// data source count
+    var count: Int {
+        return filteredDataSource.count
+    }
     
     // MARK: - Initialize
     
@@ -113,7 +117,7 @@ extension RSSelectionMenuDataSource {
     /// to update data source for tableview
     func update(dataSource: DataSource<T>, inTableView tableView: RSSelectionTableView<T>) {
         filteredDataSource = dataSource
-        tableView.reloadData()
+        tableView.reload()
     }
     
     /// checks if first row is added

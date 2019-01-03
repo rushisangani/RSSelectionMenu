@@ -50,6 +50,8 @@ extension ViewController {
             self.tableView.reloadData()
         }
         
+        selectionMenu.showEmptyDataLabel()
+        
         // show menu
         selectionMenu.show(style: style, from: self)
     }
