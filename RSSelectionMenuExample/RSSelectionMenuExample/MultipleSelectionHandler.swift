@@ -94,6 +94,9 @@ extension ViewController {
             return self.dataArray.filter({ $0.lowercased().starts(with: searchText.lowercased()) })
         }
         
+        // show empty data label
+        selectionMenu.showEmptyDataLabel(text: "No Player Found")
+        
         // show as popover
         selectionMenu.show(style: .popover(sourceView: sender, size: nil), from: self)
     }

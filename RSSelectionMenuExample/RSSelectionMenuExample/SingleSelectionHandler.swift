@@ -50,6 +50,7 @@ extension ViewController {
             self.tableView.reloadData()
         }
         
+        // show empty data label
         selectionMenu.showEmptyDataLabel()
         
         // show menu
@@ -146,6 +147,9 @@ extension ViewController {
                 print("Empty Option Selected")
             }
         }
+        
+        // show empty data label
+        selectionMenu.showEmptyDataLabel()
         
         // search bar with place holder
         selectionMenu.showSearchBar(withPlaceHolder: "Search Player", barTintColor: UIColor.lightGray.withAlphaComponent(0.2)) { (searchText) -> ([String]) in

@@ -116,6 +116,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView?.reload()
         if let handler = onWillAppear { handler() }
     }
     

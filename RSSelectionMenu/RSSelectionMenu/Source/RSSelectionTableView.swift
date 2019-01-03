@@ -59,7 +59,7 @@ open class RSSelectionTableView<T>: UITableView {
         let label = UILabel()
         label.center = self.center
         label.isHidden = true
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 17)
         label.textColor = UIColor.darkText
         label.numberOfLines = 0
         label.textAlignment = .center
