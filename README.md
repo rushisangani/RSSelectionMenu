@@ -2,19 +2,11 @@
 
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
-### What's New in version 6.0
-- New presentation styles added: **Alert** & **Actionsheet**
-- Show title with Popover
-- Auto Dismiss flag added (True or False)
-- Support for Swift 4.2
-- Carthage support
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/single1.gif "Single Selection - Tickmark")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/single2.gif "Single Selection - Checkbox")
 
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/Alert.png "Alert")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/Actionsheet.png "Actionsheet")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/Popover.jpg "Popover")
-
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/01.gif "Single Selection")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/03.gif "Custom")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/multi1.gif "Multi Selection - Tickmark")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/custom.gif "Custom - Checkbox")
 
 ## Features
 
