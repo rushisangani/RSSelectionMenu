@@ -82,8 +82,8 @@ selectionMenu.setSelectedItems(items: simpleSelectedArray) { [weak self] (item, 
     self?.simpleSelectedArray = selectedItems
 }
 
-// show as PresentationStyle = Push
-selectionMenu.show(style: .Push, from: self)
+// show as PresentationStyle = push
+selectionMenu.show(style: .push, from: self)
 ```
 
 ### Multiple Selection List
