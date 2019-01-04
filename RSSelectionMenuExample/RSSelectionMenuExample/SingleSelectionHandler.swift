@@ -18,7 +18,7 @@ extension ViewController {
     
     func showSingleSelectionMenu(style: PresentationStyle) {
         
-        // Show menu with datasource array - Default SelectionStyle = Single
+        // Show menu with datasource array - Default SelectionStyle = single
         // Here you'll get cell configuration where you'll get array item for each index
         // Cell configuration following parameters.
         // 1. UITableViewCell   2. Item of type T   3. IndexPath

@@ -3,6 +3,7 @@
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
 [![https://github.com/rushisangani/RSSelectionMenu/blob/master/Images/multi1.gif](http://img.youtube.com/vi/9Br-3GnxDSo/0.jpg)](http://www.youtube.com/watch?v=9Br-3GnxDSo "RSSelectionMenu Demo")
+
 [Demo Video](http://www.youtube.com/watch?v=9Br-3GnxDSo)
 
 ## Features
@@ -62,57 +63,78 @@ Then follow below steps:
 let simpleDataArray = ["Sachin", "Rahul", "Saurav", "Virat", "Suresh", "Ravindra", "Chris"]
 var simpleSelectedArray = [String]()
 
-// Show menu with datasource array - Default SelectionType = Single
-// Here you'll get cell configuration where you can set any text based on condition
+// Show menu with datasource array - Default SelectionStyle = single
+// Here you'll get cell configuration where you'll get array item for each index
 // Cell configuration following parameters.
-// 1. UITableViewCell   2. Object of type T   3. IndexPath
+// 1. UITableViewCell   2. Item of type T   3. IndexPath
 
-let selectionMenu =  RSSelectionMenu(dataSource: simpleDataArray) { (cell, object, indexPath) in
-    cell.textLabel?.text = object
-    
-    // Change tint color (if needed)
-    cell.tintColor = .orange
+let selectionMenu = RSSelectionMenu(dataSource: simpleDataArray) { (cell, item, indexPath) in
+    cell.textLabel?.text = item
 }
 
 // set default selected items when menu present on screen.
-// Here you'll get onDidSelectRow
+// here you'll get handler each time you select a row
+// 1. Selected Item  2. Index of Selected Item  3. Selected or Deselected  4. All Selected Items
 
-selectionMenu.setSelectedItems(items: simpleSelectedArray) { (text, isSelected, selectedItems) in
+selectionMenu.setSelectedItems(items: simpleSelectedArray) { [weak self] (text, index, isSelected, selectedItems) in
 
-    // update your existing array with updated selected items, so when menu presents second time updated items will be default selected.
-    self.simpleSelectedArray = selectedItems
+    // update your existing array with updated selected items, so when menu show menu next time, updated items will be default selected.
+    self?.simpleSelectedArray = selectedItems
 }
-
-// auto dismiss
-selectionMenu.dismissAutomatically = false      // default is true
 
 // show as PresentationStyle = Push
 selectionMenu.show(style: .Push, from: self)
 ```
+
 ### Multiple Selection List
 ```swift
-let selectionMenu = RSSelectionMenu(selectionType: .Multiple, dataSource: dataArray, cellType: .Basic) { (cell, object, indexPath) in
-    cell.textLabel?.text = object
+let selectionMenu = RSSelectionMenu(selectionStyle: .multiple, dataSource: simpleDataArray) { (cell, name, indexPath) in
+
+    cell.textLabel?.text = name
+
+    // customization
+    // set image
+    cell.imageView?.image = #imageLiteral(resourceName: "profile")
+    cell.tintColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
 }
 ```
+
 - Set Maximum selection limit (Optional)
 ```swift
 selectionMenu.setSelectedItems(items: selectedDataArray, maxSelected: 3) { (text, selected, selectedItems) in
 }
+or 
+selectionMenu.maxSelectionLimit = 3
+```
+
+### Cell Selection Style
+```swift
+selectionMenu.cellSelectionStyle = .tickmark
+or
+selectionMenu.cellSelectionStyle = .checkbox
 ```
 
 ### Presentation Style - Formsheet, Popover, Alert, Actionsheet
 ```swift
-// show as Formsheet
-selectionMenu.show(style: .Formsheet, from: self)
+// show as formSheet
+selectionMenu.show(style: .formSheet, from: self)
 
-// show as Popover
-selectionMenu.show(style: .Popover(sourceView: sourceView, size: nil), from: self)
 
-// show as Alert
+// show as popover
+selectionMenu.show(style: .popover(sourceView: sourceView, size: nil), from: self) 
+
+// or specify popover size
+selectionMenu.show(style: .popover(sourceView: sender, size: CGSize(width: 200, height: 300)), from: self)
+
+
+// show as alert
 selectionMenu.show(style: .Alert(title: "Select", action: nil, height: nil), from: self)
 
-// Show as Actionsheet
+// or specify alert button title
+selectionMenu.show(style: .Alert(title: "Select", action: "Done", height: nil), from: self)
+
+
+// ahow as actionsheet
 selectionMenu.show(style: .Actionsheet(title: nil, action: "Done", height: nil), from: self)
 ```
 
@@ -120,8 +142,8 @@ selectionMenu.show(style: .Actionsheet(title: nil, action: "Done", height: nil),
 
 #### On Dismiss
 ```swift
-selectionMenu.onDismiss = { selectedItems in
-    self.selectedDataArray = selectedItems
+selectionMenu.onDismiss = { [weak self] selectedItems in
+    self?.selectedDataArray = selectedItems
     
     // perform any operation once you get selected items
 }
@@ -140,31 +162,31 @@ selectionMenu.onWillAppear = {
 - You'll get notified via handler, when user starts typing in searchbar.
 ```swift
 // show searchbar
-selectionMenu.showSearchBar { (searchText) -> ([String]) in
+selectionMenu.showSearchBar { [weak self] (searchText) -> ([String]) in
 
   // return filtered array based on any condition
   // here let's return array where name starts with specified search text
 
-  return self.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) })
+  return self?.dataArray.filter({ $0.lowercased().hasPrefix(searchText.lowercased()) }) ?? []
 }
 ```
 
 #### Cell Style - Right Detail or Sub Title
 ```swift
-let selectionMenu = RSSelectionMenu(selectionType: .Single, dataSource: dataArray, cellType: .RightDetail) { (cell, object, indexPath) in
+let selectionMenu = RSSelectionMenu(selectionType: .single, dataSource: dataArray, cellType: .rightDetail) { (cell, item, indexPath) in
 
     // here you can set any text from object
     // let's set firstname in title and lastname as right detail
 
-    let firstName = object.components(separatedBy: " ").first
-    let lastName = object.components(separatedBy: " ").last
+    let firstName = item(separatedBy: " ").first
+    let lastName = item.components(separatedBy: " ").last
 
     cell.textLabel?.text = firstName
     cell.detailTextLabel?.text = lastName
 }
 
-selectionMenu.setSelectedItems(items: selectedDataArray) { (text, selected, selectedItems) in
-    self.selectedDataArray = selectedItems
+selectionMenu.setSelectedItems(items: selectedDataArray) { [weak self] (text, selected, selectedItems) in
+    self?.selectedDataArray = selectedItems
 }
 
 // show as default
@@ -174,31 +196,41 @@ selectionMenu.show(from: self)
 #### Custom Cells
 - Provide custom cell with xib file name and cell identifier.
 ```swift
-let selectionMenu =  RSSelectionMenu(selectionType: .Multiple, dataSource: customDataArray, cellType: .Custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
+let cellNibName = "CustomTableViewCell"
+let cellIdentifier = "cell"
 
-// cast cell to your custom cell type
-let customCell = cell as! CustomTableViewCell
+// create menu with multi selection and custom cell
 
-// set cell data here
+let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: customDataArray, cellType: .custom(nibName: cellNibName, cellIdentifier: cellIdentifier)) { (cell, person, indexPath) in
+
+    // cast cell to your custom cell type
+    let customCell = cell as! CustomTableViewCell
+
+    // here you'll get specified model object
+    // set data based on your need
+    customCell.setData(person)
 }
 ```
 
 #### Header Row - Empty, None, All, or Custom
 ```swift
 // To show first row as Empty, when dropdown as no value selected by default
-// Here you'll get Text and isSelected when user selects first row
+// add first row as empty -> Allow empty selection
 
-selectionMenu.addFirstRowAs(rowType: .Empty, showSelected: self.firstRowSelected) { (text, isSelected) in
-    
-    // update your flag here to maintain consistency. -  This is required to be update when presenting for the second time.
-    self.firstRowSelected = isSelected
+let isEmpty = (selectedDataArray.count == 0)
+selectionMenu.addFirstRowAs(rowType: .empty, showSelected: isEmpty) { (text, selected) in
+
+    /// do some stuff...
+    if selected {
+        print("Empty Option Selected")
+    }
 }
 ```
 
 ### DataSource - Codable Objects, NSObject Subclasses or Dictionary Array
-- Implement **UniqueProperty** protocol to model class or structure.
+- Implement **UniquePropertyDelegate** protocol to model class or structure.
 ```swift
-class Person: NSObject, UniqueProperty {
+class Person: NSObject, UniquePropertyDelegate {
 
     let id: Int
     let firstName: String
@@ -210,20 +242,22 @@ class Person: NSObject, UniqueProperty {
         self.lastName = lastName
     }
 
+    // MARK: - UniquePropertyDelegate   
     // Here id has the unique value for each person
-    func uniquePropertyName() -> String {
+
+    func getUniquePropertyName() -> String {
         return "id"
     }
 }
 ```
 or
 ```swift
-struct Employee: Codable, UniqueProperty {
+struct Employee: Codable, UniquePropertyDelegate {
     
     let empId: Int?
     let name: String?
     
-    func uniquePropertyName() -> String {
+    func getUniquePropertyName() -> String {
         return "empId"
     }
 }
@@ -238,8 +272,8 @@ selectionMenu.uniquePropertyName = "empId" or "keyname of unique value in dictio
 #### NavigationBar
 - Set Title, BarButton Titles, TintColor, and Title Color
 ```swift
-// set navigation title and color
-selectionMenu.setNavigationBar(title: "Select Player", attributes: nil, barTintColor: UIColor.orange.withAlphaComponent(0.5), tintColor: UIColor.white)
+// set navigation bar title and attributes
+selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white], barTintColor: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1), tintColor: UIColor.white)
 
 // right barbutton title - Default is 'Done'
 selectionMenu.rightBarButtonTitle = "Submit"
@@ -251,9 +285,10 @@ selectionMenu.leftBarButtonTitle = "Close"
 #### SearchBar
 - Set Placeholder, Tint Color
 ```swift
-// show searchbar with placeholder and tint color
-selectionMenu.showSearchBar(withPlaceHolder: "Search Player", tintColor: UIColor.withAlphaComponent(0.5)) { (searchtext) -> ([String]) in
-    return self.dataArray.filter({ $0.lowercased().hasPrefix(searchtext.lowercased()) })
+// show searchbar with placeholder and barTintColor
+selectionMenu.showSearchBar(withPlaceHolder: "Search Player", barTintColor: UIColor.lightGray.withAlphaComponent(0.2)) { [weak self] (searchText) -> ([String]) in
+
+    return self?.dataArray.filter({ $0.lowercased().starts(with: searchText.lowercased()) }) ?? []
 }
 ```
 
