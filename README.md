@@ -2,7 +2,7 @@
 
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
-### What's New in version 5.3.2
+### What's New in version 6.0
 - New presentation styles added: **Alert** & **Actionsheet**
 - Show title with Popover
 - Auto Dismiss flag added (True or False)
@@ -53,7 +53,7 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 5.3.2'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 6.0'
 ```
 
 ### Carthage
@@ -70,7 +70,7 @@ $ brew install carthage
 To integrate RSSelectionMenu into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "rushisangani/RSSelectionMenu" ~> 5.3.2
+github "rushisangani/RSSelectionMenu" ~> 6.0
 ```
 Then follow below steps:
 - Run `carthage update` to build the framework.

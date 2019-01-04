@@ -11,14 +11,22 @@ import RSSelectionMenu
 
 extension ViewController {
     
-    // show with custom cells
+    // MARK: - Custom
+    
+    // MARK: - Custom Cells
+    
     func showWithCustomCell() {
         
-        // Show menu with CellType = Custom
+        // Show menu with CellType = custom
         // For Custom cells - specify NibName and CellIdentifier
         // For Custom Models - specify UniquePropertyName
         
-        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: customDataArray, cellType: .custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, person, indexPath) in
+        let cellNibName = "CustomTableViewCell"
+        let cellIdentifier = "cell"
+        
+        // create menu with multi selection and custom cell
+        
+        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: customDataArray, cellType: .custom(nibName: cellNibName, cellIdentifier: cellIdentifier)) { (cell, person, indexPath) in
             
             // cast cell to your custom cell type
             let customCell = cell as! CustomTableViewCell
@@ -33,47 +41,63 @@ extension ViewController {
         }
         
         // show searchbar
-        selectionMenu.showSearchBar { (searchtext) -> ([Person]) in
-            return self.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(searchtext.lowercased()) })
+        selectionMenu.showSearchBar { [weak self] (searchtext) -> ([Person]) in
+            return self?.customDataArray.filter({ $0.firstName.lowercased().hasPrefix(searchtext.lowercased()) }) ?? []
         }
         
-        selectionMenu.cellSelectionStyle = .checkbox
+        // cell selection style
+        selectionMenu.cellSelectionStyle = self.cellSelectionStyle
         
         // on dismiss handler - get selected items
-        selectionMenu.onDismiss = { selectedItems in
-            self.customselectedDataArray = selectedItems
+        selectionMenu.onDismiss = { [weak self] selectedItems in
+            
+            // update selected items
+            self?.customselectedDataArray = selectedItems
         }
         
+        // show menu
         selectionMenu.show(style: .push, from: self)
     }
     
-    /// show with custom models
+    
+    // MARK: - Custom Models
+    
     func showWithCustomModels() {
         
-        // menu with custom cells and custom models
-        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: users, cellType: .custom(nibName: "CustomTableViewCell", cellIdentifier: "cell")) { (cell, user, indexPath) in
+        // create menu with custom cells and custom models
+        
+        // custom cell details
+        let cellNibName = "CustomTableViewCell"
+        let cellIdentifier = "cell"
+        
+        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: users, cellType: .custom(nibName: cellNibName, cellIdentifier: cellIdentifier)) { (cell, user, indexPath) in
             
             let customCell = cell as! CustomTableViewCell
             
+            // set custom details
             customCell.idLabel.text = "\(user.id ?? 0)"
             customCell.firstNameLabel.text = user.name
             customCell.lastNameLabel.text = user.organization
+            
+            customCell.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         }
         
-        // selected items
-        selectionMenu.setSelectedItems(items: selectedUsers) { (user, index, selected, items) in
-            self.selectedUsers = items
+        // provide selected items and selection delegate
+        selectionMenu.setSelectedItems(items: selectedUsers) { [weak self] (user, index, selected, items) in
+            self?.selectedUsers = items
         }
         
         // navigationbar
         selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white], barTintColor: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1), tintColor: UIColor.white)
         
         
-        // unique property
+        /// unique property (Required for custom models)
         selectionMenu.uniquePropertyName = "id"
         
-        selectionMenu.cellSelectionStyle = .checkbox
+        // cell selection style
+        selectionMenu.cellSelectionStyle = self.cellSelectionStyle
         
+        // present menu
         selectionMenu.show(style: .present, from: self)
     }
 }

@@ -13,87 +13,112 @@ import RSSelectionMenu
 extension ViewController {
     
     // MARK:- SINGLE SELECTION
+    
+    // MARK:- Simple Push or Present
+    
     func showSingleSelectionMenu(style: PresentationStyle) {
         
         // Show menu with datasource array - Default SelectionStyle = Single
-        // Here you'll get cell configuration where you can set any text based on condition
+        // Here you'll get cell configuration where you'll get array item for each index
         // Cell configuration following parameters.
-        // 1. UITableViewCell   2. Object of type T   3. IndexPath
+        // 1. UITableViewCell   2. Item of type T   3. IndexPath
         
-        let selectionMenu =  RSSelectionMenu(dataSource: simpleDataArray) { (cell, name, indexPath) in
-            
-            cell.textLabel?.text = name
+        let selectionMenu = RSSelectionMenu(dataSource: simpleDataArray) { (cell, item, indexPath) in
+            cell.textLabel?.text = item
         }
         
-        // set navigation bar
-        selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white], barTintColor: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1), tintColor: UIColor.white)
-        
-        
         // set default selected items when menu present on screen.
-        // Here you'll get handler with selected items, each time you select a row
+        // here you'll get handler each time you select a row
+        // 1. Selected Item  2. Index of Selected Item  3. Selected or Deselected  4. All Selected Items
         
-        selectionMenu.setSelectedItems(items: simpleSelectedArray) { (text, index, isSelected, selectedItems) in
+        selectionMenu.setSelectedItems(items: simpleSelectedArray) { [weak self] (text, index, isSelected, selectedItems) in
             
-            // update your existing array with updated selected items, so when menu presents second time updated items will be default selected.
-            self.simpleSelectedArray = selectedItems
+            // update your existing array with updated selected items, so when menu show menu next time, updated items will be default selected.
+            self?.simpleSelectedArray = selectedItems
+            
             
             /// do some stuff...
+            /// setting labels here.
             
             switch style {
             case .push:
-                self.pushDetailLabel.text = text
+                self?.pushDetailLabel.text = text
             case .present:
-                self.presentDetailLabel.text = text
+                self?.presentDetailLabel.text = text
             default:
                 break
             }
-            self.tableView.reloadData()
+            
+            self?.tableView.reloadData()
         }
         
-        selectionMenu.cellSelectionStyle = .checkbox
         
-        // show empty data label
-        selectionMenu.showEmptyDataLabel()
+        /// set cell selection style - Default is 'tickmark'
+        /// (Optional)
+        selectionMenu.cellSelectionStyle = self.cellSelectionStyle
         
-        // show menu
+        
+        /// Customization
+        /// set navigationBar title, attributes and colors
+        
+        selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white], barTintColor: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1), tintColor: UIColor.white)
+        
+        // show menu as (push or present)
         selectionMenu.show(style: style, from: self)
     }
     
-    // Formsheet
+    
+    // MARK:- Formsheet & SearchBar
+    
     func showAsFormsheet() {
+        
+        /// You can also set selection style - while creating menu instance
         
         let menu = RSSelectionMenu(selectionStyle: .single, dataSource: dataArray) { (cell, name, indexPath) in
             
             cell.textLabel?.text = name
+            
+            // cell customization
+            // set tint color
             cell.tintColor = UIColor.orange
         }
         
-        // selection
-        menu.setSelectedItems(items: selectedDataArray) { (name, index, selected, selectedItems) in
-            self.selectedDataArray = selectedItems
+        // provide - selected items and selection delegate
+        
+        menu.setSelectedItems(items: selectedDataArray) { [weak self] (name, index, selected, selectedItems) in
+            self?.selectedDataArray = selectedItems
             
             /// do some stuff...
             
-            self.formsheetDetailLabel.text = name
-            self.tableView.reloadData()
+            self?.formsheetDetailLabel.text = name
+            self?.tableView.reloadData()
         }
         
-        // search bar
-        menu.showSearchBar { (searchText) -> ([String]) in
+        // show with search bar
+
+        menu.showSearchBar { [weak self] (searchText) -> ([String]) in
             
             // Filter your result from data source based on any condition
             // Here data is filtered by name that starts with the search text
             
-            return self.dataArray.filter({ $0.lowercased().starts(with: searchText.lowercased()) })
+            return self?.dataArray.filter({ $0.lowercased().starts(with: searchText.lowercased()) }) ?? []
         }
         
-        menu.cellSelectionStyle = .checkbox
+        // cell selection style
+        menu.cellSelectionStyle = self.cellSelectionStyle
+        
+        // show empty data label - if needed
+        // Note: Default text is 'No data found'
+        
+        menu.showEmptyDataLabel()
         
         // show as formsheet
         menu.show(style: .formSheet, from: self)
     }
     
-    // Popover
+    
+    // MARK:- Popover with cell style - subTitle & get onDismiss Handler
+    
     func showAsPopover(sender: UIView) {
         
         /// cell with SubTitle Label
@@ -105,15 +130,15 @@ extension ViewController {
             cell.tintColor = UIColor.red
         }
         
-        // selection
-        menu.setSelectedItems(items: selectedDataArray) { (name, index, selected, selectedItems) in
-            self.selectedDataArray = selectedItems
+        // selection delegate
+        menu.setSelectedItems(items: selectedDataArray) { [weak self] (name, index, selected, selectedItems) in
+            self?.selectedDataArray = selectedItems
         }
         
         // title
         menu.setNavigationBar(title: "Select Player")
         
-        // on dissmis
+        // on dissmis handler
         menu.onDismiss = { selectedItems in
             
             /// do some stuff
@@ -122,28 +147,36 @@ extension ViewController {
             self.tableView.reloadData()
         }
 
+        // selection style
+        menu.cellSelectionStyle = self.cellSelectionStyle
         
         // show as Popover
         menu.show(style: .popover(sourceView: sender, size: nil), from: self)
     }
     
+    
+    
+    // MARK:- Extra Header Row
+    
     func showWithFirstRow() {
         
-        // data source array
-        let selectionMenu =  RSSelectionMenu(dataSource: dataArray) { (cell, name, indexPath) in
+        // create menu
+        let selectionMenu = RSSelectionMenu(dataSource: dataArray) { (cell, name, indexPath) in
             cell.textLabel?.text = name
         }
         
-        // set navigation bar
+        // set navigation bar title and attributes
         selectionMenu.setNavigationBar(title: "Select Player", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white], barTintColor: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1), tintColor: UIColor.white)
         
+
         // selected items
         selectionMenu.setSelectedItems(items: selectedDataArray) { (text, index, isSelected, selectedItems) in
         }
         
-        // add first row as empty -> Allow empty selection
         
+        /// add first row as empty -> Allow empty selection
         let isEmpty = (selectedDataArray.count == 0)
+        
         selectionMenu.addFirstRowAs(rowType: .empty, showSelected: isEmpty) { (text, selected) in
             
             /// do some stuff...
@@ -152,59 +185,70 @@ extension ViewController {
             }
         }
         
-        selectionMenu.cellSelectionStyle = .checkbox
+        // cell selection style
+        selectionMenu.cellSelectionStyle = self.cellSelectionStyle
         
-        // show empty data label
-        selectionMenu.showEmptyDataLabel()
         
         // search bar with place holder
-        selectionMenu.showSearchBar(withPlaceHolder: "Search Player", barTintColor: UIColor.lightGray.withAlphaComponent(0.2)) { (searchText) -> ([String]) in
+        selectionMenu.showSearchBar(withPlaceHolder: "Search Player", barTintColor: UIColor.lightGray.withAlphaComponent(0.2)) { [weak self] (searchText) -> ([String]) in
             
-            return self.dataArray.filter({ $0.lowercased().starts(with: searchText.lowercased()) })
+            return self?.dataArray.filter({ $0.lowercased().starts(with: searchText.lowercased()) }) ?? []
         }
         
         // on menu dissmiss
-        selectionMenu.onDismiss = { selectedItems in
-            self.selectedDataArray = selectedItems
+        selectionMenu.onDismiss = { [weak self] selectedItems in
+            
+            self?.selectedDataArray = selectedItems
             
             /// do some stuff when menu is dismssed
             
             if selectedItems.count == 0 {
-                self.extraRowDetailLabel.text = ""
+                self?.extraRowDetailLabel.text = ""
             }else {
-                self.extraRowDetailLabel.text = selectedItems.first
+                self?.extraRowDetailLabel.text = selectedItems.first
             }
-            self.tableView.reloadData()
+            self?.tableView.reloadData()
         }
         
         // show menu
         selectionMenu.show(style: .push, from: self)
     }
     
-    // Alert or Actionsheet
+    
+    // MARK:- Alert or Actionsheet - You can also provide buttons as needed
+    
     func showAsAlertController(style: UIAlertController.Style, title: String?, action: String?, height: Double?) {
         let selectionStyle: SelectionStyle = style == .alert ? .single : .multiple
         
+        // create menu
         let selectionMenu =  RSSelectionMenu(selectionStyle: selectionStyle, dataSource: simpleDataArray) { (cell, name, indexPath) in
             cell.textLabel?.text = name
         }
         
+        // provide selected items
         selectionMenu.setSelectedItems(items: simpleSelectedArray) { (text, index, isSelected, selectedItems) in
         }
         
-        selectionMenu.onDismiss = { items in
-            self.simpleSelectedArray = items
+        // on dismiss handler
+        selectionMenu.onDismiss = { [weak self] items in
+            
+            self?.simpleSelectedArray = items
             
             if style == .alert {
-                self.alertRowDetailLabel.text = items.first
+                self?.alertRowDetailLabel.text = items.first
             }else {
-                self.multiSelectActionSheetLabel.text = items.joined(separator: ", ")
+                self?.multiSelectActionSheetLabel.text = items.joined(separator: ", ")
             }
-            self.tableView.reloadData()
+            self?.tableView.reloadData()
         }
         
-        // show
+        // cell selection style
+        selectionMenu.cellSelectionStyle = self.cellSelectionStyle
+        
+        
+        // show - with action (if provided)
         let menuStyle: PresentationStyle = style == .alert ? .alert(title: title, action: action, height: height) : .actionSheet(title: title, action: action, height: height)
+        
         selectionMenu.show(style: menuStyle, from: self)
     }
 }
