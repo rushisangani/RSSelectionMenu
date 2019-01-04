@@ -128,14 +128,14 @@ selectionMenu.show(style: .popover(sourceView: sender, size: CGSize(width: 200, 
 
 
 // show as alert
-selectionMenu.show(style: .Alert(title: "Select", action: nil, height: nil), from: self)
+selectionMenu.show(style: .alert(title: "Select", action: nil, height: nil), from: self)
 
 // or specify alert button title
-selectionMenu.show(style: .Alert(title: "Select", action: "Done", height: nil), from: self)
+selectionMenu.show(style: .alert(title: "Select", action: "Done", height: nil), from: self)
 
 
 // show as actionsheet
-selectionMenu.show(style: .Actionsheet(title: nil, action: "Done", height: nil), from: self)
+selectionMenu.show(style: .actionSheet(title: nil, action: "Done", height: nil), from: self)
 ```
 
 ### Event Handlers
