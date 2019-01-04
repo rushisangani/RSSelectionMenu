@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   	s.homepage     = "https://github.com/rushisangani/RSSelectionMenu"
 
-    s.screenshots  = "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/01.gif", "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/02.gif", "https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/03.gif"
+    s.screenshots  = "https://github.com/rushisangani/RSSelectionMenu/tree/master/Images/multi1.gif", "https://github.com/rushisangani/RSSelectionMenu/tree/master/Images/custom.gif"
 
   
   	s.license      = { :type => "MIT", :file => "LICENSE" }
