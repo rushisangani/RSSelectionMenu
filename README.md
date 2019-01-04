@@ -2,20 +2,21 @@
 
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/single1.gif "Single Selection - Tickmark")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/single2.gif "Single Selection - Checkbox")
-
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/multi1.gif "Multi Selection - Tickmark")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/custom.gif "Custom - Checkbox")
+[![https://github.com/rushisangani/RSSelectionMenu/blob/master/Images/multi1.gif](http://img.youtube.com/vi/9Br-3GnxDSo/0.jpg)](http://www.youtube.com/watch?v=9Br-3GnxDSo "RSSelectionMenu Demo")
 
 ## Features
 
-- **Selection**: Single, Multiple
-- **Presentation Style**: Present, Push, Poopver, Formsheet, Alert, Actionsheet
-- **Cell Style**: Basic, Subtitle, Rightdetail, Custom
-- **Cell Selection Style**: Tickmark, Checkbox
-- **Data Types**: String, Int, etc..., Codable, NSObject, Dictionary Array
-- **Customization**: NavigationBar, SearchBar, Header Row, Empty Data Text, Max Limit
+- **Single** and **Multiple** selection.
+- Show menu with presentation styles like **Present**, **Push**, **Popover**, **Formsheet**, **Alert**, **Actionsheet**
+- Set UITableViewCell types like **Basic**, **Subtitle**, **Right Detail**
+- Set UITableViewCell selection style **Tickmark** or **Checkbox**
+- Search Items from the list
+- Works with Custom UITableViewCells
+- Works with Custom model classes and structs
+- Set Maximum selection limit
+- Provide Empty data set text
+- Provide header row as **Empty**, **All**, **None** or **Custom Text**
+- Customizable design for UINavigationBar and UISearchBar
 
 ## Requirements
 ```swift
