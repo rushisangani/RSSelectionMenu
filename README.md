@@ -76,7 +76,7 @@ let selectionMenu = RSSelectionMenu(dataSource: simpleDataArray) { (cell, item, 
 // here you'll get handler each time you select a row
 // 1. Selected Item  2. Index of Selected Item  3. Selected or Deselected  4. All Selected Items
 
-selectionMenu.setSelectedItems(items: simpleSelectedArray) { [weak self] (text, index, isSelected, selectedItems) in
+selectionMenu.setSelectedItems(items: simpleSelectedArray) { [weak self] (item, index, isSelected, selectedItems) in
 
     // update your existing array with updated selected items, so when menu show menu next time, updated items will be default selected.
     self?.simpleSelectedArray = selectedItems
@@ -101,16 +101,16 @@ let selectionMenu = RSSelectionMenu(selectionStyle: .multiple, dataSource: simpl
 
 - Set Maximum selection limit (Optional)
 ```swift
-selectionMenu.setSelectedItems(items: selectedDataArray, maxSelected: 3) { (text, selected, selectedItems) in
+selectionMenu.setSelectedItems(items: selectedDataArray, maxSelected: 3) { (item, selected, selectedItems) in
 }
-or 
+// or 
 selectionMenu.maxSelectionLimit = 3
 ```
 
 ### Cell Selection Style
 ```swift
 selectionMenu.cellSelectionStyle = .tickmark
-or
+// or
 selectionMenu.cellSelectionStyle = .checkbox
 ```
 
@@ -134,7 +134,7 @@ selectionMenu.show(style: .Alert(title: "Select", action: nil, height: nil), fro
 selectionMenu.show(style: .Alert(title: "Select", action: "Done", height: nil), from: self)
 
 
-// ahow as actionsheet
+// show as actionsheet
 selectionMenu.show(style: .Actionsheet(title: nil, action: "Done", height: nil), from: self)
 ```
 
@@ -185,7 +185,7 @@ let selectionMenu = RSSelectionMenu(selectionType: .single, dataSource: dataArra
     cell.detailTextLabel?.text = lastName
 }
 
-selectionMenu.setSelectedItems(items: selectedDataArray) { [weak self] (text, selected, selectedItems) in
+selectionMenu.setSelectedItems(items: selectedDataArray) { [weak self] (item, selected, selectedItems) in
     self?.selectedDataArray = selectedItems
 }
 
