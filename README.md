@@ -227,6 +227,15 @@ selectionMenu.addFirstRowAs(rowType: .empty, showSelected: isEmpty) { (text, sel
 }
 ```
 
+#### Empty Data String
+```swift
+// show message 'No data found'
+menu.showEmptyDataLabel()
+
+// or
+menu.showEmptyDataLabel(text: "No players found")
+```
+
 ### DataSource - Codable Objects, NSObject Subclasses or Dictionary Array
 - Implement **UniquePropertyDelegate** protocol to model class or structure.
 ```swift
