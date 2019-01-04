@@ -3,6 +3,7 @@
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
 [![https://github.com/rushisangani/RSSelectionMenu/blob/master/Images/multi1.gif](http://img.youtube.com/vi/9Br-3GnxDSo/0.jpg)](http://www.youtube.com/watch?v=9Br-3GnxDSo "RSSelectionMenu Demo")
+[Demo Video](http://www.youtube.com/watch?v=9Br-3GnxDSo)
 
 ## Features
 
