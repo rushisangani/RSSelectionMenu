@@ -2,38 +2,20 @@
 
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/feature/Images/single1.gif "Single Selection - Tickmark")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/feature/Images/single2.gif "Single Selection - Checkbox")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/single1.gif "Single Selection - Tickmark")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/single2.gif "Single Selection - Checkbox")
 
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/feature/Images/multi1.gif "Multi Selection - Tickmark")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/feature/Images/custom.gif "Custom - Checkbox")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/multi1.gif "Multi Selection - Tickmark")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/custom.gif "Custom - Checkbox")
 
 ## Features
 
-### Selection
-```swift
-Single | Multiple
-```
-
-### Presentation Style
-```swift
-Present | Push | Formsheet | Popover | Alert | Actionsheet
-```
-
-### Cell Style
-```swift
-Basic | RightDetail | SubTitle | Custom
-```
-
-### Data Types
-```swift
-Premitive Types (String, Int,..) | Codable Objects | NSObject Subclasses | Dictionary Array
-```
-
-### Customization
-```swift
-SearchBar | NavigationBar | Max Selection Limit | Header Row
-```
+- **Selection**: Single, Multiple
+- **Presentation Style**: Present, Push, Poopver, Formsheet, Alert, Actionsheet
+- **Cell Style**: Basic, Subtitle, Rightdetail, Custom
+- **Cell Selection Style**: Tickmark, Checkbox
+- **Data Types**: String, Int, etc..., Codable, NSObject, Dictionary Array
+- **Customization**: NavigationBar, SearchBar, Header Row, Empty Data Text, Max Limit
 
 ## Requirements
 ```swift
@@ -70,23 +52,6 @@ Then follow below steps:
 - Add  RSSelectionMenu.framework in `Embedded Binaries`.
 - Add  RSSelectionMenu.framework in `Linked Frameworks and Libraries`.
 
-<!--### Swift 4 project with RSSelectionMenu-->
-<!--RSSelectionMenu is developed in swift 3.2. So if you're using Swift 4.0 then put following script in your end of pod file.-->
-<!---->
-<!--```ruby-->
-<!--post_install do |installer|-->
-<!--    installer.pods_project.targets.each do |target|-->
-<!--        target.build_configurations.each do |config|-->
-<!--            config.build_settings['SWIFT_VERSION'] = '3.2'-->
-<!--        end-->
-<!--    end-->
-<!--end-->
-<!--```-->
-<!--- Alternatively you can follow below steps.-->
-<!---->
-<!--1. Go to pods projects in your workspace.-->
-<!--2. Select RSSelectionMenu target.-->
-<!--3. Go to Build Settings and set Swift Language Version to 3.2-->
 
 ## Usage
 
