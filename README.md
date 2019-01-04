@@ -2,11 +2,11 @@
 
 An elegant selection list or dropdown menu for iOS with single or multiple selections.
 
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/single1.gif "Single Selection - Tickmark")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/single2.gif "Single Selection - Checkbox")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/feature/Images/single1.gif "Single Selection - Tickmark")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/feature/Images/single2.gif "Single Selection - Checkbox")
 
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/multi1.gif "Multi Selection - Tickmark")
-![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/master/Images/custom.gif "Custom - Checkbox")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/feature/Images/multi1.gif "Multi Selection - Tickmark")
+![Alt text](https://raw.githubusercontent.com/rushisangani/RSSelectionMenu/feature/Images/custom.gif "Custom - Checkbox")
 
 ## Features
 
