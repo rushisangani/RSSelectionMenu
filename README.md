@@ -139,7 +139,7 @@ selectionMenu.show(style: .actionSheet(title: nil, action: "Done", height: nil),
 ```
 
 ### Auto Dismissal
-Prevent autodismissal for single selection
+Prevent auto dismissal for single selection
 ```swift
 selectionMenu.dismissAutomatically = false
 ```
