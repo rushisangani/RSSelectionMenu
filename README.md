@@ -138,6 +138,12 @@ selectionMenu.show(style: .alert(title: "Select", action: "Done", height: nil), 
 selectionMenu.show(style: .actionSheet(title: nil, action: "Done", height: nil), from: self)
 ```
 
+### Auto Dismissal
+Prevent autodismissal for single selection
+```swift
+selectionMenu.dismissAutomatically = false
+```
+
 ### Event Handlers
 
 #### On Dismiss
