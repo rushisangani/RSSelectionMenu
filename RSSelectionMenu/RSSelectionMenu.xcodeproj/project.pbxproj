@@ -187,6 +187,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = D83570FD1F87986400185B73;
 			productRefGroup = D83571081F87986400185B73 /* Products */;
@@ -383,7 +384,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenu;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -405,7 +406,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rushi.RSSelectionMenu;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

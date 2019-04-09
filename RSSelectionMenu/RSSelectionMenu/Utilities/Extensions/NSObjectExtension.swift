@@ -30,7 +30,7 @@ import CoreData
 public extension NSObject {
     
     /// Convert NSObject model to dictionary
-    @objc public func toDictionary() -> [String: AnyObject] {
+    @objc func toDictionary() -> [String: AnyObject] {
         
         let propertiesDictionary : NSMutableDictionary = NSMutableDictionary()
         

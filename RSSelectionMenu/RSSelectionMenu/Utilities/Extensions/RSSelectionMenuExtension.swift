@@ -50,7 +50,7 @@ extension RSSelectionMenu {
         if item is NSString {
             let hashValue = (item as! NSString).hashValue
         
-            return from.index(where: { (data) -> Bool in
+            return from.firstIndex(where: { (data) -> Bool in
                 return hashValue == (data as! NSString).hashValue
             })
         }
@@ -59,7 +59,7 @@ extension RSSelectionMenu {
         else if item is NSNumber {
             let hashValue = (item as! NSNumber).hashValue
             
-            return from.index(where: { (data) -> Bool in
+            return from.firstIndex(where: { (data) -> Bool in
                 return hashValue == (data as! NSNumber).hashValue
             })
         }
@@ -91,7 +91,7 @@ extension RSSelectionMenu {
     public func hasSameValue<T>(forKey key: String, object: [String: Any], inArray: DataSource<T>) -> Int? {
         let value = String(describing: object[key])
         
-        return inArray.index(where: { (data) -> Bool in
+        return inArray.firstIndex(where: { (data) -> Bool in
             let dictionary = (data is Decodable) ? (data as! Decodable).toDictionary() : (data as! NSObject).toDictionary()
             return value == String(describing: dictionary[key])
         })
