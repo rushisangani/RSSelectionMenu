@@ -73,6 +73,10 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     /// Selection menu dismissal handler
     public var onDismiss:((_ selectedItems: DataSource<T>) -> ())?
     
+    /// RightBarButton Tap handler - Only for Multiple Selection & Push, Present - Styles
+    /// Note: This is override the default dismiss behaviour of the menu.
+    /// onDismiss will not be called if this is implemeted. (dismiss manually in this completion block)
+    public var onRightBarButtonTapped:((_ selectedItems: DataSource<T>) -> ())?
     
     // MARK: - Private
     
@@ -144,14 +148,14 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         backgroundView.addSubview(tableView!)
         view.addSubview(backgroundView)
         
-        // done button
-        if showDoneButton() {
-            setDoneButton()
+        // rightBarButton
+        if showRightBarButton() {
+            setRightBarButton()
         }
         
-        // cancel button
-        if showCancelButton() {
-            setCancelButton()
+        // leftBarButton
+        if showLeftBarButton() {
+            setLeftBarButton()
         }
     }
     
@@ -215,24 +219,33 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
         self.dismiss()
     }
     
-    /// Done button
-    fileprivate func setDoneButton() {
-        let doneTitle = (self.rightBarButtonTitle != nil) ? self.rightBarButtonTitle! : doneButtonTitle
-        let doneButton = UIBarButtonItem(title: doneTitle, style: .done, target: self, action: #selector(doneButtonTapped))
-        navigationItem.rightBarButtonItem = doneButton
+    // MARK: - Bar Buttons
+    
+    /// left bar button
+    fileprivate func setLeftBarButton() {
+        let title = (self.leftBarButtonTitle != nil) ? self.leftBarButtonTitle! : cancelButtonTitle
+        let leftBarButton = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(leftBarButtonTapped))
+        navigationItem.leftBarButtonItem = leftBarButton
     }
     
-    @objc func doneButtonTapped() {
+    /// Right bar button
+    fileprivate func setRightBarButton() {
+        let title = (self.rightBarButtonTitle != nil) ? self.rightBarButtonTitle! : doneButtonTitle
+        let rightBarButton = UIBarButtonItem(title: title, style: .done, target: self, action: #selector(rightBarButtonTapped))
+        navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    @objc func leftBarButtonTapped() {
         self.dismiss()
     }
     
-    /// cancel button
-    fileprivate func setCancelButton() {
-        let cancelTitle = (self.leftBarButtonTitle != nil) ? self.leftBarButtonTitle! : cancelButtonTitle
-        let cancelButton = UIBarButtonItem(title: cancelTitle, style: .plain, target: self, action: #selector(doneButtonTapped))
-        navigationItem.leftBarButtonItem = cancelButton
+    @objc func rightBarButtonTapped() {
+        if let rightButtonHandler = onRightBarButtonTapped {
+            rightButtonHandler(self.tableView?.selectionDelegate?.selectedItems ?? [])
+            return
+        }
+        self.dismiss()
     }
-    
     
     
     // MARK: - UIPopoverPresentationControllerDelegate
@@ -241,7 +254,7 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     }
     
     public func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        return !showDoneButton()
+        return !showRightBarButton()
     }
     
     // MARK: - UIGestureRecognizerDelegate
@@ -278,6 +291,12 @@ extension RSSelectionMenu {
     /// Navigationbar title and color
     public func setNavigationBar(title: String, attributes:[NSAttributedString.Key: Any]? = nil, barTintColor: UIColor? = nil, tintColor: UIColor? = nil) {
         self.navigationBarTheme = NavigationBarTheme(title: title, titleAttributes: attributes, tintColor: tintColor, barTintColor: barTintColor)
+    }
+    
+    /// Right Barbutton title and action handler
+    public func setRightBarButton(title: String, handler: @escaping (DataSource<T>) -> ()) {
+        self.rightBarButtonTitle = title
+        self.onRightBarButtonTapped = handler
     }
     
     /// Empty Data Label
@@ -317,8 +336,8 @@ extension RSSelectionMenu {
 //MARK:- Private
 extension RSSelectionMenu {
 
-    // check if show done button
-    fileprivate func showDoneButton() -> Bool {
+    // check if show rightBarButton
+    fileprivate func showRightBarButton() -> Bool {
         switch menuPresentationStyle {
         case .present, .push:
             return (tableView?.selectionStyle == .multiple || !self.dismissAutomatically)
@@ -327,8 +346,8 @@ extension RSSelectionMenu {
         }
     }
     
-    // check if show cancel button
-    fileprivate func showCancelButton() -> Bool {
+    // check if show leftBarButton
+    fileprivate func showLeftBarButton() -> Bool {
         if case .present = menuPresentationStyle {
             return tableView?.selectionStyle == .single && self.dismissAutomatically
         }
