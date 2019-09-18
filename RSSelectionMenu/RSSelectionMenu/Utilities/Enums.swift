@@ -43,6 +43,7 @@ public enum PresentationStyle {
     case popover(sourceView: UIView, size: CGSize?)
     case alert(title: String?, action: String?, height: Double?)
     case actionSheet(title: String?, action: String?, height: Double?)
+    case bottomSheet(barButton: UIBarButtonItem, height: Double?)
 }
 
 

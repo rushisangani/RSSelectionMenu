@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D83571061F87986400185B73"
-               BuildableName = "RSSelectionMenu.framework"
-               BlueprintName = "RSSelectionMenu"
-               ReferencedContainer = "container:RSSelectionMenu.xcodeproj">
+               BlueprintIdentifier = "A29317771F87FC3F0076A0C4"
+               BuildableName = "RSSelectionMenuExample.app"
+               BlueprintName = "RSSelectionMenuExample"
+               ReferencedContainer = "container:RSSelectionMenuExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -40,15 +40,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D83571061F87986400185B73"
-            BuildableName = "RSSelectionMenu.framework"
-            BlueprintName = "RSSelectionMenu"
-            ReferencedContainer = "container:RSSelectionMenu.xcodeproj">
+            BlueprintIdentifier = "A29317771F87FC3F0076A0C4"
+            BuildableName = "RSSelectionMenuExample.app"
+            BlueprintName = "RSSelectionMenuExample"
+            ReferencedContainer = "container:RSSelectionMenuExample.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -56,15 +57,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D83571061F87986400185B73"
-            BuildableName = "RSSelectionMenu.framework"
-            BlueprintName = "RSSelectionMenu"
-            ReferencedContainer = "container:RSSelectionMenu.xcodeproj">
+            BlueprintIdentifier = "A29317771F87FC3F0076A0C4"
+            BuildableName = "RSSelectionMenuExample.app"
+            BlueprintName = "RSSelectionMenuExample"
+            ReferencedContainer = "container:RSSelectionMenuExample.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

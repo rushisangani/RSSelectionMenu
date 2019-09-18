@@ -324,7 +324,7 @@ extension RSSelectionMenu {
             switch self?.menuPresentationStyle {
             case .push?:
                 self?.navigationController?.popViewController(animated: animated!)
-            case .present?, .popover?, .formSheet?, .alert?, .actionSheet?:
+            case .present?, .popover?, .formSheet?, .alert?, .actionSheet?, .bottomSheet?:
                self?.dismiss(animated: animated!, completion: nil)
             case .none:
                 break
@@ -407,12 +407,21 @@ extension RSSelectionMenu {
             
             // present as popover for iPad
             if let popoverController = tobePresentController.popoverPresentationController {
-                popoverController.sourceView = self.view
-                popoverController.permittedArrowDirections = []
-                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.sourceView = from.view
+                popoverController.permittedArrowDirections = .any
+                popoverController.sourceRect = CGRect(x: from.view.bounds.midX, y: from.view.bounds.midY, width: 0, height: 0)
             }
         }
-        
+        else if case let .bottomSheet(barButton, height) = with {
+            tobePresentController = getAlertViewController(style: .actionSheet, title: nil, action: nil, height: height)
+            tobePresentController.setValue(self, forKey: contentViewController)
+            
+            // present as popover for iPad
+            if let popoverController = tobePresentController.popoverPresentationController {
+                popoverController.barButtonItem = barButton
+                popoverController.permittedArrowDirections = .any
+            }
+        }
         from.present(tobePresentController, animated: true, completion: nil)
     }
     
