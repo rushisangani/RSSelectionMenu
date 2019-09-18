@@ -408,7 +408,7 @@ extension RSSelectionMenu {
             // present as popover for iPad
             if let popoverController = tobePresentController.popoverPresentationController {
                 popoverController.sourceView = from.view
-                popoverController.permittedArrowDirections = .any
+                popoverController.permittedArrowDirections = []
                 popoverController.sourceRect = CGRect(x: from.view.bounds.midX, y: from.view.bounds.midY, width: 0, height: 0)
             }
         }
