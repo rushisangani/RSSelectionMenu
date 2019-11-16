@@ -429,13 +429,10 @@ extension RSSelectionMenu {
     fileprivate func getAlertViewController(style: UIAlertController.Style, title: String?, action: String?, height: Double?) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: style)
         
-        let actionTitle = action ?? doneButtonTitle
-        let doneAction = UIAlertAction(title: actionTitle, style: .cancel) { [weak self] (doneButton) in
-            self?.menuWillDismiss()
-        }
-        
-        // add done action
-        if (tableView?.selectionStyle == .multiple || !self.dismissAutomatically)  {
+        if let actionTitle = action {
+            let doneAction = UIAlertAction(title: actionTitle, style: .cancel) { [weak self] (doneButton) in
+                self?.menuWillDismiss()
+            }
             alertController.addAction(doneAction)
         }
         
