@@ -1,0 +1,13 @@
+# User data
+xcuserdata
+
+# Output
+/derivedData
+/output
+/build
+
+# Environment
+.env.default
+
+# MacOS folder structure
+.DS_Store
