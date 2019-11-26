@@ -435,7 +435,7 @@ extension RSSelectionMenu {
         }
         
         // add done action
-        if (tableView?.selectionStyle == .multiple || !self.dismissAutomatically || style == .actionSheet)  {
+        if (tableView?.selectionStyle == .multiple || !self.dismissAutomatically)  {
             alertController.addAction(doneAction)
         }
         
