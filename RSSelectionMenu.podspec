@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   
   	s.license      = { :type => "MIT", :file => "LICENSE" }
   	s.author       = { "Rushi Sangani" => "rushisangani@gmail.com" }
-  	s.source       = { :git => "https://github.com/rushisangani/RSSelectionMenu.git", :tag => v#{s.version} }
+  	s.source       = { :git => "https://github.com/rushisangani/RSSelectionMenu.git", :tag => "v#{s.version}" }
 
     s.ios.deployment_target = '9.0'
   	s.source_files = "RSSelectionMenu/**/*.swift"
