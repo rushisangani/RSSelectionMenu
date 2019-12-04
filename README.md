@@ -20,6 +20,9 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 - Provide header row as **Empty**, **All**, **None** or **Custom Text**
 - Customizable design for UINavigationBar and UISearchBar
 
+## What's new in 6.0.8
+- Use **.bottomSheet** instead of '.actionSheet' to support themes in iOS 13.
+
 ## Requirements
 ```swift
 iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
@@ -30,7 +33,7 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 6.0.7'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 6.0.8'
 ```
 
 ### Carthage
