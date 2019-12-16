@@ -26,7 +26,7 @@ extension ViewController {
         
         // create menu with multi selection and custom cell
         
-        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: customDataArray, cellType: .custom(nibName: cellNibName, cellIdentifier: cellIdentifier)) { (cell, person, indexPath) in
+        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: customDataArray, cellType: .customNib(nibName: cellNibName, cellIdentifier: cellIdentifier)) { (cell, person, indexPath) in
             
             // cast cell to your custom cell type
             let customCell = cell as! CustomTableViewCell
@@ -70,7 +70,7 @@ extension ViewController {
         let cellNibName = "CustomTableViewCell"
         let cellIdentifier = "cell"
         
-        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: users, cellType: .custom(nibName: cellNibName, cellIdentifier: cellIdentifier)) { (cell, user, indexPath) in
+        let selectionMenu =  RSSelectionMenu(selectionStyle: .multiple, dataSource: users, cellType: .customNib(nibName: cellNibName, cellIdentifier: cellIdentifier)) { (cell, user, indexPath) in
             
             let customCell = cell as! CustomTableViewCell
             

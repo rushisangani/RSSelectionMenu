@@ -53,7 +53,8 @@ public enum CellType {
     case basic          // default
     case rightDetail
     case subTitle
-    case custom(nibName: String, cellIdentifier: String)
+    case customNib(nibName: String, cellIdentifier: String)
+    case customClass(type: AnyClass, cellIdentifier: String)
     
     /// Get Value
     func value() -> String {

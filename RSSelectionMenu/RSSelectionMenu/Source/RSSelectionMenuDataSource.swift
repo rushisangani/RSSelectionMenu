@@ -45,8 +45,10 @@ open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
     var cellIdentifier: String {
         
         switch cellType {
-        case .custom(_, let identifier):
+        case .customNib(_, let identifier):
             return identifier
+        case .customClass(_, let cellIdentifier):
+            return cellIdentifier
         default:
             return cellType.value()
         }
@@ -151,8 +153,11 @@ extension RSSelectionMenuDataSource {
             cell.accessoryType = status ? .checkmark : .none
             return
         }
-        
-        guard case .custom = cellType else {
+            
+        switch cellType {
+        case .customNib, .customClass:
+            break
+        default:
             cell.setSelected(status, animated: true)
             return
         }
@@ -189,7 +194,7 @@ extension RSSelectionMenuDataSource {
 
         // create reusable cell
         switch cellType {
-        case .custom(_, _):
+        case .customNib(_, _), .customClass(_,_):
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             return cell
         default:

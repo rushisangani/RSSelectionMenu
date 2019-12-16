@@ -108,8 +108,11 @@ open class RSSelectionTableView<T>: UITableView {
         register(UITableViewCell.self, forCellReuseIdentifier: CellType.subTitle.value())
         
         // register nib for custom cell
-        if case let CellType.custom(name, cellIdentifier) = cellType {
+        if case let CellType.customNib(name, cellIdentifier) = cellType {
             register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        }
+        if case let CellType.customClass(className, cellIdentifier) = cellType {
+            register(className, forCellReuseIdentifier: cellIdentifier)
         }
     }
 }
