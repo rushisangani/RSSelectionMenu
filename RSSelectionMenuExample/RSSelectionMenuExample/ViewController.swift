@@ -44,6 +44,9 @@ class ViewController: UITableViewController {
     var users = [User]()
     var selectedUsers = [User]()
     
+    /// Bottom sheet actions
+    var bottomSheetActions = [BottomSheetAction]()
+    
     /// First Row as selected
     var firstRowSelected = true
     
@@ -54,13 +57,19 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         prepareCustomData()
+        prepareBottomSheetData()
     }
     
     // MARK: - Actions
     
     @IBAction func cellStyleChanged(_ sender: Any) {
         cellSelectionStyle = cellStyleSegment.selectedSegmentIndex == 0 ? .tickmark : .checkbox
+    }
+    
+    @IBAction func menuButtonClicked(_ sender: UIBarButtonItem) {
+        showBottomSheet(fromBarButton: sender)
     }
 }
 
@@ -140,5 +149,14 @@ extension ViewController {
         users.append(User(id: 3, name: "John", organization: "Facebook"))
         users.append(User(id: 4, name: "Camila", organization: "AirBnb"))
         users.append(User(id: 6, name: "Denial", organization: "Microsoft"))
+    }
+    
+    func prepareBottomSheetData() {
+        let camera = BottomSheetAction(iconName: "camera", title: "Camera")
+        let photoLibrary = BottomSheetAction(iconName: "media", title: "Photo Library")
+        let attachment = BottomSheetAction(iconName: "attachment", title: "Attachment")
+        let cancel = BottomSheetAction(iconName: nil, title: "Cancel")
+        
+        bottomSheetActions.append(contentsOf: [camera, photoLibrary, attachment, cancel])
     }
 }

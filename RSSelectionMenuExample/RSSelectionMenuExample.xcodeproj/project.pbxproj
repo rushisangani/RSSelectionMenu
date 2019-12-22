@@ -17,6 +17,9 @@
 		A29317961F87FD060076A0C4 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29317931F87FD060076A0C4 /* CustomTableViewCell.xib */; };
 		A2D0D2E8212C7D3200564057 /* RSSelectionMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D0D2E7212C7D3200564057 /* RSSelectionMenu.framework */; };
 		A2D0D2E9212C7D3200564057 /* RSSelectionMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2D0D2E7212C7D3200564057 /* RSSelectionMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A2D1A09B23AF8E8B007CF342 /* IconTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1A09A23AF8E8B007CF342 /* IconTitleTableViewCell.swift */; };
+		A2D1A09D23AF91B7007CF342 /* BarButtonHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1A09C23AF91B7007CF342 /* BarButtonHandler.swift */; };
+		A2D1A09F23AF91FA007CF342 /* BottomSheetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1A09E23AF91FA007CF342 /* BottomSheetAction.swift */; };
 		A2DEC10F2104E490005113C7 /* SingleSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC10E2104E490005113C7 /* SingleSelectionHandler.swift */; };
 		A2DEC111210649EA005113C7 /* MultipleSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC110210649EA005113C7 /* MultipleSelectionHandler.swift */; };
 		A2DEC11321065AFB005113C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC11221065AFB005113C7 /* User.swift */; };
@@ -49,6 +52,9 @@
 		A29317921F87FD060076A0C4 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		A29317931F87FD060076A0C4 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		A2D0D2E7212C7D3200564057 /* RSSelectionMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSSelectionMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2D1A09A23AF8E8B007CF342 /* IconTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTitleTableViewCell.swift; sourceTree = "<group>"; };
+		A2D1A09C23AF91B7007CF342 /* BarButtonHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButtonHandler.swift; sourceTree = "<group>"; };
+		A2D1A09E23AF91FA007CF342 /* BottomSheetAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetAction.swift; sourceTree = "<group>"; };
 		A2DEC10E2104E490005113C7 /* SingleSelectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectionHandler.swift; sourceTree = "<group>"; };
 		A2DEC110210649EA005113C7 /* MultipleSelectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionHandler.swift; sourceTree = "<group>"; };
 		A2DEC11221065AFB005113C7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -72,6 +78,7 @@
 			children = (
 				A26882BF1F9532D7005ECF35 /* Person.swift */,
 				A2DEC11221065AFB005113C7 /* User.swift */,
+				A2D1A09E23AF91FA007CF342 /* BottomSheetAction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -103,6 +110,7 @@
 				A2DEC10E2104E490005113C7 /* SingleSelectionHandler.swift */,
 				A2DEC110210649EA005113C7 /* MultipleSelectionHandler.swift */,
 				A2DEC11421065BBC005113C7 /* CustomCellsHandler.swift */,
+				A2D1A09C23AF91B7007CF342 /* BarButtonHandler.swift */,
 				A293177F1F87FC3F0076A0C4 /* Main.storyboard */,
 				A29317821F87FC3F0076A0C4 /* Assets.xcassets */,
 				A29317841F87FC3F0076A0C4 /* LaunchScreen.storyboard */,
@@ -116,6 +124,7 @@
 			children = (
 				A29317921F87FD060076A0C4 /* CustomTableViewCell.swift */,
 				A29317931F87FD060076A0C4 /* CustomTableViewCell.xib */,
+				A2D1A09A23AF8E8B007CF342 /* IconTitleTableViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -196,7 +205,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2D1A09B23AF8E8B007CF342 /* IconTitleTableViewCell.swift in Sources */,
+				A2D1A09F23AF91FA007CF342 /* BottomSheetAction.swift in Sources */,
 				A2DEC10F2104E490005113C7 /* SingleSelectionHandler.swift in Sources */,
+				A2D1A09D23AF91B7007CF342 /* BarButtonHandler.swift in Sources */,
 				A26882C01F9532D7005ECF35 /* Person.swift in Sources */,
 				A2DEC11521065BBC005113C7 /* CustomCellsHandler.swift in Sources */,
 				A29317951F87FD060076A0C4 /* CustomTableViewCell.swift in Sources */,
