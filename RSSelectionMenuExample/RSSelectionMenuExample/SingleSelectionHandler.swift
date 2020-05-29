@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RSSelectionMenu
+import RSSelectionMenuComponent
 
 /// Extension
 extension ViewController {

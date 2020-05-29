@@ -1,0 +1,11 @@
+framework module RSSelectionMenuComponent {
+  umbrella header "RSSelectionMenuComponent.h"
+
+  export *
+  module * { export * }
+}
+
+module RSSelectionMenuComponent.Swift {
+    header "RSSelectionMenuComponent-Swift.h"
+    requires objc
+}

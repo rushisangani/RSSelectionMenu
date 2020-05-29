@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:RSSelectionMenu/RSSelectionMenu.xcodeproj">
+      location = "group:/Users/sahinyesilyurt/Desktop/Workspace/CPaaS/ThirdParties/RSSelectionMenu/RSSelectionMenu/RSSelectionMenuComponent.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:RSSelectionMenuExample/RSSelectionMenuExample.xcodeproj">

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RSSelectionMenu
+import RSSelectionMenuComponent
 
 /// ViewController
 class ViewController: UITableViewController {

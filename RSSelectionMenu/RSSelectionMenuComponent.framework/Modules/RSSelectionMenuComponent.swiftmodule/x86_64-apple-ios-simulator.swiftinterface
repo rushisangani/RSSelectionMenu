@@ -1,0 +1,169 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name RSSelectionMenuComponent
+import CoreData
+import Foundation
+@_exported import RSSelectionMenuComponent
+import Swift
+import UIKit
+open class RSSelectionMenuDelegate<T> : ObjectiveC.NSObject, UIKit.UITableViewDelegate {
+  @objc public func tableView(_ tableView: UIKit.UITableView, viewForHeaderInSection section: Swift.Int) -> UIKit.UIView?
+  @objc public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @objc public func tableView(_ tableView: UIKit.UITableView, didDeselectRowAt indexPath: Foundation.IndexPath)
+  @objc public func tableView(_ tableView: UIKit.UITableView, heightForHeaderInSection section: Swift.Int) -> CoreGraphics.CGFloat
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension RSSelectionMenuDelegate {
+  public func showSelected(item: T, inTableView tableView: RSSelectionMenuComponent.RSSelectionTableView<T>) -> Swift.Bool
+  public func removeAllSelectedItems()
+}
+open class RSSelectionMenu<T> : UIKit.UIViewController, UIKit.UIPopoverPresentationControllerDelegate, UIKit.UIGestureRecognizerDelegate {
+  public var tableView: RSSelectionMenuComponent.RSSelectionTableView<T>?
+  public var searchBar: UIKit.UISearchBar? {
+    get
+  }
+  public var navigationBar: UIKit.UINavigationBar? {
+    get
+  }
+  public var dismissAutomatically: Swift.Bool
+  public var uniquePropertyName: Swift.String?
+  public var leftBarButtonTitle: Swift.String?
+  public var rightBarButtonTitle: Swift.String?
+  public var cellSelectionStyle: RSSelectionMenuComponent.CellSelectionStyle {
+    get
+    set
+  }
+  public var maxSelectionLimit: Swift.UInt? {
+    get
+    set
+  }
+  public var onWillAppear: (() -> ())?
+  public var onDismiss: ((RSSelectionMenuComponent.DataSource<T>) -> ())?
+  public var onRightBarButtonTapped: ((RSSelectionMenuComponent.DataSource<T>) -> ())?
+  convenience public init(dataSource: RSSelectionMenuComponent.DataSource<T>, cellConfiguration configuration: @escaping RSSelectionMenuComponent.UITableViewCellConfiguration<T>)
+  convenience public init(selectionStyle: RSSelectionMenuComponent.SelectionStyle, dataSource: RSSelectionMenuComponent.DataSource<T>, cellConfiguration configuration: @escaping RSSelectionMenuComponent.UITableViewCellConfiguration<T>)
+  convenience public init(selectionStyle: RSSelectionMenuComponent.SelectionStyle, dataSource: RSSelectionMenuComponent.DataSource<T>, cellType: RSSelectionMenuComponent.CellType, cellConfiguration configuration: @escaping RSSelectionMenuComponent.UITableViewCellConfiguration<T>)
+  @objc override dynamic open func viewDidLoad()
+  @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic open func viewWillDisappear(_ animated: Swift.Bool)
+  @objc override dynamic open func viewDidLayoutSubviews()
+  @objc public func adaptivePresentationStyle(for controller: UIKit.UIPresentationController) -> UIKit.UIModalPresentationStyle
+  @objc public func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIKit.UIPopoverPresentationController) -> Swift.Bool
+  @objc public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldReceive touch: UIKit.UITouch) -> Swift.Bool
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension RSSelectionMenu {
+  public func setSelectedItems(items: RSSelectionMenuComponent.DataSource<T>, maxSelected: Swift.UInt? = nil, onDidSelectRow delegate: @escaping RSSelectionMenuComponent.UITableViewCellSelection<T>)
+  public func addFirstRowAs(rowType: RSSelectionMenuComponent.FirstRowType, showSelected: Swift.Bool, onDidSelectFirstRow completion: @escaping RSSelectionMenuComponent.FirstRowSelection)
+  public func showSearchBar(onTextDidSearch completion: @escaping RSSelectionMenuComponent.UISearchBarResult<T>)
+  public func showSearchBar(withPlaceHolder: Swift.String, barTintColor: UIKit.UIColor, onTextDidSearch completion: @escaping RSSelectionMenuComponent.UISearchBarResult<T>)
+  public func setNavigationBar(title: Swift.String, attributes: [Foundation.NSAttributedString.Key : Any]? = nil, barTintColor: UIKit.UIColor? = nil, tintColor: UIKit.UIColor? = nil)
+  public func setRightBarButton(title: Swift.String, handler: @escaping (RSSelectionMenuComponent.DataSource<T>) -> ())
+  public func showEmptyDataLabel(text: Swift.String = defaultEmptyDataString, attributes: [Foundation.NSAttributedString.Key : Any]? = nil)
+  public func show(from: UIKit.UIViewController)
+  public func show(style: RSSelectionMenuComponent.PresentationStyle, from: UIKit.UIViewController)
+  public func dismiss(animated: Swift.Bool? = true)
+}
+public class RSFirstRowSelection {
+  @objc deinit
+}
+extension Decodable {
+  public func toDictionary() -> [Swift.String : Any]
+}
+public struct NavigationBarTheme {
+}
+open class RSSelectionTableView<T> : UIKit.UITableView {
+  convenience public init(selectionStyle: RSSelectionMenuComponent.SelectionStyle, cellType: RSSelectionMenuComponent.CellType, dataSource: RSSelectionMenuComponent.RSSelectionMenuDataSource<T>, delegate: RSSelectionMenuComponent.RSSelectionMenuDelegate<T>, from: RSSelectionMenuComponent.RSSelectionMenu<T>)
+  @objc override dynamic open func didMoveToSuperview()
+  @objc override dynamic public init(frame: CoreGraphics.CGRect, style: UIKit.UITableView.Style)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+open class RSSelectionMenuDataSource<T> : ObjectiveC.NSObject, UIKit.UITableViewDataSource {
+  @objc public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @objc public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @objc override dynamic public init()
+  @objc deinit
+}
+public protocol UniquePropertyDelegate {
+  func getUniquePropertyName() -> Swift.String
+}
+extension RSSelectionMenu {
+  public func containsObject<T>(_ object: T, inDataSource dataSource: RSSelectionMenuComponent.DataSource<T>) -> Swift.Bool
+  public func isSelected<T>(item: T, from: RSSelectionMenuComponent.DataSource<T>) -> Swift.Int?
+  public func hasSameValue<T>(forKey key: Swift.String, object: [Swift.String : Any], inArray: RSSelectionMenuComponent.DataSource<T>) -> Swift.Int?
+}
+extension UIViewController {
+  open func isPresented() -> Swift.Bool
+}
+@objc open class RSSelectionMenuSearchDelegate : ObjectiveC.NSObject {
+  public var searchBar: UIKit.UISearchBar?
+  public var didSearch: ((Swift.String) -> ())?
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension RSSelectionMenuSearchDelegate : UIKit.UISearchBarDelegate {
+  @objc dynamic public func searchBarSearchButtonClicked(_ searchBar: UIKit.UISearchBar)
+  @objc dynamic public func searchBar(_ searchBar: UIKit.UISearchBar, textDidChange searchText: Swift.String)
+}
+public let contentViewController: Swift.String
+public let defaultPlaceHolder: Swift.String
+public let cancelButtonTitle: Swift.String
+public let doneButtonTitle: Swift.String
+public let defaultEmptyDataString: Swift.String
+public let defaultSearchBarTintColor: UIKit.UIColor
+public let defaultHeaderHeight: CoreGraphics.CGFloat
+public typealias UITableViewCellConfiguration<T> = ((UIKit.UITableViewCell, T, Foundation.IndexPath) -> ())
+public typealias DataSource<T> = [T]
+public typealias FilteredDataSource<T> = [T]
+public typealias UITableViewCellSelection<T> = ((T?, Swift.Int, Swift.Bool, RSSelectionMenuComponent.DataSource<T>) -> ())
+public typealias UISearchBarResult<T> = ((Swift.String) -> (RSSelectionMenuComponent.FilteredDataSource<T>))
+public typealias FirstRowSelection = ((Swift.String, Swift.Bool) -> ())
+public enum SelectionStyle {
+  case single
+  case multiple
+  public static func == (a: RSSelectionMenuComponent.SelectionStyle, b: RSSelectionMenuComponent.SelectionStyle) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum PresentationStyle {
+  case present
+  case push
+  case formSheet
+  case popover(sourceView: UIKit.UIView, size: CoreGraphics.CGSize?)
+  case alert(title: Swift.String?, action: Swift.String?, height: Swift.Double?)
+  case actionSheet(title: Swift.String?, action: Swift.String?, height: Swift.Double?)
+  case bottomSheet(barButton: UIKit.UIBarButtonItem, height: Swift.Double?)
+}
+public enum CellType {
+  case basic
+  case rightDetail
+  case subTitle
+  case customNib(nibName: Swift.String, cellIdentifier: Swift.String)
+  case customClass(type: Swift.AnyClass, cellIdentifier: Swift.String)
+}
+public enum CellSelectionStyle {
+  case tickmark
+  case checkbox
+  public static func == (a: RSSelectionMenuComponent.CellSelectionStyle, b: RSSelectionMenuComponent.CellSelectionStyle) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum FirstRowType {
+  case empty
+  case none
+  case all
+  case custom(value: Swift.String)
+}
+extension NSObject {
+  @objc dynamic public func toDictionary() -> [Swift.String : Swift.AnyObject]
+}
+extension RSSelectionMenuComponent.SelectionStyle : Swift.Hashable {}
+extension RSSelectionMenuComponent.CellSelectionStyle : Swift.Hashable {}

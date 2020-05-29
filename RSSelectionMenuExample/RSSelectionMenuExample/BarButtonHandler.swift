@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import RSSelectionMenu
+import RSSelectionMenuComponent
 
 // MARK: - UIBarButtonHandler
 

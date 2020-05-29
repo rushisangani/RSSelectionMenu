@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RSSelectionMenu
+import RSSelectionMenuComponent
 
 /// Person
 class Person: NSObject, UniquePropertyDelegate {
