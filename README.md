@@ -20,9 +20,12 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 - Provide header row as **Empty**, **All**, **None** or **Custom Text**
 - Customizable design for UINavigationBar and UISearchBar
 
-## What's new in 6.1.0
-- Use **.bottomSheet** instead of '.actionSheet' to support themes in iOS 13.
-- Now you can use both **CustomClass** and **CustomNib** for UITableViewCell.
+## What's new in 7.0.0
+- Supported **Equatable** conformance
+
+## Already using? Migrate to 7.0.0
+- Remove all references of `UniquePropertyDelegate`,  `uniquePropertyName`, and `getUniquePropertyName()`
+- Conform to `Equatable` in your model classes (if required)
 
 ## Requirements
 ```swift
@@ -34,7 +37,7 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 6.1.0'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 7.0.0'
 ```
 
 ### Carthage
@@ -51,7 +54,7 @@ $ brew install carthage
 To integrate RSSelectionMenu into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "rushisangani/RSSelectionMenu" ~> 6.0
+github "rushisangani/RSSelectionMenu" ~> 7.0
 ```
 Then follow below steps:
 - Run `carthage update` to build the framework.
@@ -246,10 +249,17 @@ menu.showEmptyDataLabel()
 menu.showEmptyDataLabel(text: "No players found")
 ```
 
-### DataSource - Codable Objects, NSObject Subclasses or Dictionary Array
-- Implement **UniquePropertyDelegate** protocol to model class or structure.
+### DataSource - Equatable conformance
 ```swift
-class Person: NSObject, UniquePropertyDelegate {
+struct Employee: Equatable {
+    
+    let empId: Int?
+    let name: String?
+}
+```
+or
+```swift
+class Person: NSObject {
 
     let id: Int
     let firstName: String
@@ -260,30 +270,7 @@ class Person: NSObject, UniquePropertyDelegate {
         self.firstName = firstName
         self.lastName = lastName
     }
-
-    // MARK: - UniquePropertyDelegate   
-    // Here id has the unique value for each person
-
-    func getUniquePropertyName() -> String {
-        return "id"
-    }
 }
-```
-or
-```swift
-struct Employee: Codable, UniquePropertyDelegate {
-    
-    let empId: Int?
-    let name: String?
-    
-    func getUniquePropertyName() -> String {
-        return "empId"
-    }
-}
-```
-or
-```swift
-selectionMenu.uniquePropertyName = "empId" or "keyname of unique value in dictionary"
 ```
 
 ### UI Customization
