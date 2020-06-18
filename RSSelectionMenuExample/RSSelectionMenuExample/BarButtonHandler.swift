@@ -39,9 +39,6 @@ extension ViewController {
             // Can also customise cell backgroundColor, titleColor, iconColor based on the theme
         }
         
-        // Unique property in BottomSheetAction
-        menu.uniquePropertyName = "title"
-        
         // on selection
         menu.onDismiss = { items in
             guard let selectedTitle = items.first?.title else { return }  // since there is single selection

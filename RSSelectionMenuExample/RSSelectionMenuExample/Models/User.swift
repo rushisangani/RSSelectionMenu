@@ -9,7 +9,7 @@
 import Foundation
 
 /// User
-struct User: Codable {
+struct User: Equatable {
     
     var id: UInt?
     var name: String?

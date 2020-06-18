@@ -10,7 +10,7 @@ import Foundation
 import RSSelectionMenu
 
 /// Person
-class Person: NSObject, UniquePropertyDelegate {
+class Person: NSObject {
     
     // MARK: - Properties
     let id: Int
@@ -21,11 +21,5 @@ class Person: NSObject, UniquePropertyDelegate {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
-    }
-    
-    
-    // MARK: - UniquePropertyDelegate
-    func getUniquePropertyName() -> String {
-        return "id"
     }
 }

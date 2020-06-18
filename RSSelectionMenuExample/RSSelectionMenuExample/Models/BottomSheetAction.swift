@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RSSelectionMenu
 
-struct BottomSheetAction: Codable {
+struct BottomSheetAction: Equatable {
     
     // MARK: - Properties
     
