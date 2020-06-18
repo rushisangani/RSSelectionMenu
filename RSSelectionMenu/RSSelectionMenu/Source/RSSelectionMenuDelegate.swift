@@ -26,7 +26,7 @@
 import UIKit
 
 /// RSSelectionMenuDelegate
-open class RSSelectionMenuDelegate<T>: NSObject, UITableViewDelegate {
+open class RSSelectionMenuDelegate<T: Equatable>: NSObject, UITableViewDelegate {
 
     // MARK: - Properties
 
@@ -98,7 +98,7 @@ extension RSSelectionMenuDelegate {
     
     /// Check for selection status
     public func showSelected(item: T, inTableView tableView: RSSelectionTableView<T>) -> Bool {
-        return tableView.selectionMenu!.containsObject(item, inDataSource: selectedItems)
+        selectedItems.contains(item)
     }
     
     /// Remove all selected items
@@ -134,7 +134,7 @@ extension RSSelectionMenuDelegate {
         var selected = false
         
         // remove if already selected
-        if let selectedIndex = tableView.selectionMenu?.isSelected(item: item, from: selectedItems) {
+        if let selectedIndex = selectedItems.firstIndex(where: { $0 == item }) {
             selectedItems.remove(at: selectedIndex)
         }
         

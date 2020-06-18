@@ -26,7 +26,7 @@
 import UIKit
 
 /// RSSelectionMenuController
-open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate {
+open class RSSelectionMenu<T: Equatable>: UIViewController, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate {
 
     // MARK: - Views
     public var tableView: RSSelectionTableView<T>?
@@ -45,9 +45,6 @@ open class RSSelectionMenu<T>: UIViewController, UIPopoverPresentationController
     
     /// dismiss: for Single selection only
     public var dismissAutomatically: Bool = true
-    
-    /// property name or unique key is required when using custom models array or dictionary array as datasource
-    public var uniquePropertyName: String?
     
     /// Barbuttons titles
     public var leftBarButtonTitle: String?

@@ -26,7 +26,7 @@
 import UIKit
 
 /// RSSelectionMenuDataSource
-open class RSSelectionMenuDataSource<T>: NSObject, UITableViewDataSource {
+open class RSSelectionMenuDataSource<T: Equatable>: NSObject, UITableViewDataSource {
 
     // MARK: - Properties
     

@@ -26,7 +26,7 @@
 import UIKit
 
 /// RSSelectionTableView
-open class RSSelectionTableView<T>: UITableView {
+open class RSSelectionTableView<T: Equatable>: UITableView {
 
     // MARK: - Properties
     

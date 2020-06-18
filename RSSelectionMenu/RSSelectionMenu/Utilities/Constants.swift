@@ -53,23 +53,23 @@ public let defaultHeaderHeight         = CGFloat(50)
 
 
 /// UITableViewCellConfiguration
-public typealias UITableViewCellConfiguration<T> = ((_ cell: UITableViewCell, _ item: T, _ indexPath: IndexPath) -> ())
+public typealias UITableViewCellConfiguration<T: Equatable> = ((_ cell: UITableViewCell, _ item: T, _ indexPath: IndexPath) -> ())
 
 
 /// DataSource
-public typealias DataSource<T> = [T]
+public typealias DataSource<T: Equatable> = [T]
 
 
 /// FilteredDataSource
-public typealias FilteredDataSource<T> = [T]
+public typealias FilteredDataSource<T: Equatable> = [T]
 
 
 /// UITableViewCellSelection
-public typealias UITableViewCellSelection<T> = ((_ item: T?, _ index: Int, _ selected: Bool, _ selectedItems: DataSource<T>) -> ())
+public typealias UITableViewCellSelection<T: Equatable> = ((_ item: T?, _ index: Int, _ selected: Bool, _ selectedItems: DataSource<T>) -> ())
 
 
 /// UISearchBarResult
-public typealias UISearchBarResult<T> = ((_ searchText: String) -> (FilteredDataSource<T>))
+public typealias UISearchBarResult<T: Equatable> = ((_ searchText: String) -> (FilteredDataSource<T>))
 
 
 /// FirstRowSelection
