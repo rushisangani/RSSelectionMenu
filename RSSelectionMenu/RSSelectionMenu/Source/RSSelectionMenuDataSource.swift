@@ -180,7 +180,13 @@ extension RSSelectionMenuDataSource {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: CellType.basic.value())
         cell.selectionStyle = .none
         cell.textLabel?.text = selectionTableView?.firstRowSelection?.rowType.value
-        cell.textLabel?.textColor = UIColor.darkText
+        
+        if #available(iOS 13.0, *) {
+            cell.textLabel?.textColor = UIColor.label
+        } else {
+            // Fallback on earlier versions
+            cell.textLabel?.textColor = UIColor.darkText
+        }
         
         // update status
         let selected = selectionTableView?.firstRowSelection?.selected ?? false
