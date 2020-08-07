@@ -436,15 +436,13 @@ extension RSSelectionMenu {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: style)
         
         let actionTitle = action ?? doneButtonTitle
-        let doneAction = UIAlertAction(title: actionTitle, style: .cancel) { [weak self] (doneButton) in
+        let doneAction = UIAlertAction(title: actionTitle, style: .default) { [weak self] (doneButton) in
             self?.menuWillDismiss()
         }
         
         // add done action
-        if (tableView?.selectionStyle == .multiple || !self.dismissAutomatically || style == .actionSheet)  {
-            if case .actionSheet = menuPresentationStyle {
-                alertController.addAction(doneAction)
-            }
+        if (tableView?.selectionStyle == .multiple || !self.dismissAutomatically)  {
+            alertController.addAction(doneAction)
         }
         
         let viewHeight = height ?? 350
