@@ -39,7 +39,7 @@ public enum PresentationStyle {
     
     case present       // default
     case push
-    case formSheet
+    case formSheet(size: CGSize?)
     case popover(sourceView: UIView, size: CGSize?)
     case alert(title: String?, action: String?, height: Double?)
     case actionSheet(title: String?, action: String?, height: Double?)

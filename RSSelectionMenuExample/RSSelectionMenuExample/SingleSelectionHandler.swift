@@ -113,7 +113,7 @@ extension ViewController {
         menu.showEmptyDataLabel()
         
         // show as formsheet
-        menu.show(style: .formSheet, from: self)
+        menu.show(style: .formSheet(size: nil), from: self)
     }
     
     
