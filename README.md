@@ -20,10 +20,11 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 - Provide header row as **Empty**, **All**, **None** or **Custom Text**
 - Customizable design for UINavigationBar and UISearchBar
 
-## What's new in 7.0.0
+## What's new in 7.1.0
 - Supported **Equatable** conformance
+- Custom size support in Formsheet presentation
 
-## Already using? Migrate to 7.0.0
+## Already using? Migrate to 7.1.0
 - Remove all references of `UniquePropertyDelegate`,  `uniquePropertyName`, and `getUniquePropertyName()`
 - Conform to `Equatable` in your model classes (if required)
 
@@ -37,7 +38,7 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 7.0.0'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 7.1.0'
 ```
 
 ### Carthage
@@ -54,7 +55,7 @@ $ brew install carthage
 To integrate RSSelectionMenu into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "rushisangani/RSSelectionMenu" ~> 7.0
+github "rushisangani/RSSelectionMenu" ~> 7.1
 ```
 Then follow below steps:
 - Run `carthage update` to build the framework.
