@@ -131,6 +131,11 @@ open class RSSelectionMenu<T: Equatable>: UIViewController, UIPopoverPresentatio
     override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         view.endEditing(true)
+        
+        /// on dimiss not called in iPad for multi select popover
+        if tableView?.selectionStyle == .multiple, popoverPresentationController != nil {
+            self.menuWillDismiss()
+        }
     }
     
     // MARK: - Setup Views
