@@ -393,14 +393,15 @@ extension RSSelectionMenu {
         if case .present = with {
             tobePresentController = UINavigationController(rootViewController: self)
         }
-        else if case let .popover(sourceView, size) = with {
+        else if case let .popover(sourceView, size, arrowDirection, hideNavBar) = with {
             tobePresentController = UINavigationController(rootViewController: self)
+			(tobePresentController as! UINavigationController).setNavigationBarHidden(hideNavBar, animated: false)
             tobePresentController.modalPresentationStyle = .popover
             if size != nil { tobePresentController.preferredContentSize = size! }
             
             let popover = tobePresentController.popoverPresentationController!
             popover.delegate = self
-            popover.permittedArrowDirections = .any
+            popover.permittedArrowDirections = arrowDirection
             popover.sourceView = sourceView
             popover.sourceRect = sourceView.bounds
         }
