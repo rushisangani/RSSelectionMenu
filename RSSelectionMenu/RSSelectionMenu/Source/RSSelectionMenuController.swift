@@ -265,7 +265,11 @@ open class RSSelectionMenu<T: Equatable>: UIViewController, UIPopoverPresentatio
     }
     
     public func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        return !showRightBarButton()
+	let shouldDismiss = !showRightBarButton()
+	if shouldDismiss {
+	    self.menuWillDismiss()
+	}
+        return shouldDismiss
     }
     
     // MARK: - UIGestureRecognizerDelegate
