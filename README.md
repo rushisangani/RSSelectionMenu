@@ -20,12 +20,11 @@ An elegant selection list or dropdown menu for iOS with single or multiple selec
 - Provide header row as **Empty**, **All**, **None** or **Custom Text**
 - Customizable design for UINavigationBar and UISearchBar
 
-## What's new in 7.1.2
-- Supported **Equatable** conformance
-- Custom size support in Formsheet presentation
-- Swift Pacakge Manager Support
+## What's new in 7.1.3
+- Popover Style Improvements
+- Now you can specify UITableView.Style while initializing
 
-## Already using? Migrate to 7.1.2
+## Already using? Migrate to 7.1.3
 - Remove all references of `UniquePropertyDelegate`,  `uniquePropertyName`, and `getUniquePropertyName()`
 - Conform to `Equatable` in your model classes (if required)
 
@@ -39,7 +38,7 @@ iOS 9.0+ | Xcode 8.3+ | Swift 3.0+
 ### CocoaPods
 
 ```ruby
-pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 7.1.2'
+pod 'RSSelectionMenu' or pod 'RSSelectionMenu', '~> 7.1.3'
 ```
 
 ### Carthage
