@@ -92,25 +92,62 @@ open class RSSelectionMenu<T: Equatable>: UIViewController, UIPopoverPresentatio
     
     // MARK: - Init
     
-    convenience public init(dataSource: DataSource<T>, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
-        self.init(selectionStyle: .single, dataSource: dataSource, cellConfiguration: configuration)
+    convenience public init(
+        dataSource: DataSource<T>,
+        tableViewStyle: UITableView.Style = .plain,
+        cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
+        
+        self.init(
+            selectionStyle: .single,
+            dataSource: dataSource,
+            tableViewStyle: tableViewStyle,
+            cellConfiguration: configuration
+        )
     }
     
-    convenience public init(selectionStyle: SelectionStyle, dataSource: DataSource<T>, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
-        self.init(selectionStyle: selectionStyle, dataSource: dataSource, cellType: .basic, cellConfiguration: configuration)
+    convenience public init(
+        selectionStyle: SelectionStyle,
+        dataSource: DataSource<T>,
+        tableViewStyle: UITableView.Style = .plain,
+        cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
+        
+        self.init(
+            selectionStyle: selectionStyle,
+            dataSource: dataSource,
+            tableViewStyle: tableViewStyle,
+            cellType: .basic,
+            cellConfiguration: configuration
+        )
     }
     
-    convenience public init(selectionStyle: SelectionStyle, dataSource: DataSource<T>, cellType: CellType, cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
+    convenience public init(
+        selectionStyle: SelectionStyle,
+        dataSource: DataSource<T>,
+        tableViewStyle: UITableView.Style = .plain,
+        cellType: CellType,
+        cellConfiguration configuration: @escaping UITableViewCellConfiguration<T>) {
+        
         self.init()
         
         // data source
-        let selectionDataSource = RSSelectionMenuDataSource<T>(dataSource: dataSource, forCellType: cellType, cellConfiguration: configuration)
+        let selectionDataSource = RSSelectionMenuDataSource<T>(
+            dataSource: dataSource,
+            forCellType: cellType,
+            cellConfiguration: configuration
+        )
         
         // delegate
         let selectionDelegate = RSSelectionMenuDelegate<T>(selectedItems: [])
      
         // initilize tableview
-        self.tableView = RSSelectionTableView<T>(selectionStyle: selectionStyle, cellType: cellType, dataSource: selectionDataSource, delegate: selectionDelegate, from: self)
+        self.tableView = RSSelectionTableView<T>(
+            selectionStyle: selectionStyle,
+            tableViewStyle: tableViewStyle,
+            cellType: cellType,
+            dataSource: selectionDataSource,
+            delegate: selectionDelegate,
+            from: self
+        )
     }
     
     // MARK: - Life Cycle

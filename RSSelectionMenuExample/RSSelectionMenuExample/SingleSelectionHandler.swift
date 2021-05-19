@@ -23,7 +23,12 @@ extension ViewController {
         // Cell configuration following parameters.
         // 1. UITableViewCell   2. Item of type T   3. IndexPath
         
-        let selectionMenu = RSSelectionMenu(dataSource: simpleDataArray) { (cell, item, indexPath) in
+        var tableViewStyle: UITableView.Style = .plain
+        if #available(iOS 13.0, *) {
+            tableViewStyle = UITableView.Style.insetGrouped
+        }
+        
+        let selectionMenu = RSSelectionMenu(dataSource: simpleDataArray, tableViewStyle: tableViewStyle) { (cell, item, indexPath) in
             cell.textLabel?.text = item
         }
         
@@ -151,7 +156,7 @@ extension ViewController {
         menu.cellSelectionStyle = self.cellSelectionStyle
         
         // show as Popover
-        menu.show(style: .popover(sourceView: sender, size: nil), from: self)
+        menu.show(style: .popover(sourceView: sender, size: nil, arrowDirection: .down, hideNavBar: true), from: self)
     }
     
     

@@ -89,7 +89,8 @@ open class RSSelectionMenuDelegate<T: Equatable>: NSObject, UITableViewDelegate 
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.isSearchBarAdded(tableView).0 ? defaultHeaderHeight : 1
+        let height: CGFloat = [UITableView.Style.plain, .grouped].contains(tableView.style) ? 1.0 : 24.0
+        return self.isSearchBarAdded(tableView).0 ? defaultHeaderHeight : height
     }
 }
 

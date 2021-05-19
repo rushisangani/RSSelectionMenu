@@ -72,8 +72,19 @@ open class RSSelectionTableView<T: Equatable>: UITableView {
     
     // MARK: - Life Cycle
     
-    convenience public init(selectionStyle: SelectionStyle, cellType: CellType, dataSource: RSSelectionMenuDataSource<T>, delegate: RSSelectionMenuDelegate<T>, from: RSSelectionMenu<T>) {
-        self.init()
+    convenience public init(
+        selectionStyle: SelectionStyle,
+        tableViewStyle: UITableView.Style,
+        cellType: CellType,
+        dataSource: RSSelectionMenuDataSource<T>,
+        delegate: RSSelectionMenuDelegate<T>,
+        from: RSSelectionMenu<T>) {
+        
+        if #available(iOS 13.0, *) {
+            self.init(frame: .zero, style: tableViewStyle)
+        } else {
+            self.init()
+        }
         
         self.selectionDataSource = dataSource
         self.selectionDelegate = delegate
