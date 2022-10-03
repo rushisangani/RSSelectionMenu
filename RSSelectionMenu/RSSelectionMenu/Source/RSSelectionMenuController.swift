@@ -215,6 +215,40 @@ open class RSSelectionMenu<T: Equatable>: UIViewController, UIPopoverPresentatio
         setTableViewFrame()
     }
     
+    class PopoverBackgroundView: UIPopoverBackgroundView {
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            self.layer.shadowColor = UIColor.clear.cgColor
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        override static func contentViewInsets() -> UIEdgeInsets {
+            return UIEdgeInsets.zero
+        }
+       
+        override static func arrowHeight() -> CGFloat {
+            return 0
+        }
+
+        override var arrowDirection: UIPopoverArrowDirection {
+            get { return UIPopoverArrowDirection.down }
+            set {
+                setNeedsLayout()
+            }
+        }
+
+        override var arrowOffset: CGFloat {
+            get { return 0 }
+            set {
+                setNeedsLayout()
+            }
+        }
+    }
+    
     /// tableView frame
     fileprivate func setTableViewFrame() {
         
@@ -445,6 +479,7 @@ extension RSSelectionMenu {
             popover.permittedArrowDirections = arrowDirection
             popover.sourceView = sourceView
             popover.sourceRect = sourceView.bounds
+            popover.popoverBackgroundViewClass = PopoverBackgroundView.self
         }
         else if case .formSheet = with {
             tobePresentController.modalPresentationStyle = .overCurrentContext
